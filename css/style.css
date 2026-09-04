@@ -1,0 +1,406 @@
+/* ==========================================================================
+   Halo Works — 公式サイト共通スタイル
+   コンセプト：屋号「Halo（光の輪）」をやわらかいグラデーションの光として表現。
+   誠実さ・丁寧さを伝えるため、派手すぎない落ち着いたトーンにする。
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #f5f6fa;
+  --surface: #ffffff;
+  --surface-soft: #eef0f7;
+  --ink: #1e2233;
+  --ink-soft: #5b6178;
+  --ink-faint: #8a90a6;
+  --accent-gold: #e7a33e;
+  --accent-coral: #ef7f6c;
+  --line: #e1e3ed;
+  --shadow: 0 20px 45px -25px rgba(30, 34, 51, 0.35);
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --max-width: 1080px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14151f;
+    --surface: #1c1e2b;
+    --surface-soft: #23263650;
+    --ink: #edeef5;
+    --ink-soft: #9aa0b7;
+    --ink-faint: #6c7288;
+    --accent-gold: #f0b563;
+    --accent-coral: #f3907e;
+    --line: #2a2c3c;
+    --shadow: 0 20px 45px -25px rgba(0, 0, 0, 0.6);
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'Work Sans', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  font-size: 16px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, .display {
+  font-family: 'Fraunces', 'Hiragino Mincho ProN', serif;
+  font-weight: 600;
+  line-height: 1.3;
+  text-wrap: balance;
+  margin: 0 0 0.5em;
+}
+
+p { margin: 0 0 1em; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; text-decoration: none; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent-coral);
+  margin-bottom: 0.75em;
+}
+
+/* ---- ヘッダー / ナビ ---- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+}
+
+.logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2.5px solid var(--accent-gold);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-gold) 18%, transparent),
+              0 0 16px 2px color-mix(in srgb, var(--accent-coral) 35%, transparent);
+  flex-shrink: 0;
+}
+
+nav.main-nav {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+nav.main-nav a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  transition: color 0.15s ease;
+}
+
+nav.main-nav a:hover,
+nav.main-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: var(--ink);
+}
+
+@media (max-width: 720px) {
+  nav.main-nav {
+    position: fixed;
+    inset: 72px 0 0 0;
+    background: var(--bg);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 20px 24px;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.18s ease, transform 0.18s ease;
+  }
+  nav.main-nav.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+  nav.main-nav a {
+    width: 100%;
+    padding: 14px 4px;
+    border-bottom: 1px solid var(--line);
+    font-size: 1rem;
+  }
+  .nav-toggle { display: block; }
+}
+
+/* ---- ボタン ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+  color: #241503;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+.btn-ghost:hover { border-color: var(--accent-coral); }
+
+/* ---- Hero（halo グラデーション） ---- */
+.hero {
+  position: relative;
+  padding: 96px 0 80px;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -220px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 720px;
+  height: 720px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    color-mix(in srgb, var(--accent-gold) 45%, transparent) 0%,
+    color-mix(in srgb, var(--accent-coral) 30%, transparent) 42%,
+    transparent 70%);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+#halo-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-inner { position: relative; z-index: 1; max-width: 640px; }
+
+.hero h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); }
+
+.hero .lead {
+  font-size: 1.08rem;
+  color: var(--ink-soft);
+  max-width: 52ch;
+}
+
+.hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+
+/* ---- セクション共通 ---- */
+section { padding: 72px 0; }
+section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+.section-head { max-width: 620px; margin: 0 auto 44px; text-align: center; }
+.section-head.left { margin: 0 0 44px; text-align: left; }
+
+/* ---- カードグリッド（サービス） ---- */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+@media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  will-change: transform;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover { box-shadow: var(--shadow); }
+
+/* ---- スクロール出現演出（JSが有効な場合のみ付与される） ---- */
+.reveal-init {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.reveal-in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-init { opacity: 1; transform: none; transition: none; }
+  .card { transition: none; }
+}
+
+.card .num {
+  font-family: 'Fraunces', serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-coral);
+}
+
+.card h3 { font-size: 1.15rem; margin-bottom: 0.2em; }
+.card p { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 0; }
+
+/* ---- 料金テーブル ---- */
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.price-table th, .price-table td {
+  text-align: left;
+  padding: 16px 12px;
+  border-bottom: 1px solid var(--line);
+}
+.price-table th { color: var(--ink-faint); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
+.price-table td.amount { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+
+/* ---- 実績（ポートフォリオ） ---- */
+.case-study {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.browser-frame {
+  background: var(--ink);
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.browser-frame .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-faint); opacity: 0.6; }
+.browser-frame .url {
+  margin-left: 10px;
+  font-size: 0.78rem;
+  color: #cfd2e0;
+  font-family: 'Work Sans', sans-serif;
+  background: rgba(255,255,255,0.08);
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.case-study iframe {
+  width: 100%;
+  height: 520px;
+  border: none;
+  display: block;
+  background: var(--surface-soft);
+}
+@media (max-width: 720px) { .case-study iframe { height: 380px; } }
+
+.case-body { padding: 34px; display: grid; gap: 26px; }
+
+.case-points { display: grid; gap: 20px; }
+@media (min-width: 720px) { .case-points { grid-template-columns: repeat(3, 1fr); } }
+.case-points h4 {
+  font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: var(--accent-coral); font-weight: 700; margin: 0 0 8px;
+}
+.case-points p { font-size: 0.93rem; color: var(--ink-soft); margin: 0; }
+
+.note-box {
+  background: var(--surface-soft);
+  border-left: 3px solid var(--accent-gold);
+  border-radius: 8px;
+  padding: 16px 20px;
+  font-size: 0.9rem;
+  color: var(--ink-soft);
+}
+
+/* ---- 連絡先 ---- */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
+
+.contact-card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.contact-card .icon {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+  font-size: 1.1rem;
+}
+
+/* ---- フッター ---- */
+footer {
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  color: var(--ink-faint);
+  font-size: 0.85rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---- ページ共通ヒーロー（下位ページ用の小さめ版） ---- */
+.page-hero { padding: 64px 0 40px; }
+.page-hero h1 { font-size: clamp(1.8rem, 4vw, 2.4rem); }
