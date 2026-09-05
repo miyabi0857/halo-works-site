@@ -82,13 +82,21 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---- ヘッダー / ナビ ---- */
+/* 注意：backdrop-filter は position:fixed の子要素（モバイルナビ）の基準位置を
+   ヘッダー自身にずらしてしまうため、必ず ::before の疑似要素側にだけ付与すること */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 50;
+  border-bottom: 1px solid var(--line);
+}
+.site-header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
   background: color-mix(in srgb, var(--bg) 88%, transparent);
   backdrop-filter: blur(10px);
-  border-bottom: 1px solid var(--line);
+  z-index: -1;
 }
 
 .site-header .container {
@@ -141,15 +149,44 @@ nav.main-nav {
 }
 
 nav.main-nav a {
+  position: relative;
   font-size: 0.92rem;
   font-weight: 500;
   color: var(--ink-soft);
   transition: color 0.15s ease;
 }
 
+nav.main-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-coral));
+  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
 nav.main-nav a:hover,
 nav.main-nav a[aria-current="page"] {
   color: var(--ink);
+}
+nav.main-nav a:hover::after,
+nav.main-nav a[aria-current="page"]::after {
+  width: 100%;
+}
+
+/* ---- スクロール進捗バー ---- */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent-gold), var(--accent-coral));
+  z-index: 100;
+  transition: width 0.1s linear;
 }
 
 .nav-toggle {
@@ -203,18 +240,30 @@ nav.main-nav a[aria-current="page"] {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
+.btn:active { transform: scale(0.94); }
+
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
   color: #241503;
+  animation: btn-breathe 2.6s ease-in-out infinite;
 }
-.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow); animation-play-state: paused; }
+
+@keyframes btn-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-coral) 35%, transparent); }
+  50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent-coral) 0%, transparent); }
+}
 
 .btn-ghost {
   background: transparent;
   border-color: var(--line);
   color: var(--ink);
 }
-.btn-ghost:hover { border-color: var(--accent-coral); }
+.btn-ghost:hover { border-color: var(--accent-coral); transform: translateY(-2px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary { animation: none; }
+}
 
 /* ---- Hero（halo グラデーション） ---- */
 .hero {
@@ -263,6 +312,32 @@ nav.main-nav a[aria-current="page"] {
 /* ---- セクション共通 ---- */
 section { padding: 72px 0; }
 section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+/* ---- 背景の浮遊ブロブ（ページ全体に常時動きを出す装飾） ---- */
+section.has-blobs { position: relative; overflow: hidden; }
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.28;
+  pointer-events: none;
+  z-index: 0;
+  animation: blob-float 11s ease-in-out infinite;
+}
+.blob-gold { background: var(--accent-gold); }
+.blob-coral { background: var(--accent-coral); }
+
+@keyframes blob-float {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(24px, -28px) scale(1.1); }
+  66% { transform: translate(-18px, 16px) scale(0.92); }
+}
+
+section.has-blobs > .container { position: relative; z-index: 1; }
+
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}
 
 .section-head { max-width: 620px; margin: 0 auto 44px; text-align: center; }
 .section-head.left { margin: 0 0 44px; text-align: left; }
@@ -315,10 +390,23 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
 }
 
 .card .num {
+  display: inline-block;
   font-family: 'Fraunces', serif;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent-coral);
+  animation: num-bounce 2.4s ease-in-out infinite;
+}
+.card:nth-child(2) .num { animation-delay: 0.25s; }
+.card:nth-child(3) .num { animation-delay: 0.5s; }
+
+@keyframes num-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card .num { animation: none; }
 }
 
 .card h3 { font-size: 1.15rem; margin-bottom: 0.2em; }
@@ -335,6 +423,8 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   padding: 16px 12px;
   border-bottom: 1px solid var(--line);
 }
+.price-table tbody tr { transition: background 0.2s ease, transform 0.2s ease; }
+.price-table tbody tr:hover { background: var(--surface-soft); transform: translateX(6px); }
 .price-table th { color: var(--ink-faint); font-weight: 600; font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; }
 .price-table td.amount { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 600; }
 .table-wrap { overflow-x: auto; }
@@ -412,19 +502,18 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
 }
 
 .greeting .avatar {
-  width: 84px;
-  height: 84px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Fraunces', serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  color: #241503;
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+  object-fit: cover;
   box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-gold) 14%, transparent);
+  transition: transform 0.3s ease;
+}
+.greeting .avatar:hover { transform: rotate(-4deg) scale(1.04); }
+
+@media (prefers-reduced-motion: reduce) {
+  .greeting .avatar { transition: none; }
 }
 
 .greeting .role {
@@ -457,6 +546,12 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   display: flex; align-items: center; justify-content: center;
   background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
   font-size: 1.1rem;
+  animation: num-bounce 2.8s ease-in-out infinite;
+}
+.contact-card:nth-child(2) .icon { animation-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-card .icon { animation: none; }
 }
 
 /* ---- フッター ---- */

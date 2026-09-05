@@ -3,7 +3,30 @@ document.addEventListener('DOMContentLoaded', () => {
   initHaloCanvas();
   initScrollReveal();
   initCardMotion();
+  initScrollProgress();
 });
+
+/* ---------------------------------------------------------
+   ページ上部のスクロール進捗バー
+--------------------------------------------------------- */
+function initScrollProgress() {
+  const bar = document.querySelector('.scroll-progress');
+  if (!bar) return;
+  let ticking = false;
+  const update = () => {
+    const doc = document.documentElement;
+    const max = doc.scrollHeight - doc.clientHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    bar.style.width = pct + '%';
+    ticking = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+}
 
 /* ---------------------------------------------------------
    モバイルナビの開閉
