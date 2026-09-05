@@ -653,6 +653,113 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 .note-box:hover { transform: rotate(1deg) scale(1.015); }
 
+/* ---- 写真フレーム（ステッカー調） ---- */
+.photo-frame {
+  border: 3px solid var(--ink);
+  border-radius: 16px;
+  overflow: hidden;
+  transform: rotate(var(--tilt, -1.5deg));
+  box-shadow: 9px 10px 0 0 color-mix(in srgb, var(--accent-gold) 65%, transparent);
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+.photo-frame:hover {
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 13px 15px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
+}
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+/* 写真＋文章の2カラム */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+@media (max-width: 860px) {
+  .split { grid-template-columns: 1fr; gap: 36px; }
+}
+
+/* ---- チェックリスト ---- */
+.checklist { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+.checklist li {
+  position: relative;
+  padding-left: 40px;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.checklist li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  border: 2px solid var(--ink);
+}
+.checklist li::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 11px;
+  width: 9px;
+  height: 5px;
+  border-left: 2.5px solid var(--ink);
+  border-bottom: 2.5px solid var(--ink);
+  transform: rotate(-45deg);
+}
+
+/* ---- 全幅の写真帯 ---- */
+.photo-band {
+  position: relative;
+  padding: 0;
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  border-top: 3px solid var(--ink);
+  border-bottom: 3px solid var(--ink);
+}
+.photo-band img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.photo-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg,
+    rgba(20, 14, 6, 0.78) 0%,
+    rgba(20, 14, 6, 0.55) 55%,
+    rgba(20, 14, 6, 0.3) 100%);
+}
+.photo-band .band-copy {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 60px 24px;
+  max-width: 640px;
+}
+.photo-band .band-copy h2 { color: #fff; margin-bottom: 0.4em; }
+.photo-band .band-copy p { color: rgba(255,255,255,0.86); margin-bottom: 0; }
+
+/* ---- サービス内の補足写真 ---- */
+.inline-photo {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 22px;
+  align-items: center;
+  margin-top: 18px;
+}
+@media (max-width: 640px) {
+  .inline-photo { grid-template-columns: 1fr; }
+}
+
 /* ---- ごあいさつ ---- */
 .greeting {
   display: grid;
