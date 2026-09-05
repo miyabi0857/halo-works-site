@@ -432,7 +432,13 @@ nav.main-nav a[aria-current="page"]::after {
   margin-bottom: 4px;
 }
 
-.hero h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); }
+.hero h1 {
+  font-size: clamp(1.75rem, 5.2vw, 3.1rem);
+  line-break: strict;
+}
+
+/* 日本語が意味の途中で改行されないよう、まとまりごとに分割禁止にする */
+.hero h1 .chunk { display: inline-block; }
 
 /* 見出しが行ごとに弾んで登場する */
 .hero h1 .line {
