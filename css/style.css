@@ -345,13 +345,16 @@ nav.main-nav a[aria-current="page"]::after {
 
 .hero-inner { position: relative; z-index: 1; }
 
+/* スマホの実機モックアップ側は固定幅にし、残りをすべて文章に回す
+   （文章側の幅が足りないと見出しが細切れに折り返してしまうため） */
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr 300px;
   gap: 48px;
   align-items: center;
 }
-.hero-copy { max-width: 620px; }
+/* 見出しが2行に収まる幅を確保する（本文の行長は .lead 側の 52ch で別途制限） */
+.hero-copy { max-width: 700px; }
 @media (max-width: 900px) {
   .hero-grid { grid-template-columns: 1fr; gap: 44px; }
 }
@@ -432,8 +435,10 @@ nav.main-nav a[aria-current="page"]::after {
   margin-bottom: 4px;
 }
 
+/* 狭い画面では「「作って終わり」にしない、」が1行に収まるサイズまで下げる
+   （収まらないとまとまり単位で行が落ち、右側に大きな余白が残るため） */
 .hero h1 {
-  font-size: clamp(1.75rem, 5.2vw, 3.1rem);
+  font-size: clamp(1.5rem, 3.6vw, 2.75rem);
   line-break: strict;
 }
 
