@@ -139,25 +139,40 @@ a { color: inherit; text-decoration: none; }
   height: 72px;
 }
 
+/* ロゴは1つの語として組むので flex にしない（単語間の空白が消えるため） */
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: inline-block;
+  white-space: nowrap;
   font-family: 'Fraunces', serif;
   font-weight: 600;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   letter-spacing: 0.01em;
 }
 
-.logo-mark {
-  width: 28px;
-  height: 28px;
+/* ロゴタイプ：「Halo」の o を光の輪に置き換える（ロゴ案B） */
+.logo-o {
+  display: inline-block;
+  position: relative;
+  width: 0.66em;
+  height: 0.66em;
+  margin: 0 0.02em 0 0.03em;
   border-radius: 50%;
-  border: 2.5px solid var(--accent-gold);
-  box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-gold) 18%, transparent),
-              0 0 16px 2px color-mix(in srgb, var(--accent-coral) 35%, transparent);
+  border: 0.14em solid var(--accent-gold);
+  vertical-align: -0.02em;
   flex-shrink: 0;
   animation: halo-pulse 3.2s ease-in-out infinite;
+}
+/* 輪の上に乗る粒（輪の線の中心に置く） */
+.logo-o::after {
+  content: "";
+  position: absolute;
+  top: -0.005em;
+  left: 50%;
+  width: 0.15em;
+  height: 0.15em;
+  margin-left: -0.075em;
+  border-radius: 50%;
+  background: var(--ink);
 }
 
 @keyframes halo-pulse {
