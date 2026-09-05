@@ -37,43 +37,42 @@
       <span class="eyebrow">Contact</span>
       <h1>依頼・お問い合わせ</h1>
       <p class="lead" style="color:var(--ink-soft); max-width:56ch;">
-        下記のいずれかからお気軽にご連絡ください。内容を確認のうえ、ヒアリング・お見積りに進めます。
+        InstagramのDMでご連絡ください。内容を確認のうえ、ヒアリング・お見積りに進めます。
       </p>
     </div>
   </section>
 
   <section style="padding-top:0;">
     <div class="container">
-      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
-        <div class="field">
-          <label for="name">お名前・店舗名<span class="required">必須</span></label>
-          <input type="text" id="name" name="name" required autocomplete="name" placeholder="例：Halo Works／野﨑">
-        </div>
-        <div class="field">
-          <label for="email">ご返信先のメールアドレス<span class="required">必須</span></label>
-          <input type="email" id="email" name="email" required autocomplete="email" placeholder="例：info@example.com">
-        </div>
-        <div class="field">
-          <label for="message">ご相談内容<span class="required">必須</span></label>
-          <textarea id="message" name="message" required placeholder="「ホームページを作りたい」「エクセルの集計を楽にしたい」など、決まっていない段階のご相談でも大丈夫です。"></textarea>
-        </div>
-        <p class="form-status" role="status" hidden></p>
-        <div>
-          <button type="submit" class="btn btn-primary">この内容で送信する</button>
-        </div>
-      </form>
+      <div class="dm-cta">
+        <span class="dm-icon" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
+          </svg>
+        </span>
+        <h2>InstagramのDMで承っています</h2>
+        <p>
+          「ホームページを作りたい」「エクセルの集計を楽にしたい」など、
+          決まっていない段階のご相談でも大丈夫です。<br>
+          お店の名前と、困っていることを一言添えていただけると話が早いです。
+        </p>
+        <a href="https://www.instagram.com/haloworks.jp/" target="_blank" rel="noopener" class="btn btn-primary">
+          @haloworks.jp にDMを送る
+        </a>
+      </div>
 
-      <div class="contact-grid" style="margin-top:32px;">
-        <div class="contact-card">
-          <span class="icon">📷</span>
-          <h3 style="margin-bottom:0;">Instagram DM</h3>
-          <p style="color:var(--ink-soft); margin-bottom:0;">フォームより気軽に聞きたい場合は、DMでもお気軽にどうぞ。</p>
-          <a href="https://www.instagram.com/haloworks.jp/" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start;">Instagramを開く</a>
-        </div>
+      <div class="contact-grid" style="margin-top:36px;">
         <div class="contact-card">
           <span class="icon">🕒</span>
           <h3 style="margin-bottom:0;">お返事の目安</h3>
           <p style="color:var(--ink-soft); margin-bottom:0;">通常2〜3日以内にご返信します。お急ぎの場合はその旨をお書き添えください。</p>
+        </div>
+        <div class="contact-card">
+          <span class="icon">💬</span>
+          <h3 style="margin-bottom:0;">はじめての方へ</h3>
+          <p style="color:var(--ink-soft); margin-bottom:0;">見積りが必要かどうかも含めてご相談いただけます。相談だけで終わっても構いません。</p>
         </div>
       </div>
 

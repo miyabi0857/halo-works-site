@@ -940,7 +940,30 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   .contact-card .icon { animation: none; }
 }
 
-/* ---- 問い合わせフォーム ---- */
+/* ---- DMへの導線（問い合わせの主役） ---- */
+.dm-cta {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 46px 40px;
+  text-align: center;
+  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
+}
+.dm-cta .dm-icon {
+  display: inline-grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 22px;
+  margin-bottom: 18px;
+  color: #241503;
+  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+  border: 2px solid var(--ink);
+}
+.dm-cta h2 { font-size: clamp(1.3rem, 3.4vw, 1.7rem); margin-bottom: 0.5em; }
+.dm-cta p { color: var(--ink-soft); margin: 0 auto 26px; max-width: 46ch; }
+
+/* ---- 問い合わせフォーム（現在は未使用。再開時にそのまま使える） ---- */
 .contact-form {
   background: var(--surface);
   border: 2px solid var(--ink);
