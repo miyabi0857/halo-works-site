@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initHaloCanvas();
   initScrollReveal();
-  initCardTilt();
+  initCardMotion();
 });
 
 /* ---------------------------------------------------------
@@ -28,9 +28,11 @@ function initNav() {
 
 /* ---------------------------------------------------------
    ヒーローの Halo（光の輪）パーティクルアニメーション
-   ・屋号のモチーフである「輪」に沿って粒子を周回させる
-   ・カーソルに近づいた粒子はやわらかく外側へ逃げる
+   ・屋号のモチーフである「輪」に沿って粒子を周回させる（常時、呼吸するように拡縮）
+   ・マウス／指が近づいた粒子はやわらかく外側へ逃げる（PC・スマホ両対応）
+   ・軌跡がうっすら尾を引くトレイル表現で、より目を引く見た目にする
    ・prefers-reduced-motion では静止したリングを1回だけ描画
+   ・スクロールに合わせて緩やかにパララックスする
 --------------------------------------------------------- */
 function initHaloCanvas() {
   const canvas = document.getElementById('halo-canvas');
@@ -40,10 +42,22 @@ function initHaloCanvas() {
 
   let width, height, dpr;
   let particles = [];
-  let mouse = { x: -9999, y: -9999 };
-  let rafId = null;
+  let pointer = { x: -9999, y: -9999, active: false };
+  let trailFill = 'rgba(245, 246, 250, 0.22)';
 
   const palette = ['#e7a33e', '#ef7f6c', '#f0b563'];
+
+  function readTrailColor() {
+    const bg = getComputedStyle(document.body).getPropertyValue('--bg').trim();
+    const rgb = hexToRgb(bg);
+    if (rgb) trailFill = `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.22)`;
+  }
+
+  function hexToRgb(hex) {
+    const m = hex.replace('#', '').match(/^([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
+    if (!m) return null;
+    return { r: parseInt(m[1], 16), g: parseInt(m[2], 16), b: parseInt(m[3], 16) };
+  }
 
   function resize() {
     const rect = canvas.parentElement.getBoundingClientRect();
@@ -53,59 +67,65 @@ function initHaloCanvas() {
     canvas.width = width * dpr;
     canvas.height = height * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    readTrailColor();
     buildParticles();
   }
 
   function buildParticles() {
-    const cx = width * 0.72;
+    const cx = width * 0.7;
     const cy = height * 0.42;
-    const baseRadius = Math.min(width, height) * 0.34;
-    const count = Math.round(width < 640 ? 34 : 60);
+    const baseRadius = Math.min(width, height) * (width < 640 ? 0.44 : 0.36);
+    const count = Math.round(width < 640 ? 46 : 70);
 
     particles = Array.from({ length: count }, (_, i) => {
       const angle = (i / count) * Math.PI * 2;
       return {
         cx, cy,
         angle,
-        baseRadius: baseRadius + (Math.sin(i * 12.9) * 18),
-        speed: 0.0009 + (i % 5) * 0.00012,
-        size: 1.2 + (i % 4) * 0.6,
+        angleOffset: i * 12.9,
+        baseRadius: baseRadius + (Math.sin(i * 12.9) * 20),
+        speed: (0.0016 + (i % 5) * 0.0003) * (i % 2 === 0 ? 1 : -1) * 0.4 + 0.0014,
+        size: 1.6 + (i % 4) * 0.9,
         color: palette[i % palette.length],
       };
     });
   }
 
   function frame(time) {
-    ctx.clearRect(0, 0, width, height);
+    // 完全にクリアせず、うっすら塗り重ねることで光の尾（トレイル）を作る
+    ctx.fillStyle = trailFill;
+    ctx.fillRect(0, 0, width, height);
+
+    const breathe = Math.sin(time * 0.0007) * 12; // リング全体がゆっくり呼吸する
 
     const pts = particles.map((p) => {
       p.angle += p.speed;
-      let radius = p.baseRadius;
+      let radius = p.baseRadius + breathe;
       let x = p.cx + Math.cos(p.angle) * radius;
-      let y = p.cy + Math.sin(p.angle) * radius * 0.62; // 楕円のリングにする
+      let y = p.cy + Math.sin(p.angle) * radius * 0.6; // 楕円のリング
 
-      // カーソル近接で外側へ逃がす
-      const dx = x - mouse.x;
-      const dy = y - mouse.y;
+      // カーソル／指が近いと外側へ逃がす
+      const dx = x - pointer.x;
+      const dy = y - pointer.y;
       const dist = Math.hypot(dx, dy);
-      const influence = 90;
+      const influence = 130;
       if (dist < influence) {
         const push = (influence - dist) / influence;
-        x += (dx / (dist || 1)) * push * 26;
-        y += (dy / (dist || 1)) * push * 26;
+        x += (dx / (dist || 1)) * push * 40;
+        y += (dy / (dist || 1)) * push * 40;
       }
       return { x, y, size: p.size, color: p.color };
     });
 
-    // 粒子同士を結ぶ、うっすらとした線（近い粒子だけ）
+    // 粒子同士を結ぶ、うっすらとした線
     ctx.lineWidth = 1;
     for (let i = 0; i < pts.length; i++) {
       for (let j = i + 1; j < pts.length; j++) {
         const dx = pts[i].x - pts[j].x;
         const dy = pts[i].y - pts[j].y;
         const d = Math.hypot(dx, dy);
-        if (d < 46) {
-          ctx.strokeStyle = `rgba(231, 163, 62, ${0.14 * (1 - d / 46)})`;
+        if (d < 52) {
+          ctx.strokeStyle = `rgba(231, 163, 62, ${0.18 * (1 - d / 52)})`;
           ctx.beginPath();
           ctx.moveTo(pts[i].x, pts[i].y);
           ctx.lineTo(pts[j].x, pts[j].y);
@@ -114,30 +134,39 @@ function initHaloCanvas() {
       }
     }
 
-    // 粒子本体
+    // 粒子本体（うっすら発光させる）
     pts.forEach((p) => {
+      ctx.save();
+      ctx.shadowBlur = 10;
+      ctx.shadowColor = p.color;
       ctx.beginPath();
       ctx.fillStyle = p.color;
-      ctx.globalAlpha = 0.85;
+      ctx.globalAlpha = 0.9;
       ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
     });
-    ctx.globalAlpha = 1;
 
-    rafId = requestAnimationFrame(frame);
+    requestAnimationFrame(frame);
   }
 
   function drawStatic() {
-    // reduced-motion 用：静止したリングを1回だけ描く
     resize();
     ctx.clearRect(0, 0, width, height);
-    const cx = width * 0.72, cy = height * 0.42;
-    const r = Math.min(width, height) * 0.34;
+    const cx = width * 0.7, cy = height * 0.42;
+    const r = Math.min(width, height) * 0.36;
     ctx.strokeStyle = 'rgba(231, 163, 62, 0.35)';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.ellipse(cx, cy, r, r * 0.62, 0, 0, Math.PI * 2);
+    ctx.ellipse(cx, cy, r, r * 0.6, 0, 0, Math.PI * 2);
     ctx.stroke();
+  }
+
+  function setPointerFromEvent(e) {
+    const rect = canvas.getBoundingClientRect();
+    const point = e.touches && e.touches[0] ? e.touches[0] : e;
+    pointer.x = point.clientX - rect.left;
+    pointer.y = point.clientY - rect.top;
   }
 
   window.addEventListener('resize', () => {
@@ -145,14 +174,24 @@ function initHaloCanvas() {
     resize();
   });
 
-  canvas.parentElement.addEventListener('mousemove', (e) => {
-    const rect = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - rect.left;
-    mouse.y = e.clientY - rect.top;
-  });
-  canvas.parentElement.addEventListener('mouseleave', () => {
-    mouse.x = -9999; mouse.y = -9999;
-  });
+  const host = canvas.parentElement;
+  host.addEventListener('mousemove', setPointerFromEvent);
+  host.addEventListener('mouseleave', () => { pointer.x = -9999; pointer.y = -9999; });
+  host.addEventListener('touchmove', (e) => { setPointerFromEvent(e); }, { passive: true });
+  host.addEventListener('touchstart', (e) => { setPointerFromEvent(e); }, { passive: true });
+  host.addEventListener('touchend', () => { pointer.x = -9999; pointer.y = -9999; });
+
+  // 緩やかなパララックス：スクロールに応じてリング全体を少しだけ動かす
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (reduceMotion || ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const offset = Math.min(window.scrollY * 0.18, 60);
+      canvas.style.transform = `translateY(${offset}px)`;
+      ticking = false;
+    });
+  }, { passive: true });
 
   if (reduceMotion) {
     drawStatic();
@@ -160,7 +199,7 @@ function initHaloCanvas() {
   }
 
   resize();
-  rafId = requestAnimationFrame(frame);
+  requestAnimationFrame(frame);
 }
 
 /* ---------------------------------------------------------
@@ -170,7 +209,7 @@ function initHaloCanvas() {
 function initScrollReveal() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const targets = document.querySelectorAll('.card, .case-study, .contact-card, .section-head');
+  const targets = document.querySelectorAll('.card, .case-study, .contact-card, .section-head, .greeting');
   if (!targets.length) return;
 
   const observer = new IntersectionObserver((entries) => {
@@ -184,27 +223,33 @@ function initScrollReveal() {
 
   targets.forEach((el, i) => {
     el.classList.add('reveal-init');
-    el.style.transitionDelay = `${Math.min(i % 3, 2) * 70}ms`;
+    el.style.transitionDelay = `${Math.min(i % 3, 2) * 90}ms`;
     observer.observe(el);
   });
 }
 
 /* ---------------------------------------------------------
-   カードのマウス追従チルト（軽い立体感の演出）
+   カードの動き：
+   ・ホバー可能な端末（PC）→ マウス追従チルト
+   ・タッチ端末（スマホ）→ 常時ふわふわ浮遊させて「動いている感」を出す
 --------------------------------------------------------- */
-function initCardTilt() {
+function initCardMotion() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (window.matchMedia('(hover: none)').matches) return; // タッチ端末では無効
 
-  document.querySelectorAll('.card').forEach((card) => {
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const px = (e.clientX - rect.left) / rect.width - 0.5;
-      const py = (e.clientY - rect.top) / rect.height - 0.5;
-      card.style.transform = `perspective(700px) rotateX(${(-py * 6).toFixed(2)}deg) rotateY(${(px * 6).toFixed(2)}deg) translateY(-2px)`;
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  const cards = document.querySelectorAll('.card');
+
+  if (canHover) {
+    cards.forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const px = (e.clientX - rect.left) / rect.width - 0.5;
+        const py = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform = `perspective(700px) rotateX(${(-py * 8).toFixed(2)}deg) rotateY(${(px * 8).toFixed(2)}deg) translateY(-3px)`;
+      });
+      card.addEventListener('mouseleave', () => { card.style.transform = ''; });
     });
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
+  } else {
+    cards.forEach((card) => card.classList.add('idle-float'));
+  }
 }
