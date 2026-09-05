@@ -526,53 +526,108 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
 
-/* カードは「貼ったステッカー」のように少し傾けておき、触ると真っ直ぐになる */
+/* --------------------------------------------------------
+   カードの装飾は2段階に分ける。
+   ・.card            … 静かな既定形（罫線のみ）。説明ブロック用
+   ・.card--sticker   … 太枠＋ずらし影の「特別扱い」。看板となる3枚だけ
+   装飾を全部の要素に配ると主役が消えて平板に見えるため、意図的に差をつける。
+   -------------------------------------------------------- */
 .card {
   background: var(--surface);
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-lg);
-  padding: 30px 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 28px 26px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  transition: border-color 0.25s ease;
+}
+.card:hover { border-color: color-mix(in srgb, var(--accent-coral) 55%, var(--line)); }
+
+/* 看板の3枚だけ「貼ったステッカー」扱いにする */
+.card--sticker {
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 30px 26px;
   will-change: transform;
   transform: rotate(var(--tilt, 0deg));
   box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 }
-.grid-3 .card:nth-child(1) { --tilt: -2deg; }
-.grid-3 .card:nth-child(2) { --tilt: 1.6deg; }
-.grid-3 .card:nth-child(3) { --tilt: -1.2deg; }
+.grid-3 .card--sticker:nth-child(1) { --tilt: -2deg; }
+.grid-3 .card--sticker:nth-child(2) { --tilt: 1.6deg; }
+.grid-3 .card--sticker:nth-child(3) { --tilt: -1.2deg; }
 
-.card:hover {
+/* 横一列に揃えず段違いに置いて、整いすぎた印象を崩す */
+@media (min-width: 861px) {
+  .grid-3 .card--sticker:nth-child(2) { margin-top: 34px; }
+  .grid-3 .card--sticker:nth-child(3) { margin-top: -14px; }
+}
+
+.card--sticker:hover {
   transform: rotate(0deg) translateY(-6px);
   box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
 }
-.card:active { transform: rotate(0deg) scale(0.96) !important; }
+.card--sticker:active { transform: rotate(0deg) scale(0.96) !important; }
 
-/* タッチ端末（ホバー不可）では、常時ゆらゆら浮遊させて「動いている感」を出す */
-.card.idle-float {
+/* タッチ端末（ホバー不可）では、看板の3枚だけゆらゆら浮遊させる */
+.card--sticker.idle-float {
   animation: card-float 4.6s ease-in-out infinite;
 }
-.card.idle-float:nth-child(2) { animation-delay: 0.5s; }
-.card.idle-float:nth-child(3) { animation-delay: 1s; }
+.card--sticker.idle-float:nth-child(2) { animation-delay: 0.5s; }
+.card--sticker.idle-float:nth-child(3) { animation-delay: 1s; }
 
 @keyframes card-float {
   0%, 100% { transform: rotate(var(--tilt, 0deg)) translateY(0); }
   50% { transform: rotate(calc(var(--tilt, 0deg) * -0.6)) translateY(-10px); }
 }
 
-/* ---- スクロール出現演出（JSが有効な場合のみ付与される） ---- */
-.reveal-init {
-  opacity: 0;
-  transform: translateY(40px) scale(0.95);
-  transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+/* --------------------------------------------------------
+   スクロール出現演出（JSが有効な場合のみ付与される）
+   全要素を同じ動きで出すと単調に見えるため、要素の性格ごとに
+   data-reveal で動きを変える。演出後はJSがクラスを外すので、
+   ホバー時の変形とはぶつからない。
+   -------------------------------------------------------- */
+.reveal-init { opacity: 0; }
+
+.reveal-in {
+  animation-duration: 0.85s;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-fill-mode: both;
 }
-.reveal-in { opacity: 1; transform: none; }
+
+/* 文章まわり：静かに下から */
+[data-reveal="up"].reveal-in { animation-name: rv-up; }
+@keyframes rv-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 看板カード：傾いた角度から「パタン」と貼られる */
+[data-reveal="stamp"].reveal-in { animation-name: rv-stamp; animation-duration: 0.7s; }
+@keyframes rv-stamp {
+  from { opacity: 0; transform: rotate(-10deg) scale(1.15); }
+  to   { opacity: 1; transform: rotate(var(--tilt, 0deg)); }
+}
+
+/* 写真：フェードではなく、マスクが横に開く */
+[data-reveal="wipe"].reveal-in { animation-name: rv-wipe; animation-duration: 1s; }
+@keyframes rv-wipe {
+  from { opacity: 1; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+/* 見出し：横から滑り込む */
+[data-reveal="slide"].reveal-in { animation-name: rv-slide; }
+@keyframes rv-slide {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: none; }
+}
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal-init { opacity: 1; transform: none; transition: none; }
-  .card, .card.idle-float { transition: none; animation: none; }
+  .reveal-init { opacity: 1; }
+  .reveal-in { animation: none; }
+  .card, .card--sticker, .card--sticker.idle-float { transition: none; animation: none; }
 }
 
 .card .num {
@@ -597,6 +652,27 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 
 .card h3 { font-size: 1.15rem; margin-bottom: 0.2em; }
 .card p { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 0; }
+
+/* ---- 罫線だけの説明ブロック（カードにしない静かな列） ---- */
+.stack { display: grid; gap: 0; max-width: 760px; }
+.stack-item {
+  border-top: 1px solid var(--line);
+  padding: 26px 0 26px 30px;
+  position: relative;
+}
+.stack-item:last-child { border-bottom: 1px solid var(--line); }
+.stack-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 33px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+}
+.stack-item h3 { font-size: 1.1rem; margin-bottom: 6px; }
+.stack-item p { color: var(--ink-soft); font-size: 0.96rem; margin-bottom: 0; }
 
 /* ---- 料金テーブル ---- */
 .price-table {
@@ -786,39 +862,43 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   .inline-photo { grid-template-columns: 1fr; }
 }
 
-/* ---- ごあいさつ ---- */
+/* ---- ごあいさつ（枠で囲わず、雑誌の見開きのように組む） ---- */
 .greeting {
   display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 32px;
-  align-items: flex-start;
-  background: var(--surface);
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-lg);
-  padding: 36px;
-  transform: rotate(-0.8deg);
-  box-shadow: 7px 7px 0 0 color-mix(in srgb, var(--accent-coral) 55%, transparent);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  grid-template-columns: 300px 1fr;
+  gap: 52px;
+  align-items: start;
 }
-.greeting:hover { transform: rotate(0deg); }
-@media (max-width: 640px) {
-  .greeting { grid-template-columns: 1fr; text-align: center; }
-  .greeting .avatar { margin: 0 auto; }
+@media (max-width: 780px) {
+  .greeting { grid-template-columns: 1fr; gap: 28px; }
 }
 
+/* 写真は角丸を大きく取り、上に少しずらして紙面から浮かせる */
 .greeting .avatar {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  flex-shrink: 0;
+  width: 100%;
+  aspect-ratio: 3 / 4;
   object-fit: cover;
-  box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent-gold) 14%, transparent);
-  transition: transform 0.3s ease;
+  border-radius: 160px 160px 18px 18px;
+  border: 2px solid var(--ink);
+  margin-top: -18px;
 }
-.greeting .avatar:hover { transform: rotate(-4deg) scale(1.04); }
+@media (max-width: 780px) {
+  .greeting .avatar { width: 210px; margin: 0 auto; }
+}
 
-@media (prefers-reduced-motion: reduce) {
-  .greeting .avatar { transition: none; }
+/* 本文の頭に細い縦罫を引いて、囲まずに「まとまり」を作る */
+.greeting-body {
+  border-left: 3px solid var(--accent-gold);
+  padding-left: 30px;
+}
+@media (max-width: 780px) {
+  .greeting-body { border-left: none; padding-left: 0; }
+}
+.greeting-body .name {
+  font-family: 'Fraunces', serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 
 .greeting .role {
@@ -837,23 +917,15 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 @media (max-width: 720px) { .contact-grid { grid-template-columns: 1fr; } }
 
+/* 連絡先は補助情報なので静かに置く（主役はフォーム） */
 .contact-card {
-  background: var(--surface);
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-lg);
-  padding: 30px;
+  background: transparent;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 28px;
   display: flex;
   flex-direction: column;
   gap: 14px;
-  transform: rotate(var(--tilt, 0deg));
-  box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-}
-.contact-grid .contact-card:nth-child(1) { --tilt: -1.5deg; }
-.contact-grid .contact-card:nth-child(2) { --tilt: 1.5deg; }
-.contact-card:hover {
-  transform: rotate(0deg) translateY(-5px);
-  box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
 }
 .contact-card .icon {
   width: 42px; height: 42px; border-radius: 50%;
@@ -876,8 +948,9 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   padding: 32px;
   display: grid;
   gap: 20px;
-  box-shadow: 7px 7px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  box-shadow: 6px 7px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
 }
+.field input, .field textarea { box-shadow: none; }
 
 .field { display: grid; gap: 7px; }
 
@@ -921,6 +994,72 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   background: color-mix(in srgb, var(--accent-gold) 12%, var(--surface));
 }
 .form-status[hidden] { display: none !important; }
+
+/* ---- 制作の流れ（縦の線でつなぐ。番号は本当の順序なので数字を使う） ---- */
+.flow { position: relative; display: grid; gap: 34px; max-width: 720px; }
+.flow::before {
+  content: "";
+  position: absolute;
+  left: 25px;
+  top: 12px;
+  bottom: 12px;
+  width: 2px;
+  background: repeating-linear-gradient(
+    var(--line) 0 6px, transparent 6px 12px
+  );
+}
+.flow-step {
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 22px;
+  align-items: start;
+}
+.flow-step .no {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  font-family: 'Fraunces', serif;
+  font-weight: 600;
+  font-size: 1.05rem;
+  z-index: 1;
+}
+.flow-step:last-child .no { background: var(--accent-gold); }
+.flow-step h3 { font-size: 1.08rem; margin-bottom: 4px; }
+.flow-step p { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 0; }
+
+/* ---- よくあるご質問 ---- */
+.faq { display: grid; gap: 0; max-width: 760px; }
+.faq-item {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--line); }
+.faq-item h3 {
+  position: relative;
+  padding-left: 38px;
+  font-size: 1.05rem;
+  margin-bottom: 8px;
+}
+.faq-item h3::before {
+  content: "Q";
+  position: absolute;
+  left: 0;
+  top: -1px;
+  font-family: 'Fraunces', serif;
+  color: var(--accent-coral);
+  font-size: 1.2rem;
+}
+.faq-item p {
+  padding-left: 38px;
+  color: var(--ink-soft);
+  font-size: 0.95rem;
+  margin-bottom: 0;
+}
 
 /* ---- フッター ---- */
 footer {

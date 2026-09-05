@@ -6,7 +6,37 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgress();
   initCursorDot();
   initContactForm();
+  initBandParallax();
 });
+
+/* ---------------------------------------------------------
+   写真帯の視差スクロール
+   背景写真を本文よりゆっくり動かして奥行きを出す
+--------------------------------------------------------- */
+function initBandParallax() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const img = document.querySelector('.photo-band img');
+  if (!img) return;
+  const band = img.parentElement;
+  let ticking = false;
+
+  const update = () => {
+    const rect = band.getBoundingClientRect();
+    // 帯が画面に入っている間だけ計算する
+    if (rect.bottom > 0 && rect.top < window.innerHeight) {
+      const progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height); // 0→1
+      img.style.transform = `translateY(${(progress - 0.5) * 70}px) scale(1.14)`;
+    }
+    ticking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+}
 
 /* ---------------------------------------------------------
    カーソルを追いかける光の玉（PCのみ・装飾）
@@ -318,21 +348,41 @@ function initHaloCanvas() {
 function initScrollReveal() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const targets = document.querySelectorAll('.card, .case-study, .contact-card, .section-head, .greeting');
+  // data-reveal が付いた要素を対象にする。付いていなければ既定の動きを割り当てる。
+  const defaults = [
+    ['.card--sticker', 'stamp'],
+    ['.photo-frame, .case-study, .device-wrap', 'wipe'],
+    ['.section-head, .greeting, .contact-card, .contact-form, .flow-step, .faq-item', 'up'],
+  ];
+  defaults.forEach(([sel, kind]) => {
+    document.querySelectorAll(sel).forEach((el) => {
+      if (!el.dataset.reveal) el.dataset.reveal = kind;
+    });
+  });
+
+  const targets = document.querySelectorAll('[data-reveal]');
   if (!targets.length) return;
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('reveal-in');
-        observer.unobserve(entry.target);
-      }
+      if (!entry.isIntersecting) return;
+      const el = entry.target;
+      observer.unobserve(el);
+      el.classList.add('reveal-in');
+      // 演出が終わったらクラスを外し、ホバー時の変形とぶつからないようにする
+      el.addEventListener('animationend', () => {
+        el.classList.remove('reveal-init', 'reveal-in');
+        el.style.animationDelay = '';
+      }, { once: true });
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 
-  targets.forEach((el, i) => {
+  targets.forEach((el) => {
     el.classList.add('reveal-init');
-    el.style.transitionDelay = `${Math.min(i % 3, 2) * 90}ms`;
+    // 同じ親の中での並び順に応じて少しずつ遅らせる（順番に現れるようにする）
+    const siblings = [...el.parentElement.children].filter((c) => c.dataset && c.dataset.reveal);
+    const idx = siblings.indexOf(el);
+    if (idx > 0) el.style.animationDelay = `${Math.min(idx, 4) * 110}ms`;
     observer.observe(el);
   });
 }
@@ -346,7 +396,7 @@ function initCardMotion() {
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
   const canHover = window.matchMedia('(hover: hover)').matches;
-  const cards = document.querySelectorAll('.card');
+  const cards = document.querySelectorAll('.card--sticker');
 
   if (canHover) {
     cards.forEach((card) => {

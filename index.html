@@ -72,7 +72,7 @@
         <p style="color:var(--ink-soft)">3つの領域を、一人で最初から最後まで担当します。</p>
       </div>
       <div class="grid-3">
-        <div class="card">
+        <div class="card card--sticker">
           <span class="num">01</span>
           <!-- ブラウザ窓のイラスト -->
           <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
@@ -92,7 +92,7 @@
           <h3>ホームページ制作</h3>
           <p>数ページ程度の静的サイトを中心に、スマートフォン閲覧に対応した形で制作します。</p>
         </div>
-        <div class="card">
+        <div class="card card--sticker">
           <span class="num">02</span>
           <!-- チェックリストのイラスト -->
           <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
@@ -113,7 +113,7 @@
           <h3>業務アプリ開発</h3>
           <p>タスク管理など、日々の業務で使う小規模なツールを、使う人の手間を減らす視点で設計します。</p>
         </div>
-        <div class="card">
+        <div class="card card--sticker">
           <span class="num">03</span>
           <!-- 表計算＋自動化のイラスト -->
           <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
@@ -165,17 +165,18 @@
         <span class="eyebrow">About</span>
         <h2>本業で培った視点を活かします</h2>
       </div>
-      <div class="grid-3">
-        <div class="card">
+      <!-- ここはカードにせず、罫線だけのテキストブロックにして主役（サービス3枚）を邪魔しない -->
+      <div class="stack">
+        <div class="stack-item" data-reveal="up">
           <h3>丁寧なヒアリング</h3>
           <p>認識のズレを防ぐため、依頼内容を丁寧に確認してから制作を始めます。</p>
         </div>
-        <div class="card">
+        <div class="stack-item" data-reveal="up">
           <h3>使う側の目線</h3>
           <p>企業の人事部門で新卒採用・社内広報を担当し、自社ホームページの運営にも携わってきた経験から、
             「使う人がつまずく点」を想像して設計します。</p>
         </div>
-        <div class="card">
+        <div class="stack-item" data-reveal="up">
           <h3>正直な進め方</h3>
           <p>分からないことは分からないと伝え、実績の少なさも隠さず、確実さで信頼を積み重ねます。</p>
         </div>
@@ -190,10 +191,10 @@
         <h2>ごあいさつ</h2>
       </div>
       <div class="greeting">
-        <img class="avatar" src="assets/founder.jpg" alt="野﨑大雅の写真">
-        <div>
-          <p style="margin-bottom:2px; font-weight:600;">野﨑 大雅（Halo Works 運営者）</p>
-          <p class="role">本業：人事部門（新卒採用・社内広報・自社ホームページ運営）</p>
+        <img class="avatar" src="assets/founder.jpg" alt="野﨑大雅の写真" data-reveal="wipe">
+        <div class="greeting-body">
+          <p class="name">野﨑 大雅</p>
+          <p class="role">Halo Works 運営者／本業：人事部門（新卒採用・社内広報・自社ホームページ運営）</p>
           <p>
             はじめまして、Halo Worksを一人で運営している野﨑 大雅と申します。本業では人事部門で
             新卒採用や社内広報を担当し、自社のホームページ運営にも携わってきました。
@@ -212,6 +213,60 @@
     </div>
   </section>
 
+  <section class="alt">
+    <div class="container">
+      <div class="section-head left">
+        <span class="eyebrow">Flow</span>
+        <h2>ご依頼から納品までの流れ</h2>
+        <p style="color:var(--ink-soft)">はじめてホームページを作る方にも分かるよう、順番にご説明します。</p>
+      </div>
+      <div class="flow">
+        <div class="flow-step">
+          <span class="no">1</span>
+          <div>
+            <h3>ご相談・お問い合わせ</h3>
+            <p>フォームかInstagramのDMからご連絡ください。「何から相談すればいいか分からない」段階で構いません。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="no">2</span>
+          <div>
+            <h3>ヒアリング</h3>
+            <p>どんなお店なのか、誰に見てほしいのか、何を載せたいのかをお伺いします。ここに一番時間をかけます。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="no">3</span>
+          <div>
+            <h3>お見積り・内容のご確認</h3>
+            <p>作業内容・金額・納期をメールでお送りします。ご了承の返信をいただいてから着手します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="no">4</span>
+          <div>
+            <h3>制作</h3>
+            <p>本業の合間に進めるため、余裕をもったスケジュールでご相談させてください。無理な納期はお約束しません。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="no">5</span>
+          <div>
+            <h3>ご確認・修正</h3>
+            <p>できあがったものをご覧いただき、気になる点を直します。2回までは無料で対応します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <span class="no">6</span>
+          <div>
+            <h3>納品・お支払い</h3>
+            <p>内容にご納得いただいてから、一括でお支払いをお願いします。着手金はいただきません。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="photo-band">
     <img src="assets/desk-work.jpg" alt="木製のデスクでノートパソコンに向かう手元" loading="lazy" width="1600" height="1067">
     <div class="band-copy">
@@ -220,6 +275,52 @@
         数をこなすことはできませんが、その分ひとつの案件にじっくり向き合います。
         急ぎのご依頼にはお応えできないこともありますが、無理な約束はいたしません。
       </p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head left">
+        <span class="eyebrow">FAQ</span>
+        <h2>よくあるご質問</h2>
+      </div>
+      <div class="faq">
+        <div class="faq-item">
+          <h3>費用はどのくらいかかりますか？</h3>
+          <p>数ページの簡単なホームページで2万円〜8万円程度が目安です。作業量によって変わりますので、
+            ご相談内容をお伺いしてからお見積りします。実績を増やしている段階のため、
+            案件によっては初回限定のモニター価格でご案内する場合があります。</p>
+        </div>
+        <div class="faq-item">
+          <h3>支払いのタイミングはいつですか？</h3>
+          <p>納品後、内容をご確認いただいてからの一括払いです。着手金はいただいていません。</p>
+        </div>
+        <div class="faq-item">
+          <h3>修正は何回までお願いできますか？</h3>
+          <p>納品時のご確認で気になる点があれば、2回までは無料で修正します。
+            それ以降の修正や大きな仕様変更は、別途ご相談のうえお見積りします。</p>
+        </div>
+        <div class="faq-item">
+          <h3>作ったあと、自分たちで更新できますか？</h3>
+          <p>ご希望に応じて、ログインして記事を投稿・編集できる管理画面をお付けできます。
+            実績ページのReAct!!様の事例では、スマホから写真つきで投稿できる画面をご用意しました。</p>
+        </div>
+        <div class="faq-item">
+          <h3>毎月の維持費はかかりますか？</h3>
+          <p>構成によります。ReAct!!様の事例ではサーバーを使わない構成にしているため、維持費はかかっていません。
+            独自ドメイン（〇〇.com など）を取得される場合は、年間数千円程度が別途かかります。</p>
+        </div>
+        <div class="faq-item">
+          <h3>作ったホームページの権利はどうなりますか？</h3>
+          <p>お支払い完了後、データ・著作権ともにお客様に帰属します。</p>
+        </div>
+        <div class="faq-item">
+          <h3>対応できる時間帯を教えてください</h3>
+          <p>本業がありますので、平日は夜間中心、土日は日中〜終日で対応できる場合があります。
+            即日対応・24時間対応は行っていません。お急ぎの場合はその旨をお知らせください。
+            現実的にお受けできるかどうかを正直にお伝えします。</p>
+        </div>
+      </div>
     </div>
   </section>
 
