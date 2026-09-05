@@ -41,18 +41,36 @@
 
   <section style="padding-top:0;">
     <div class="container">
-      <div class="contact-grid">
+      <form class="contact-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <div class="field">
+          <label for="name">お名前・店舗名<span class="required">必須</span></label>
+          <input type="text" id="name" name="name" required autocomplete="name" placeholder="例：Halo Works／野﨑">
+        </div>
+        <div class="field">
+          <label for="email">ご返信先のメールアドレス<span class="required">必須</span></label>
+          <input type="email" id="email" name="email" required autocomplete="email" placeholder="例：info@example.com">
+        </div>
+        <div class="field">
+          <label for="message">ご相談内容<span class="required">必須</span></label>
+          <textarea id="message" name="message" required placeholder="「ホームページを作りたい」「エクセルの集計を楽にしたい」など、決まっていない段階のご相談でも大丈夫です。"></textarea>
+        </div>
+        <p class="form-status" role="status" hidden></p>
+        <div>
+          <button type="submit" class="btn btn-primary">この内容で送信する</button>
+        </div>
+      </form>
+
+      <div class="contact-grid" style="margin-top:32px;">
         <div class="contact-card">
           <span class="icon">📷</span>
           <h3 style="margin-bottom:0;">Instagram DM</h3>
-          <p style="color:var(--ink-soft); margin-bottom:0;">一番お返事が早い連絡手段です。気軽にメッセージをお送りください。</p>
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="btn btn-primary" style="align-self:flex-start;">Instagramを開く</a>
+          <p style="color:var(--ink-soft); margin-bottom:0;">フォームより気軽に聞きたい場合は、DMでもお気軽にどうぞ。</p>
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener" class="btn btn-ghost" style="align-self:flex-start;">Instagramを開く</a>
         </div>
         <div class="contact-card">
-          <span class="icon">✉️</span>
-          <h3 style="margin-bottom:0;">メール</h3>
-          <p style="color:var(--ink-soft); margin-bottom:0;">じっくりご相談内容をまとめて送りたい場合はこちら。</p>
-          <a href="mailto:example@example.com" class="btn btn-ghost" style="align-self:flex-start;">example@example.com</a>
+          <span class="icon">🕒</span>
+          <h3 style="margin-bottom:0;">お返事の目安</h3>
+          <p style="color:var(--ink-soft); margin-bottom:0;">通常2〜3日以内にご返信します。お急ぎの場合はその旨をお書き添えください。</p>
         </div>
       </div>
 

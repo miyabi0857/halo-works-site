@@ -4,7 +4,93 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initCardMotion();
   initScrollProgress();
+  initCursorDot();
+  initContactForm();
 });
+
+/* ---------------------------------------------------------
+   カーソルを追いかける光の玉（PCのみ・装飾）
+   リンクやカードに近づくと大きくふくらむ
+--------------------------------------------------------- */
+function initCursorDot() {
+  if (!window.matchMedia('(hover: hover)').matches) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const dot = document.createElement('div');
+  dot.className = 'cursor-dot';
+  document.body.appendChild(dot);
+
+  let x = window.innerWidth / 2, y = window.innerHeight / 2;
+  let targetX = x, targetY = y;
+
+  document.addEventListener('mousemove', (e) => {
+    targetX = e.clientX;
+    targetY = e.clientY;
+  });
+
+  (function loop() {
+    x += (targetX - x) * 0.16;
+    y += (targetY - y) * 0.16;
+    dot.style.transform = `translate(${x}px, ${y}px)`;
+    requestAnimationFrame(loop);
+  })();
+
+  document.querySelectorAll('a, button, .card, .contact-card, .note-box').forEach((el) => {
+    el.addEventListener('mouseenter', () => dot.classList.add('is-big'));
+    el.addEventListener('mouseleave', () => dot.classList.remove('is-big'));
+  });
+}
+
+/* ---------------------------------------------------------
+   問い合わせフォーム
+   フォーム送信サービス（Formspree等）へ非同期で送信し、
+   ページ遷移せずにその場で結果を表示する。
+   ※ 送信先は contact.html の form action に設定する
+--------------------------------------------------------- */
+function initContactForm() {
+  const form = document.querySelector('.contact-form');
+  if (!form) return;
+  const status = form.querySelector('.form-status');
+  const submitBtn = form.querySelector('button[type="submit"]');
+
+  const show = (message) => {
+    status.textContent = message;
+    status.hidden = false;
+  };
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    if (form.action.includes('YOUR_FORM_ID')) {
+      show('送信先が未設定です。お手数ですがInstagramのDMからご連絡ください。');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    const originalLabel = submitBtn.textContent;
+    submitBtn.textContent = '送信中…';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      });
+
+      if (res.ok) {
+        form.reset();
+        show('送信しました。内容を確認のうえ、こちらからご連絡いたします。ありがとうございました。');
+      } else {
+        show('送信に失敗しました。お手数ですが、しばらく経ってから再度お試しいただくか、InstagramのDMからご連絡ください。');
+      }
+    } catch (err) {
+      show('通信エラーが発生しました。電波状況をご確認のうえ、再度お試しください。');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+  });
+}
 
 /* ---------------------------------------------------------
    ページ上部のスクロール進捗バー

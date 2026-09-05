@@ -71,14 +71,47 @@ a { color: inherit; text-decoration: none; }
   padding: 0 24px;
 }
 
+/* ステッカー風のラベル（少し傾けて貼り付けたような見た目） */
 .eyebrow {
   display: inline-block;
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--accent-coral);
-  margin-bottom: 0.75em;
+  margin-bottom: 1em;
+  padding: 5px 15px;
+  background: color-mix(in srgb, var(--accent-gold) 14%, var(--surface));
+  border: 1.5px dashed var(--accent-coral);
+  border-radius: 999px;
+  transform: rotate(-2deg);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.eyebrow:hover { transform: rotate(2deg) scale(1.06); }
+
+/* ---- カーソル追従の光の玉（PCのみ・装飾） ---- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  margin: -8px 0 0 -8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-gold), var(--accent-coral));
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 999;
+  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              margin 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+              opacity 0.25s ease;
+}
+.cursor-dot.is-big {
+  width: 46px;
+  height: 46px;
+  margin: -23px 0 0 -23px;
+  opacity: 0.32;
 }
 
 /* ---- ヘッダー / ナビ ---- */
@@ -240,26 +273,39 @@ nav.main-nav a[aria-current="page"]::after {
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
-.btn:active { transform: scale(0.94); }
+.btn:active { transform: rotate(0deg) scale(0.93) !important; }
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
   color: #241503;
-  animation: btn-breathe 2.6s ease-in-out infinite;
+  border-color: var(--ink);
+  box-shadow: 4px 4px 0 0 var(--ink);
+  animation: btn-wiggle 3.4s ease-in-out infinite;
 }
-.btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: var(--shadow); animation-play-state: paused; }
+.btn-primary:hover {
+  transform: translate(-2px, -3px) rotate(-2deg) scale(1.05);
+  box-shadow: 7px 8px 0 0 var(--ink);
+  animation-play-state: paused;
+}
 
-@keyframes btn-breathe {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent-coral) 35%, transparent); }
-  50% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--accent-coral) 0%, transparent); }
+/* ボタンが時々ぷるっと揺れる（放置していても目に留まるように） */
+@keyframes btn-wiggle {
+  0%, 82%, 100% { transform: rotate(0deg); }
+  86% { transform: rotate(-3deg) scale(1.03); }
+  90% { transform: rotate(3deg) scale(1.03); }
+  94% { transform: rotate(-2deg) scale(1.02); }
 }
 
 .btn-ghost {
-  background: transparent;
-  border-color: var(--line);
+  background: var(--surface);
+  border-color: var(--ink);
   color: var(--ink);
+  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent-coral) 55%, transparent);
 }
-.btn-ghost:hover { border-color: var(--accent-coral); transform: translateY(-2px); }
+.btn-ghost:hover {
+  transform: translate(-2px, -3px) rotate(2deg);
+  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--accent-coral) 75%, transparent);
+}
 
 @media (prefers-reduced-motion: reduce) {
   .btn-primary { animation: none; }
@@ -300,6 +346,23 @@ nav.main-nav a[aria-current="page"]::after {
 .hero-inner { position: relative; z-index: 1; max-width: 640px; }
 
 .hero h1 { font-size: clamp(2.1rem, 5vw, 3.1rem); }
+
+/* 見出しが行ごとに弾んで登場する */
+.hero h1 .line {
+  display: block;
+  opacity: 0;
+  transform: translateY(34px) rotate(-3deg);
+  animation: line-pop 0.85s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.hero h1 .line:nth-child(2) { animation-delay: 0.16s; }
+
+@keyframes line-pop {
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1 .line { opacity: 1; transform: none; animation: none; }
+}
 
 .hero .lead {
   font-size: 1.08rem;
@@ -350,19 +413,29 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 @media (max-width: 860px) { .grid-3 { grid-template-columns: 1fr; } }
 
+/* カードは「貼ったステッカー」のように少し傾けておき、触ると真っ直ぐになる */
 .card {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 2px solid var(--ink);
   border-radius: var(--radius-lg);
   padding: 30px 26px;
   display: flex;
   flex-direction: column;
   gap: 12px;
   will-change: transform;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transform: rotate(var(--tilt, 0deg));
+  box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 }
-.card:hover { box-shadow: var(--shadow); }
-.card:active { transform: scale(0.97) !important; }
+.grid-3 .card:nth-child(1) { --tilt: -2deg; }
+.grid-3 .card:nth-child(2) { --tilt: 1.6deg; }
+.grid-3 .card:nth-child(3) { --tilt: -1.2deg; }
+
+.card:hover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
+}
+.card:active { transform: rotate(0deg) scale(0.96) !important; }
 
 /* タッチ端末（ホバー不可）では、常時ゆらゆら浮遊させて「動いている感」を出す */
 .card.idle-float {
@@ -372,8 +445,8 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 .card.idle-float:nth-child(3) { animation-delay: 1s; }
 
 @keyframes card-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%, 100% { transform: rotate(var(--tilt, 0deg)) translateY(0); }
+  50% { transform: rotate(calc(var(--tilt, 0deg) * -0.6)) translateY(-10px); }
 }
 
 /* ---- スクロール出現演出（JSが有効な場合のみ付与される） ---- */
@@ -432,11 +505,14 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 /* ---- 実績（ポートフォリオ） ---- */
 .case-study {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 2px solid var(--ink);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: var(--shadow);
+  transform: rotate(-0.6deg);
+  box-shadow: 8px 8px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.case-study:hover { transform: rotate(0deg); }
 
 .browser-frame {
   background: var(--ink);
@@ -475,14 +551,20 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 .case-points p { font-size: 0.93rem; color: var(--ink-soft); margin: 0; }
 
+/* 付箋のように少し傾けて貼る */
 .note-box {
-  background: var(--surface-soft);
-  border-left: 3px solid var(--accent-gold);
-  border-radius: 8px;
-  padding: 16px 20px;
+  position: relative;
+  background: color-mix(in srgb, var(--accent-gold) 12%, var(--surface));
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 18px 22px;
   font-size: 0.9rem;
   color: var(--ink-soft);
+  transform: rotate(-1deg);
+  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.note-box:hover { transform: rotate(1deg) scale(1.015); }
 
 /* ---- ごあいさつ ---- */
 .greeting {
@@ -491,11 +573,14 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   gap: 32px;
   align-items: flex-start;
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 2px solid var(--ink);
   border-radius: var(--radius-lg);
   padding: 36px;
-  box-shadow: var(--shadow);
+  transform: rotate(-0.8deg);
+  box-shadow: 7px 7px 0 0 color-mix(in srgb, var(--accent-coral) 55%, transparent);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
+.greeting:hover { transform: rotate(0deg); }
 @media (max-width: 640px) {
   .greeting { grid-template-columns: 1fr; text-align: center; }
   .greeting .avatar { margin: 0 auto; }
@@ -534,12 +619,21 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 
 .contact-card {
   background: var(--surface);
-  border: 1px solid var(--line);
+  border: 2px solid var(--ink);
   border-radius: var(--radius-lg);
   padding: 30px;
   display: flex;
   flex-direction: column;
   gap: 14px;
+  transform: rotate(var(--tilt, 0deg));
+  box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+.contact-grid .contact-card:nth-child(1) { --tilt: -1.5deg; }
+.contact-grid .contact-card:nth-child(2) { --tilt: 1.5deg; }
+.contact-card:hover {
+  transform: rotate(0deg) translateY(-5px);
+  box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
 }
 .contact-card .icon {
   width: 42px; height: 42px; border-radius: 50%;
@@ -553,6 +647,60 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 @media (prefers-reduced-motion: reduce) {
   .contact-card .icon { animation: none; }
 }
+
+/* ---- 問い合わせフォーム ---- */
+.contact-form {
+  background: var(--surface);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius-lg);
+  padding: 32px;
+  display: grid;
+  gap: 20px;
+  box-shadow: 7px 7px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
+}
+
+.field { display: grid; gap: 7px; }
+
+.field label {
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.field .required {
+  font-size: 0.72rem;
+  color: var(--accent-coral);
+  margin-left: 6px;
+  font-weight: 700;
+}
+
+.field input,
+.field textarea {
+  font-family: inherit;
+  font-size: 1rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 2px solid var(--line);
+  border-radius: 10px;
+  padding: 12px 14px;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+.field input:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--accent-coral);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent-coral) 45%, transparent);
+}
+.field textarea { min-height: 150px; resize: vertical; }
+
+.form-status {
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 14px 18px;
+  border-radius: 10px;
+  border: 2px dashed var(--accent-coral);
+  background: color-mix(in srgb, var(--accent-gold) 12%, var(--surface));
+}
+.form-status[hidden] { display: none !important; }
 
 /* ---- フッター ---- */
 footer {
