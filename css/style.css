@@ -1,22 +1,29 @@
 /* ==========================================================================
-   Halo Works — 公式サイト共通スタイル
-   コンセプト：屋号「Halo（光の輪）」をやわらかいグラデーションの光として表現。
+   Gear Bloom — 公式サイト共通スタイル
+   コンセプト：屋号「Gear Bloom」＝歯車がかみ合って動き出し、その先で花が咲く。
+   配色は「弁柄（べんがら）」。日本の建具や漆器に使われてきた赤茶で、
+   生成りの紙色と合わせる。個人店に向けた温かさと、落ち着きの両立をねらう。
    誠実さ・丁寧さを伝えるため、派手すぎない落ち着いたトーンにする。
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap');
 
 :root {
-  --bg: #f5f6fa;
+  --bg: #f7f4ef;
   --surface: #ffffff;
-  --surface-soft: #eef0f7;
-  --ink: #1e2233;
-  --ink-soft: #5b6178;
-  --ink-faint: #8a90a6;
-  --accent-gold: #e7a33e;
-  --accent-coral: #ef7f6c;
-  --line: #e1e3ed;
-  --shadow: 0 20px 45px -25px rgba(30, 34, 51, 0.35);
+  --surface-soft: #efe7db;
+  --ink: #241a15;
+  --ink-soft: #5c4d44;
+  --ink-faint: #8a7a6e;
+  /* 配色は「弁柄（赤茶）」の一色相でまとめる。
+     --accent が主役、--sand はその淡い側で、どちらも同じ暖色系。
+     【重要】補色（緑・青など）を主役級の彩度で足さないこと。
+     以前ここに深緑を混ぜてオリーブに濁らせた失敗がある。
+     2色を混ぜたグラデーションも作らない（中間色が必ず濁る）。 */
+  --accent: #9c4a32;
+  --sand: #eee3d5;
+  --line: #e5ddd2;
+  --shadow: 0 20px 45px -25px rgba(36, 26, 21, 0.35);
   --radius-lg: 20px;
   --radius-md: 12px;
   --max-width: 1080px;
@@ -24,15 +31,15 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #14151f;
-    --surface: #1c1e2b;
-    --surface-soft: #23263650;
-    --ink: #edeef5;
-    --ink-soft: #9aa0b7;
-    --ink-faint: #6c7288;
-    --accent-gold: #f0b563;
-    --accent-coral: #f3907e;
-    --line: #2a2c3c;
+    --bg: #1a1512;
+    --surface: #221b17;
+    --surface-soft: #2a221c80;
+    --ink: #efe7dd;
+    --ink-soft: #b5a89d;
+    --ink-faint: #85786d;
+    --accent: #d4735a;
+    --sand: #6b5546;
+    --line: #362b24;
     --shadow: 0 20px 45px -25px rgba(0, 0, 0, 0.6);
   }
 }
@@ -78,11 +85,11 @@ a { color: inherit; text-decoration: none; }
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--accent-coral);
+  color: var(--accent);
   margin-bottom: 1em;
   padding: 5px 15px;
-  background: color-mix(in srgb, var(--accent-gold) 14%, var(--surface));
-  border: 1.5px dashed var(--accent-coral);
+  background: color-mix(in srgb, var(--sand) 14%, var(--surface));
+  border: 1.5px dashed var(--accent);
   border-radius: 999px;
   transform: rotate(-2deg);
   transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -98,7 +105,7 @@ a { color: inherit; text-decoration: none; }
   height: 16px;
   margin: -8px 0 0 -8px;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--accent-gold), var(--accent-coral));
+  background: var(--accent);
   opacity: 0.55;
   pointer-events: none;
   z-index: 999;
@@ -139,9 +146,11 @@ a { color: inherit; text-decoration: none; }
   height: 72px;
 }
 
-/* ロゴは1つの語として組むので flex にしない（単語間の空白が消えるため） */
+/* ロゴ：マークとワードマークを一組として組む */
 .logo {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.44em;
   white-space: nowrap;
   font-family: 'Fraunces', serif;
   font-weight: 600;
@@ -149,45 +158,25 @@ a { color: inherit; text-decoration: none; }
   letter-spacing: 0.01em;
 }
 
-/* ロゴタイプ：「Halo」の o を光の輪に置き換える（ロゴ案B） */
-.logo-o {
-  display: inline-block;
-  position: relative;
-  width: 0.66em;
-  height: 0.66em;
-  margin: 0 0.02em 0 0.03em;
-  border-radius: 50%;
-  border: 0.14em solid var(--accent-gold);
-  vertical-align: -0.02em;
+/* マーク：歯車の歯が、回りながら少しずつ花びらへ変わっていく形 */
+.logo-mark {
+  width: 1.34em;
+  height: 1.34em;
   flex-shrink: 0;
-  animation: halo-pulse 3.2s ease-in-out infinite;
-}
-/* 輪の上に乗る粒（輪の線の中心に置く） */
-.logo-o::after {
-  content: "";
-  position: absolute;
-  top: -0.005em;
-  left: 50%;
-  width: 0.15em;
-  height: 0.15em;
-  margin-left: -0.075em;
-  border-radius: 50%;
-  background: var(--ink);
+  color: var(--accent);
+  transition: transform 0.7s cubic-bezier(0.22, 0.9, 0.3, 1);
 }
 
-@keyframes halo-pulse {
-  0%, 100% {
-    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent-gold) 18%, transparent),
-                0 0 16px 2px color-mix(in srgb, var(--accent-coral) 35%, transparent);
-  }
-  50% {
-    box-shadow: 0 0 0 9px color-mix(in srgb, var(--accent-gold) 32%, transparent),
-                0 0 28px 6px color-mix(in srgb, var(--accent-coral) 60%, transparent);
-  }
+/* かみ合って回る、を触れたときだけ小さく体験させる */
+.logo:hover .logo-mark,
+.logo:focus-visible .logo-mark {
+  transform: rotate(40deg);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .logo-mark { animation: none; }
+  .logo-mark { transition: none; }
+  .logo:hover .logo-mark,
+  .logo:focus-visible .logo-mark { transform: none; }
 }
 
 nav.main-nav {
@@ -212,7 +201,7 @@ nav.main-nav a::after {
   width: 0;
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg, var(--accent-gold), var(--accent-coral));
+  background: var(--accent);
   transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -232,7 +221,7 @@ nav.main-nav a[aria-current="page"]::after {
   left: 0;
   height: 3px;
   width: 0%;
-  background: linear-gradient(90deg, var(--accent-gold), var(--accent-coral));
+  background: var(--accent);
   z-index: 100;
   transition: width 0.1s linear;
 }
@@ -291,8 +280,8 @@ nav.main-nav a[aria-current="page"]::after {
 .btn:active { transform: rotate(0deg) scale(0.93) !important; }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
-  color: #241503;
+  background: var(--accent);
+  color: var(--bg);
   border-color: var(--ink);
   box-shadow: 4px 4px 0 0 var(--ink);
   animation: btn-wiggle 3.4s ease-in-out infinite;
@@ -315,18 +304,18 @@ nav.main-nav a[aria-current="page"]::after {
   background: var(--surface);
   border-color: var(--ink);
   color: var(--ink);
-  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent-coral) 55%, transparent);
+  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
 }
 .btn-ghost:hover {
   transform: translate(-2px, -3px) rotate(2deg);
-  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--accent-coral) 75%, transparent);
+  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--accent) 75%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .btn-primary { animation: none; }
 }
 
-/* ---- Hero（halo グラデーション） ---- */
+/* ---- Hero（真鍮と緑のグラデーション＋周回パーティクル） ---- */
 .hero {
   position: relative;
   padding: 96px 0 80px;
@@ -343,14 +332,14 @@ nav.main-nav a[aria-current="page"]::after {
   height: 720px;
   border-radius: 50%;
   background: radial-gradient(circle,
-    color-mix(in srgb, var(--accent-gold) 45%, transparent) 0%,
-    color-mix(in srgb, var(--accent-coral) 30%, transparent) 42%,
+    color-mix(in srgb, var(--sand) 45%, transparent) 0%,
+    color-mix(in srgb, var(--accent) 30%, transparent) 42%,
     transparent 70%);
   filter: blur(10px);
   pointer-events: none;
 }
 
-#halo-canvas {
+#bloom-canvas {
   position: absolute;
   inset: 0;
   width: 100%;
@@ -384,14 +373,14 @@ nav.main-nav a[aria-current="page"]::after {
   border: 3px solid var(--ink);
   border-radius: 32px;
   background: var(--ink);
-  box-shadow: 10px 12px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
+  box-shadow: 10px 12px 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
   transform: rotate(3deg);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
               box-shadow 0.25s ease;
 }
 .device:hover {
   transform: rotate(-1deg) translateY(-8px);
-  box-shadow: 14px 18px 0 0 color-mix(in srgb, var(--accent-gold) 75%, transparent);
+  box-shadow: 14px 18px 0 0 color-mix(in srgb, var(--sand) 75%, transparent);
 }
 
 .device::before {
@@ -435,8 +424,8 @@ nav.main-nav a[aria-current="page"]::after {
   padding: 6px 16px;
   border-radius: 999px;
   border: 2px solid var(--ink);
-  background: var(--accent-gold);
-  color: #241503;
+  background: var(--sand);
+  color: var(--ink);
   transform: rotate(-3deg);
   box-shadow: 3px 3px 0 0 var(--ink);
 }
@@ -500,8 +489,8 @@ section.has-blobs { position: relative; overflow: hidden; }
   z-index: 0;
   animation: blob-float 11s ease-in-out infinite;
 }
-.blob-gold { background: var(--accent-gold); }
-.blob-coral { background: var(--accent-coral); }
+.blob-sand { background: var(--sand); }
+.blob-accent { background: var(--accent); }
 
 @keyframes blob-float {
   0%, 100% { transform: translate(0, 0) scale(1); }
@@ -542,7 +531,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   gap: 12px;
   transition: border-color 0.25s ease;
 }
-.card:hover { border-color: color-mix(in srgb, var(--accent-coral) 55%, var(--line)); }
+.card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
 
 /* 看板の3枚だけ「貼ったステッカー」扱いにする */
 .card--sticker {
@@ -551,7 +540,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   padding: 30px 26px;
   will-change: transform;
   transform: rotate(var(--tilt, 0deg));
-  box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
+  box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--sand) 60%, transparent);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 }
 .grid-3 .card--sticker:nth-child(1) { --tilt: -2deg; }
@@ -566,7 +555,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 
 .card--sticker:hover {
   transform: rotate(0deg) translateY(-6px);
-  box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
+  box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
 }
 .card--sticker:active { transform: rotate(0deg) scale(0.96) !important; }
 
@@ -635,7 +624,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   font-family: 'Fraunces', serif;
   font-size: 0.85rem;
   font-weight: 600;
-  color: var(--accent-coral);
+  color: var(--accent);
   animation: num-bounce 2.4s ease-in-out infinite;
 }
 .card:nth-child(2) .num { animation-delay: 0.25s; }
@@ -669,7 +658,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: var(--accent-gold);
+  background: var(--accent);
 }
 .stack-item h3 { font-size: 1.1rem; margin-bottom: 6px; }
 .stack-item p { color: var(--ink-soft); font-size: 0.96rem; margin-bottom: 0; }
@@ -698,7 +687,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   border-radius: var(--radius-lg);
   overflow: hidden;
   transform: rotate(-0.6deg);
-  box-shadow: 8px 8px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
+  box-shadow: 8px 8px 0 0 color-mix(in srgb, var(--sand) 60%, transparent);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .case-study:hover { transform: rotate(0deg); }
@@ -736,21 +725,21 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 @media (min-width: 720px) { .case-points { grid-template-columns: repeat(3, 1fr); } }
 .case-points h4 {
   font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em;
-  color: var(--accent-coral); font-weight: 700; margin: 0 0 8px;
+  color: var(--accent); font-weight: 700; margin: 0 0 8px;
 }
 .case-points p { font-size: 0.93rem; color: var(--ink-soft); margin: 0; }
 
 /* 付箋のように少し傾けて貼る */
 .note-box {
   position: relative;
-  background: color-mix(in srgb, var(--accent-gold) 12%, var(--surface));
+  background: color-mix(in srgb, var(--sand) 12%, var(--surface));
   border: 2px solid var(--ink);
   border-radius: 10px;
   padding: 18px 22px;
   font-size: 0.9rem;
   color: var(--ink-soft);
   transform: rotate(-1deg);
-  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--sand) 55%, transparent);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 .note-box:hover { transform: rotate(1deg) scale(1.015); }
@@ -761,12 +750,12 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   border-radius: 16px;
   overflow: hidden;
   transform: rotate(var(--tilt, -1.5deg));
-  box-shadow: 9px 10px 0 0 color-mix(in srgb, var(--accent-gold) 65%, transparent);
+  box-shadow: 9px 10px 0 0 color-mix(in srgb, var(--sand) 65%, transparent);
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
 }
 .photo-frame:hover {
   transform: rotate(0deg) translateY(-5px);
-  box-shadow: 13px 15px 0 0 color-mix(in srgb, var(--accent-coral) 70%, transparent);
+  box-shadow: 13px 15px 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -797,7 +786,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   width: 24px;
   height: 24px;
   border-radius: 50%;
-  background: var(--accent-gold);
+  background: var(--sand);
   border: 2px solid var(--ink);
 }
 .checklist li::after {
@@ -888,7 +877,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 
 /* 本文の頭に細い縦罫を引いて、囲まずに「まとまり」を作る */
 .greeting-body {
-  border-left: 3px solid var(--accent-gold);
+  border-left: 3px solid var(--accent);
   padding-left: 30px;
 }
 @media (max-width: 780px) {
@@ -930,7 +919,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 .contact-card .icon {
   width: 42px; height: 42px; border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+  background: var(--accent);
   font-size: 1.1rem;
   animation: num-bounce 2.8s ease-in-out infinite;
 }
@@ -947,7 +936,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   border-radius: var(--radius-lg);
   padding: 46px 40px;
   text-align: center;
-  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--accent-gold) 60%, transparent);
+  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--sand) 60%, transparent);
 }
 .dm-cta .dm-icon {
   display: inline-grid;
@@ -956,8 +945,8 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   height: 68px;
   border-radius: 22px;
   margin-bottom: 18px;
-  color: #241503;
-  background: linear-gradient(135deg, var(--accent-gold), var(--accent-coral));
+  color: var(--bg);
+  background: var(--accent);
   border: 2px solid var(--ink);
 }
 .dm-cta h2 { font-size: clamp(1.3rem, 3.4vw, 1.7rem); margin-bottom: 0.5em; }
@@ -971,7 +960,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   padding: 32px;
   display: grid;
   gap: 20px;
-  box-shadow: 6px 7px 0 0 color-mix(in srgb, var(--accent-gold) 55%, transparent);
+  box-shadow: 6px 7px 0 0 color-mix(in srgb, var(--sand) 55%, transparent);
 }
 .field input, .field textarea { box-shadow: none; }
 
@@ -983,7 +972,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 .field .required {
   font-size: 0.72rem;
-  color: var(--accent-coral);
+  color: var(--accent);
   margin-left: 6px;
   font-weight: 700;
 }
@@ -1002,9 +991,9 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 .field input:focus,
 .field textarea:focus {
   outline: none;
-  border-color: var(--accent-coral);
+  border-color: var(--accent);
   transform: translate(-2px, -2px);
-  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent-coral) 45%, transparent);
+  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent) 45%, transparent);
 }
 .field textarea { min-height: 150px; resize: vertical; }
 
@@ -1013,8 +1002,8 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   font-weight: 600;
   padding: 14px 18px;
   border-radius: 10px;
-  border: 2px dashed var(--accent-coral);
-  background: color-mix(in srgb, var(--accent-gold) 12%, var(--surface));
+  border: 2px dashed var(--accent);
+  background: color-mix(in srgb, var(--sand) 12%, var(--surface));
 }
 .form-status[hidden] { display: none !important; }
 
@@ -1051,7 +1040,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   font-size: 1.05rem;
   z-index: 1;
 }
-.flow-step:last-child .no { background: var(--accent-gold); }
+.flow-step:last-child .no { background: var(--sand); }
 .flow-step h3 { font-size: 1.08rem; margin-bottom: 4px; }
 .flow-step p { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 0; }
 
@@ -1074,7 +1063,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   left: 0;
   top: -1px;
   font-family: 'Fraunces', serif;
-  color: var(--accent-coral);
+  color: var(--accent);
   font-size: 1.2rem;
 }
 .faq-item p {

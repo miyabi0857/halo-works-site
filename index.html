@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halo Works｜Web制作・業務アプリ・Excelマクロ</title>
+<title>Gear Bloom｜Web制作・業務アプリ・Excelマクロ</title>
 <meta name="description" content="長崎県内の個人店・小さな会社のためのホームページ制作、業務アプリ開発、Excelマクロ作成を承っています。">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -16,7 +16,7 @@
 
 <header class="site-header">
   <div class="container">
-    <a href="index.html" class="logo" aria-label="Halo Works">Hal<span class="logo-o" aria-hidden="true"></span> Works</a>
+    <a href="index.html" class="logo" aria-label="Gear Bloom"><svg class="logo-mark" viewBox="0 0 160 160" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M70.08,45.39 Q70.96,42.10 71.84,38.80 Q80.00,38.80 88.16,38.80 Q89.04,42.10 89.92,45.39 A36.00,36.00 0 0 1 94.64,47.11 Q98.17,43.62 103.74,41.18 Q110.72,45.58 115.88,52.02 Q113.53,56.89 109.85,59.87 A36.00,36.00 0 0 1 112.36,64.22 Q118.85,63.17 127.13,66.58 Q130.76,74.22 128.94,82.48 Q122.12,85.52 115.80,83.76 A36.00,36.00 0 0 1 114.93,88.71 Q122.13,92.63 126.88,103.63 Q125.77,112.35 117.92,116.30 Q108.71,113.66 105.01,105.90 A36.00,36.00 0 0 1 101.16,109.12 Q104.92,118.20 99.70,132.42 Q93.72,139.44 85.27,135.75 Q78.68,125.98 82.51,115.91 A36.00,36.00 0 0 1 77.49,115.91 Q74.14,126.83 57.66,135.15 Q48.27,137.84 45.49,128.47 Q46.96,114.47 58.84,109.12 A36.00,36.00 0 0 1 54.99,105.90 Q44.08,112.97 23.04,106.92 Q13.14,103.68 18.79,94.92 Q30.62,83.50 45.07,88.71 A36.00,36.00 0 0 1 44.20,83.76 Q29.75,81.91 16.53,60.17 Q9.77,51.27 20.83,49.65 Q39.68,48.36 47.64,64.22 A36.00,36.00 0 0 1 50.15,59.87 Q39.33,47.95 45.00,19.38 Q44.57,7.35 53.78,15.10 Q71.09,27.76 65.36,47.11 A36.00,36.00 0 0 1 70.08,45.39 Z M80.00,80.00 m-13.00,0 a13.00,13.00 0 1,0 26.00,0 a13.00,13.00 0 1,0 -26.00,0 Z"/></svg><span>Gear Bloom</span></a>
     <nav class="main-nav">
       <a href="index.html" aria-current="page">トップ</a>
       <a href="service.html">サービス</a>
@@ -32,7 +32,7 @@
 <main>
 
   <section class="hero">
-    <canvas id="halo-canvas" aria-hidden="true"></canvas>
+    <canvas id="bloom-canvas" aria-hidden="true"></canvas>
     <div class="container hero-inner">
       <div class="hero-grid">
         <div class="hero-copy">
@@ -63,8 +63,8 @@
   </section>
 
   <section class="alt has-blobs">
-    <div class="blob blob-gold" style="width:220px;height:220px;top:-60px;left:-60px;"></div>
-    <div class="blob blob-coral" style="width:180px;height:180px;bottom:-50px;right:-40px;"></div>
+    <div class="blob blob-sand" style="width:220px;height:220px;top:-60px;left:-60px;"></div>
+    <div class="blob blob-accent" style="width:180px;height:180px;bottom:-50px;right:-40px;"></div>
     <div class="container">
       <div class="section-head">
         <span class="eyebrow">Service</span>
@@ -76,13 +76,13 @@
           <span class="num">01</span>
           <!-- ブラウザ窓のイラスト -->
           <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
-            <rect x="12" y="14" width="104" height="70" rx="7" fill="var(--accent-gold)"/>
+            <rect x="12" y="14" width="104" height="70" rx="7" fill="var(--sand)"/>
             <rect x="6" y="8" width="104" height="70" rx="7" fill="var(--surface)" stroke="currentColor" stroke-width="2.6"/>
             <path d="M6 24 H110" stroke="currentColor" stroke-width="2.6"/>
-            <circle cx="16" cy="16" r="2.6" fill="var(--accent-coral)"/>
-            <circle cx="25" cy="16" r="2.6" fill="var(--accent-gold)"/>
+            <circle cx="16" cy="16" r="2.6" fill="var(--accent)"/>
+            <circle cx="25" cy="16" r="2.6" fill="var(--sand)"/>
             <circle cx="34" cy="16" r="2.6" fill="currentColor" opacity="0.25"/>
-            <rect x="14" y="33" width="38" height="26" rx="4" fill="var(--accent-coral)" stroke="currentColor" stroke-width="2.2"/>
+            <rect x="14" y="33" width="38" height="26" rx="4" fill="var(--accent)" stroke="currentColor" stroke-width="2.2"/>
             <rect x="60" y="34" width="38" height="5" rx="2.5" fill="currentColor" opacity="0.35"/>
             <rect x="60" y="44" width="30" height="5" rx="2.5" fill="currentColor" opacity="0.35"/>
             <rect x="60" y="54" width="36" height="5" rx="2.5" fill="currentColor" opacity="0.35"/>
@@ -96,18 +96,18 @@
           <span class="num">02</span>
           <!-- チェックリストのイラスト -->
           <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
-            <rect x="40" y="12" width="52" height="76" rx="10" fill="var(--accent-coral)"/>
+            <rect x="40" y="12" width="52" height="76" rx="10" fill="var(--accent)"/>
             <rect x="33" y="5" width="52" height="76" rx="10" fill="var(--surface)" stroke="currentColor" stroke-width="2.6"/>
             <rect x="49" y="11" width="20" height="3.5" rx="1.75" fill="currentColor" opacity="0.4"/>
-            <circle cx="45" cy="30" r="5" fill="var(--accent-gold)" stroke="currentColor" stroke-width="2.2"/>
+            <circle cx="45" cy="30" r="5" fill="var(--sand)" stroke="currentColor" stroke-width="2.2"/>
             <path d="M42.6 30 L44.4 32 L47.6 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <rect x="55" y="27.5" width="22" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="45" cy="47" r="5" fill="var(--accent-gold)" stroke="currentColor" stroke-width="2.2"/>
+            <circle cx="45" cy="47" r="5" fill="var(--sand)" stroke="currentColor" stroke-width="2.2"/>
             <path d="M42.6 47 L44.4 49 L47.6 45" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             <rect x="55" y="44.5" width="17" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
             <circle cx="45" cy="64" r="5" fill="var(--surface)" stroke="currentColor" stroke-width="2.2"/>
             <rect x="55" y="61.5" width="20" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="93" cy="66" r="13" fill="var(--accent-gold)" stroke="currentColor" stroke-width="2.6"/>
+            <circle cx="93" cy="66" r="13" fill="var(--sand)" stroke="currentColor" stroke-width="2.6"/>
             <path d="M93 60 V72 M87 66 H99" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
           </svg>
           <h3>業務アプリ開発</h3>
@@ -117,15 +117,15 @@
           <span class="num">03</span>
           <!-- 表計算＋自動化のイラスト -->
           <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
-            <rect x="14" y="18" width="100" height="62" rx="6" fill="var(--accent-gold)"/>
+            <rect x="14" y="18" width="100" height="62" rx="6" fill="var(--sand)"/>
             <rect x="8" y="12" width="100" height="62" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="2.6"/>
             <path d="M8 28 H108" stroke="currentColor" stroke-width="2.6"/>
-            <path d="M8 28 V18 A6 6 0 0 1 14 12 H102 A6 6 0 0 1 108 18 V28 Z" fill="var(--accent-gold)"/>
+            <path d="M8 28 V18 A6 6 0 0 1 14 12 H102 A6 6 0 0 1 108 18 V28 Z" fill="var(--sand)"/>
             <path d="M42 28 V74 M75 28 V74 M8 47 H108 M8 61 H108" stroke="currentColor" stroke-width="1.8" opacity="0.45"/>
             <rect x="16" y="35" width="18" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
             <rect x="49" y="35" width="18" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
             <rect x="16" y="52" width="18" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <path d="M76 44 L92 44 L84 58 L96 58 L74 84 L80 64 L69 64 Z" fill="var(--accent-coral)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
+            <path d="M76 44 L92 44 L84 58 L96 58 L74 84 L80 64 L69 64 Z" fill="var(--accent)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
           </svg>
           <h3>Excelマクロ制作</h3>
           <p>集計・転記・レポート出力など、繰り返し作業をマクロで自動化します。</p>
@@ -159,7 +159,7 @@
   </section>
 
   <section class="has-blobs">
-    <div class="blob blob-coral" style="width:200px;height:200px;top:10%;right:-70px;"></div>
+    <div class="blob blob-accent" style="width:200px;height:200px;top:10%;right:-70px;"></div>
     <div class="container">
       <div class="section-head left">
         <span class="eyebrow">About</span>
@@ -194,15 +194,15 @@
         <img class="avatar" src="assets/founder.jpg" alt="野﨑大雅の写真" data-reveal="wipe">
         <div class="greeting-body">
           <p class="name">野﨑 大雅</p>
-          <p class="role">Halo Works 運営者／本業：人事部門（新卒採用・社内広報・自社ホームページ運営）</p>
+          <p class="role">Gear Bloom 運営者／本業：人事部門（新卒採用・社内広報・自社ホームページ運営）</p>
           <p>
-            はじめまして、Halo Worksを一人で運営している野﨑 大雅と申します。本業では人事部門で
+            はじめまして、Gear Bloomを一人で運営している野﨑 大雅と申します。本業では人事部門で
             新卒採用や社内広報を担当し、自社のホームページ運営にも携わってきました。
           </p>
           <p>
             その中で、「作ってもらったはいいけれど、更新の仕方が分からず放置してしまう」
             ホームページを何度も見てきました。同じことを、お付き合いするお店・会社様には
-            経験してほしくないという思いから、副業としてHalo Worksを始めました。
+            経験してほしくないという思いから、副業としてGear Bloomを始めました。
           </p>
           <p>
             まだ実績は多くありませんが、丁寧なヒアリングと、使う方の立場に立った設計で、
@@ -325,7 +325,7 @@
   </section>
 
   <section class="alt has-blobs">
-    <div class="blob blob-gold" style="width:240px;height:240px;top:-70px;left:50%;"></div>
+    <div class="blob blob-sand" style="width:240px;height:240px;top:-70px;left:50%;"></div>
     <div class="container" style="text-align:center;">
       <span class="eyebrow">Contact</span>
       <h2 style="margin-bottom:0.3em;">まずはお気軽にご相談ください</h2>
@@ -337,8 +337,8 @@
 </main>
 
 <footer class="container">
-  <span>&copy; Halo Works</span>
-  <a href="https://www.instagram.com/haloworks.jp/" target="_blank" rel="noopener">Instagram</a>
+  <span>&copy; Gear Bloom</span>
+  <a href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener">Instagram</a>
 </footer>
 
 <script src="js/main.js"></script>

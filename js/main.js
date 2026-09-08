@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
-  initHaloCanvas();
+  initBloomCanvas();
   initScrollReveal();
   initCardMotion();
   initScrollProgress();
@@ -166,15 +166,16 @@ function initNav() {
 }
 
 /* ---------------------------------------------------------
-   ヒーローの Halo（光の輪）パーティクルアニメーション
-   ・屋号のモチーフである「輪」に沿って粒子を周回させる（常時、呼吸するように拡縮）
+   ヒーローの周回パーティクルアニメーション
+   ・屋号のモチーフである「かみ合って回るもの」を、円軌道を巡る粒子で表す
+     （常時、呼吸するように拡縮する）
    ・マウス／指が近づいた粒子はやわらかく外側へ逃げる（PC・スマホ両対応）
    ・軌跡がうっすら尾を引くトレイル表現で、より目を引く見た目にする
-   ・prefers-reduced-motion では静止したリングを1回だけ描画
+   ・prefers-reduced-motion では静止した円を1回だけ描画
    ・スクロールに合わせて緩やかにパララックスする
 --------------------------------------------------------- */
-function initHaloCanvas() {
-  const canvas = document.getElementById('halo-canvas');
+function initBloomCanvas() {
+  const canvas = document.getElementById('bloom-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -184,7 +185,8 @@ function initHaloCanvas() {
   let pointer = { x: -9999, y: -9999, active: false };
   let trailFill = 'rgba(245, 246, 250, 0.22)';
 
-  const palette = ['#e7a33e', '#ef7f6c', '#f0b563'];
+  // すべて弁柄の色相でそろえる。補色を混ぜると画面全体が濁るので足さないこと。
+  const palette = ['#9c4a32', '#b8674c', '#9c4a32', '#d9c3a5'];
 
   function readTrailColor() {
     const bg = getComputedStyle(document.body).getPropertyValue('--bg').trim();
@@ -312,6 +314,21 @@ function initHaloCanvas() {
     if (reduceMotion) { drawStatic(); return; }
     resize();
   });
+
+  // OSのライト／ダーク切り替えに追従する。
+  // トレイルは «背景色を薄く塗り重ねる» 方式なので、色を持ち越すと
+  // 前のテーマの背景色がヒーロー全体に溜まってしまう。切り替え時に必ず塗り直す。
+  const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+  const onSchemeChange = () => {
+    readTrailColor();
+    ctx.clearRect(0, 0, width, height);
+    if (reduceMotion) drawStatic();
+  };
+  if (schemeQuery.addEventListener) {
+    schemeQuery.addEventListener('change', onSchemeChange);
+  } else if (schemeQuery.addListener) {
+    schemeQuery.addListener(onSchemeChange); // 古いSafari向け
+  }
 
   const host = canvas.parentElement;
   host.addEventListener('mousemove', setPointerFromEvent);
