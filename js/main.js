@@ -52,10 +52,18 @@ function initCursorDot() {
 
   let x = window.innerWidth / 2, y = window.innerHeight / 2;
   let targetX = x, targetY = y;
+  const HOVER_TARGETS = 'a, button, .card, .contact-card, .note-box';
 
+  /* 玉をふくらませる判定は「ポインタが動いたとき」だけ行う。
+     要素側の mouseenter / mouseleave に任せると、カーソルを止めたまま
+     スクロールしたときにボタンやカードが玉の下を通過するたびに発火し、
+     大きさと不透明度が切り替わって点滅して見える。 */
   document.addEventListener('mousemove', (e) => {
     targetX = e.clientX;
     targetY = e.clientY;
+    dot.classList.add('is-on'); // 最初にマウスが動くまでは表示しない
+    const el = document.elementFromPoint(e.clientX, e.clientY);
+    dot.classList.toggle('is-big', !!(el && el.closest(HOVER_TARGETS)));
   });
 
   (function loop() {
@@ -64,11 +72,6 @@ function initCursorDot() {
     dot.style.transform = `translate(${x}px, ${y}px)`;
     requestAnimationFrame(loop);
   })();
-
-  document.querySelectorAll('a, button, .card, .contact-card, .note-box').forEach((el) => {
-    el.addEventListener('mouseenter', () => dot.classList.add('is-big'));
-    el.addEventListener('mouseleave', () => dot.classList.remove('is-big'));
-  });
 }
 
 /* ---------------------------------------------------------
