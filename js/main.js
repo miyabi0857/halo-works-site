@@ -185,8 +185,24 @@ function initBloomCanvas() {
   let pointer = { x: -9999, y: -9999, active: false };
   let trailFill = 'rgba(245, 246, 250, 0.22)';
 
-  // すべて弁柄の色相でそろえる。補色を混ぜると画面全体が濁るので足さないこと。
-  const palette = ['#9c4a32', '#b8674c', '#9c4a32', '#d9c3a5'];
+  /* 粒子の色。弁柄の色相はそのままに、明度を上げた明るい側だけを使う。
+     暗い色は shadowBlur と相まって「発光」ではなく「影のにじみ」に見えてしまうため、
+     ここに濃い弁柄（#9c4a32 など）を入れないこと。
+     地の明るさが逆転するので、ライト／ダークで別の組を持つ。 */
+  const PALETTES = {
+    light: ['#eda27a', '#f3ba97', '#e79268', '#f8d5bd'],
+    dark:  ['#ffb083', '#ffc9a5', '#ff9d6b', '#ffe3cd'],
+  };
+  const LINK_RGB = { light: '237, 162, 122', dark: '255, 176, 131' };
+
+  let palette = PALETTES.light;
+  let linkRgb = LINK_RGB.light;
+
+  function readPalette() {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    palette = isDark ? PALETTES.dark : PALETTES.light;
+    linkRgb = isDark ? LINK_RGB.dark : LINK_RGB.light;
+  }
 
   function readTrailColor() {
     const bg = getComputedStyle(document.body).getPropertyValue('--bg').trim();
@@ -209,6 +225,7 @@ function initBloomCanvas() {
     canvas.height = height * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     readTrailColor();
+    readPalette();
     buildParticles();
   }
 
@@ -266,7 +283,7 @@ function initBloomCanvas() {
         const dy = pts[i].y - pts[j].y;
         const d = Math.hypot(dx, dy);
         if (d < 52) {
-          ctx.strokeStyle = `rgba(231, 163, 62, ${0.18 * (1 - d / 52)})`;
+          ctx.strokeStyle = `rgba(${linkRgb}, ${0.18 * (1 - d / 52)})`;
           ctx.beginPath();
           ctx.moveTo(pts[i].x, pts[i].y);
           ctx.lineTo(pts[j].x, pts[j].y);
@@ -296,7 +313,7 @@ function initBloomCanvas() {
     ctx.clearRect(0, 0, width, height);
     const cx = width * 0.7, cy = height * 0.42;
     const r = Math.min(width, height) * 0.36;
-    ctx.strokeStyle = 'rgba(231, 163, 62, 0.35)';
+    ctx.strokeStyle = `rgba(${linkRgb}, 0.35)`;
     ctx.lineWidth = 1.5;
     ctx.beginPath();
     ctx.ellipse(cx, cy, r, r * 0.6, 0, 0, Math.PI * 2);
@@ -321,6 +338,8 @@ function initBloomCanvas() {
   const schemeQuery = window.matchMedia('(prefers-color-scheme: dark)');
   const onSchemeChange = () => {
     readTrailColor();
+    readPalette();
+    buildParticles(); // 粒子は生成時に色を持つので、組み直さないと前のテーマの色が残る
     ctx.clearRect(0, 0, width, height);
     if (reduceMotion) drawStatic();
   };
