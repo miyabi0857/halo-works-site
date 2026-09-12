@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>はかどりの使い方｜Gear Bloom</title>
+<meta name="description" content="タスク管理ツール「はかどり」の導入手順と使い方。Pythonの入れ方から、タスクの登録、チームでの共有、バックアップまで順を追って説明します。">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="64x64">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<style>
+  /* 手順の番号つきリスト。共通CSSに無いのでこのページだけで定義する */
+  .steps { list-style: none; counter-reset: step; padding: 0; margin: 0; }
+  .steps > li { counter-increment: step; position: relative;
+    padding-left: 52px; padding-bottom: 30px; }
+  .steps > li::before { content: counter(step); position: absolute; left: 0; top: 0;
+    width: 34px; height: 34px; border-radius: 50%; background: var(--accent); color: #fff;
+    display: grid; place-items: center; font-weight: 700; font-size: 0.95rem; }
+  .steps > li:not(:last-child)::after { content: ""; position: absolute; left: 17px; top: 40px;
+    bottom: 6px; width: 2px; background: var(--line); }
+  .steps h3 { margin: 4px 0 8px; }
+  .steps p { color: var(--ink-soft); margin: 0 0 10px; }
+  pre.cmd { background: var(--ink); color: #f3ece4; border-radius: var(--radius-md);
+    padding: 14px 18px; overflow-x: auto; font-size: 0.92rem; line-height: 1.7; margin: 12px 0; }
+  pre.cmd code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .toc { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+  .toc a { border: 1px solid var(--line); background: var(--surface);
+    border-radius: 999px; padding: 8px 18px; text-decoration: none; color: var(--ink);
+    font-size: 0.9rem; }
+  .toc a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress"></div>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="logo" aria-label="Gear Bloom"><svg class="logo-mark" viewBox="0 0 160 160" aria-hidden="true"><path fill="currentColor" fill-rule="evenodd" d="M70.08,45.39 Q70.96,42.10 71.84,38.80 Q80.00,38.80 88.16,38.80 Q89.04,42.10 89.92,45.39 A36.00,36.00 0 0 1 94.64,47.11 Q98.17,43.62 103.74,41.18 Q110.72,45.58 115.88,52.02 Q113.53,56.89 109.85,59.87 A36.00,36.00 0 0 1 112.36,64.22 Q118.85,63.17 127.13,66.58 Q130.76,74.22 128.94,82.48 Q122.12,85.52 115.80,83.76 A36.00,36.00 0 0 1 114.93,88.71 Q122.13,92.63 126.88,103.63 Q125.77,112.35 117.92,116.30 Q108.71,113.66 105.01,105.90 A36.00,36.00 0 0 1 101.16,109.12 Q104.92,118.20 99.70,132.42 Q93.72,139.44 85.27,135.75 Q78.68,125.98 82.51,115.91 A36.00,36.00 0 0 1 77.49,115.91 Q74.14,126.83 57.66,135.15 Q48.27,137.84 45.49,128.47 Q46.96,114.47 58.84,109.12 A36.00,36.00 0 0 1 54.99,105.90 Q44.08,112.97 23.04,106.92 Q13.14,103.68 18.79,94.92 Q30.62,83.50 45.07,88.71 A36.00,36.00 0 0 1 44.20,83.76 Q29.75,81.91 16.53,60.17 Q9.77,51.27 20.83,49.65 Q39.68,48.36 47.64,64.22 A36.00,36.00 0 0 1 50.15,59.87 Q39.33,47.95 45.00,19.38 Q44.57,7.35 53.78,15.10 Q71.09,27.76 65.36,47.11 A36.00,36.00 0 0 1 70.08,45.39 Z M80.00,80.00 m-13.00,0 a13.00,13.00 0 1,0 26.00,0 a13.00,13.00 0 1,0 -26.00,0 Z"/></svg><span>Gear Bloom</span></a>
+    <nav class="main-nav">
+      <a href="index.html">トップ</a>
+      <a href="service.html">サービス</a>
+      <a href="portfolio.html">実績</a>
+      <a href="hakadori.html" aria-current="page">はかどり</a>
+      <a href="contact.html">依頼・お問い合わせ</a>
+    </nav>
+    <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+
+  <section class="page-hero has-blobs">
+    <div class="blob blob-accent" style="width:220px;height:220px;top:-60px;left:-60px;"></div>
+    <div class="container">
+      <span class="eyebrow">Guide</span>
+      <h1>はかどりの使い方</h1>
+      <p class="lead" style="color:var(--ink-soft); max-width:58ch;">
+        導入から日々の使い方、チームでの共有、バックアップまで。
+        パソコンの操作に不慣れな方でも進められるよう、順を追って説明します。
+      </p>
+      <div class="toc">
+        <a href="#install">導入する</a>
+        <a href="#start">起動する</a>
+        <a href="#basic">タスクを登録する</a>
+        <a href="#views">4つの見方</a>
+        <a href="#team">チームで使う</a>
+        <a href="#backup">バックアップ</a>
+        <a href="#trouble">困ったとき</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="install" style="padding-top:0;">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">導入する</h2>
+      <ol class="steps">
+        <li>
+          <h3>Python を入れる</h3>
+          <p>はかどりを動かすには Python 3.10 以降が必要です。すでに入っている場合はこの手順を飛ばしてください。</p>
+          <p><a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org のダウンロードページ</a>
+            から最新版を入れます。<strong>インストール画面の最初に出る「Add Python to PATH」に必ずチェックを入れてください。</strong>
+            ここを入れ忘れると、あとの手順でコマンドが見つからないと言われます。</p>
+        </li>
+        <li>
+          <h3>ファイルを置く</h3>
+          <p>ダウンロードした <code>hakadori-1.0.zip</code> を右クリックして「すべて展開」を選び、
+            好きな場所に置きます。デスクトップでもドキュメントでも構いません。</p>
+          <p>チームで使う場合は、この段階で<strong>共有フォルダに置いてください。</strong>（詳しくは
+            <a href="#team">チームで使う</a>）</p>
+        </li>
+        <li>
+          <h3>必要な部品を入れる</h3>
+          <p>展開してできた <code>hakadori</code> フォルダを開き、
+            アドレスバーに <code>cmd</code> と打ち込んで Enter を押します。黒い画面が開くので、
+            次の1行を貼り付けて Enter を押してください。</p>
+          <pre class="cmd"><code>pip install -r requirements.txt</code></pre>
+          <p>文字がたくさん流れて止まれば完了です。この作業は最初の1回だけです。</p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="alt" id="start">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">起動する</h2>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        フォルダの中にある <strong>「はかどり起動.bat」をダブルクリック</strong>してください。
+        黒い画面が出たあと、自動的にブラウザが開きます。
+      </p>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        初回は「ユーザーを選択してください」と表示されます。サンプルとして3人分の名前が入っているので、
+        <strong>「新規ユーザー作成」からご自身の名前を登録</strong>してお使いください。
+      </p>
+      <div class="note-box" style="margin-top:20px;">
+        <strong>黒い画面は閉じないでください。</strong>これがはかどり本体です。
+        閉じると画面が動かなくなります。終わるときは、はかどりの画面右上にある
+        <strong>「システム終了」</strong>ボタンを押してください。
+      </div>
+      <p style="color:var(--ink-soft); margin-top:20px;">
+        最初はサンプルのタスクが数件入っています。使い方を確かめたら、削除してご自身の仕事を登録してください。
+      </p>
+    </div>
+  </section>
+
+  <section id="basic">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">タスクを登録する</h2>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        画面右上の <strong>「＋新規タスク」</strong> から登録します。
+        名前と期日だけ入れれば登録できます。あとから足せるので、最初から全部埋める必要はありません。
+      </p>
+
+      <div class="card" style="margin-top:24px;">
+        <h3>いちばん大事なのは「業務負荷」の選択です</h3>
+        <p style="color:var(--ink-soft);">
+          はかどりは、タスクを次の3種類に分けて集計します。ここを正しく選んでおくと、
+          あとから「何に時間を取られていたのか」が見えるようになります。
+        </p>
+        <div class="table-wrap" style="margin-top:12px;">
+          <table class="price-table">
+            <thead><tr><th>種類</th><th>こんな仕事</th></tr></thead>
+            <tbody>
+              <tr><td><strong>長期プロジェクト</strong></td><td>数週間〜数ヶ月かけて進めるもの。企画、制作、導入など</td></tr>
+              <tr><td><strong>定例</strong></td><td>毎週・毎月くり返し発生するもの。月次処理、定例会議の準備など</td></tr>
+              <tr><td><strong>突発</strong></td><td>急に飛び込んでくるもの。問い合わせ対応、トラブル対応など</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p style="color:var(--ink-soft); margin-top:14px; margin-bottom:0;">
+          「今週はほとんど突発だった」と数字で見えると、
+          来週どこを空けておくべきかが判断できるようになります。これがはかどりを作った理由です。
+        </p>
+      </div>
+
+      <div class="card" style="margin-top:24px;">
+        <h3>色の意味</h3>
+        <p style="color:var(--ink-soft); margin-bottom:0;">
+          一覧の行の色は、期日までの余裕を表しています。
+          <strong>白は余裕あり、黄色は近い、オレンジ・赤は今日か過ぎている</strong>、という見方です。
+          いちいち日付を読まなくても、色だけで急ぎのものが分かります。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="views">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">4つの見方を切り替える</h2>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        画面上部のタブで切り替えます。<strong>同じタスクを違う角度から見ているだけ</strong>なので、
+        どれかで編集すれば全部に反映されます。
+      </p>
+      <div class="table-wrap" style="margin-top:20px;">
+        <table class="price-table">
+          <thead><tr><th>表示</th><th>向いている場面</th></tr></thead>
+          <tbody>
+            <tr><td><strong>リスト</strong></td><td>全体をざっと確認する。期日順に並べ替えて優先順位をつける</td></tr>
+            <tr><td><strong>カンバン</strong></td><td>作業中の状況を見る。ドラッグで「処理中」「完了」に動かせる</td></tr>
+            <tr><td><strong>ガントチャート</strong></td><td>期間の重なりを見る。いつが混んでいるかが分かる</td></tr>
+            <tr><td><strong>優先度マップ</strong></td><td>重要度と期日から、手をつける順番を考える</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="color:var(--ink-soft); margin-top:20px;">
+        左側のメニューにある <strong>「統計ダッシュボード」</strong> では、
+        全体の進み具合、メンバーごとの持ち件数、業務分類ごとの内訳をグラフで確認できます。
+      </p>
+    </div>
+  </section>
+
+  <section id="team">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">チームで使う</h2>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        <strong>フォルダごと共有フォルダに置くだけ</strong>です。サーバーの用意もアカウント登録も要りません。
+      </p>
+      <ol class="steps" style="margin-top:24px;">
+        <li>
+          <h3>共有フォルダに置く</h3>
+          <p>社内のファイルサーバーなど、メンバー全員がアクセスできる場所に <code>hakadori</code> フォルダを置きます。</p>
+        </li>
+        <li>
+          <h3>各自が起動する</h3>
+          <p>使う人それぞれが「はかどり起動.bat」をダブルクリックし、
+            「新規ユーザー作成」で自分の名前を登録します。</p>
+        </li>
+        <li>
+          <h3>担当者を割り当てる</h3>
+          <p>タスクには主担当と副担当を設定できます。一覧の担当者フィルタで
+            「自分のタスクだけ」に絞り込めます。</p>
+        </li>
+      </ol>
+      <div class="note-box" style="margin-top:8px;">
+        <strong>同時に大人数で使うことは想定していません。</strong>
+        データを1つのファイルで持つ仕組みのため、数人程度までを目安にしてください。
+        また、<strong>ログイン認証の仕組みがありません。</strong>
+        共有フォルダにアクセスできる人は誰でも全タスクを見られます。
+        インターネットに公開することは絶対にしないでください。
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="backup">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">バックアップと引っ越し</h2>
+      <p style="color:var(--ink-soft); max-width:60ch;">
+        データは <code>task_manager.db</code> というファイル1つに入っています。
+        <strong>このファイルをコピーするだけでバックアップになります。</strong>
+        別のパソコンに移すときも、このファイルを持っていけばそのまま続きから使えます。
+      </p>
+      <div class="note-box" style="margin-top:20px;">
+        コピーするときは、<strong>はかどりを終了してから</strong>行ってください。
+        動いている最中にコピーすると、書きかけの状態が混ざることがあります。
+      </div>
+      <p style="color:var(--ink-soft); margin-top:20px;">
+        添付ファイルを使っている場合は、添付の保存フォルダもあわせてコピーしてください。
+      </p>
+    </div>
+  </section>
+
+  <section id="trouble">
+    <div class="container">
+      <h2 style="margin-bottom:0.6em;">困ったとき</h2>
+
+      <div class="card" style="margin-bottom:20px;">
+        <h3>「pip は認識されていません」と出る</h3>
+        <p style="color:var(--ink-soft); margin-bottom:0;">
+          Python のインストール時に「Add Python to PATH」のチェックが入っていなかった可能性が高いです。
+          Python を入れ直し、最初の画面でチェックを入れてください。
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <h3>ブラウザが自動で開かない</h3>
+        <p style="color:var(--ink-soft); margin-bottom:0;">
+          黒い画面に表示されているアドレス（<code>http://127.0.0.1:</code> で始まるもの）を、
+          ブラウザのアドレス欄にコピーして開いてください。
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <h3>画面がぎゅうぎゅうで見づらい</h3>
+        <p style="color:var(--ink-soft); margin-bottom:0;">
+          はかどりは横幅を広く使う設計です。<strong>1400px以上のディスプレイ</strong>を推奨しています。
+          ノートパソコンで狭く感じる場合は、ブラウザの表示倍率を <strong>Ctrl と「－」</strong> で小さくすると収まります。
+        </p>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <h3>タスクが1件も表示されない</h3>
+        <p style="color:var(--ink-soft); margin-bottom:0;">
+          画面上部の<strong>担当者フィルタが自分に設定されている</strong>可能性があります。
+          「担当者で絞り込み」に戻すと全件表示されます。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>それでも解決しない</h3>
+        <p style="color:var(--ink-soft); margin-bottom:0;">
+          はかどりの画面左下にある<strong>「ご意見箱に投稿」</strong>から、不具合の報告やご要望を送れます
+          （この内容も外部には送信されず、手元に保存されます）。
+          直接ご連絡いただく場合は<a href="contact.html">お問い合わせページ</a>からどうぞ。
+          個人で開発・配布しているため、すべてにお応えできるとは限りませんが、必ず目を通します。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt has-blobs">
+    <div class="blob blob-sand" style="width:200px;height:200px;bottom:-60px;right:-40px;"></div>
+    <div class="container" style="text-align:center;">
+      <h2 style="margin-bottom:0.3em;">まだダウンロードしていない方へ</h2>
+      <p style="color:var(--ink-soft); margin-bottom:28px;">機能制限はありません。無料でお使いいただけます。</p>
+      <a href="downloads/hakadori-1.0.zip" class="btn btn-primary" download>はかどりをダウンロード</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="container">
+  <span>&copy; Gear Bloom</span>
+  <a href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener">Instagram</a>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
