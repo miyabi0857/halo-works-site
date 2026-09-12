@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>はかどり｜小さなチームのための無料タスク管理ツール｜Gear Bloom</title>
-<meta name="description" content="インストール不要・データを外に出さないタスク管理ツール「はかどり」。Gear Bloomが開発し、無料で配布しています。長期プロジェクト・定例・突発の3種類でタスクを分けて管理できます。">
+<meta name="description" content="インストール不要・データを外に出さないタスク管理ツール「はかどり」。Gear Bloomが開発し、無料で配布しています。HELP！／大／中／小の4段階でタスクの重さを分けて管理できます。">
 <link rel="stylesheet" href="css/style.css">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="64x64">
@@ -42,7 +42,7 @@
         データを外に出しません。</strong>Gear Bloom が開発し、無料で配布しています。
       </p>
       <div class="hero-cta" style="margin-top:24px;">
-        <a href="downloads/hakadori-1.0.zip" class="btn btn-primary" download>無料でダウンロード（81KB）</a>
+        <a href="downloads/hakadori-1.0.zip" class="btn btn-primary" download>無料でダウンロード（85KB）</a>
         <a href="hakadori-guide.html" class="btn btn-ghost">使い方を見る</a>
       </div>
     </div>
@@ -59,11 +59,12 @@
   <section class="alt">
     <div class="container">
       <span class="eyebrow">Why</span>
-      <h2 style="margin-bottom:0.4em;">「急な仕事に追われて、本来の仕事が進まない」を見えるようにする</h2>
+      <h2 style="margin-bottom:0.4em;">「抱えているものの重さ」を見えるようにする</h2>
       <p style="color:var(--ink-soft); max-width:60ch;">
-        はかどりは、タスクを <strong style="color:var(--ink);">長期プロジェクト／定例／突発</strong> の3種類に分けて扱います。
-        1日の終わりに「今日は突発ばかりだった」と分かること自体が、次の週の組み立てを変えます。
-        タスク管理ツールは数多くありますが、この分け方を軸にしたものは意外と多くありません。
+        はかどりは、タスクに「業務負荷」を必ず1つ付けます。
+        <strong style="color:var(--ink);">HELP！／大（数日以上）／中（数時間）／小（すぐ終わる）</strong> の4段階です。
+        件数ではなく重さで並ぶので、「数は少ないのに全部『大』で詰まっている」といった状態が一覧と統計で見えます。
+        HELP！は一人で抱えきれないことを声に出すための段階で、画面上で唯一の赤になります。
       </p>
 
       <div class="cards" style="margin-top:28px;">
@@ -94,7 +95,7 @@
       <div class="card" style="margin-bottom:28px;">
         <h3>4つの見方でタスクを眺める</h3>
         <p style="color:var(--ink-soft);">同じタスクを、リスト・カンバン・ガントチャート・優先度マップの4通りで見られます。
-          期日が近いものは色が変わります。</p>
+          期日が近いものは行の左端に色が付きます。</p>
         <div class="photo-frame" style="--tilt:0deg; margin-top:16px;">
           <img src="assets/hakadori-kanban.png" alt="はかどりのカンバン画面。未対応・処理中・完了の列にタスクカードが並んでいる" loading="lazy" width="1440" height="900">
         </div>
@@ -120,9 +121,8 @@
               <tr><td>コメント</td><td>タスクごとにやり取りを残せます。絵文字リアクションも付けられます</td></tr>
               <tr><td>添付ファイル</td><td>仕様書や画像をタスクに紐づけて保存できます</td></tr>
               <tr><td>デスクトップ通知</td><td>期限が近いタスクを常駐アプリがお知らせします</td></tr>
-              <tr><td>祝日対応</td><td>内閣府の祝日CSVを取り込み、営業日ベースで期限を計算します</td></tr>
-              <tr><td>週報の自動作成</td><td>その週の実績から週報の下書きを作ります。AIなしでも動きます</td></tr>
-              <tr><td>ステータスの追加</td><td>「未対応・処理中・完了」以外の段階を自由に足せます</td></tr>
+              <tr><td>会社カレンダー</td><td>休日を書いたCSVを取り込むと、期日の計算とガントチャートのグレーアウトに反映されます。祝日に限らず、会社独自の休業日を自由に登録できます</td></tr>
+              <tr><td>週報の自動作成</td><td>その週の実績から下書きを作ります。ボタンは2つあり、<strong>簡易版はAI不要</strong>、AI版はローカルのOllama＋Gemma4の導入が必須です</td></tr>
             </tbody>
           </table>
         </div>
@@ -140,7 +140,7 @@
       </p>
 
       <div class="card" style="margin-top:24px;">
-        <h3>はかどり 1.0（ソース一式・81KB）</h3>
+        <h3>はかどり 1.0（ソース一式・85KB）</h3>
         <p style="color:var(--ink-soft);">
           動かすには Python 3.10 以降が必要です。手順は使い方ページで説明しています。
         </p>
