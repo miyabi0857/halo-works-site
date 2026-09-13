@@ -3,16 +3,29 @@
    コンセプト：屋号「Gear Bloom」＝歯車がかみ合って動き出し、その先で花が咲く。
    配色は「弁柄（べんがら）」。日本の建具や漆器に使われてきた赤茶で、
    生成りの紙色と合わせる。個人店に向けた温かさと、落ち着きの両立をねらう。
-   誠実さ・丁寧さを伝えるため、派手すぎない落ち着いたトーンにする。
+
+   2026-09-13、見た目の方向を一本化した。
+   それまでは「ステッカー的な装飾」（真下にずれる硬い影・点線の傾いたラベル・
+   ぷるっと揺れるボタン・傾いたカードと写真・ぼかした丸・カーソル追従の玉）と、
+   明朝＋弁柄の落ち着いたトーンが同じ画面で喧嘩していて、
+   どちらにも振り切れず素人っぽく見えていた。
+
+   今の決まり：
+   ・書体はゴシック1本（Archivo＋Zen Kaku Gothic New）。明朝は使わない
+   ・平面で組む。影・ぼかし・グラデーション・傾きは使わない
+   ・線は1pxの細い罫線。囲みを増やさない
+   ・差し色は弁柄の1色だけ。大きな平面図形として使う
+   【重要】補色（緑・青など）を主役級の彩度で足さないこと。
+   以前ここに深緑を混ぜてオリーブに濁らせた失敗がある。
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Noto+Sans+JP:wght@400;500;700&family=Noto+Serif+JP:wght@500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
 
 :root {
-  --bg: #f7f4ef;
+  --bg: #faf8f4;
   --surface: #ffffff;
   --surface-soft: #efe7db;
-  --ink: #241a15;
+  --ink: #1a1310;
   --ink-soft: #5c4d44;
   --ink-faint: #8a7a6e;
   /* 配色は「弁柄（赤茶）」の一色相でまとめる。
@@ -20,7 +33,10 @@
      【重要】補色（緑・青など）を主役級の彩度で足さないこと。
      以前ここに深緑を混ぜてオリーブに濁らせた失敗がある。
      2色を混ぜたグラデーションも作らない（中間色が必ず濁る）。 */
-  --accent: #9c4a32;
+  --accent: #c2401f;
+  /* 小さい文字・リンクはこちら。#c2401f は大きい面では効くが、
+     本文サイズだと生成りの地に対してコントラストが足りない */
+  --accent-ink: #8f3a20;
   --sand: #eee3d5;
   --line: #e5ddd2;
   --shadow: 0 20px 45px -25px rgba(36, 26, 21, 0.35);
@@ -37,7 +53,8 @@
     --ink: #efe7dd;
     --ink-soft: #b5a89d;
     --ink-faint: #85786d;
-    --accent: #d4735a;
+    --accent: #e2653f;
+    --accent-ink: #efa88e;
     --sand: #6b5546;
     --line: #362b24;
     --shadow: 0 20px 45px -25px rgba(0, 0, 0, 0.6);
@@ -52,16 +69,17 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
-  font-family: 'Work Sans', 'Noto Sans JP', 'Hiragino Sans', 'Yu Gothic', sans-serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
   font-size: 16px;
   line-height: 1.75;
   -webkit-font-smoothing: antialiased;
 }
 
 h1, h2, h3, .display {
-  font-family: 'Fraunces', 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
-  font-weight: 600;
-  line-height: 1.3;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
+  font-weight: 700;
+  line-height: 1.34;
+  letter-spacing: 0.005em;
   text-wrap: balance;
   margin: 0 0 0.5em;
 }
@@ -81,51 +99,25 @@ a { color: inherit; text-decoration: none; }
 /* ヒーローだけは制作物を大きく見せたいので、本文より広い幅を使う */
 .container--wide { max-width: 1220px; }
 
-/* ステッカー風のラベル（少し傾けて貼り付けたような見た目） */
+/* ラベル。短い罫線＋大きな字間だけで、囲みも傾きも使わない */
 .eyebrow {
-  display: inline-block;
-  font-size: 0.78rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.72rem;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 1em;
-  padding: 5px 15px;
-  background: color-mix(in srgb, var(--sand) 14%, var(--surface));
-  border: 1.5px dashed var(--accent);
-  border-radius: 999px;
-  transform: rotate(-2deg);
-  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  color: var(--accent-ink);
+  margin-bottom: 1.2em;
 }
-.eyebrow:hover { transform: rotate(2deg) scale(1.06); }
-
-/* ---- カーソル追従の光の玉（PCのみ・装飾） ---- */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 16px;
-  height: 16px;
-  margin: -8px 0 0 -8px;
-  border-radius: 50%;
+.eyebrow::before {
+  content: "";
+  display: block;
+  width: 26px;
+  height: 2px;
   background: var(--accent);
-  /* マウスが一度も動いていない間は隠しておく。
-     出しっぱなしにすると、画面の隅に茶色い点が居座って見える。 */
-  opacity: 0;
-  pointer-events: none;
-  z-index: 999;
-  transition: width 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              height 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              margin 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.25s ease;
-}
-.cursor-dot.is-on { opacity: 0.55; }
-
-.cursor-dot.is-on.is-big {
-  width: 46px;
-  height: 46px;
-  margin: -23px 0 0 -23px;
-  opacity: 0.32;
+  flex-shrink: 0;
 }
 
 /* ---- ヘッダー / ナビ ---- */
@@ -159,7 +151,7 @@ a { color: inherit; text-decoration: none; }
   align-items: center;
   gap: 0.44em;
   white-space: nowrap;
-  font-family: 'Fraunces', serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
   font-weight: 600;
   font-size: 1.2rem;
   letter-spacing: 0.01em;
@@ -271,89 +263,59 @@ nav.main-nav a[aria-current="page"]::after {
 }
 
 /* ---- ボタン ---- */
+/* 塗りつぶしと線の2種類だけ。影・傾き・揺れは使わない。
+   以前ここに「真下にずれる硬い影」と定期的に揺れる動きを入れていたが、
+   明朝・弁柄の落ち着いたトーンと喧嘩して手作り感が出ていた。 */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 13px 26px;
+  gap: 10px;
+  padding: 16px 32px;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.95rem;
+  line-height: 1.4;
   border: 1.5px solid transparent;
   cursor: pointer;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
-
-.btn:active { transform: rotate(0deg) scale(0.93) !important; }
 
 .btn-primary {
   background: var(--accent);
-  color: var(--bg);
-  border-color: var(--ink);
-  box-shadow: 4px 4px 0 0 var(--ink);
-  animation: btn-wiggle 3.4s ease-in-out infinite;
+  color: #ffffff;
+  border-color: var(--accent);
 }
-.btn-primary:hover {
-  transform: translate(-2px, -3px) rotate(-2deg) scale(1.05);
-  box-shadow: 7px 8px 0 0 var(--ink);
-  animation-play-state: paused;
-}
-
-/* ボタンが時々ぷるっと揺れる（放置していても目に留まるように） */
-@keyframes btn-wiggle {
-  0%, 82%, 100% { transform: rotate(0deg); }
-  86% { transform: rotate(-3deg) scale(1.03); }
-  90% { transform: rotate(3deg) scale(1.03); }
-  94% { transform: rotate(-2deg) scale(1.02); }
-}
+.btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
 
 .btn-ghost {
-  background: var(--surface);
-  border-color: var(--ink);
-  color: var(--ink);
-  box-shadow: 4px 4px 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent-ink);
 }
-.btn-ghost:hover {
-  transform: translate(-2px, -3px) rotate(2deg);
-  box-shadow: 7px 8px 0 0 color-mix(in srgb, var(--accent) 75%, transparent);
-}
+.btn-ghost:hover { background: var(--accent); color: #ffffff; }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn-primary { animation: none; }
-}
+.btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
-/* ---- Hero（真鍮と緑のグラデーション＋周回パーティクル） ---- */
+/* ---- Hero ---- */
 .hero {
   position: relative;
   padding: 64px 0 72px;
   overflow: hidden;
 }
 
+/* 方眼紙のうっすらした目。ぼかした光の玉をやめた代わりに、
+   ここだけ平面のテクスチャで地を作る。上下は消えるようにマスクする。 */
 .hero::before {
   content: "";
   position: absolute;
-  top: -220px;
-  left: 50%;
-  transform: translateX(-50%);
-  /* 制作物のほうに目を向けたいので、地の光は「ほんのり暖かい」程度に留める。
-     濃くすると紙にできた染みのように見える。 */
-  width: 1180px;
-  height: 640px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center,
-    color-mix(in srgb, var(--accent) 11%, transparent) 0%,
-    color-mix(in srgb, var(--sand) 34%, transparent) 46%,
-    transparent 72%);
-  filter: blur(32px);
-  pointer-events: none;
-}
-
-#bloom-canvas {
-  position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 46px 46px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 66%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 66%, transparent 100%);
+  pointer-events: none;
 }
 
 .hero-inner { position: relative; z-index: 1; }
@@ -376,14 +338,31 @@ nav.main-nav a[aria-current="page"]::after {
 /* ---- 制作物のショーケース（ブラウザ窓の中で実物が動く） ----
    このサイトに来る人が一番知りたいのは「どんなものを作るのか」なので、
    ファーストビューを説明文ではなく制作物そのものに使う。 */
-.work { min-width: 0; }
+.work { min-width: 0; position: relative; }
+
+/* 平面の図形は、枠の後ろから少しだけのぞかせる。
+   影やぼかしを使わずに奥行きを出すための重ね方。 */
+.work-deco {
+  position: absolute;
+  color: var(--accent);
+  pointer-events: none;
+  z-index: 0;
+}
+/* 枠の外側に置き、半分だけ後ろに隠れるように重ねる。
+   セクションの天地で切られる位置に置くと、欠けて見えるので避ける。 */
+.work-deco--a { width: 104px; height: 104px; top: 26px; right: -30px; }
+.work-deco--b { width: 118px; height: 118px; bottom: 54px; left: -58px; }
+@media (max-width: 980px) {
+  .work-deco--b { display: none; }
+  .work-deco--a { width: 64px; height: 64px; top: 16px; right: -22px; }
+}
 
 .work-frame {
-  border-radius: 12px;
+  position: relative;
+  z-index: 1;
+  border-radius: 10px;
   overflow: hidden;
   background: var(--ink);
-  border: 1px solid color-mix(in srgb, var(--ink) 20%, transparent);
-  box-shadow: 0 30px 60px -30px rgba(36, 26, 21, 0.55);
 }
 
 .work-bar {
@@ -403,7 +382,7 @@ nav.main-nav a[aria-current="page"]::after {
 .work-url {
   flex: 1;
   min-width: 0;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Archivo', sans-serif;
   font-size: 0.72rem;
   letter-spacing: 0.02em;
   color: color-mix(in srgb, var(--surface) 62%, transparent);
@@ -537,22 +516,24 @@ nav.main-nav a[aria-current="page"]::after {
 
 /* 狭い画面では「「作って終わり」にしない、」が1行に収まるサイズまで下げる
    （収まらないとまとまり単位で行が落ち、右側に大きな余白が残るため） */
+/* 英字を主役の大きさで置き、意味は直下の日本語が受け持つ。
+   和文をこの大きさまで上げると字面が詰まって重くなるため、役割を分けている。 */
 .hero h1 {
-  font-size: clamp(1.5rem, 3.6vw, 2.75rem);
-  line-break: strict;
+  font-size: clamp(2.6rem, 7vw, 5.4rem);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  margin: 0 0 24px;
+  text-transform: uppercase;
+  text-wrap: initial;
 }
-
-/* 日本語が意味の途中で改行されないよう、まとまりごとに分割禁止にする */
-.hero h1 .chunk { display: inline-block; }
-
-/* 見出しが行ごとに弾んで登場する */
 .hero h1 .line {
   display: block;
   opacity: 0;
-  transform: translateY(22px);
-  animation: line-pop 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform: translateY(20px);
+  animation: line-pop 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.hero h1 .line:nth-child(2) { animation-delay: 0.16s; }
+.hero h1 .line:nth-child(2) { animation-delay: 0.12s; }
 
 @keyframes line-pop {
   to { opacity: 1; transform: none; }
@@ -562,10 +543,20 @@ nav.main-nav a[aria-current="page"]::after {
   .hero h1 .line { opacity: 1; transform: none; animation: none; }
 }
 
+/* 実質の見出し。英字より小さいが、本文よりはっきり太い */
+.hero-sub {
+  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
+  font-weight: 700;
+  line-height: 1.62;
+  letter-spacing: 0.01em;
+  margin: 0 0 18px;
+}
+
 .hero .lead {
-  font-size: 1.08rem;
+  font-size: 1rem;
   color: var(--ink-soft);
-  max-width: 52ch;
+  max-width: 34em;
+  margin-bottom: 30px;
 }
 
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
@@ -582,32 +573,6 @@ nav.main-nav a[aria-current="page"]::after {
 /* ---- セクション共通 ---- */
 section { padding: 72px 0; }
 section.alt { background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-
-/* ---- 背景の浮遊ブロブ（ページ全体に常時動きを出す装飾） ---- */
-section.has-blobs { position: relative; overflow: hidden; }
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(50px);
-  opacity: 0.28;
-  pointer-events: none;
-  z-index: 0;
-  animation: blob-float 11s ease-in-out infinite;
-}
-.blob-sand { background: var(--sand); }
-.blob-accent { background: var(--accent); }
-
-@keyframes blob-float {
-  0%, 100% { transform: translate(0, 0) scale(1); }
-  33% { transform: translate(24px, -28px) scale(1.1); }
-  66% { transform: translate(-18px, 16px) scale(0.92); }
-}
-
-section.has-blobs > .container { position: relative; z-index: 1; }
-
-@media (prefers-reduced-motion: reduce) {
-  .blob { animation: none; }
-}
 
 .section-head { max-width: 620px; margin: 0 auto 44px; text-align: center; }
 .section-head.left { margin: 0 0 44px; text-align: left; }
@@ -638,42 +603,19 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 }
 .card:hover { border-color: color-mix(in srgb, var(--accent) 55%, var(--line)); }
 
-/* 看板の3枚だけ「貼ったステッカー」扱いにする */
+/* 看板の3枚。囲みは1本の細い罫線だけにして、傾けない */
 .card--sticker {
-  border: 2px solid var(--ink);
-  border-radius: var(--radius-lg);
-  padding: 30px 26px;
-  will-change: transform;
-  transform: rotate(var(--tilt, 0deg));
-  box-shadow: 5px 5px 0 0 color-mix(in srgb, var(--sand) 60%, transparent);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  padding: 34px 30px;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
-.grid-3 .card--sticker:nth-child(1) { --tilt: -2deg; }
-.grid-3 .card--sticker:nth-child(2) { --tilt: 1.6deg; }
-.grid-3 .card--sticker:nth-child(3) { --tilt: -1.2deg; }
-
-/* 横一列に揃えず段違いに置いて、整いすぎた印象を崩す */
-@media (min-width: 861px) {
-  .grid-3 .card--sticker:nth-child(2) { margin-top: 34px; }
-  .grid-3 .card--sticker:nth-child(3) { margin-top: -14px; }
-}
-
 .card--sticker:hover {
-  transform: rotate(0deg) translateY(-6px);
-  box-shadow: 9px 9px 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
 }
-.card--sticker:active { transform: rotate(0deg) scale(0.96) !important; }
 
-/* タッチ端末（ホバー不可）では、看板の3枚だけゆらゆら浮遊させる */
-.card--sticker.idle-float {
-  animation: card-float 4.6s ease-in-out infinite;
-}
-.card--sticker.idle-float:nth-child(2) { animation-delay: 0.5s; }
-.card--sticker.idle-float:nth-child(3) { animation-delay: 1s; }
 
-@keyframes card-float {
-  0%, 100% { transform: rotate(var(--tilt, 0deg)) translateY(0); }
-  50% { transform: rotate(calc(var(--tilt, 0deg) * -0.6)) translateY(-10px); }
 }
 
 /* --------------------------------------------------------
@@ -733,7 +675,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 
 .card .num {
   display: inline-block;
-  font-family: 'Fraunces', serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent);
@@ -816,7 +758,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   margin-left: 10px;
   font-size: 0.78rem;
   color: #cfd2e0;
-  font-family: 'Work Sans', sans-serif;
+  font-family: 'Archivo', sans-serif;
   background: rgba(255,255,255,0.08);
   padding: 4px 12px;
   border-radius: 999px;
@@ -857,17 +799,10 @@ section.has-blobs > .container { position: relative; z-index: 1; }
 .note-box:hover { transform: rotate(1deg) scale(1.015); }
 
 /* ---- 写真フレーム（ステッカー調） ---- */
+/* 傾けない・影を落とさない。角だけ small radius で締める */
 .photo-frame {
-  border: 3px solid var(--ink);
-  border-radius: 16px;
+  border-radius: 10px;
   overflow: hidden;
-  transform: rotate(var(--tilt, -1.5deg));
-  box-shadow: 9px 10px 0 0 color-mix(in srgb, var(--sand) 65%, transparent);
-  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
-}
-.photo-frame:hover {
-  transform: rotate(0deg) translateY(-5px);
-  box-shadow: 13px 15px 0 0 color-mix(in srgb, var(--accent) 70%, transparent);
 }
 .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
@@ -996,7 +931,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   .greeting-body { border-left: none; padding-left: 0; }
 }
 .greeting-body .name {
-  font-family: 'Fraunces', serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 2px;
@@ -1147,7 +1082,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   place-items: center;
   background: var(--surface);
   border: 2px solid var(--ink);
-  font-family: 'Fraunces', serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
   font-weight: 600;
   font-size: 1.05rem;
   z-index: 1;
@@ -1174,7 +1109,7 @@ section.has-blobs > .container { position: relative; z-index: 1; }
   position: absolute;
   left: 0;
   top: -1px;
-  font-family: 'Fraunces', serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
   color: var(--accent);
   font-size: 1.2rem;
 }
@@ -1252,7 +1187,7 @@ footer {
 }
 .demo-name {
   display: block;
-  font-family: 'Fraunces', serif;
+  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
   font-size: 1.18rem;
   margin-bottom: 8px;
 }

@@ -1,13 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
   initWorkShowcase();
-  initBloomCanvas();
   initScrollReveal();
-  initCardMotion();
   initScrollProgress();
-  initCursorDot();
   initContactForm();
   initBandParallax();
+  /* カードのマウス追従チルト・カーソルの光の玉・ヒーローの周回パーティクルは
+     2026-09-13に廃止。装飾の種類が多すぎて、全体が手作り感の方向に寄っていたため。
+     関数は残してあるが、呼び出していない。 */
 });
 
 /* ---------------------------------------------------------
