@@ -135,7 +135,7 @@ nav.links a:hover::after{transform:scaleX(1);transform-origin:0 50%}
 
 .btn{
   position:relative;display:inline-flex;align-items:center;gap:10px;overflow:hidden;
-  font-size:13px;letter-spacing:.12em;text-decoration:none;
+  font-size:13px;letter-spacing:.12em;text-decoration:none;white-space:nowrap;
   padding-top:14px;padding-bottom:14px;padding-left:28px;padding-right:28px;
   border-radius:999px;border:1px solid var(--ink);color:var(--paper);
   background:var(--ink);isolation:isolate;
@@ -263,10 +263,12 @@ html.js .stage{position:sticky;top:0;height:100svh;display:flex;align-items:cent
 .clock-face svg{width:100%;height:100%;overflow:visible}
 .clock-hand{transform-origin:100px 100px;transition:transform .12s linear}
 html:not(.js) .clock-hand{transform:rotate(-60deg)}
+/* 文字盤の中心は針の軸なので、時刻はその下（サブダイヤルの位置）に置く */
 .clock-time{
-  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  font-family:'Cormorant Garamond',serif;font-size:clamp(30px,4.6vw,46px);
-  letter-spacing:.06em;color:var(--ink);pointer-events:none;
+  position:absolute;inset:0;display:flex;align-items:flex-start;justify-content:center;
+  padding-top:59%;
+  font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.9vw,38px);
+  letter-spacing:.08em;color:var(--ink-soft);pointer-events:none;
 }
 .steps-list{display:flex;flex-direction:column;gap:clamp(18px,3vw,34px);max-width:520px}
 .step-item{
@@ -421,10 +423,29 @@ footer a{color:#c9c0b3}
   .menu-aside{position:static}
   .firsts{grid-template-columns:1fr}
   nav.links{display:none}
+  /* 狭い画面でヘッダーが2段に折れて高さを食い、
+     固定セクションの中身にかぶっていた。1行に収める。 */
+  .hrow{padding-top:13px;padding-bottom:13px}
+  .brand .jp{font-size:18px;white-space:nowrap}
+  .brand .en{display:none}
+  .hrow .btn{padding-top:11px;padding-bottom:11px;padding-left:18px;padding-right:18px;font-size:12px}
+
   html.js .run{height:340vh}
-  .clock-grid{grid-template-columns:1fr;gap:30px}
-  .clock-face{width:min(30vh,230px)}
-  .steps-list{gap:16px}
+  .clock-grid{grid-template-columns:1fr;gap:22px}
+  .clock-face{width:min(23vh,168px)}
+  html.js .stage{padding-top:56px}
+  .clock-grid .title{margin-bottom:20px;font-size:clamp(22px,5.6vw,30px)}
+
+  /* 縦に3つ並べると画面に収まらず、下が切れる。
+     スマホでは進行中の1つだけを見せ、重ねて入れ替える。
+     JSが動かないときは従来どおり縦に並べる。 */
+  html.js .steps-list{position:relative;min-height:152px;gap:0}
+  html.js .step-item{
+    position:absolute;left:0;right:0;top:0;
+    opacity:0;transform:translateY(10px);padding-left:30px;
+  }
+  html.js .step-item.live{opacity:1;transform:none}
+  html.js .clock-grid .tiny{margin-top:16px;font-size:11.5px}
 }
 @media (max-width:600px){
   .stack{grid-template-columns:1fr}

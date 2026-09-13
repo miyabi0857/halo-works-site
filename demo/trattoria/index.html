@@ -103,7 +103,7 @@ nav.links a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width
 nav.links a:hover{color:var(--cream)}
 nav.links a:hover::after{transform:scaleX(1);transform-origin:0 50%}
 .btn{position:relative;display:inline-flex;align-items:center;gap:10px;overflow:hidden;
-  font-size:13px;letter-spacing:.12em;text-decoration:none;isolation:isolate;
+  font-size:13px;letter-spacing:.12em;text-decoration:none;white-space:nowrap;isolation:isolate;
   padding-top:14px;padding-bottom:14px;padding-left:26px;padding-right:26px;
   border-radius:2px;border:1px solid var(--terra);background:var(--terra);color:#fff}
 .btn::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--cream);
@@ -317,6 +317,11 @@ footer .wrap{padding-top:66px;padding-bottom:66px}
   .hero{min-height:auto}
   .hero-inner{padding-top:130px;padding-bottom:60px}
   .hero-scroll{display:none}
+  .hrow{padding-top:12px;padding-bottom:12px}
+  .brand .en{font-size:17px;white-space:nowrap}
+  .brand .jp{font-size:9.5px;white-space:nowrap}
+  .hrow .btn{padding-top:11px;padding-bottom:11px;padding-left:18px;padding-right:18px;font-size:12px}
+
   html.js .run{height:330vh}
   .board{border-width:9px}
 }
@@ -324,6 +329,14 @@ footer .wrap{padding-top:66px;padding-bottom:66px}
   .rail{padding-left:20px}
   .rail figure{flex:0 0 74vw}
   .board-head{font-size:17px}
+
+  /* 品書きを1行で書き切ろうとすると、右の金額が板からはみ出て切れる。
+     狭い画面では品名だけ折り返し、金額は行末に残す。 */
+  .board{padding-left:18px;padding-right:18px;border-width:9px}
+  .cl{font-size:12.5px;gap:.45em}
+  .cl > span:first-child{min-width:0;white-space:normal}
+  .cl.head{font-size:14.5px}
+  .chalk .grp{margin-bottom:14px}
 }
 </style>
 </head>
