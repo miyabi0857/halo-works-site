@@ -1,0 +1,1012 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+</head>
+<body>
+<title>中川塗装｜長崎県島原市の外壁・屋根塗装</title>
+<script>document.documentElement.className += ' js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  /* ============================================================
+     中川塗装 ／ 長崎県島原市
+     職人・建設の色（濃紺＋ヘルメットの黄）で組んだ単一テーマ。
+     写真は一切使わず、すべてベクターで描いている：
+     他店の写真も第三者の写真も使えないため、かつ
+     「塗り替え前後」は写真より図の方が正直に見せられるため。
+     ------------------------------------------------------------
+     padding は横方向の役割を持つクラス（.wrap）には左右だけ、
+     縦方向の役割を持つクラス（.sec）には上下だけを指定する。
+     ショートハンドを両方に書くと打ち消し合うため。
+     ============================================================ */
+  :root {
+    --ink:       #0e2739;   /* 濃紺・本文と地の基準 */
+    --ink-2:     #16405f;
+    --ink-3:     #1d5480;
+    --paper:     #f2f3f1;   /* わずかに緑に寄せた白。純白より壁の白が映える */
+    --paper-2:   #ffffff;
+    --paper-3:   #e7e9e6;
+    --accent:    #efa41b;   /* ヘルメット・水平器の黄 */
+    --accent-dk: #c4820c;
+    --muted:     #6b7a84;
+    --line:      #d5dad7;
+    --line-dk:   rgba(255,255,255,.16);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 400;
+    line-height: 1.95;
+    letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4, .zen {
+    font-family: "Zen Kaku Gothic New", "Noto Sans JP", sans-serif;
+    font-weight: 900;
+    letter-spacing: .01em;
+    line-height: 1.5;
+    text-wrap: balance;
+  }
+  .num {
+    font-family: "Barlow Condensed", "Zen Kaku Gothic New", sans-serif;
+    font-weight: 600;
+    font-variant-numeric: lining-nums tabular-nums;
+    letter-spacing: .01em;
+  }
+  a { color: inherit; }
+  svg { display: block; }
+  ::selection { background: var(--accent); color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .wrap { max-width: 1080px; margin-left: auto; margin-right: auto;
+    padding-left: 26px; padding-right: 26px; }
+  .sec { padding-top: 104px; padding-bottom: 104px; }
+  @media (max-width: 760px) {
+    .wrap { padding-left: 20px; padding-right: 20px; }
+    .sec { padding-top: 68px; padding-bottom: 68px; }
+  }
+
+  /* ---- 見出しの型 ---- */
+  .eyebrow { display: inline-flex; align-items: center; gap: 10px;
+    font-size: .7rem; letter-spacing: .22em; color: var(--muted);
+    text-transform: uppercase; margin-bottom: 16px; }
+  .eyebrow i { display: block; width: 26px; height: 2px; background: var(--accent); }
+  .sec-title { font-size: clamp(1.55rem, 4vw, 2.35rem); margin: 0 0 18px; }
+  .sec-lead { color: var(--muted); max-width: 34em; margin: 0 0 46px; font-size: .95rem; }
+
+  /* ---- 出現 ---- */
+  html.js [data-rv] { opacity: 0; transform: translateY(22px);
+    transition: opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1); }
+  html.js [data-rv].on { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html.js [data-rv] { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---- ボタン ---- */
+  .btn { display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 26px; border-radius: 3px; font-size: .88rem; font-weight: 700;
+    text-decoration: none; border: 1.5px solid transparent;
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    transition: transform .18s ease, background-color .18s ease, color .18s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-fill { background-color: var(--accent); color: var(--ink); }
+  .btn-fill:hover { background-color: var(--accent-dk); }
+  .btn-line { border-color: currentColor; }
+  .btn-line:hover { background-color: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .btn-ghost { border-color: var(--line-dk); color: var(--paper); }
+  .btn-ghost:hover { background-color: var(--paper); color: var(--ink); }
+  .btnrow { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ============ ヘッダー ============ */
+  header { position: sticky; top: 0; z-index: 70;
+    background-color: rgba(242,243,241,.88);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line); }
+  .hbar { max-width: 1080px; margin-left: auto; margin-right: auto;
+    padding: 12px 26px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .hlogo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+  .hmark { width: 34px; height: 34px; flex-shrink: 0; }
+  .hlogo b { font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 900;
+    font-size: 1.02rem; letter-spacing: .04em; line-height: 1.2; }
+  .hlogo span { display: block; font-size: .58rem; letter-spacing: .18em;
+    color: var(--muted); font-weight: 500; }
+  .hnav { display: flex; align-items: center; gap: 22px; font-size: .8rem; font-weight: 500; }
+  .hnav a { text-decoration: none; color: var(--ink); }
+  .hnav a:hover { color: var(--ink-3); }
+  @media (max-width: 900px) { .hnav a.wide { display: none; } }
+  @media (max-width: 560px) {
+    .hbar { padding-left: 18px; padding-right: 18px; }
+    .hnav .btn { padding: 11px 16px; font-size: .78rem; }
+  }
+
+  /* ============ ヒーロー ============ */
+  .hero { padding-top: 56px; padding-bottom: 74px; }
+  .hero h1 { font-size: clamp(1.9rem, 5vw, 3.05rem); margin: 0 0 20px; }
+  .hero h1 .hl { position: relative; white-space: nowrap; }
+  .hero h1 .hl::after { content: ""; position: absolute; left: -2px; right: -2px; bottom: .1em;
+    height: .34em; background-color: var(--accent); opacity: .42; z-index: -1; border-radius: 2px; }
+  .hero-lead { color: var(--muted); font-size: .97rem; max-width: 30em; margin: 0 0 28px; }
+  .hero-top { display: grid; grid-template-columns: 1.02fr .98fr; gap: 40px; align-items: center; }
+  @media (max-width: 900px) { .hero-top { grid-template-columns: 1fr; gap: 30px; } }
+
+  .badges { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 26px; }
+  .badge { display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid var(--line); background-color: var(--paper-2);
+    border-radius: 999px; padding: 7px 14px; font-size: .76rem; font-weight: 700; }
+  .badge svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* ---- 家のビフォーアフター ---- */
+  .house-card { background-color: var(--paper-2); border: 1px solid var(--line);
+    border-radius: 6px; overflow: hidden; box-shadow: 0 18px 44px rgba(14,39,57,.09); }
+  .house-hd { display: flex; align-items: center; justify-content: space-between;
+    padding: 11px 16px; border-bottom: 1px solid var(--line); font-size: .72rem;
+    letter-spacing: .12em; color: var(--muted); }
+  .house-hd b { color: var(--ink); font-weight: 700; letter-spacing: .04em; }
+  .house-stage { position: relative; cursor: ew-resize; touch-action: none;
+    background-color: #eef1ef; }
+  .house-stage svg { width: 100%; height: auto; }
+  .ba-tag { position: absolute; top: 12px; font-size: .68rem; font-weight: 700;
+    letter-spacing: .1em; padding: 5px 11px; border-radius: 999px; pointer-events: none; }
+  .ba-before { left: 12px; background-color: rgba(14,39,57,.78); color: #fff; }
+  .ba-after { right: 12px; background-color: var(--accent); color: var(--ink); }
+  .house-hint { padding: 10px 16px; border-top: 1px solid var(--line);
+    font-size: .72rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .house-hint svg { width: 15px; height: 15px; flex-shrink: 0; }
+
+  /* ---- 色見本 ---- */
+  .picker { margin-top: 22px; background-color: var(--paper-2);
+    border: 1px solid var(--line); border-radius: 6px; padding: 18px 18px 16px; }
+  .picker-row + .picker-row { margin-top: 16px; padding-top: 16px; border-top: 1px dashed var(--line); }
+  .picker-lb { display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; margin-bottom: 10px; }
+  .picker-lb b { font-size: .78rem; font-weight: 700; letter-spacing: .06em; }
+  .picker-lb span { font-size: .72rem; color: var(--muted); }
+  .chips { display: flex; gap: 9px; flex-wrap: wrap; }
+  .chip { width: 46px; height: 46px; border-radius: 4px; border: 2px solid transparent;
+    outline: 1px solid var(--line); outline-offset: -1px; cursor: pointer; padding: 0;
+    position: relative; transition: transform .15s ease; }
+  .chip:hover { transform: translateY(-2px); }
+  .chip[aria-pressed="true"] { border-color: var(--ink); }
+  .chip[aria-pressed="true"]::after { content: ""; position: absolute;
+    left: 50%; bottom: -9px; transform: translateX(-50%);
+    width: 5px; height: 5px; border-radius: 50%; background-color: var(--ink); }
+  .chip:focus-visible { outline: 2px solid var(--ink-3); outline-offset: 2px; }
+  @media (max-width: 400px) { .chip { width: 40px; height: 40px; } }
+
+  /* ============ 数字の帯 ============ */
+  .strip { background-color: var(--ink); color: var(--paper); }
+  .strip-in { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background-color: var(--line-dk); }
+  .strip-cell { background-color: var(--ink); padding: 30px 20px; text-align: center; }
+  .strip-cell b { display: block; font-family: "Barlow Condensed", sans-serif; font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: clamp(2rem, 5vw, 3rem); line-height: 1.05; color: var(--accent); }
+  .strip-cell b i { font-style: normal; font-size: .42em; margin-left: 3px; color: var(--paper); }
+  .strip-cell span { display: block; font-size: .73rem; color: #a9bac6; margin-top: 6px; }
+  @media (max-width: 720px) { .strip-in { grid-template-columns: repeat(2, 1fr); }
+    .strip-cell { padding-top: 22px; padding-bottom: 22px; } }
+
+  /* ============ 3回塗り（ピン留め） ============ */
+  .coat { background-color: var(--ink); color: var(--paper); }
+  .run { position: relative; }
+  html.js .run { height: 400vh; }
+  .stage { padding-top: 74px; padding-bottom: 74px; }
+  /* ヘッダーが sticky で天面に重なるため、その分を padding で確保してから中央に寄せる */
+  html.js .stage { position: sticky; top: 0; height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden; padding-top: 76px; padding-bottom: 0; }
+  .coat .eyebrow { color: #9fb4c2; }
+  .coat .eyebrow i { background-color: var(--accent); }
+  .coat-hd { margin-bottom: 22px; }
+  .coat-hd h2 { font-size: clamp(1.4rem, 3.6vw, 2.1rem); margin: 0; }
+  .coat-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 38px; align-items: center; }
+  @media (max-width: 900px) { .coat-grid { grid-template-columns: 1fr; gap: 20px; } }
+
+  .cut { background-color: #0a1e2c; border: 1px solid var(--line-dk); border-radius: 5px;
+    padding: 16px; }
+  .cut svg { width: 100%; height: auto; }
+  .cut-cap { font-size: .68rem; color: #8ea5b3; margin-top: 9px; letter-spacing: .06em; }
+
+  .coat-steps { position: relative; }
+  html.js .coat-steps { min-height: 186px; }
+  .coat-step { display: flex; gap: 16px; align-items: flex-start; }
+  html.js .coat-step { position: absolute; left: 0; right: 0; top: 0;
+    opacity: 0; transform: translateY(12px);
+    transition: opacity .5s ease, transform .5s ease; }
+  html.js .coat-step.live { opacity: 1; transform: none; }
+  html:not(.js) .coat-step + .coat-step { margin-top: 22px; }
+  .coat-no { font-family: "Barlow Condensed", sans-serif; font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: 2.1rem; line-height: 1; color: var(--accent); flex-shrink: 0; width: 46px; }
+  .coat-step h3 { font-size: 1.12rem; margin: 0 0 7px; }
+  .coat-step p { margin: 0; font-size: .88rem; color: #b6c7d2; line-height: 1.85; }
+  .coat-bar { margin-top: 26px; height: 3px; background-color: rgba(255,255,255,.14); border-radius: 2px; }
+  .coat-bar i { display: block; height: 100%; width: 0; background-color: var(--accent); border-radius: 2px; }
+  @media (max-width: 900px) {
+    .cut { padding: 12px; }
+    html.js .coat-steps { min-height: 168px; }
+    .coat-no { font-size: 1.7rem; width: 36px; }
+    .coat-step h3 { font-size: 1rem; }
+    .coat-step p { font-size: .82rem; line-height: 1.75; }
+  }
+
+  /* ============ 見積書の読み方 ============ */
+  .est-list { display: grid; gap: 14px; }
+  .est { background-color: var(--paper-2); border: 1px solid var(--line); border-radius: 5px;
+    border-left: 4px solid var(--accent); padding: 22px 24px; }
+  .est h3 { font-size: 1.03rem; margin: 0 0 8px; display: flex; align-items: center; gap: 10px; }
+  .est h3 em { font-style: normal; font-family: "Barlow Condensed", sans-serif;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: .95rem; color: var(--accent-dk); flex-shrink: 0; }
+  .est p { margin: 0; font-size: .88rem; color: var(--muted); }
+  .est p .ng { color: var(--ink); font-weight: 700;
+    background-color: rgba(239,164,27,.24); padding: 1px 5px; border-radius: 2px; }
+  @media (max-width: 560px) { .est { padding: 18px 18px; } }
+
+  /* ============ 工事の流れ ============ */
+  .flow { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background-color: var(--line); border: 1px solid var(--line); border-radius: 5px; overflow: hidden; }
+  .flow-i { background-color: var(--paper-2); padding: 26px 22px; }
+  .flow-i .k { font-family: "Barlow Condensed", sans-serif; font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: .8rem; letter-spacing: .14em; color: var(--muted); display: block; margin-bottom: 10px; }
+  .flow-i h3 { font-size: 1rem; margin: 0 0 8px; }
+  .flow-i p { margin: 0; font-size: .84rem; color: var(--muted); line-height: 1.8; }
+  @media (max-width: 860px) { .flow { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .flow { grid-template-columns: 1fr; } }
+
+  /* ============ 施工メニュー ============ */
+  .menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .menu-i { background-color: var(--paper-2); border: 1px solid var(--line);
+    border-radius: 5px; padding: 26px; display: flex; gap: 18px; align-items: flex-start; }
+  .menu-i svg { width: 38px; height: 38px; flex-shrink: 0; }
+  .menu-i h3 { font-size: 1.02rem; margin: 0 0 7px; }
+  .menu-i p { margin: 0; font-size: .85rem; color: var(--muted); line-height: 1.8; }
+  @media (max-width: 700px) { .menu { grid-template-columns: 1fr; }
+    .menu-i { padding: 20px; gap: 14px; } }
+
+  /* ============ 対応エリア ============ */
+  .area { background-color: var(--ink); color: var(--paper); }
+  .area .sec-lead { color: #9fb4c2; }
+  .area .eyebrow { color: #9fb4c2; }
+  .area .eyebrow i { background-color: var(--accent); }
+  .area-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .area-grid { grid-template-columns: 1fr; gap: 26px; } }
+  .area-map { background-color: #0a1e2c; border: 1px solid var(--line-dk);
+    border-radius: 5px; padding: 18px; }
+  .area-map svg { width: 100%; height: auto; }
+  .area-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;
+    background-color: var(--line-dk); border: 1px solid var(--line-dk); border-radius: 5px; overflow: hidden; }
+  .area-i { background-color: var(--ink); padding: 20px 22px; }
+  .area-i b { display: block; font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 900; font-size: 1.05rem; }
+  .area-i span { display: block; font-size: .72rem; color: #8ea5b3; margin-top: 3px; }
+
+  /* ============ よくある質問 ============ */
+  .faq { border-top: 1px solid var(--line); }
+  .faq details { border-bottom: 1px solid var(--line); }
+  .faq summary { cursor: pointer; list-style: none; padding: 22px 40px 22px 0;
+    position: relative; font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 700;
+    font-size: .98rem; }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq summary::after { content: ""; position: absolute; right: 8px; top: 50%;
+    width: 11px; height: 11px; margin-top: -7px;
+    border-right: 2px solid var(--accent-dk); border-bottom: 2px solid var(--accent-dk);
+    transform: rotate(45deg); transition: transform .25s ease; }
+  .faq details[open] summary::after { transform: rotate(225deg); margin-top: -3px; }
+  .faq summary:focus-visible { outline: 2px solid var(--ink-3); outline-offset: 3px; }
+  .faq .ans { padding-bottom: 24px; font-size: .89rem; color: var(--muted); margin: 0; max-width: 46em; }
+
+  /* ============ お問い合わせ ============ */
+  .cta { background-color: var(--accent); }
+  .cta-in { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+  @media (max-width: 860px) { .cta-in { grid-template-columns: 1fr; gap: 26px; } }
+  .cta h2 { font-size: clamp(1.5rem, 4vw, 2.3rem); margin: 0 0 14px; }
+  .cta p { margin: 0 0 24px; font-size: .92rem; max-width: 28em; }
+  .cta-card { background-color: var(--paper-2); border-radius: 6px; padding: 28px;
+    box-shadow: 0 16px 40px rgba(14,39,57,.16); }
+  .cta-card dl { margin: 0; display: grid; grid-template-columns: 5.4em 1fr; gap: 10px 14px; font-size: .87rem; }
+  .cta-card dt { color: var(--muted); font-size: .78rem; }
+  .cta-card dd { margin: 0; }
+  .tel { font-family: "Barlow Condensed", sans-serif; font-weight: 700;
+    font-variant-numeric: lining-nums tabular-nums;
+    font-size: 1.9rem; line-height: 1.2; display: block; letter-spacing: .02em; }
+  .tel-note { font-size: .72rem; color: var(--muted); display: block; margin-top: 2px; }
+  .fill-note { display: inline-block; font-size: .64rem; font-weight: 700; letter-spacing: .08em;
+    background-color: rgba(14,39,57,.08); color: var(--muted);
+    border: 1px dashed var(--muted); border-radius: 3px; padding: 2px 7px; vertical-align: middle; }
+
+  /* ============ フッター ============ */
+  footer { background-color: var(--ink); color: var(--paper); }
+  .foot-in { padding-top: 50px; padding-bottom: 50px; }
+  .foot-top { display: flex; align-items: center; gap: 13px; margin-bottom: 14px; }
+  .foot-top b { font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 900; font-size: 1.1rem; }
+  .foot-addr { font-size: .82rem; color: #9fb4c2; margin: 0 0 26px; }
+  .foot-note { font-size: .76rem; color: #8ea5b3; line-height: 1.9; margin: 0;
+    border-top: 1px solid var(--line-dk); padding-top: 22px; max-width: 52em; }
+</style>
+
+<header>
+  <div class="hbar">
+    <a class="hlogo" href="#top">
+      <svg class="hmark" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="0" y="0" width="40" height="40" rx="4" fill="#0e2739"></rect>
+        <path d="M9 27 L20 10 L31 27 Z" fill="#efa41b"></path>
+        <rect x="9" y="28" width="22" height="3.4" fill="#f2f3f1"></rect>
+      </svg>
+      <b>中川塗装<span>NAKAGAWA PAINTING</span></b>
+    </a>
+    <nav class="hnav">
+      <a class="wide" href="#coat">3回塗り</a>
+      <a class="wide" href="#estimate">見積りの見方</a>
+      <a class="wide" href="#menu">施工メニュー</a>
+      <a class="btn btn-fill" href="#contact">無料で診断を頼む</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ============ ヒーロー ============ -->
+<section class="wrap hero">
+  <div class="hero-top">
+    <div>
+      <div class="eyebrow"><i></i><span>Shimabara, Nagasaki</span></div>
+      <h1>その見積り、<br><span class="hl">何を塗るか</span>まで<br>書いてありますか。</h1>
+      <p class="hero-lead">
+        島原市の中川塗装です。外壁と屋根の塗り替えを、1級塗装技能士が自分の手で行います。
+        塗料のメーカー名も、塗る面積の出し方も、なぜその工程が要るのかも、
+        すべてお見積りの紙の上に書いてお渡しします。
+      </p>
+      <div class="badges">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0e2739" stroke-width="2" aria-hidden="true"><path d="M12 2l2.9 6.1 6.6.9-4.8 4.6 1.2 6.6L12 17l-5.9 3.2 1.2-6.6L2.5 9l6.6-.9z"/></svg>
+          1級塗装技能士
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0e2739" stroke-width="2" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 8-7 9-4-1-7-4.5-7-9V6z"/></svg>
+          最長15年保証
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#0e2739" stroke-width="2" aria-hidden="true"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg>
+          島原・雲仙・南島原・大村
+        </span>
+      </div>
+      <div class="btnrow">
+        <a class="btn btn-fill" href="#contact">まずは無料で見てもらう</a>
+        <a class="btn btn-line" href="#estimate">見積りの見方を読む</a>
+      </div>
+    </div>
+
+    <div>
+      <!-- 塗り替え前／後を1枚の図で比べる。写真を使わずに差を示すための仕掛け -->
+      <div class="house-card">
+        <div class="house-hd"><b>塗り替えのイメージ</b><span>つまんで左右に動かせます</span></div>
+        <div class="house-stage" id="baStage">
+          <svg viewBox="0 0 800 520" id="houseSvg" role="img" aria-label="塗り替え前と塗り替え後を比べた住宅の図">
+            <defs>
+              <clipPath id="beforeClip"><rect id="beforeRect" x="0" y="0" width="336" height="520"></rect></clipPath>
+              <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#e8eeef"></stop>
+                <stop offset="1" stop-color="#f4f6f4"></stop>
+              </linearGradient>
+              <pattern id="dirt" width="7" height="7" patternUnits="userSpaceOnUse">
+                <rect width="7" height="7" fill="none"></rect>
+                <circle cx="2" cy="3" r="1" fill="#6d7060" opacity=".5"></circle>
+                <circle cx="5.5" cy="6" r=".8" fill="#6d7060" opacity=".35"></circle>
+              </pattern>
+            </defs>
+
+            <rect x="0" y="0" width="800" height="520" fill="url(#skyGrad)"></rect>
+            <rect x="0" y="468" width="800" height="52" fill="#dfe4de"></rect>
+
+            <!-- 塗り替え後（下地として全面に描く） -->
+            <g id="houseAfter">
+              <polygon id="roofA" points="148,238 400,106 652,238" fill="#3b4a52"></polygon>
+              <rect id="eaveA" x="142" y="234" width="516" height="13" fill="#2f3c43"></rect>
+              <rect id="wallA" x="170" y="247" width="460" height="193" fill="#efe7d6"></rect>
+              <rect x="164" y="440" width="472" height="28" fill="#b9bdb6"></rect>
+              <!-- 雨樋 -->
+              <rect id="pipeL" x="162" y="247" width="8" height="193" fill="#2f3c43" opacity=".55"></rect>
+              <rect id="pipeR" x="630" y="247" width="8" height="193" fill="#2f3c43" opacity=".55"></rect>
+              <!-- 窓 -->
+              <g fill="#cfd9dd" stroke="#8d9ba2" stroke-width="3">
+                <rect x="212" y="272" width="108" height="74"></rect>
+                <rect x="480" y="272" width="108" height="74"></rect>
+                <rect x="212" y="362" width="148" height="74"></rect>
+              </g>
+              <g stroke="#8d9ba2" stroke-width="3">
+                <line x1="266" y1="272" x2="266" y2="346"></line>
+                <line x1="534" y1="272" x2="534" y2="346"></line>
+                <line x1="286" y1="362" x2="286" y2="436"></line>
+              </g>
+              <!-- 玄関 -->
+              <rect x="470" y="336" width="88" height="104" fill="#6d5a45"></rect>
+              <rect x="470" y="336" width="88" height="104" fill="none" stroke="#4d4032" stroke-width="3"></rect>
+              <circle cx="547" cy="392" r="4" fill="#efa41b"></circle>
+            </g>
+
+            <!-- 塗り替え前（左側だけ切り抜いて重ねる） -->
+            <g clip-path="url(#beforeClip)">
+              <polygon points="148,238 400,106 652,238" fill="#6a7278"></polygon>
+              <rect x="142" y="234" width="516" height="13" fill="#585f64"></rect>
+              <rect x="170" y="247" width="460" height="193" fill="#c2bdad"></rect>
+              <rect x="170" y="247" width="460" height="193" fill="url(#dirt)"></rect>
+              <rect x="164" y="440" width="472" height="28" fill="#a2a69d"></rect>
+              <!-- 雨だれ：窓の下に出る黒い筋 -->
+              <g fill="#8d8a78" opacity=".55">
+                <rect x="216" y="346" width="7" height="90"></rect>
+                <rect x="238" y="346" width="4" height="62"></rect>
+                <rect x="308" y="346" width="6" height="74"></rect>
+                <rect x="486" y="346" width="7" height="94"></rect>
+                <rect x="512" y="346" width="4" height="58"></rect>
+                <rect x="578" y="346" width="6" height="80"></rect>
+              </g>
+              <!-- 苔・藻：基礎まわりと日の当たらない面 -->
+              <g fill="#6f7d55" opacity=".5">
+                <ellipse cx="196" cy="428" rx="28" ry="16"></ellipse>
+                <ellipse cx="176" cy="400" rx="14" ry="30"></ellipse>
+                <ellipse cx="392" cy="434" rx="40" ry="12"></ellipse>
+                <ellipse cx="612" cy="420" rx="18" ry="26"></ellipse>
+              </g>
+              <!-- ひび割れ -->
+              <g stroke="#7e7a6a" stroke-width="2.4" fill="none" stroke-linecap="round">
+                <path d="M372 258 L380 292 L366 318 L378 352"></path>
+                <path d="M380 292 L404 300"></path>
+                <path d="M418 372 L408 402 L420 430"></path>
+              </g>
+              <!-- 屋根の色あせと欠け -->
+              <g fill="#8b9298" opacity=".6">
+                <polygon points="250,200 300,168 340,200"></polygon>
+                <polygon points="420,170 470,200 400,200"></polygon>
+              </g>
+              <!-- 窓（曇った状態） -->
+              <g fill="#bfc4c2" stroke="#7d8480" stroke-width="3">
+                <rect x="212" y="272" width="108" height="74"></rect>
+                <rect x="480" y="272" width="108" height="74"></rect>
+                <rect x="212" y="362" width="148" height="74"></rect>
+              </g>
+              <g stroke="#7d8480" stroke-width="3">
+                <line x1="266" y1="272" x2="266" y2="346"></line>
+                <line x1="534" y1="272" x2="534" y2="346"></line>
+                <line x1="286" y1="362" x2="286" y2="436"></line>
+              </g>
+              <rect x="470" y="336" width="88" height="104" fill="#6b6152"></rect>
+              <rect x="470" y="336" width="88" height="104" fill="none" stroke="#4d4740" stroke-width="3"></rect>
+              <!-- 全体のくすみ。色あせは部分的な汚れより「面でトーンが落ちる」ので、最後に一枚かける -->
+              <rect x="0" y="0" width="800" height="520" fill="#5f6459" opacity=".16"></rect>
+            </g>
+
+            <!-- 仕切り -->
+            <g id="baHandle">
+              <rect id="baLine" x="333" y="0" width="6" height="520" fill="#0e2739"></rect>
+              <circle id="baKnob" cx="336" cy="260" r="24" fill="#0e2739"></circle>
+              <path id="baArrows" d="M326 260 l-8 -8 m8 8 l-8 8 m8 -8 h-2 M346 260 l8 -8 m-8 8 l8 8 m-8 -8 h2"
+                    stroke="#efa41b" stroke-width="2.6" fill="none" stroke-linecap="round"></path>
+            </g>
+          </svg>
+          <span class="ba-tag ba-before">塗り替え前</span>
+          <span class="ba-tag ba-after">塗り替え後</span>
+        </div>
+        <div class="house-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#6b7a84" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6"/><path d="M12 7.5v.5"/></svg>
+          下の色見本を押すと、外壁と屋根の色が変わります
+        </div>
+      </div>
+
+      <div class="picker">
+        <div class="picker-row">
+          <div class="picker-lb"><b>外壁の色</b><span id="wallName">アイボリー</span></div>
+          <div class="chips" id="wallChips"></div>
+        </div>
+        <div class="picker-row">
+          <div class="picker-lb"><b>屋根の色</b><span id="roofName">チャコール</span></div>
+          <div class="chips" id="roofChips"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 数字 ============ -->
+<div class="strip">
+  <div class="wrap" style="padding-left:0; padding-right:0;">
+    <div class="strip-in">
+      <div class="strip-cell"><b class="num">1<i>級</i></b><span>塗装技能士が施工</span></div>
+      <div class="strip-cell"><b class="num">3<i>回</i></b><span>下塗り・中塗り・上塗り</span></div>
+      <div class="strip-cell"><b class="num">15<i>年</i></b><span>最長保証</span></div>
+      <div class="strip-cell"><b class="num">4<i>市</i></b><span>島原・雲仙・南島原・大村</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 3回塗り ============ -->
+<div class="coat" id="coat">
+  <div class="run" id="coatRun">
+    <div class="stage">
+      <div class="wrap" style="width:100%;">
+        <div class="coat-hd">
+          <div class="eyebrow"><i></i><span>Three coats</span></div>
+          <h2>「3回塗り」の中身を、断面で見てください。</h2>
+        </div>
+        <div class="coat-grid">
+          <div class="cut">
+            <!-- viewBox の右側に層名、下側にキャプションを置くぶんの余白を確保している -->
+            <svg viewBox="0 0 600 234" role="img" aria-label="外壁の塗膜を下塗り・中塗り・上塗りの3層に分けて示した断面図">
+              <defs>
+                <clipPath id="c1"><rect id="c1r" x="40" y="0" width="0" height="234"></rect></clipPath>
+                <clipPath id="c2"><rect id="c2r" x="40" y="0" width="0" height="234"></rect></clipPath>
+                <clipPath id="c3"><rect id="c3r" x="40" y="0" width="0" height="234"></rect></clipPath>
+                <pattern id="base" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <rect width="10" height="10" fill="#4a5762"></rect>
+                  <line x1="0" y1="0" x2="0" y2="10" stroke="#5d6c78" stroke-width="3"></line>
+                </pattern>
+              </defs>
+              <!-- 素地 -->
+              <rect x="40" y="120" width="480" height="76" fill="url(#base)"></rect>
+              <text x="40" y="222" fill="#8ea5b3" font-size="13" font-family="Noto Sans JP, sans-serif">素地（サイディング・モルタル）</text>
+              <!-- 3層 -->
+              <g clip-path="url(#c1)"><rect x="40" y="96" width="480" height="26" fill="#b9c6cf"></rect></g>
+              <g clip-path="url(#c2)"><rect x="40" y="72" width="480" height="26" fill="#d8b26a"></rect></g>
+              <g clip-path="url(#c3)"><rect x="40" y="48" width="480" height="26" fill="#efa41b"></rect></g>
+              <!-- 層の名前 -->
+              <g font-family="Noto Sans JP, sans-serif" font-size="12" fill="#e6eef3">
+                <text id="lb1" x="530" y="114" opacity="0">下塗り</text>
+                <text id="lb2" x="530" y="90" opacity="0">中塗り</text>
+                <text id="lb3" x="530" y="66" opacity="0">上塗り</text>
+              </g>
+              <!-- 厚みの寸法線 -->
+              <g id="thickMark" opacity="0">
+                <line x1="24" y1="48" x2="24" y2="122" stroke="#efa41b" stroke-width="2"></line>
+                <line x1="18" y1="48" x2="30" y2="48" stroke="#efa41b" stroke-width="2"></line>
+                <line x1="18" y1="122" x2="30" y2="122" stroke="#efa41b" stroke-width="2"></line>
+              </g>
+            </svg>
+            <div class="cut-cap">※ 層の厚みは分かりやすくするために誇張しています</div>
+          </div>
+
+          <div>
+            <div class="coat-steps" id="coatSteps">
+              <div class="coat-step" data-step="0">
+                <div class="coat-no num">00</div>
+                <div>
+                  <h3>洗浄と下地の補修</h3>
+                  <p>高圧洗浄で汚れと苔を落とし、ひび割れや傷んだ部分を先に直します。ここを飛ばすと、どんな良い塗料を塗っても数年で剥がれます。</p>
+                </div>
+              </div>
+              <div class="coat-step" data-step="1">
+                <div class="coat-no num">01</div>
+                <div>
+                  <h3>下塗り</h3>
+                  <p>壁と塗料を接着させるための層です。色はつきません。壁の材質と傷み具合を見て、下塗り材そのものを選び分けます。</p>
+                </div>
+              </div>
+              <div class="coat-step" data-step="2">
+                <div class="coat-no num">02</div>
+                <div>
+                  <h3>中塗り</h3>
+                  <p>ここから色がつきます。上塗りと同じ塗料を使い、決められた量をきちんと使い切ることで、必要な膜の厚みが出ます。</p>
+                </div>
+              </div>
+              <div class="coat-step" data-step="3">
+                <div class="coat-no num">03</div>
+                <div>
+                  <h3>上塗り</h3>
+                  <p>仕上げの層です。2回重ねてはじめて、塗料メーカーが想定した耐用年数になります。中塗りを省いた2回塗りでは、その年数はもちません。</p>
+                </div>
+              </div>
+            </div>
+            <div class="coat-bar"><i id="coatBar"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 見積りの見方 ============ -->
+<section class="wrap sec" id="estimate">
+  <div class="eyebrow" data-rv><i></i><span>How to read an estimate</span></div>
+  <h2 class="sec-title" data-rv>他社さんの見積りも、この4点だけ見てください。</h2>
+  <p class="sec-lead" data-rv>
+    塗装は相見積もりを取るのが当たり前の工事です。ただ、金額だけを並べても比べようがありません。
+    うちを選ばなくても損はしないので、次の4点だけ確かめてから決めてください。
+  </p>
+  <div class="est-list">
+    <div class="est" data-rv>
+      <h3><em>01</em>「外壁塗装工事 一式」で終わっていないか</h3>
+      <p>工程ごとに分かれていない <span class="ng">一式</span> の見積りは、あとから「それは含まれていません」と言われても確かめようがありません。洗浄・下地補修・下塗り・中塗り・上塗り・付帯部が別々の行になっているかを見てください。</p>
+    </div>
+    <div class="est" data-rv>
+      <h3><em>02</em>塗る面積の根拠が書いてあるか</h3>
+      <p>金額は <span class="ng">㎡数 × 単価</span> で決まります。その㎡数がどこから出た数字なのか（実測なのか、図面からなのか）が書かれていない見積りは、単価が安くても総額が合いません。</p>
+    </div>
+    <div class="est" data-rv>
+      <h3><em>03</em>塗料のメーカー名と商品名が書いてあるか</h3>
+      <p><span class="ng">シリコン塗料</span> とだけ書かれていても、耐用年数も値段も製品によって大きく違います。メーカー名・商品名・何缶使うかまで書いてあれば、あとからご自身で調べられます。</p>
+    </div>
+    <div class="est" data-rv>
+      <h3><em>04</em>足場代が「サービス」になっていないか</h3>
+      <p>足場は必ずかかる費用です。<span class="ng">足場代無料</span> と書いてある場合、その分はどこかの行に乗っています。無料にするより、正しい金額で出したほうが結果的に安く済むことが多いです。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 施工メニュー ============ -->
+<section class="wrap sec" id="menu" style="padding-top:0;">
+  <div class="eyebrow" data-rv><i></i><span>Services</span></div>
+  <h2 class="sec-title" data-rv>承っている工事</h2>
+  <div class="menu">
+    <div class="menu-i" data-rv>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#0e2739" stroke-width="2.4" aria-hidden="true">
+        <rect x="7" y="12" width="34" height="28"/><line x1="7" y1="21" x2="41" y2="21"/>
+        <line x1="7" y1="30" x2="41" y2="30"/><line x1="24" y1="12" x2="24" y2="21"/>
+        <line x1="16" y1="21" x2="16" y2="30"/><line x1="32" y1="30" x2="32" y2="40"/>
+      </svg>
+      <div><h3>外壁塗装</h3><p>サイディング・モルタル・ALCなど、壁の材質に合わせて下塗り材から選びます。窓枠や雨樋といった付帯部も一緒にお見積りします。</p></div>
+    </div>
+    <div class="menu-i" data-rv>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#0e2739" stroke-width="2.4" aria-hidden="true">
+        <path d="M5 26 L24 10 L43 26"/><path d="M11 24 L24 13 L37 24"/><path d="M9 32 h30"/><path d="M11 38 h26"/>
+      </svg>
+      <div><h3>屋根塗装</h3><p>スレート屋根・トタン屋根の塗り替え。屋根は普段見えない場所なので、施工前と施工後の写真をお渡しします。</p></div>
+    </div>
+    <div class="menu-i" data-rv>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#0e2739" stroke-width="2.4" aria-hidden="true">
+        <path d="M24 6 C24 6 13 19 13 28 a11 11 0 0 0 22 0 C35 19 24 6 24 6 Z"/>
+        <path d="M19 28 a5 5 0 0 0 5 5"/>
+      </svg>
+      <div><h3>防水工事</h3><p>ベランダ・陸屋根の防水層の塗り直し。雨漏りは壁より先に防水層から始まることが多いので、外壁と一緒に見せていただきます。</p></div>
+    </div>
+    <div class="menu-i" data-rv>
+      <svg viewBox="0 0 48 48" fill="none" stroke="#0e2739" stroke-width="2.4" aria-hidden="true">
+        <rect x="8" y="8" width="32" height="32"/><path d="M16 40 V24 h16 v16"/><path d="M24 24 V8"/>
+      </svg>
+      <div><h3>室内塗装・内装</h3><p>お部屋の壁や建具の塗り替えも承ります。外壁の工事に合わせてまとめて頼まれる方が多いです。</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 流れ ============ -->
+<section class="wrap sec" style="padding-top:0;">
+  <div class="eyebrow" data-rv><i></i><span>Flow</span></div>
+  <h2 class="sec-title" data-rv>ご相談から引き渡しまで</h2>
+  <p class="sec-lead" data-rv>診断とお見積りまでは無料です。お見積りを見てお断りいただいても、費用は一切いただきません。</p>
+  <div class="flow">
+    <div class="flow-i" data-rv><span class="k num">STEP 01</span><h3>お問い合わせ</h3><p>お電話かInstagramのメッセージでご連絡ください。「そろそろかな」という段階のご相談で構いません。</p></div>
+    <div class="flow-i" data-rv><span class="k num">STEP 02</span><h3>建物の診断</h3><p>壁の傷み具合、ひび割れ、防水層の状態を見せていただきます。写真を撮って、どこがどう傷んでいるかをご説明します。</p></div>
+    <div class="flow-i" data-rv><span class="k num">STEP 03</span><h3>お見積りのご説明</h3><p>工程ごとに分けた見積りをお持ちします。塗料の種類を変えた場合の金額も一緒にお出しします。</p></div>
+    <div class="flow-i" data-rv><span class="k num">STEP 04</span><h3>色決め・ご契約</h3><p>色見本と、実際に塗った板を見ながら決めていきます。ご近所へのご挨拶もこちらで行います。</p></div>
+    <div class="flow-i" data-rv><span class="k num">STEP 05</span><h3>足場・洗浄・施工</h3><p>足場を組み、洗浄してから3回塗りに入ります。工事中は毎日その日の作業内容をご報告します。</p></div>
+    <div class="flow-i" data-rv><span class="k num">STEP 06</span><h3>完了・保証書のお渡し</h3><p>足場を解体し、一緒に確認していただいてからお引き渡しです。保証書をお渡しします。</p></div>
+  </div>
+</section>
+
+<!-- ============ 対応エリア ============ -->
+<div class="area">
+  <section class="wrap sec">
+    <div class="area-grid">
+      <div class="area-map" data-rv>
+        <svg viewBox="0 0 340 320" role="img" aria-label="島原半島と大村市を示した対応エリアの概略図">
+          <!-- 島原半島のごく簡略な形。正確な地図ではない -->
+          <path d="M196 78 C232 84 262 108 272 142 C282 176 272 214 246 240
+                   C220 266 180 276 148 262 C116 248 96 216 98 182
+                   C100 146 122 112 150 92 Z"
+                fill="#143349" stroke="#2a5a7d" stroke-width="2"></path>
+          <path d="M150 92 C138 70 118 52 92 44 L70 38" fill="none" stroke="#2a5a7d" stroke-width="2"></path>
+          <circle cx="186" cy="176" r="26" fill="#1d5480" opacity=".45"></circle>
+          <g fill="#efa41b">
+            <circle cx="232" cy="132" r="7"></circle>
+            <circle cx="150" cy="168" r="6"></circle>
+            <circle cx="186" cy="246" r="6"></circle>
+            <circle cx="74" cy="46" r="6"></circle>
+          </g>
+          <g font-family="Noto Sans JP, sans-serif" font-size="13" fill="#e6eef3">
+            <text x="246" y="130">島原市</text>
+            <text x="104" y="160">雲仙市</text>
+            <text x="150" y="268">南島原市</text>
+            <text x="88" y="42">大村市</text>
+          </g>
+          <g font-family="Noto Sans JP, sans-serif" font-size="11" fill="#7f98a8">
+            <text x="170" y="182">雲仙岳</text>
+            <text x="14" y="306">※ 位置関係を示した概略図です</text>
+          </g>
+        </svg>
+      </div>
+      <div>
+        <div class="eyebrow" data-rv><i></i><span>Area</span></div>
+        <h2 class="sec-title" data-rv>島原半島と大村市に伺います</h2>
+        <p class="sec-lead" data-rv>
+          地元の家は、海からの風と、雲仙からの雨の当たり方で傷み方が変わります。
+          同じ築年数でも、面によって塗り替えの時期が違うことは珍しくありません。
+        </p>
+        <div class="area-list" data-rv>
+          <div class="area-i"><b>島原市</b><span>本拠地・新山</span></div>
+          <div class="area-i"><b>雲仙市</b><span>対応可</span></div>
+          <div class="area-i"><b>南島原市</b><span>対応可</span></div>
+          <div class="area-i"><b>大村市</b><span>対応可</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ FAQ ============ -->
+<section class="wrap sec">
+  <div class="eyebrow" data-rv><i></i><span>Q &amp; A</span></div>
+  <h2 class="sec-title" data-rv>よくあるご質問</h2>
+  <div class="faq" data-rv>
+    <details>
+      <summary>まだ塗り替えの時期かどうか分かりません。見に来てもらえますか。</summary>
+      <p class="ans">はい。壁を手で触って白い粉がつく、コーキングが切れている、屋根の色が抜けている、といった目安はありますが、判断が難しい場合がほとんどです。診断は無料ですので、気になった時点でお声がけください。「まだ数年もちます」とお伝えすることもあります。</p>
+    </details>
+    <details>
+      <summary>工事の間、家にいないといけませんか。</summary>
+      <p class="ans">ずっといていただく必要はありません。ただ、足場を組む日と、色を決める前の打ち合わせだけはご在宅だと助かります。日中お留守のお宅も多いので、その日の作業内容は写真でご報告しています。</p>
+    </details>
+    <details>
+      <summary>近所に迷惑がかからないか心配です。</summary>
+      <p class="ans">足場を組む前に、両隣と裏のお宅へご挨拶に伺います。洗浄の水や塗料の飛散を防ぐため、足場にはメッシュシートを張ります。車に塗料が飛ぶことを心配される方が多いので、必要であればカバーをかけさせていただきます。</p>
+    </details>
+    <details>
+      <summary>色はどうやって決めればいいですか。</summary>
+      <p class="ans">小さな色見本だけで決めると、実際に塗ったときに明るく見えて驚かれることがあります（面積効果といいます）。A4以上の大きな見本板を作ってお持ちしますので、必ず屋外の日光の下で、ご自宅の壁に当てて見てください。</p>
+    </details>
+    <details>
+      <summary>保証はどういう内容ですか。</summary>
+      <p class="ans">塗った面の剥がれや著しい退色について、書面で保証をお出しします。年数は使う塗料のグレードによって変わり、最長で15年です。ご契約前に、何年の保証が付くのかを見積書に明記します。</p>
+    </details>
+  </div>
+</section>
+
+<!-- ============ お問い合わせ ============ -->
+<div class="cta" id="contact">
+  <section class="wrap sec">
+    <div class="cta-in">
+      <div>
+        <h2>「まだ早いかも」の段階で、<br>呼んでください。</h2>
+        <p>
+          傷みが進んでからだと、下地の補修が増えて費用が上がります。
+          早めに見ておけば、いつごろ・いくらくらいかかるかの見当がつきます。
+          診断もお見積りも無料です。
+        </p>
+        <div class="btnrow">
+          <a class="btn btn-line" href="https://www.instagram.com/nakagawa_painting23">Instagramから相談する</a>
+        </div>
+      </div>
+      <div class="cta-card">
+        <dl>
+          <dt>お電話</dt>
+          <dd>
+            <span class="tel">0957-00-0000</span>
+            <span class="tel-note">8:00〜18:00／日曜定休　<span class="fill-note">実際の番号に差し替えます</span></span>
+          </dd>
+          <dt>所在地</dt><dd>〒855-0843<br>長崎県島原市新山2丁目6668-1</dd>
+          <dt>代表</dt><dd>中川 侑哉</dd>
+          <dt>資格</dt><dd>1級塗装技能士</dd>
+          <dt>対応</dt><dd>外壁塗装／屋根塗装／防水／室内塗装</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ フッター ============ -->
+<footer>
+  <div class="wrap foot-in">
+    <div class="foot-top">
+      <svg width="34" height="34" viewBox="0 0 40 40" aria-hidden="true">
+        <rect x="0" y="0" width="40" height="40" rx="4" fill="#16405f"></rect>
+        <path d="M9 27 L20 10 L31 27 Z" fill="#efa41b"></path>
+        <rect x="9" y="28" width="22" height="3.4" fill="#f2f3f1"></rect>
+      </svg>
+      <b>中川塗装</b>
+    </div>
+    <p class="foot-addr">長崎県島原市新山2丁目6668-1／8:00〜18:00／日曜定休</p>
+    <p class="foot-note">
+      ※ このページはご提案用のサンプルです。掲載内容はInstagramなどの公開情報をもとに作成しており、
+      電話番号・保証年数・施工実績など、確認できていない項目は仮の内容や空欄のままにしています。
+      実際にご依頼いただく場合は、正しい情報と御社の施工写真をお伺いしたうえで作り直します。
+      図版はすべて描き起こしたもので、実際の建物ではありません。
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ---------- 出現 ---------- */
+  (function () {
+    var els = document.querySelectorAll('[data-rv]');
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < els.length; i++) els[i].classList.add('on');
+      return;
+    }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ---------- 色見本 ---------- */
+  (function () {
+    var WALLS = [
+      { n: 'アイボリー',   c: '#efe7d6' },
+      { n: 'ベージュ',     c: '#ddcbac' },
+      { n: 'グレージュ',   c: '#cbc6bd' },
+      { n: 'ライトグレー', c: '#c3c8c9' },
+      { n: 'ネイビー',     c: '#2f4a63' },
+      { n: 'モスグリーン', c: '#7d8567' }
+    ];
+    var ROOFS = [
+      { n: 'チャコール',   c: '#3b4a52' },
+      { n: 'ブラック',     c: '#2a2e31' },
+      { n: 'ブラウン',     c: '#4e4035' },
+      { n: 'グリーン',     c: '#37493c' }
+    ];
+    var wallA = document.getElementById('wallA');
+    var roofA = document.getElementById('roofA');
+    var eaveA = document.getElementById('eaveA');
+    var pipeL = document.getElementById('pipeL');
+    var pipeR = document.getElementById('pipeR');
+
+    /* 軒と雨樋は屋根より一段暗く。手で暗い色を持たなくて済むように計算する */
+    function darken(hex, k) {
+      var n = parseInt(hex.slice(1), 16);
+      var r = Math.round(((n >> 16) & 255) * k);
+      var g = Math.round(((n >> 8) & 255) * k);
+      var b = Math.round((n & 255) * k);
+      return 'rgb(' + r + ',' + g + ',' + b + ')';
+    }
+
+    function build(list, host, nameEl, apply) {
+      list.forEach(function (item, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.className = 'chip';
+        b.style.backgroundColor = item.c;
+        b.title = item.n;
+        b.setAttribute('aria-label', item.n);
+        b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+        b.addEventListener('click', function () {
+          host.querySelectorAll('.chip').forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+          b.setAttribute('aria-pressed', 'true');
+          nameEl.textContent = item.n;
+          apply(item.c);
+        });
+        host.appendChild(b);
+      });
+    }
+
+    build(WALLS, document.getElementById('wallChips'), document.getElementById('wallName'),
+      function (c) { wallA.setAttribute('fill', c); });
+
+    build(ROOFS, document.getElementById('roofChips'), document.getElementById('roofName'),
+      function (c) {
+        roofA.setAttribute('fill', c);
+        eaveA.setAttribute('fill', darken(c, .78));
+        pipeL.setAttribute('fill', darken(c, .78));
+        pipeR.setAttribute('fill', darken(c, .78));
+      });
+  })();
+
+  /* ---------- ビフォーアフターの仕切り ---------- */
+  (function () {
+    var stage = document.getElementById('baStage');
+    var rect = document.getElementById('beforeRect');
+    var line = document.getElementById('baLine');
+    var knob = document.getElementById('baKnob');
+    var arrows = document.getElementById('baArrows');
+    if (!stage) return;
+    var W = 800;
+    var x = 336;
+
+    function place(nx) {
+      x = Math.max(60, Math.min(W - 60, nx));
+      rect.setAttribute('width', x);
+      line.setAttribute('x', x - 3);
+      knob.setAttribute('cx', x);
+      arrows.setAttribute('transform', 'translate(' + (x - 336) + ',0)');
+    }
+
+    function fromEvent(e) {
+      var r = stage.getBoundingClientRect();
+      return ((e.clientX - r.left) / r.width) * W;
+    }
+
+    var dragging = false;
+    stage.addEventListener('pointerdown', function (e) {
+      dragging = true;
+      stage.setPointerCapture(e.pointerId);
+      place(fromEvent(e));
+    });
+    stage.addEventListener('pointermove', function (e) {
+      if (dragging) place(fromEvent(e));
+    });
+    function stop(e) {
+      if (!dragging) return;
+      dragging = false;
+      try { stage.releasePointerCapture(e.pointerId); } catch (err) {}
+    }
+    stage.addEventListener('pointerup', stop);
+    stage.addEventListener('pointercancel', stop);
+
+    place(336);
+  })();
+
+  /* ---------- 3回塗り（スクロールで層が増える） ---------- */
+  (function () {
+    var run = document.getElementById('coatRun');
+    if (!run) return;
+    var W = 480, X0 = 40;
+    var r1 = document.getElementById('c1r');
+    var r2 = document.getElementById('c2r');
+    var r3 = document.getElementById('c3r');
+    var lb = [document.getElementById('lb1'), document.getElementById('lb2'), document.getElementById('lb3')];
+    var mark = document.getElementById('thickMark');
+    var bar = document.getElementById('coatBar');
+    var steps = document.querySelectorAll('#coatSteps .coat-step');
+
+    /* 各層が塗られる区間。0番目（洗浄）はまだ層が無い */
+    var SPAN = [[0.14, 0.38], [0.42, 0.64], [0.68, 0.90]];
+
+    function seg(p, a, b) {
+      if (p <= a) return 0;
+      if (p >= b) return 1;
+      return (p - a) / (b - a);
+    }
+
+    function place(p) {
+      var t = [seg(p, SPAN[0][0], SPAN[0][1]), seg(p, SPAN[1][0], SPAN[1][1]), seg(p, SPAN[2][0], SPAN[2][1])];
+      r1.setAttribute('width', (W * t[0]).toFixed(1));
+      r2.setAttribute('width', (W * t[1]).toFixed(1));
+      r3.setAttribute('width', (W * t[2]).toFixed(1));
+      r1.setAttribute('x', X0); r2.setAttribute('x', X0); r3.setAttribute('x', X0);
+      for (var i = 0; i < 3; i++) lb[i].setAttribute('opacity', t[i] > 0.55 ? '1' : '0');
+      mark.setAttribute('opacity', t[2] > 0.9 ? '1' : '0');
+      bar.style.width = (p * 100).toFixed(1) + '%';
+
+      var live = 0;
+      if (p >= 0.68) live = 3;
+      else if (p >= 0.42) live = 2;
+      else if (p >= 0.14) live = 1;
+      for (var j = 0; j < steps.length; j++) steps[j].classList.toggle('live', j === live);
+    }
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.remove('js');
+      place(1);
+      for (var k = 0; k < steps.length; k++) steps[k].classList.add('live');
+      return;
+    }
+
+    function apply() {
+      var r = run.getBoundingClientRect();
+      var span = r.height - innerHeight;
+      if (span <= 0) { place(1); return; }
+      var p = -r.top / span;
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      place(p);
+    }
+    window.addEventListener('scroll', apply, { passive: true });
+    window.addEventListener('resize', apply);
+    window.addEventListener('load', apply);
+    apply();
+  })();
+</script>
+
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
