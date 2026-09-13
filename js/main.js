@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   initNav();
+  initWorkShowcase();
   initBloomCanvas();
   initScrollReveal();
   initCardMotion();
@@ -450,4 +451,97 @@ function initCardMotion() {
   } else {
     cards.forEach((card) => card.classList.add('idle-float'));
   }
+}
+
+/* ---------------------------------------------------------
+   ヒーローの制作物ショーケース
+   ・タブを押すと静止画が切り替わる（軽いので即座に出る）
+   ・「動かす」を押したときだけ、実物を iframe で読み込む
+     デモは写真を埋め込んでいて1MB前後あるため、最初から読ませない
+--------------------------------------------------------- */
+function initWorkShowcase() {
+  const view = document.getElementById('workView');
+  if (!view) return;
+
+  const shot = document.getElementById('workShot');
+  const play = document.getElementById('workPlay');
+  const urlEl = document.getElementById('workUrl');
+  const tabs = Array.from(document.querySelectorAll('.work-tabs [role="tab"]'));
+
+  const WORKS = [
+    {
+      url: 'https://miyabi0857.github.io/react-yosakoi-site/',
+      label: 'miyabi0857.github.io/react-yosakoi-site/',
+      shot: 'assets/demo-react.jpg',
+      alt: '制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている'
+    },
+    {
+      url: 'demo/salon/',
+      label: 'gearbloom.jp/demo/salon/',
+      shot: 'assets/demo-salon.jpg',
+      alt: '美容室なぎさ堂の制作サンプル。生成り色の紙面に花の写真'
+    },
+    {
+      url: 'demo/trattoria/',
+      label: 'gearbloom.jp/demo/trattoria/',
+      shot: 'assets/demo-trattoria.jpg',
+      alt: 'トラットリア南風の制作サンプル。黒板のメニューが並ぶ紙面'
+    }
+  ];
+
+  let live = null;
+
+  /* 1120px幅で描かせたものを枠の実寸まで縮める倍率 */
+  function fitScale() {
+    const w = view.getBoundingClientRect().width;
+    if (w > 0) view.style.setProperty('--work-scale', (w / 1120).toFixed(4));
+  }
+  fitScale();
+  if ('ResizeObserver' in window) {
+    new ResizeObserver(fitScale).observe(view);
+  } else {
+    window.addEventListener('resize', fitScale);
+  }
+
+  function dropLive() {
+    if (live) {
+      live.remove();
+      live = null;
+    }
+    shot.hidden = false;
+    play.hidden = false;
+    play.classList.remove('is-loading');
+    play.lastChild.textContent = ' このページを動かす';
+  }
+
+  function show(i) {
+    const w = WORKS[i];
+    dropLive();
+    shot.src = w.shot;
+    shot.alt = w.alt;
+    urlEl.textContent = w.label;
+    play.dataset.url = w.url;
+    tabs.forEach((t, j) => t.setAttribute('aria-selected', String(i === j)));
+  }
+
+  tabs.forEach((t, i) => t.addEventListener('click', () => show(i)));
+
+  play.addEventListener('click', () => {
+    const url = play.dataset.url || WORKS[0].url;
+    play.classList.add('is-loading');
+    play.lastChild.textContent = ' 読み込んでいます';
+
+    const frame = document.createElement('iframe');
+    frame.title = '制作したページのプレビュー';
+    frame.loading = 'eager';
+    frame.addEventListener('load', () => {
+      shot.hidden = true;
+      play.hidden = true;
+    });
+    frame.src = url;
+    view.appendChild(frame);
+    live = frame;
+  });
+
+  show(0);
 }

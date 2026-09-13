@@ -15,7 +15,7 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="長崎県内の会社・お店のためのホームページ制作、業務アプリ開発、Excelマクロ作成を承っています。">
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=20260913c">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="64x64">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
@@ -43,17 +43,15 @@
 <main>
 
   <section class="hero">
-    <canvas id="bloom-canvas" aria-hidden="true"></canvas>
-    <div class="container hero-inner">
+    <div class="container container--wide hero-inner">
       <div class="hero-grid">
         <div class="hero-copy">
           <span class="eyebrow">長崎県内 会社・お店向け</span>
           <!-- chunk = 途中で改行されると困るまとまり（inline-blockで分割を防ぐ） -->
           <h1><span class="line"><span class="chunk">「作って終わり」</span><span class="chunk">にしない、</span></span><span class="line"><span class="chunk">地域の会社・お店のための</span><span class="chunk">Web制作。</span></span></h1>
           <p class="lead">
-            本業を持ちながら、副業としてWeb制作に取り組んでいます。
-            ホームページ制作から、Excelマクロによる集計の自動化、日々の業務で使う簡易アプリの開発まで。
-            本業（人事・広報・採用）で培った「使う側の目線」で、丁寧にヒアリングしながら形にします。
+            長崎で、ホームページと業務アプリを作っています。
+            ここに並んでいるのは実際に公開しているページで、そのまま動かせます。
           </p>
           <div class="hero-cta">
             <a href="contact.html" class="btn btn-primary">依頼・相談してみる</a>
@@ -61,13 +59,36 @@
           </div>
         </div>
 
-        <div class="device-wrap">
-          <div class="device">
-            <div class="device-screen">
-              <iframe src="https://miyabi0857.github.io/react-yosakoi-site/" loading="lazy" title="制作したReAct!!サイトのプレビュー" tabindex="-1" aria-hidden="true"></iframe>
+        <!-- 制作物そのものをヒーローにする。
+             静止画を先に出して即座に描画し、押されたときだけ実物を読み込む
+             （デモは写真を埋め込んでいて1MB前後あり、最初から読むと重いため） -->
+        <div class="work">
+          <div class="work-frame">
+            <div class="work-bar">
+              <span class="work-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span class="work-url" id="workUrl">miyabi0857.github.io/react-yosakoi-site/</span>
+            </div>
+            <div class="work-view" id="workView">
+              <img id="workShot" src="assets/demo-react.jpg" width="1120" height="700"
+                   alt="制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている">
+              <button type="button" class="work-play" id="workPlay">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 L18.5 12 L8 18.5 Z" fill="currentColor"/></svg>
+                このページを動かす
+              </button>
             </div>
           </div>
-          <span class="device-caption">↑ 実際に制作したサイトです</span>
+
+          <div class="work-tabs" role="tablist" aria-label="制作したページ">
+            <button type="button" role="tab" aria-selected="true" data-i="0">
+              ReAct!!<span>ご依頼いただいた制作</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" data-i="1">
+              なぎさ堂<span>制作サンプル／美容室</span>
+            </button>
+            <button type="button" role="tab" aria-selected="false" data-i="2">
+              トラットリア南風<span>制作サンプル／飲食店</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -352,6 +373,6 @@
   <a href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener">Instagram</a>
 </footer>
 
-<script src="js/main.js"></script>
+<script src="js/main.js?v=20260913c"></script>
 </body>
 </html>
