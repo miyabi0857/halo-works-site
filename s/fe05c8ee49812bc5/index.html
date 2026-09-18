@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>まんてん加工所｜長与町特産品直売所</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="まんてん加工所｜長与町特産品直売所">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/fe05c8ee49812bc5/">
+<meta property="og:image" content="https://gearbloom.jp/s/fe05c8ee49812bc5/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=Klee+One:wght@400;600&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  /* ============================================================
+     まんてん加工所 ／ 長崎県西彼杵郡長与町
+     ------------------------------------------------------------
+     このページは、これまでのたたき台の骨格を意図的に使っていない。
+     （mockup-design-rules.md 「骨格を使い回さない」に従う）
+     使っていないもの：
+       stickyヘッダー／罫線付きラベル／ヒーロー2カラム＋右にSVG／
+       バッジ3個／暗い帯3セル／4枚カードグリッド／CTA＋dlカード／
+       暗いフッター／スクロール出現アニメ／details形式のFAQ
+
+     代わりの骨格：
+       ・棚（shelf）をページ全体を貫くモチーフにする
+       ・ヒーローは「コピー左上＋全幅の棚」
+       ・商品紹介は横長の帯を交互に積む
+       ・目玉は「季節で棚の中身が入れ替わる」。触ると変わる＝季節で変わる
+         ことを体験させる。スクロールで勝手に動く飾りにはしない
+
+     色は商品そのものから取る。濃緑の地に、みかん橙・甘夏黄・
+     ブルーベリー紫・漬物緑が並ぶ＝棚がそのまま配色になる。
+     ============================================================ */
+  :root {
+    --forest:   #1f2e1d;
+    --forest-2: #182516;
+    --forest-3: #2b3d28;
+    --cream:    #f6f2e6;
+    --cream-2:  #fdfbf4;
+    --ink:      #20201c;
+    --ink-soft: #5d574a;
+    --amber:    #f0a500;
+    --leaf:     #accf76;
+    --mikan:    #ee8206;
+    --amanatsu: #e3ab12;
+    --berry:    #6b3f8f;
+    --tsuke:    #7fa04a;
+    --wood:     #7a5c37;
+    --wood-dk:  #5b4526;
+    --rule:     #ddd3bb;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--cream);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    line-height: 1.95;
+    letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  .dela { font-family: "Dela Gothic One", sans-serif; font-weight: 400; }
+  .klee { font-family: "Klee One", serif; }
+  a { color: inherit; }
+  svg { display: block; }
+  ::selection { background: var(--amber); color: var(--ink); }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .wrap { max-width: 1120px; margin-left: auto; margin-right: auto;
+    padding-left: 30px; padding-right: 30px; }
+  @media (max-width: 760px) { .wrap { padding-left: 20px; padding-right: 20px; } }
+
+  /* 見出しは「番号＋短い語」。罫線付きラベルは使わない */
+  .lead-no { font-family: "Dela Gothic One", sans-serif; font-size: .82rem;
+    letter-spacing: .1em; color: var(--amber); display: block; margin-bottom: 10px; }
+  .h2 { font-family: "Dela Gothic One", sans-serif; font-weight: 400;
+    font-size: clamp(1.7rem, 4.4vw, 2.6rem); line-height: 1.38; margin: 0 0 18px; }
+  .note-s { font-size: .86rem; color: var(--ink-soft); max-width: 32em; margin: 0; }
+
+  /* ============ ヒーロー（コピー左上＋全幅の棚） ============ */
+  .hero { background-color: var(--forest); color: var(--cream); position: relative;
+    padding-top: 40px; overflow: hidden; }
+  .hero-mark { font-size: .78rem; letter-spacing: .18em; color: var(--leaf);
+    margin-bottom: 54px; }
+  .hero h1 { font-family: "Dela Gothic One", sans-serif; font-weight: 400;
+    font-size: clamp(2.6rem, 8.4vw, 5.4rem); line-height: 1.28; margin: 0 0 24px; }
+  .hero h1 em { font-style: normal; color: var(--amber); }
+  .hero p { font-size: 1rem; color: #c2cbb4; max-width: 27em; margin: 0 0 56px; }
+  .shelf-hero { margin-left: calc(50% - 50vw); width: 100vw; }
+  .shelf-hero svg { width: 100%; height: auto; }
+
+  /* ============ 季節で入れ替わる棚 ============ */
+  .season { background-color: var(--forest-2); color: var(--cream);
+    padding-top: 88px; padding-bottom: 88px; }
+  .season-hd { display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 26px; flex-wrap: wrap; margin-bottom: 34px; }
+  .season h2 { color: var(--cream); }
+  .season .note-s { color: #9fb58c; }
+  .tabs { display: flex; gap: 0; border: 2px solid var(--leaf); }
+  .tabs button { font-family: "Dela Gothic One", sans-serif; font-size: .96rem;
+    background: transparent; color: var(--leaf); border: 0; cursor: pointer;
+    padding: 13px 26px; transition: background-color .18s ease, color .18s ease; }
+  .tabs button + button { border-left: 2px solid var(--leaf); }
+  .tabs button[aria-selected="true"] { background-color: var(--leaf); color: var(--forest-2); }
+  .tabs button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+  .season-stage { background-color: var(--forest-3); padding: 34px 30px 0; }
+  .season-stage svg { width: 100%; height: auto; }
+  .season-say { display: flex; align-items: baseline; gap: 18px; flex-wrap: wrap;
+    margin-top: 26px; padding-bottom: 6px; }
+  .season-say b { font-family: "Klee One", serif; font-weight: 600; font-size: 1.32rem; }
+  .season-say span { font-size: .88rem; color: #9fb58c; }
+
+  /* ============ 商品（横長の帯を交互に積む） ============ */
+  .items { padding-top: 92px; padding-bottom: 20px; }
+  /* 左右交互は nth-child で数えない。
+     .items の中には見出しや説明文も入るため、数がずれて逆のルールが当たる。
+     （実際にそれで瓶が巨大化してテキストが潰れた）明示クラスで指定する。 */
+  .item { display: grid; grid-template-columns: 240px 1fr; gap: 42px;
+    align-items: center; padding-top: 44px; padding-bottom: 44px;
+    border-top: 1px solid var(--rule); }
+  .item--rev { grid-template-columns: 1fr 240px; }
+  .item--rev .item-art { order: 2; }
+  .item-art { max-width: 240px; }
+  .item-art svg { width: 100%; height: auto; }
+  .item h3 { font-family: "Klee One", serif; font-weight: 600;
+    font-size: clamp(1.4rem, 3.4vw, 1.95rem); margin: 0 0 12px; }
+  .item p { margin: 0 0 14px; font-size: .94rem; color: var(--ink-soft); max-width: 34em; }
+  .item .when { display: inline-block; font-family: "Dela Gothic One", sans-serif;
+    font-size: .74rem; letter-spacing: .06em; padding: 7px 14px; color: var(--cream-2); }
+  @media (max-width: 760px) {
+    .item, .item--rev { grid-template-columns: 1fr; gap: 20px; }
+    .item--rev .item-art { order: 0; }
+    .item-art { max-width: 180px; }
+  }
+
+  /* ============ 料理教室（全幅のベタ塗り看板） ============ */
+  .class { background-color: var(--amber); color: var(--ink);
+    padding-top: 84px; padding-bottom: 84px; margin-top: 60px; }
+  .class h2 { font-family: "Dela Gothic One", sans-serif; font-weight: 400;
+    font-size: clamp(2rem, 6vw, 3.4rem); line-height: 1.32; margin: 0 0 26px; }
+  .class-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 46px; align-items: start; }
+  @media (max-width: 860px) { .class-grid { grid-template-columns: 1fr; gap: 26px; } }
+  .class p { font-size: .96rem; margin: 0 0 12px; max-width: 30em; }
+  .class-past { border: 2px solid var(--ink); padding: 24px 26px; background-color: rgba(255,255,255,.34); }
+  .class-past b { font-family: "Klee One", serif; font-weight: 600; font-size: 1.04rem;
+    display: block; margin-bottom: 10px; }
+  .class-past ul { margin: 0; padding-left: 1.2em; font-size: .9rem; }
+  .class-past li { margin-bottom: 4px; }
+
+  /* ============ 加工所のこと（テキスト主体・罫線で区切る） ============ */
+  .about { padding-top: 88px; padding-bottom: 88px; }
+  .about-body { border-left: 4px solid var(--forest); padding-left: 32px; max-width: 42em; }
+  .about-body p { font-size: .96rem; color: var(--ink-soft); margin: 0 0 16px; }
+  .about-body p strong { color: var(--ink); }
+  @media (max-width: 560px) { .about-body { padding-left: 20px; } }
+
+  /* ============ 買いに行く（表） ============ */
+  .go { background-color: var(--cream-2); border-top: 1px solid var(--rule);
+    padding-top: 84px; padding-bottom: 84px; }
+  .go table { width: 100%; border-collapse: collapse; margin-top: 12px; }
+  .go th, .go td { text-align: left; padding: 18px 8px; border-bottom: 1px solid var(--rule);
+    font-size: .94rem; vertical-align: top; }
+  .go th { width: 8.5em; font-weight: 700; color: var(--ink-soft); font-size: .86rem; }
+  .go td b { font-family: "Klee One", serif; font-weight: 600; font-size: 1.16rem; }
+  .tbd { display: inline-block; font-size: .68rem; font-weight: 700; letter-spacing: .06em;
+    background-color: rgba(31,46,29,.07); color: var(--ink-soft);
+    border: 1px dashed var(--forest); padding: 2px 8px; }
+  .go .ig { display: inline-flex; align-items: center; gap: 9px; margin-top: 26px;
+    font-family: "Dela Gothic One", sans-serif; font-size: .9rem;
+    background-color: var(--forest); color: var(--cream); padding: 15px 28px;
+    text-decoration: none; }
+  .go .ig:hover { background-color: var(--forest-3); }
+
+  /* ============ フッター（生成り。暗いフッターは使わない） ============ */
+  footer { background-color: var(--cream); border-top: 2px solid var(--forest);
+    padding-top: 44px; padding-bottom: 44px; }
+  .foot-name { font-family: "Dela Gothic One", sans-serif; font-size: 1.04rem; margin-bottom: 8px; }
+  .foot-addr { font-size: .84rem; color: var(--ink-soft); margin: 0 0 24px; }
+  .foot-note { font-size: .76rem; color: #7d7566; line-height: 1.9; margin: 0;
+    border-top: 1px solid var(--rule); padding-top: 20px; max-width: 54em; }
+</style>
+
+<!-- ============ ヒーロー ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-mark">長与町特産品直売所　まんてん加工所</div>
+    <h1>畑のものを、<br><em>余さず。</em></h1>
+    <p>生のままでは売り切れないぶんを、ジャムやお漬物にして棚へ戻す。まんてん加工所は、そのためにできました。つくる人の手間を、捨てないための場所です。</p>
+  </div>
+  <div class="shelf-hero">
+    <svg viewBox="0 0 1200 330" role="img" aria-label="直売所の棚に、みかんジャム・甘夏マーマレード・ブルーベリージャム・お漬物が並んでいる図">
+      <rect x="0" y="236" width="1200" height="18" fill="#7a5c37"></rect>
+      <rect x="0" y="236" width="1200" height="5" fill="#96754b"></rect>
+      <rect x="0" y="254" width="1200" height="11" fill="#5b4526"></rect>
+      <rect x="0" y="265" width="1200" height="65" fill="#182516"></rect>
+      <defs>
+        <path id="jar" d="M-44 -132 h88 v18 c0 9 14 17 14 34 v80 h-116 v-80 c0-17 14-25 14-34 Z"></path>
+        <path id="jarS" d="M-37 -112 h74 v15 c0 8 12 14 12 29 v68 h-98 v-68 c0-15 12-21 12-29 Z"></path>
+      </defs>
+
+      <g transform="translate(150,236)">
+        <use href="#jar" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></use>
+        <clipPath id="hc1"><use href="#jar"></use></clipPath>
+        <g clip-path="url(#hc1)">
+          <rect x="-60" y="-92" width="120" height="96" fill="#ee8206"></rect>
+          <rect x="-60" y="-92" width="120" height="9" fill="#f6a93c"></rect>
+          <g fill="#cd6c05" opacity=".45"><circle cx="-20" cy="-64" r="9"></circle><circle cx="16" cy="-42" r="11"></circle><circle cx="-12" cy="-22" r="8"></circle></g>
+        </g>
+        <rect x="-48" y="-146" width="96" height="17" rx="4" fill="#3d4c30"></rect>
+        <rect x="-33" y="-80" width="66" height="40" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="0" y="-54" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="17" fill="#20201c">みかん</text>
+      </g>
+
+      <g transform="translate(330,236)">
+        <use href="#jar" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></use>
+        <clipPath id="hc2"><use href="#jar"></use></clipPath>
+        <g clip-path="url(#hc2)">
+          <rect x="-60" y="-96" width="120" height="100" fill="#e3ab12"></rect>
+          <rect x="-60" y="-96" width="120" height="9" fill="#f0c64a"></rect>
+          <g fill="#bd8c05" opacity=".5"><rect x="-38" y="-70" width="26" height="5" rx="2"></rect><rect x="6" y="-50" width="30" height="5" rx="2"></rect><rect x="-28" y="-30" width="24" height="5" rx="2"></rect></g>
+        </g>
+        <rect x="-48" y="-146" width="96" height="17" rx="4" fill="#3d4c30"></rect>
+        <rect x="-33" y="-84" width="66" height="40" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="0" y="-58" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="17" fill="#20201c">甘夏</text>
+      </g>
+
+      <g transform="translate(486,236)">
+        <use href="#jarS" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></use>
+        <clipPath id="hc3"><use href="#jarS"></use></clipPath>
+        <g clip-path="url(#hc3)">
+          <rect x="-52" y="-78" width="104" height="82" fill="#ee8206"></rect>
+          <rect x="-52" y="-78" width="104" height="8" fill="#f6a93c"></rect>
+        </g>
+        <rect x="-40" y="-124" width="80" height="15" rx="4" fill="#3d4c30"></rect>
+        <rect x="-27" y="-68" width="54" height="34" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="0" y="-45" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="15" fill="#20201c">みかん</text>
+      </g>
+
+      <g transform="translate(660,236)">
+        <use href="#jar" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></use>
+        <clipPath id="hc4"><use href="#jar"></use></clipPath>
+        <g clip-path="url(#hc4)">
+          <rect x="-60" y="-88" width="120" height="92" fill="#6b3f8f"></rect>
+          <rect x="-60" y="-88" width="120" height="8" fill="#8a5bad"></rect>
+          <g fill="#4a2767" opacity=".6"><circle cx="-18" cy="-60" r="9"></circle><circle cx="16" cy="-40" r="10"></circle><circle cx="-8" cy="-20" r="8"></circle></g>
+        </g>
+        <rect x="-48" y="-146" width="96" height="17" rx="4" fill="#3d4c30"></rect>
+        <rect x="-36" y="-78" width="72" height="40" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="0" y="-52" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="14" fill="#20201c">ブルーベリー</text>
+      </g>
+
+      <g transform="translate(838,236)">
+        <path d="M-50 -122 q50 -16 100 0 v122 h-100 Z" fill="#eef0e6" stroke="#c9cdb8" stroke-width="2"></path>
+        <path d="M-50 -122 q50 -16 100 0 v14 q-50 -14 -100 0 Z" fill="#dee2d0"></path>
+        <g opacity=".85">
+          <ellipse cx="-16" cy="-64" rx="18" ry="10" fill="#7fa04a" transform="rotate(-16 -16 -64)"></ellipse>
+          <ellipse cx="18" cy="-42" rx="17" ry="9" fill="#688a39" transform="rotate(12 18 -42)"></ellipse>
+          <ellipse cx="-10" cy="-20" rx="16" ry="9" fill="#93b05e" transform="rotate(-5 -10 -20)"></ellipse>
+        </g>
+        <rect x="-34" y="-104" width="68" height="26" fill="#fdfbf4" stroke="#c9cdb8" stroke-width="1.4"></rect>
+        <text x="0" y="-86" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="15" fill="#20201c">お漬物</text>
+      </g>
+
+      <g transform="translate(962,236)">
+        <path d="M-44 -104 q44 -14 88 0 v104 h-88 Z" fill="#eef0e6" stroke="#c9cdb8" stroke-width="2"></path>
+        <path d="M-44 -104 q44 -14 88 0 v12 q-44 -12 -88 0 Z" fill="#dee2d0"></path>
+        <g opacity=".85">
+          <ellipse cx="-12" cy="-56" rx="15" ry="9" fill="#7fa04a" transform="rotate(-14 -12 -56)"></ellipse>
+          <ellipse cx="14" cy="-34" rx="14" ry="8" fill="#688a39" transform="rotate(10 14 -34)"></ellipse>
+        </g>
+      </g>
+
+      <g transform="translate(1100,236)">
+        <use href="#jarS" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></use>
+        <clipPath id="hc7"><use href="#jarS"></use></clipPath>
+        <g clip-path="url(#hc7)">
+          <rect x="-52" y="-82" width="104" height="86" fill="#e3ab12"></rect>
+          <rect x="-52" y="-82" width="104" height="8" fill="#f0c64a"></rect>
+        </g>
+        <rect x="-40" y="-124" width="80" height="15" rx="4" fill="#3d4c30"></rect>
+        <rect x="-27" y="-72" width="54" height="34" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="0" y="-49" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="15" fill="#20201c">甘夏</text>
+      </g>
+
+      <g font-family="Noto Sans JP, sans-serif" font-size="13" font-weight="700" fill="#9fb58c" text-anchor="middle">
+        <text x="240" y="296">ジャム</text>
+        <text x="660" y="296">ジャム</text>
+        <text x="900" y="296">お漬物</text>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ============ 季節で入れ替わる棚 ============ -->
+<section class="season" id="season">
+  <div class="wrap">
+    <div class="season-hd">
+      <div>
+        <span class="lead-no">01</span>
+        <h2 class="h2">同じ棚に、<br>同じものは並びません。</h2>
+      </div>
+      <p class="note-s">畑で採れたものだけを、採れたときに仕込みます。だから季節で、棚の顔が変わります。押して確かめてみてください。</p>
+    </div>
+
+    <div class="tabs" role="tablist" aria-label="季節">
+      <button type="button" role="tab" aria-selected="true" data-s="0">春</button>
+      <button type="button" role="tab" aria-selected="false" data-s="1">夏</button>
+      <button type="button" role="tab" aria-selected="false" data-s="2">秋</button>
+      <button type="button" role="tab" aria-selected="false" data-s="3">冬</button>
+    </div>
+
+    <div class="season-stage">
+      <svg viewBox="0 0 900 250" role="img" aria-label="季節ごとに中身が入れ替わる棚">
+        <rect x="0" y="196" width="900" height="14" fill="#7a5c37"></rect>
+        <rect x="0" y="196" width="900" height="4" fill="#96754b"></rect>
+        <rect x="0" y="210" width="900" height="9" fill="#5b4526"></rect>
+        <g id="slots"></g>
+      </svg>
+      <div class="season-say">
+        <b id="seasonName">春の棚</b>
+        <span id="seasonText">中晩柑のころ。甘夏をマーマレードにします。</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 商品 ============ -->
+<section class="wrap items">
+  <span class="lead-no">02</span>
+  <h2 class="h2">つくっているもの</h2>
+  <p class="note-s" style="margin-bottom:30px;">長与町の畑でとれた果実と野菜を、加工所でひとつずつ手作りしています。</p>
+
+  <div class="item">
+    <div class="item-art">
+      <svg viewBox="0 0 200 230" aria-hidden="true">
+        <path d="M56 40 h88 v18 c0 9 14 17 14 34 v120 h-116 v-120 c0-17 14-25 14-34 Z" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></path>
+        <clipPath id="i1"><path d="M56 40 h88 v18 c0 9 14 17 14 34 v120 h-116 v-120 c0-17 14-25 14-34 Z"></path></clipPath>
+        <g clip-path="url(#i1)"><rect x="40" y="104" width="128" height="120" fill="#ee8206"></rect>
+          <rect x="40" y="104" width="128" height="9" fill="#f6a93c"></rect>
+          <g fill="#cd6c05" opacity=".45"><circle cx="80" cy="134" r="10"></circle><circle cx="118" cy="158" r="12"></circle><circle cx="86" cy="186" r="9"></circle></g></g>
+        <rect x="52" y="24" width="96" height="17" rx="4" fill="#3d4c30"></rect>
+        <rect x="68" y="118" width="66" height="42" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="101" y="145" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="17" fill="#20201c">みかん</text>
+      </svg>
+    </div>
+    <div>
+      <h3>みかんジャム</h3>
+      <p>長与町は、長崎の温州みかんが広がっていった土地です。傾斜地で水はけがよく、実が甘くなります。その実を煮て、ジャムにしています。</p>
+      <span class="when" style="background-color:#ee8206;">秋から冬にかけて</span>
+    </div>
+  </div>
+
+  <div class="item item--rev">
+    <div class="item-art">
+      <svg viewBox="0 0 200 230" aria-hidden="true">
+        <path d="M56 40 h88 v18 c0 9 14 17 14 34 v120 h-116 v-120 c0-17 14-25 14-34 Z" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></path>
+        <clipPath id="i2"><path d="M56 40 h88 v18 c0 9 14 17 14 34 v120 h-116 v-120 c0-17 14-25 14-34 Z"></path></clipPath>
+        <g clip-path="url(#i2)"><rect x="40" y="100" width="128" height="124" fill="#e3ab12"></rect>
+          <rect x="40" y="100" width="128" height="9" fill="#f0c64a"></rect>
+          <g fill="#bd8c05" opacity=".5"><rect x="62" y="128" width="28" height="6" rx="3"></rect><rect x="106" y="150" width="32" height="6" rx="3"></rect><rect x="72" y="176" width="26" height="6" rx="3"></rect></g></g>
+        <rect x="52" y="24" width="96" height="17" rx="4" fill="#3d4c30"></rect>
+        <rect x="68" y="114" width="66" height="42" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="101" y="141" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="17" fill="#20201c">甘夏</text>
+      </svg>
+    </div>
+    <div>
+      <h3>甘夏マーマレード</h3>
+      <p>皮まで使うので、ほろ苦さが残ります。甘いだけのジャムが苦手な方や、パンよりヨーグルトに合わせたい方に。</p>
+      <span class="when" style="background-color:#e3ab12;">冬から春にかけて</span>
+    </div>
+  </div>
+
+  <div class="item">
+    <div class="item-art">
+      <svg viewBox="0 0 200 230" aria-hidden="true">
+        <path d="M56 40 h88 v18 c0 9 14 17 14 34 v120 h-116 v-120 c0-17 14-25 14-34 Z" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="2"></path>
+        <clipPath id="i3"><path d="M56 40 h88 v18 c0 9 14 17 14 34 v120 h-116 v-120 c0-17 14-25 14-34 Z"></path></clipPath>
+        <g clip-path="url(#i3)"><rect x="40" y="108" width="128" height="116" fill="#6b3f8f"></rect>
+          <rect x="40" y="108" width="128" height="8" fill="#8a5bad"></rect>
+          <g fill="#4a2767" opacity=".6"><circle cx="82" cy="138" r="10"></circle><circle cx="120" cy="160" r="11"></circle><circle cx="90" cy="188" r="9"></circle></g></g>
+        <rect x="52" y="24" width="96" height="17" rx="4" fill="#3d4c30"></rect>
+        <rect x="64" y="122" width="74" height="42" fill="#fdfbf4" stroke="#d3c9b0" stroke-width="1.4"></rect>
+        <text x="101" y="149" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="14" fill="#20201c">ブルーベリー</text>
+      </svg>
+    </div>
+    <div>
+      <h3>ブルーベリージャム</h3>
+      <p>夏のあいだに仕込みます。粒の食感が残るように煮ています。</p>
+      <span class="when" style="background-color:#6b3f8f;">夏に仕込みます</span>
+    </div>
+  </div>
+
+  <div class="item item--rev">
+    <div class="item-art">
+      <svg viewBox="0 0 200 230" aria-hidden="true">
+        <path d="M52 44 q49 -16 98 0 v168 h-98 Z" fill="#eef0e6" stroke="#c9cdb8" stroke-width="2"></path>
+        <path d="M52 44 q49 -16 98 0 v14 q-49 -14 -98 0 Z" fill="#dee2d0"></path>
+        <g opacity=".85">
+          <ellipse cx="86" cy="116" rx="20" ry="11" fill="#7fa04a" transform="rotate(-16 86 116)"></ellipse>
+          <ellipse cx="118" cy="146" rx="19" ry="10" fill="#688a39" transform="rotate(12 118 146)"></ellipse>
+          <ellipse cx="90" cy="176" rx="18" ry="10" fill="#93b05e" transform="rotate(-5 90 176)"></ellipse>
+        </g>
+        <rect x="66" y="62" width="70" height="28" fill="#fdfbf4" stroke="#c9cdb8" stroke-width="1.4"></rect>
+        <text x="101" y="82" text-anchor="middle" font-family="Klee One, serif" font-weight="600" font-size="16" fill="#20201c">お漬物</text>
+      </svg>
+    </div>
+    <div>
+      <h3>お漬物</h3>
+      <p>畑でとれた野菜を、そのまま漬けます。ジャムと違って、ごはんのおかずになるものです。</p>
+      <span class="when" style="background-color:#7fa04a;">とれたときに</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 料理教室 ============ -->
+<section class="class" id="class">
+  <div class="wrap">
+    <span class="lead-no" style="color:#7a4b00;">03</span>
+    <h2>予約はいりません。<br>お金もいりません。</h2>
+    <div class="class-grid">
+      <div>
+        <p>加工所では、料理教室をひらいています。予約なしで、どなたでも参加できます。参加費はいただきません。</p>
+        <p>作っているのは、特別な料理ではありません。家で作れるものを、一緒に作ります。加工所で使っている材料の話もします。</p>
+        <p style="font-size:.86rem;"><span class="tbd" style="border-color:#7a4b00;color:#5a3800;">開催日・持ち物は、お伺いして入れます</span></p>
+      </div>
+      <div class="class-past">
+        <b>これまでのメニュー</b>
+        <ul>
+          <li>カボチャのオムレツ</li>
+          <li>麻婆豆腐</li>
+          <li>ふくれ菓子</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 加工所のこと ============ -->
+<section class="wrap about" id="about">
+  <span class="lead-no" style="color:#c96a08;">04</span>
+  <h2 class="h2">加工所のこと</h2>
+  <div class="about-body">
+    <p>まんてんは、長与町の人が作ったものを売る直売所です。野菜、果物、花、魚。町の中で採れたものが並びます。</p>
+    <p><strong>ただ、生のものには売り切れないぶんが出ます。</strong>畑で手をかけて育てても、その日に売れなければ行き場がなくなる。加工所は、そこをなんとかするために作られました。</p>
+    <p>ジャムにすれば日持ちします。漬物にすれば、また別のものになります。<strong>つくった人の手間を、捨てずに済みます。</strong></p>
+    <p>料理教室をひらいているのも、同じ理由です。作り方を知ってもらえれば、家でも同じことができるようになります。</p>
+  </div>
+</section>
+
+<!-- ============ 買いに行く ============ -->
+<section class="go" id="go">
+  <div class="wrap">
+    <span class="lead-no" style="color:#c96a08;">05</span>
+    <h2 class="h2">買いに行く</h2>
+    <table>
+      <tr>
+        <th>場所</th>
+        <td><b>長与町特産品直売所　まんてん</b><br>長崎県西彼杵郡長与町岡郷614-12</td>
+      </tr>
+      <tr>
+        <th>電話</th>
+        <td>095-887-1345</td>
+      </tr>
+      <tr>
+        <th>加工所の営業</th>
+        <td>土曜・日曜　10:00〜14:00<br><span style="color:#c96a08;font-weight:700;">10月からは金曜・土曜・日曜</span></td>
+      </tr>
+      <tr>
+        <th>直売所の営業</th>
+        <td><span class="tbd">最新の営業時間をお伺いして入れます</span><br><span style="font-size:.84rem;color:#7d7566;">※ 町や県のサイトには以前の営業時間が残っているため、ここに正しいものを載せる想定です</span></td>
+      </tr>
+      <tr>
+        <th>支払い</th>
+        <td><span class="tbd">現金のみ／カード可などをお伺いします</span></td>
+      </tr>
+    </table>
+    <a class="ig" href="https://www.instagram.com/810moondrops">Instagramで最新のお知らせを見る</a>
+  </div>
+</section>
+
+<!-- ============ フッター ============ -->
+<footer>
+  <div class="wrap">
+    <div class="foot-name">まんてん加工所</div>
+    <p class="foot-addr">長崎県西彼杵郡長与町岡郷614-12　／　長与町特産品直売所 まんてん</p>
+    <p class="foot-note">
+      ※ このページはご提案用のサンプルです。掲載内容はInstagramや公開されている情報をもとにした仮のもので、
+      価格・支払い方法・料理教室の開催日・直売所の最新の営業時間など、確認できていない項目は数字を入れずに空けています。
+      実際にご依頼いただく場合は、正しい情報と御社の写真を伺ったうえで作り直します。
+      図版はすべて描き起こしたもので、実際の商品の写真ではありません。
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ---------- 季節で棚の中身が入れ替わる ----------
+     スクロールで勝手に動く飾りにはしない。押して確かめる形にすることで
+     「行く時期によって買えるものが違う」を体験として伝える。 */
+  (function () {
+    var slots = document.getElementById('slots');
+    if (!slots) return;
+
+    var JAR = 'M-40 -120 h80 v16 c0 8 13 15 13 31 v73 h-106 v-73 c0-16 13-23 13-31 Z';
+    var BAG = 'M-45 -110 q45 -14 90 0 v110 h-90 Z';
+
+    /* 中身は公開情報から分かる範囲。分からないものは置かない */
+    var SEASONS = [
+      { name: '春の棚', text: '中晩柑のころ。甘夏をマーマレードにします。',
+        items: [
+          { t: 'jar', c: '#e3ab12', top: '#f0c64a', label: '甘夏' },
+          { t: 'jar', c: '#e3ab12', top: '#f0c64a', label: '甘夏' },
+          { t: 'bag', label: 'お漬物' }
+        ] },
+      { name: '夏の棚', text: 'ブルーベリーを仕込む季節。かき氷も出ます。',
+        items: [
+          { t: 'jar', c: '#6b3f8f', top: '#8a5bad', label: 'ブルーベリー' },
+          { t: 'jar', c: '#6b3f8f', top: '#8a5bad', label: 'ブルーベリー' },
+          { t: 'bag', label: 'お漬物' },
+          { t: 'ice', label: 'かき氷' }
+        ] },
+      { name: '秋の棚', text: '温州みかんがはじまります。',
+        items: [
+          { t: 'jar', c: '#ee8206', top: '#f6a93c', label: 'みかん' },
+          { t: 'jar', c: '#ee8206', top: '#f6a93c', label: 'みかん' },
+          { t: 'jar', c: '#6b3f8f', top: '#8a5bad', label: 'ブルーベリー' },
+          { t: 'bag', label: 'お漬物' }
+        ] },
+      { name: '冬の棚', text: 'みかんが続き、そろそろ甘夏に変わるころ。',
+        items: [
+          { t: 'jar', c: '#ee8206', top: '#f6a93c', label: 'みかん' },
+          { t: 'jar', c: '#e3ab12', top: '#f0c64a', label: '甘夏' },
+          { t: 'bag', label: 'お漬物' }
+        ] }
+    ];
+
+    var NS = 'http://www.w3.org/2000/svg';
+    function el(n, a) {
+      var e = document.createElementNS(NS, n);
+      for (var k in a) e.setAttribute(k, a[k]);
+      return e;
+    }
+
+    function draw(i) {
+      var s = SEASONS[i];
+      while (slots.firstChild) slots.removeChild(slots.firstChild);
+
+      var n = s.items.length;
+      var step = 900 / (n + 1);
+
+      s.items.forEach(function (it, j) {
+        var g = el('g', { transform: 'translate(' + (step * (j + 1)).toFixed(0) + ',196)' });
+        g.style.opacity = '0';
+        g.style.transform = g.getAttribute('transform') + ' translateY(10px)';
+
+        if (it.t === 'jar') {
+          var cid = 'sc' + i + '_' + j;
+          g.appendChild(el('path', { d: JAR, fill: '#fdfbf4', stroke: '#d3c9b0', 'stroke-width': 2 }));
+          var cp = el('clipPath', { id: cid });
+          cp.appendChild(el('path', { d: JAR }));
+          g.appendChild(cp);
+          var inner = el('g', { 'clip-path': 'url(#' + cid + ')' });
+          inner.appendChild(el('rect', { x: -56, y: -84, width: 112, height: 92, fill: it.c }));
+          inner.appendChild(el('rect', { x: -56, y: -84, width: 112, height: 8, fill: it.top }));
+          g.appendChild(inner);
+          g.appendChild(el('rect', { x: -44, y: -133, width: 88, height: 15, rx: 4, fill: '#3d4c30' }));
+          g.appendChild(el('rect', { x: -31, y: -72, width: 62, height: 36, fill: '#fdfbf4', stroke: '#d3c9b0', 'stroke-width': 1.4 }));
+          var t = el('text', { x: 0, y: -49, 'text-anchor': 'middle', 'font-family': 'Klee One, serif',
+            'font-weight': 600, 'font-size': it.label.length > 4 ? 13 : 16, fill: '#20201c' });
+          t.textContent = it.label;
+          g.appendChild(t);
+        } else if (it.t === 'bag') {
+          g.appendChild(el('path', { d: BAG, fill: '#eef0e6', stroke: '#c9cdb8', 'stroke-width': 2 }));
+          g.appendChild(el('path', { d: 'M-45 -110 q45 -14 90 0 v13 q-45 -13 -90 0 Z', fill: '#dee2d0' }));
+          [[-14, -58, 17, -16], [16, -36, 16, 12], [-8, -16, 15, -5]].forEach(function (p, k) {
+            g.appendChild(el('ellipse', { cx: p[0], cy: p[1], rx: p[2], ry: 9,
+              fill: ['#7fa04a', '#688a39', '#93b05e'][k], transform: 'rotate(' + p[3] + ' ' + p[0] + ' ' + p[1] + ')' }));
+          });
+          g.appendChild(el('rect', { x: -31, y: -94, width: 62, height: 25, fill: '#fdfbf4', stroke: '#c9cdb8', 'stroke-width': 1.4 }));
+          var t2 = el('text', { x: 0, y: -77, 'text-anchor': 'middle', 'font-family': 'Klee One, serif',
+            'font-weight': 600, 'font-size': 15, fill: '#20201c' });
+          t2.textContent = it.label;
+          g.appendChild(t2);
+        } else {
+          /* かき氷 */
+          g.appendChild(el('path', { d: 'M-34 -46 h68 l-14 46 h-40 Z', fill: '#fdfbf4', stroke: '#d3c9b0', 'stroke-width': 2 }));
+          g.appendChild(el('path', { d: 'M-40 -46 q40 -52 80 0 Z', fill: '#e9f3f7', stroke: '#cfe0e8', 'stroke-width': 2 }));
+          g.appendChild(el('path', { d: 'M-30 -56 q30 -30 60 0 q-30 14 -60 0 Z', fill: '#f0a500', opacity: .85 }));
+          var t3 = el('text', { x: 0, y: 22, 'text-anchor': 'middle', 'font-family': 'Klee One, serif',
+            'font-weight': 600, 'font-size': 14, fill: '#e7ecd9' });
+          t3.textContent = it.label;
+          g.appendChild(t3);
+        }
+
+        slots.appendChild(g);
+        /* 1本ずつ置かれていく。触った結果として並ぶ、という手応えを出す */
+        setTimeout(function () {
+          g.style.transition = 'opacity .32s ease, transform .32s cubic-bezier(.16,1,.3,1)';
+          g.style.opacity = '1';
+          g.style.transform = g.getAttribute('transform');
+        }, 40 + j * 70);
+      });
+
+      document.getElementById('seasonName').textContent = s.name;
+      document.getElementById('seasonText').textContent = s.text;
+    }
+
+    var tabs = document.querySelectorAll('.tabs [role="tab"]');
+    tabs.forEach(function (b) {
+      b.addEventListener('click', function () {
+        tabs.forEach(function (o) { o.setAttribute('aria-selected', 'false'); });
+        b.setAttribute('aria-selected', 'true');
+        draw(Number(b.dataset.s));
+      });
+    });
+
+    draw(0);
+  })();
+</script>
+
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
