@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>雲仙うまか唐辛子｜雲仙市の生産者がつくる唐辛子</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="雲仙うまか唐辛子｜雲仙市の生産者がつくる唐辛子">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/0d10df4fd20f6816/">
+<meta property="og:image" content="https://gearbloom.jp/s/0d10df4fd20f6816/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+<body>
+<script>document.documentElement.className += ' js';</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600&family=Zen+Old+Mincho:wght@400;600;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap">
+<style>
+  /* ============================================================
+     雲仙うまか唐辛子 ／ 長崎県雲仙市
+     ロゴが「緑の雲仙岳＋赤い唐辛子」なので、配色はそこから取った。
+     赤を主役、緑を深い差し色、土色を地の締めに使う。
+     赤と緑を同じ面積で置くと祝祭的に見えてしまうため、必ず赤を優位にする。
+
+     立ち上げ直後で公開情報がほとんど無いため、
+     **事実が確認できない項目は数字を入れず「これから」と明記する。**
+     辛さ・品種・価格・生産者名を想像で埋めないこと。
+
+     写真は一切使わず、すべてベクターで描いている
+     （先方の写真を許諾なく使えないため）。
+     ------------------------------------------------------------
+     padding は横方向の役割を持つクラス（.wrap）には左右だけ、
+     縦方向の役割を持つクラス（.sec）には上下だけを指定する。
+     ============================================================ */
+  :root {
+    --wpad: 26px;
+    --paper:    #fbf7f0;
+    --paper-2:  #ffffff;
+    --paper-3:  #f2e9da;
+    --ink:      #241c16;
+    --ink-soft: #5f5247;
+    --red:      #c62a22;
+    --red-dp:   #971810;
+    --green:    #2f6b3a;
+    --green-lt: #5c9b57;
+    --soil:     #6b4a2f;
+    --line:     #e4dacb;
+    --line-dk:  rgba(251,247,240,.18);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: "Noto Sans JP", sans-serif;
+    font-weight: 400;
+    line-height: 1.95;
+    letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, .mincho {
+    font-family: "Zen Old Mincho", serif;
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: .02em;
+    text-wrap: balance;
+  }
+  .os {
+    font-family: "Oswald", sans-serif;
+    font-variant-numeric: lining-nums tabular-nums;
+    letter-spacing: .06em;
+  }
+  a { color: inherit; }
+  svg { display: block; }
+  ::selection { background: var(--red); color: #fff; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  .wrap { max-width: 1040px; margin-left: auto; margin-right: auto;
+    padding-left: var(--wpad); padding-right: var(--wpad); }
+  .sec { padding-top: 104px; padding-bottom: 104px; }
+  @media (max-width: 760px) {
+    :root { --wpad: 20px; }
+    .sec { padding-top: 66px; padding-bottom: 66px; }
+  }
+
+  /* ---- 見出しの型 ---- */
+  .eyebrow { display: inline-flex; align-items: center; gap: 12px;
+    font-family: "Oswald", sans-serif; font-weight: 500;
+    font-size: .76rem; letter-spacing: .24em; text-transform: uppercase;
+    color: var(--red); margin-bottom: 16px; }
+  .eyebrow i { display: block; width: 28px; height: 2px; background: var(--red); }
+  .sec-title { font-size: clamp(1.55rem, 4vw, 2.3rem); margin: 0 0 20px; }
+  .sec-lead { color: var(--ink-soft); max-width: 34em; margin: 0 0 46px; font-size: .95rem; }
+
+  /* ---- 出現 ---- */
+  html.js [data-rv] { opacity: 0; transform: translateY(22px);
+    transition: opacity .9s cubic-bezier(.16,1,.3,1), transform .9s cubic-bezier(.16,1,.3,1); }
+  html.js [data-rv].on { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    html.js [data-rv] { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* ---- ボタン ---- */
+  .btn { display: inline-flex; align-items: center; gap: 10px;
+    padding: 15px 30px; border-radius: 2px; font-size: .88rem; font-weight: 700;
+    text-decoration: none; border: 1.5px solid transparent;
+    font-family: "Noto Sans JP", sans-serif;
+    transition: background-color .2s ease, color .2s ease, transform .2s ease; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-fill { background-color: var(--red); color: #fff; }
+  .btn-fill:hover { background-color: var(--red-dp); }
+  .btn-line { border-color: var(--ink); color: var(--ink); }
+  .btn-line:hover { background-color: var(--ink); color: var(--paper); }
+  .btnrow { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  /* ============ ヘッダー ============ */
+  header { position: sticky; top: 0; z-index: 70;
+    background-color: rgba(251,247,240,.9);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line); }
+  .hbar { max-width: 1040px; margin-left: auto; margin-right: auto;
+    padding: 12px var(--wpad); display: flex; align-items: center; justify-content: space-between; gap: 14px; }
+  .hlogo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+  .hmark { width: 38px; height: 38px; flex-shrink: 0; }
+  .hlogo b { font-family: "Zen Old Mincho", serif; font-weight: 900;
+    font-size: 1.04rem; letter-spacing: .06em; line-height: 1.2; }
+  .hlogo span { display: block; font-family: "Oswald", sans-serif; font-size: .55rem;
+    letter-spacing: .16em; color: var(--ink-soft); font-weight: 400; margin-top: 2px;
+    text-transform: uppercase; }
+  .hnav { display: flex; align-items: center; gap: 22px; font-size: .82rem; font-weight: 500; }
+  .hnav a { text-decoration: none; color: var(--ink); }
+  .hnav a:hover { color: var(--red); }
+  @media (max-width: 900px) { .hnav a.wide { display: none; } }
+  @media (max-width: 560px) { .hnav .btn { padding: 11px 16px; font-size: .78rem; } }
+
+  /* ============ ヒーロー ============ */
+  .hero { padding-top: 56px; padding-bottom: 76px; position: relative; overflow: hidden; }
+  .hero-top { display: grid; grid-template-columns: 1.06fr .94fr; gap: 44px; align-items: center; }
+  @media (max-width: 900px) { .hero-top { grid-template-columns: 1fr; gap: 32px; } }
+
+  .hero h1 { font-size: clamp(2rem, 5.4vw, 3.4rem); margin: 0 0 22px; font-weight: 900; }
+  .hero h1 .r { color: var(--red); }
+  .hero h1 .g { color: var(--green); }
+  .hero-lead { color: var(--ink-soft); font-size: .98rem; max-width: 29em; margin: 0 0 30px; }
+
+  .badges { display: flex; gap: 9px; flex-wrap: wrap; margin-bottom: 28px; }
+  .badge { display: inline-flex; align-items: center; gap: 7px;
+    border: 1px solid var(--line); background-color: var(--paper-2);
+    border-radius: 2px; padding: 8px 15px; font-size: .76rem; font-weight: 700; color: var(--ink-soft); }
+  .badge svg { width: 14px; height: 14px; flex-shrink: 0; color: var(--green); }
+
+  .hero-art { position: relative; }
+  .hero-art svg { width: 100%; height: auto; }
+
+  /* ============ 帯 ============ */
+  .strip { background-color: var(--ink); color: var(--paper); }
+  .strip-in { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;
+    background-color: var(--line-dk); }
+  .strip-cell { background-color: var(--ink); padding: 30px 20px; text-align: center; }
+  .strip-cell b { display: block; font-family: "Zen Old Mincho", serif; font-weight: 700;
+    font-size: clamp(1.2rem, 3vw, 1.6rem); line-height: 1.4; color: #f0c04a; }
+  .strip-cell span { display: block; font-size: .74rem; color: #b9a893; margin-top: 7px; }
+  @media (max-width: 720px) { .strip-in { grid-template-columns: 1fr; }
+    .strip-cell { padding-top: 22px; padding-bottom: 22px; } }
+
+  /* ============ 青から赤へ（ピン留め） ============ */
+  .ripen { background-color: var(--ink); color: var(--paper); }
+  .run { position: relative; }
+  html.js .run { height: 380vh; }
+  .stage { padding-top: 76px; padding-bottom: 76px; }
+  html.js .stage { position: sticky; top: 0; height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+    overflow: hidden; padding-top: 76px; padding-bottom: 0; }
+  .ripen .eyebrow { color: #f0c04a; }
+  .ripen .eyebrow i { background: #f0c04a; }
+  .ripen-hd { margin-bottom: 24px; }
+  .ripen-hd h2 { font-size: clamp(1.4rem, 3.6vw, 2.1rem); margin: 0; }
+
+  .chilis { display: flex; align-items: flex-end; justify-content: center;
+    gap: clamp(6px, 2.4vw, 26px); margin-bottom: 26px; }
+  .chilis svg { width: clamp(38px, 9vw, 74px); height: auto; }
+
+  .ripen-cap { text-align: center; }
+  .ripen-cap .stage-name { font-family: "Zen Old Mincho", serif; font-weight: 700;
+    font-size: clamp(1.1rem, 2.6vw, 1.5rem); margin: 0 0 8px; }
+  .ripen-cap p { margin: 0 auto; font-size: .86rem; color: #c3b4a1; max-width: 30em; line-height: 1.85; }
+  .ripen-bar { margin-top: 30px; height: 2px; background-color: rgba(255,255,255,.16); }
+  .ripen-bar i { display: block; height: 100%; width: 0;
+    background: linear-gradient(90deg, var(--green-lt), #f0c04a, var(--red)); }
+  @media (max-width: 760px) {
+    html.js .stage { padding-top: 66px; }
+    .ripen-cap p { font-size: .8rem; }
+  }
+
+  /* ============ 土づくりから ============ */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;
+    background-color: var(--line); border: 1px solid var(--line); }
+  .steps-i { background-color: var(--paper-2); padding: 28px 22px; }
+  .steps-i .k { font-family: "Oswald", sans-serif; font-weight: 500;
+    font-size: .78rem; letter-spacing: .14em; color: var(--red); display: block; margin-bottom: 12px; }
+  .steps-i svg { width: 32px; height: 32px; color: var(--green); margin-bottom: 12px; }
+  .steps-i h3 { font-size: 1rem; margin: 0 0 8px; }
+  .steps-i p { margin: 0; font-size: .83rem; color: var(--ink-soft); line-height: 1.85; }
+  @media (max-width: 860px) { .steps { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 520px) { .steps { grid-template-columns: 1fr; } }
+
+  /* ============ 生産者 ============ */
+  .makers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .maker { background-color: var(--paper-2); border: 1px solid var(--line);
+    padding: 28px 24px; text-align: center; }
+  .maker .ph { width: 74px; height: 74px; margin: 0 auto 16px;
+    border-radius: 50%; background-color: var(--paper-3);
+    display: grid; place-items: center; color: var(--green); }
+  .maker .ph svg { width: 34px; height: 34px; }
+  .maker h3 { font-size: 1rem; margin: 0 0 6px; }
+  .maker p { margin: 0; font-size: .8rem; color: var(--ink-soft); line-height: 1.8; }
+  @media (max-width: 760px) { .makers { grid-template-columns: 1fr; } }
+
+  /* ---- 仮置き表記 ---- */
+  .tbd { display: inline-block; font-size: .64rem; font-weight: 700; letter-spacing: .08em;
+    background-color: rgba(198,42,34,.07); color: var(--red-dp);
+    border: 1px dashed var(--red); border-radius: 2px; padding: 2px 8px;
+    vertical-align: middle; font-family: "Noto Sans JP", sans-serif; }
+
+  /* ============ これから決めること ============ */
+  .todo { background-color: var(--paper-3); }
+  .todo-list { display: grid; gap: 14px; }
+  .todo-i { background-color: var(--paper-2); border: 1px solid var(--line);
+    border-left: 4px solid var(--green); padding: 22px 26px; }
+  .todo-i h3 { font-size: 1rem; margin: 0 0 8px; }
+  .todo-i p { margin: 0; font-size: .86rem; color: var(--ink-soft); }
+
+  /* ============ お問い合わせ ============ */
+  .cta { background-color: var(--red); color: #fff; }
+  .cta-in { display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center; }
+  @media (max-width: 860px) { .cta-in { grid-template-columns: 1fr; gap: 26px; } }
+  .cta h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin: 0 0 16px; }
+  .cta p { margin: 0 0 26px; font-size: .92rem; max-width: 29em; opacity: .94; }
+  .cta .btn-w { background-color: #fff; color: var(--red-dp); }
+  .cta .btn-w:hover { background-color: var(--ink); color: #fff; }
+  .cta-card { background-color: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.3);
+    padding: 28px; }
+  .cta-card dl { margin: 0; display: grid; grid-template-columns: 5.2em 1fr; gap: 11px 14px; font-size: .87rem; }
+  .cta-card dt { opacity: .8; font-size: .78rem; }
+  .cta-card dd { margin: 0; }
+  .cta-card .tbd { background-color: rgba(255,255,255,.16); color: #fff; border-color: rgba(255,255,255,.6); }
+
+  /* ============ フッター ============ */
+  footer { background-color: var(--ink); color: var(--paper); }
+  .foot-in { padding-top: 50px; padding-bottom: 50px; }
+  .foot-top { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .foot-top b { font-family: "Zen Old Mincho", serif; font-weight: 900; font-size: 1.1rem; }
+  .foot-addr { font-size: .82rem; color: #b9a893; margin: 0 0 26px; }
+  .foot-note { font-size: .76rem; color: #9c8b79; line-height: 1.9; margin: 0;
+    border-top: 1px solid var(--line-dk); padding-top: 22px; max-width: 54em; }
+</style>
+
+<header>
+  <div class="hbar">
+    <a class="hlogo" href="#top">
+      <svg class="hmark" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M4 34 L16 16 L25 28 L32 19 L44 34 Z" fill="#2f6b3a"></path>
+        <path d="M30 10 C33 6 38 7 38 11 C38 14 35 15 33 14 C36 20 35 28 30 34 C27 37 24 36 24 33 C24 28 27 20 33 14"
+              fill="#c62a22"></path>
+      </svg>
+      <b>雲仙うまか唐辛子<span>Unzen Umaka Chili Pepper</span></b>
+    </a>
+    <nav class="hnav">
+      <a class="wide" href="#ripen">青から、赤へ</a>
+      <a class="wide" href="#soil">土づくりから</a>
+      <a class="wide" href="#makers">つくり手</a>
+      <a class="btn btn-fill" href="#contact">お問い合わせ</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top"></div>
+
+<!-- ============ ヒーロー ============ -->
+<section class="wrap hero">
+  <div class="hero-top">
+    <div>
+      <div class="eyebrow"><i></i><span>Unzen, Nagasaki</span></div>
+      <h1>雲仙の<span class="g">土</span>から、<br>はじまる<span class="r">辛さ</span>。</h1>
+      <p class="hero-lead">
+        雲仙市内で、情熱を持った生産者が集まりました。
+        それぞれが自分の技術を持ち寄って、土づくりから育てた唐辛子です。
+      </p>
+      <div class="badges">
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18 L9 9 L13 15 L16 11 L21 18 Z"/></svg>
+          長崎県雲仙市
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="9" cy="8" r="3"/><circle cx="16" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 20c0-2.2 1.3-4.2 3.3-5"/></svg>
+          生産者が集まってつくる
+        </span>
+        <span class="badge">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 19h16"/><path d="M6 19c0-5 2.7-9 6-9s6 4 6 9"/><path d="M12 10V4"/></svg>
+          土づくりから
+        </span>
+      </div>
+      <div class="btnrow">
+        <a class="btn btn-fill" href="#contact">お問い合わせ</a>
+        <a class="btn btn-line" href="#soil">つくり方を見る</a>
+      </div>
+    </div>
+
+    <div>
+      <!-- ロゴのモチーフ（雲仙岳＋唐辛子）をそのまま主役の図にした。写真は使わない -->
+      <div class="hero-art">
+        <svg viewBox="0 0 520 520" role="img" aria-label="雲仙岳と唐辛子を描いた図">
+          <circle cx="260" cy="260" r="228" fill="#f2e9da"></circle>
+          <circle cx="260" cy="260" r="228" fill="none" stroke="#e4dacb" stroke-width="2"></circle>
+
+          <!-- 空と稜線 -->
+          <clipPath id="disc"><circle cx="260" cy="260" r="228"></circle></clipPath>
+          <g clip-path="url(#disc)">
+            <!-- 雲仙岳のシルエット（概略） -->
+            <path d="M-20 400 L90 268 L150 330 L214 236 L268 306 L320 244 L400 348 L470 276 L560 400 Z" fill="#2f6b3a"></path>
+            <path d="M-20 430 L120 330 L210 392 L300 322 L410 402 L540 330 L560 430 Z" fill="#245530" opacity=".85"></path>
+            <!-- 土の層 -->
+            <rect x="-20" y="424" width="580" height="120" fill="#6b4a2f"></rect>
+            <rect x="-20" y="424" width="580" height="14" fill="#5a3d25"></rect>
+            <!-- 畝 -->
+            <g fill="#5a3d25" opacity=".55">
+              <ellipse cx="90" cy="470" rx="70" ry="10"></ellipse>
+              <ellipse cx="260" cy="492" rx="90" ry="11"></ellipse>
+              <ellipse cx="430" cy="470" rx="70" ry="10"></ellipse>
+            </g>
+          </g>
+
+          <!-- 主役の唐辛子。軸はまっすぐ立てて、ヘタは実の上にかぶせる。
+               軸を曲線で巻くと緑の渦に見えてしまうので、曲げすぎないこと。 -->
+          <g transform="translate(260,250) scale(1.5)">
+            <path d="M0 -44 C0 -58 3 -68 9 -76"
+                  fill="none" stroke="#2f6b3a" stroke-width="7" stroke-linecap="round"></path>
+            <path d="M-15 -44 C-10 -55 8 -56 15 -45 C18 -39 10 -34 0 -35 C-10 -36 -18 -39 -15 -44 Z" fill="#2f6b3a"></path>
+            <path d="M0 -36 C26 -30 38 -2 34 38 C30 78 16 112 2 132 C0 135 -3 135 -4 132 C-16 110 -30 78 -33 38 C-36 -2 -24 -30 0 -36 Z"
+                  fill="#c62a22"></path>
+            <path d="M-16 -18 C-24 8 -24 44 -16 80" fill="none" stroke="#e05a4c" stroke-width="5"
+                  stroke-linecap="round" opacity=".7"></path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 帯 ============ -->
+<div class="strip">
+  <div class="wrap" style="padding-left:0; padding-right:0;">
+    <div class="strip-in">
+      <div class="strip-cell"><b>雲仙市</b><span>山と海に囲まれた土地で育てる</span></div>
+      <div class="strip-cell"><b>土づくりから</b><span>畑の土をつくるところから始める</span></div>
+      <div class="strip-cell"><b>生産者が集まって</b><span>それぞれの技術を持ち寄る</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 青から、赤へ ============ -->
+<div class="ripen" id="ripen">
+  <div class="run" id="ripenRun">
+    <div class="stage">
+      <div class="wrap" style="width:100%;">
+        <div class="ripen-hd">
+          <div class="eyebrow"><i></i><span>Ripening</span></div>
+          <h2>青から、赤へ。</h2>
+        </div>
+
+        <div class="chilis" id="chilis">
+          <!-- 6本。スクロールに合わせて左から順に色が変わる -->
+        </div>
+
+        <div class="ripen-cap">
+          <p class="stage-name" id="ripenName">青唐辛子</p>
+          <p id="ripenText">実がつき、まだ青い時期。この段階で収穫すれば、さわやかな辛さと香りが立ちます。</p>
+        </div>
+        <div class="ripen-bar"><i id="ripenBar"></i></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 土づくりから ============ -->
+<section class="wrap sec" id="soil">
+  <div class="eyebrow" data-rv><i></i><span>How we grow</span></div>
+  <h2 class="sec-title" data-rv>辛さは、土でつくる。</h2>
+  <p class="sec-lead" data-rv>
+    唐辛子は、育つ環境で味も辛さも変わります。
+    わたしたちは苗を植える前の、土をつくるところから手をかけています。
+  </p>
+  <div class="steps">
+    <div class="steps-i" data-rv>
+      <span class="k">01</span>
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 24h26"/><path d="M6 24c0-3 4-5 10-5s10 2 10 5"/><path d="M16 19V9"/><path d="M16 12c-3 0-5-2-5-4 3 0 5 2 5 4z"/></svg>
+      <h3>土づくり</h3>
+      <p>畑の土の状態を見ながら、唐辛子が根を伸ばせる土に整えていきます。</p>
+    </div>
+    <div class="steps-i" data-rv>
+      <span class="k">02</span>
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M16 28V13"/><path d="M16 15c-5 0-8-3-8-7 5 0 8 3 8 7z"/><path d="M16 19c4 0 7-2 7-6-4 0-7 2-7 6z"/></svg>
+      <h3>育苗</h3>
+      <p>苗の段階から一本ずつ様子を見て、しっかり根を張らせてから畑へ植えます。</p>
+    </div>
+    <div class="steps-i" data-rv>
+      <span class="k">03</span>
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 26 L16 8 L28 26 Z"/><path d="M9 26v-5h6v5"/></svg>
+      <h3>栽培</h3>
+      <p>ハウスで温度と水を見ながら育てます。生産者それぞれが自分の技術で向き合います。</p>
+    </div>
+    <div class="steps-i" data-rv>
+      <span class="k">04</span>
+      <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 14h18l-2 13H9z"/><path d="M12 14V9a4 4 0 0 1 8 0v5"/></svg>
+      <h3>収穫</h3>
+      <p>用途に合わせて、青いうちに穫るか、完熟の赤まで待つかを決めます。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ つくり手 ============ -->
+<section class="wrap sec" style="padding-top:0;" id="makers">
+  <div class="eyebrow" data-rv><i></i><span>Growers</span></div>
+  <h2 class="sec-title" data-rv>ひとりではなく、集まってつくる。</h2>
+  <p class="sec-lead" data-rv>
+    雲仙市内の生産者が集まって立ち上げました。
+    それぞれが別の畑で、別の技術を持っています。
+    <span class="tbd">お一人ずつのご紹介は、内容を伺って差し替えます</span>
+  </p>
+  <div class="makers">
+    <div class="maker" data-rv>
+      <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+      <h3>生産者 A</h3>
+      <p>お名前・畑の場所・つくり方のこだわりが入ります。</p>
+    </div>
+    <div class="maker" data-rv>
+      <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+      <h3>生産者 B</h3>
+      <p>お名前・畑の場所・つくり方のこだわりが入ります。</p>
+    </div>
+    <div class="maker" data-rv>
+      <div class="ph"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/></svg></div>
+      <h3>生産者 C</h3>
+      <p>お名前・畑の場所・つくり方のこだわりが入ります。</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ これから決めること ============ -->
+<div class="todo">
+  <section class="wrap sec">
+    <div class="eyebrow" data-rv><i></i><span>Coming soon</span></div>
+    <h2 class="sec-title" data-rv>ここから先は、決まり次第。</h2>
+    <p class="sec-lead" data-rv>
+      デビューしたばかりなので、まだ公開されていない情報があります。
+      決まった順に、この場所へ入れていけます。
+    </p>
+    <div class="todo-list">
+      <div class="todo-i" data-rv>
+        <h3>品種と辛さ</h3>
+        <p>どんな品種で、どのくらいの辛さなのか。食べ方の向き不向きまで書けると、買う側が選びやすくなります。</p>
+      </div>
+      <div class="todo-i" data-rv>
+        <h3>どこで買えるか</h3>
+        <p>直売所・道の駅・通販サイトなど、買える場所へのご案内。<strong>このページ自体で決済はせず、既にある販売先へご案内する形</strong>にすれば、余計な費用も手間もかかりません。</p>
+      </div>
+      <div class="todo-i" data-rv>
+        <h3>加工品</h3>
+        <p>唐辛子そのものだけでなく、調味料などに広がったときの紹介欄。</p>
+      </div>
+      <div class="todo-i" data-rv>
+        <h3>収穫の時期</h3>
+        <p>いつ穫れて、いつ買えるのか。季節ものは、この一文があるだけで問い合わせが減ります。</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ お問い合わせ ============ -->
+<div class="cta" id="contact">
+  <section class="wrap sec">
+    <div class="cta-in">
+      <div>
+        <h2>唐辛子のこと、<br>お気軽にお問い合わせください。</h2>
+        <p>
+          仕入れをご検討の飲食店・小売店の方からのご相談も承ります。
+          まずはInstagramからご連絡ください。
+        </p>
+        <div class="btnrow">
+          <a class="btn btn-w" href="https://www.instagram.com/unzenumaka">Instagramを見る</a>
+        </div>
+      </div>
+      <div class="cta-card">
+        <dl>
+          <dt>名称</dt><dd>雲仙うまか唐辛子</dd>
+          <dt>産地</dt><dd>長崎県雲仙市</dd>
+          <dt>内容</dt><dd>唐辛子の生産・販売</dd>
+          <dt>連絡先</dt><dd><span class="tbd">お伺いして差し替えます</span></dd>
+          <dt>販売先</dt><dd><span class="tbd">決まり次第</span></dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============ フッター ============ -->
+<footer>
+  <div class="wrap foot-in">
+    <div class="foot-top">
+      <svg width="32" height="32" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M4 34 L16 16 L25 28 L32 19 L44 34 Z" fill="#5c9b57"></path>
+        <path d="M30 10 C33 6 38 7 38 11 C38 14 35 15 33 14 C36 20 35 28 30 34 C27 37 24 36 24 33 C24 28 27 20 33 14"
+              fill="#e05a4c"></path>
+      </svg>
+      <b>雲仙うまか唐辛子</b>
+    </div>
+    <p class="foot-addr">長崎県雲仙市／生産者が集まってつくる唐辛子</p>
+    <p class="foot-note">
+      ※ このページはご提案用のサンプルです。掲載内容はInstagramの公開情報をもとにした仮のもので、
+      <strong>品種・辛さ・価格・販売先・生産者のお名前・連絡先など、確認できていない項目は数字や名前を入れず空欄にしています。</strong>
+      実際にご依頼いただく場合は、正しい情報と御社の写真を伺ったうえで作り直します。
+      図版はすべて描き起こしたもので、実際の畑や商品の写真ではありません。
+    </p>
+  </div>
+</footer>
+
+<script>
+  /* ---------- 出現 ---------- */
+  (function () {
+    var els = document.querySelectorAll('[data-rv]');
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < els.length; i++) els[i].classList.add('on');
+      return;
+    }
+    var io = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('on'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -12% 0px' });
+    els.forEach(function (el) { io.observe(el); });
+  })();
+
+  /* ---------- 青から赤へ ---------- */
+  (function () {
+    var N = 6;
+    var host = document.getElementById('chilis');
+    if (!host) return;
+
+    /* 唐辛子を1本描く。ヘタは常緑、実だけ色が変わる */
+    for (var i = 0; i < N; i++) {
+      host.insertAdjacentHTML('beforeend',
+        '<svg viewBox="0 0 100 210" aria-hidden="true">' +
+          '<path d="M50 44 C50 30 53 20 59 12" fill="none" stroke="#2f6b3a" stroke-width="7" stroke-linecap="round"></path>' +
+          '<path d="M34 44 C39 34 57 33 64 43 C67 49 59 55 49 54 C39 53 31 50 34 44 Z" fill="#3f7d43"></path>' +
+          '<path class="body" d="M48 52 C74 58 86 86 82 124 C78 160 66 188 52 202 C50 204 47 204 46 202 C34 188 22 160 19 124 C15 86 26 58 48 52 Z" fill="#7cb342"></path>' +
+          '<path class="shine" d="M33 76 C26 98 26 132 33 160" fill="none" stroke="#ffffff" stroke-width="5" stroke-linecap="round" opacity=".28"></path>' +
+        '</svg>');
+    }
+    var bodies = host.querySelectorAll('.body');
+
+    /* 熟すほど緑→黄→赤。HSLで回すと途中が濁らない */
+    function ripeColor(t) {
+      t = t < 0 ? 0 : (t > 1 ? 1 : t);
+      var h = 96 + (0 - 96) * t;          /* 96deg(緑) → 0deg(赤) */
+      var s = 44 + (72 - 44) * t;
+      var l = 48 + (44 - 48) * t;
+      return 'hsl(' + h.toFixed(1) + ',' + s.toFixed(1) + '%,' + l.toFixed(1) + '%)';
+    }
+
+    var STAGES = [
+      { at: 0.00, name: '青唐辛子',
+        text: '実がつき、まだ青い時期。この段階で収穫すれば、さわやかな辛さと香りが立ちます。' },
+      { at: 0.38, name: '色づきはじめ',
+        text: '先の方から少しずつ色が変わります。畑では、青と赤が同じ株に混ざって並びます。' },
+      { at: 0.70, name: '完熟',
+        text: '真っ赤になるまで待つと、辛さに甘みと旨みが乗ります。乾燥や加工に向くのもこの状態です。' }
+    ];
+
+    var nameEl = document.getElementById('ripenName');
+    var textEl = document.getElementById('ripenText');
+    var barEl = document.getElementById('ripenBar');
+    var run = document.getElementById('ripenRun');
+
+    function place(p) {
+      for (var i = 0; i < N; i++) {
+        /* 左から順に熟す。1本あたり少し重ねてずらす */
+        var t = (p - i * 0.11) / 0.5;
+        bodies[i].setAttribute('fill', ripeColor(t));
+      }
+      barEl.style.width = (p * 100).toFixed(1) + '%';
+
+      var s = STAGES[0];
+      for (var j = 0; j < STAGES.length; j++) if (p >= STAGES[j].at) s = STAGES[j];
+      if (nameEl.textContent !== s.name) {
+        nameEl.textContent = s.name;
+        textEl.textContent = s.text;
+      }
+    }
+
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.classList.remove('js');
+      place(1);
+      return;
+    }
+
+    function apply() {
+      var r = run.getBoundingClientRect();
+      var span = r.height - innerHeight;
+      if (span <= 0) { place(1); return; }
+      var p = -r.top / span;
+      p = p < 0 ? 0 : (p > 1 ? 1 : p);
+      place(p);
+    }
+    window.addEventListener('scroll', apply, { passive: true });
+    window.addEventListener('resize', apply);
+    window.addEventListener('load', apply);
+    apply();
+  })();
+</script>
+
+
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
