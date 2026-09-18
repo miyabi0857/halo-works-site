@@ -84,9 +84,7 @@
     padding-left: 30px; padding-right: 30px; }
   @media (max-width: 760px) { .wrap { padding-left: 20px; padding-right: 20px; } }
 
-  /* 見出しは「番号＋短い語」。罫線付きラベルは使わない */
-  .lead-no { font-family: "Dela Gothic One", sans-serif; font-size: .82rem;
-    letter-spacing: .1em; color: var(--amber); display: block; margin-bottom: 10px; }
+  /* 見出しは大きな一言だけ。罫線付きラベルも番号も使わない */
   .h2 { font-family: "Dela Gothic One", sans-serif; font-weight: 400;
     font-size: clamp(1.7rem, 4.4vw, 2.6rem); line-height: 1.38; margin: 0 0 18px; }
   .note-s { font-size: .86rem; color: var(--ink-soft); max-width: 32em; margin: 0; }
@@ -110,10 +108,11 @@
     gap: 26px; flex-wrap: wrap; margin-bottom: 34px; }
   .season h2 { color: var(--cream); }
   .season .note-s { color: #9fb58c; }
+  /* 4つで幅を等分する。flex を伸ばさないと、右側に空のセルが残る */
   .tabs { display: flex; gap: 0; border: 2px solid var(--leaf); }
-  .tabs button { font-family: "Dela Gothic One", sans-serif; font-size: .96rem;
+  .tabs button { flex: 1 1 0; font-family: "Dela Gothic One", sans-serif; font-size: .96rem;
     background: transparent; color: var(--leaf); border: 0; cursor: pointer;
-    padding: 13px 26px; transition: background-color .18s ease, color .18s ease; }
+    padding: 13px 10px; transition: background-color .18s ease, color .18s ease; }
   .tabs button + button { border-left: 2px solid var(--leaf); }
   .tabs button[aria-selected="true"] { background-color: var(--leaf); color: var(--forest-2); }
   .tabs button:focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; }
@@ -200,7 +199,7 @@
   <div class="wrap">
     <div class="hero-mark">長与町特産品直売所　まんてん加工所</div>
     <h1>畑のものを、<br><em>余さず。</em></h1>
-    <p>生のままでは売り切れないぶんを、ジャムやお漬物にして棚へ戻す。まんてん加工所は、そのためにできました。つくる人の手間を、捨てないための場所です。</p>
+    <p>長与町の畑でとれた果実と野菜を、この町の加工所で手作りしています。いちばんおいしい時期に仕込むから、季節を越えても畑の味がそのまま残ります。</p>
   </div>
   <div class="shelf-hero">
     <svg viewBox="0 0 1200 330" role="img" aria-label="直売所の棚に、みかんジャム・甘夏マーマレード・ブルーベリージャム・お漬物が並んでいる図">
@@ -311,7 +310,6 @@
   <div class="wrap">
     <div class="season-hd">
       <div>
-        <span class="lead-no">01</span>
         <h2 class="h2">同じ棚に、<br>同じものは並びません。</h2>
       </div>
       <p class="note-s">畑で採れたものだけを、採れたときに仕込みます。だから季節で、棚の顔が変わります。押して確かめてみてください。</p>
@@ -341,7 +339,6 @@
 
 <!-- ============ 商品 ============ -->
 <section class="wrap items">
-  <span class="lead-no">02</span>
   <h2 class="h2">つくっているもの</h2>
   <p class="note-s" style="margin-bottom:30px;">長与町の畑でとれた果実と野菜を、加工所でひとつずつ手作りしています。</p>
 
@@ -430,7 +427,6 @@
 <!-- ============ 料理教室 ============ -->
 <section class="class" id="class">
   <div class="wrap">
-    <span class="lead-no" style="color:#7a4b00;">03</span>
     <h2>予約はいりません。<br>お金もいりません。</h2>
     <div class="class-grid">
       <div>
@@ -452,12 +448,11 @@
 
 <!-- ============ 加工所のこと ============ -->
 <section class="wrap about" id="about">
-  <span class="lead-no" style="color:#c96a08;">04</span>
   <h2 class="h2">加工所のこと</h2>
   <div class="about-body">
     <p>まんてんは、長与町の人が作ったものを売る直売所です。野菜、果物、花、魚。町の中で採れたものが並びます。</p>
-    <p><strong>ただ、生のものには売り切れないぶんが出ます。</strong>畑で手をかけて育てても、その日に売れなければ行き場がなくなる。加工所は、そこをなんとかするために作られました。</p>
-    <p>ジャムにすれば日持ちします。漬物にすれば、また別のものになります。<strong>つくった人の手間を、捨てずに済みます。</strong></p>
+    <p><strong>果物も野菜も、いちばんおいしい時期は短いものです。</strong>みかんにも甘夏にも、ちょうどいい頃合いがあります。その一番のときに仕込んでおけば、季節を越えても同じ味を届けられます。</p>
+    <p>加工所は、そのためにあります。<strong>ジャムにすれば日持ちします。漬物にすれば、また別のおいしさになります。</strong>畑でとれたものを、いい時期のまま閉じこめておく場所です。</p>
     <p>料理教室をひらいているのも、同じ理由です。作り方を知ってもらえれば、家でも同じことができるようになります。</p>
   </div>
 </section>
@@ -465,7 +460,6 @@
 <!-- ============ 買いに行く ============ -->
 <section class="go" id="go">
   <div class="wrap">
-    <span class="lead-no" style="color:#c96a08;">05</span>
     <h2 class="h2">買いに行く</h2>
     <table>
       <tr>
