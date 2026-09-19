@@ -425,6 +425,19 @@ function initScrollReveal() {
     if (idx > 0) el.style.animationDelay = `${Math.min(idx, 4) * 110}ms`;
     observer.observe(el);
   });
+
+  // 保険：.reveal-init は opacity:0 なので、演出が不発だと中身が読めなくなる。
+  // 5秒後、画面内にあるのに隠れたままの要素があればクラスを外し、素の表示に戻す。
+  // JSは飾りを足すだけで、読めるかどうかを左右してはいけない。
+  setTimeout(() => {
+    document.querySelectorAll('.reveal-init').forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.remove('reveal-init', 'reveal-in');
+        el.style.animationDelay = '';
+      }
+    });
+  }, 5000);
 }
 
 /* ---------------------------------------------------------

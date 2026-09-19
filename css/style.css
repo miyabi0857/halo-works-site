@@ -356,6 +356,11 @@ nav.main-nav a[aria-current="page"]::after {
   .work-deco--b { display: none; }
   .work-deco--a { width: 64px; height: 64px; top: 16px; right: -22px; }
 }
+/* 幅が狭いと図形が画面外にはみ出し、overflow:hidden に切られて
+   橙色の破片が飛び出しているように見えるため、狭い画面では出さない */
+@media (max-width: 560px) {
+  .work-deco--a { display: none; }
+}
 
 .work-frame {
   position: relative;
@@ -615,9 +620,6 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   background: color-mix(in srgb, var(--accent) 5%, var(--surface));
 }
 
-
-}
-
 /* --------------------------------------------------------
    スクロール出現演出（JSが有効な場合のみ付与される）
    全要素を同じ動きで出すと単調に見えるため、要素の性格ごとに
@@ -679,18 +681,6 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--accent);
-  animation: num-bounce 2.4s ease-in-out infinite;
-}
-.card:nth-child(2) .num { animation-delay: 0.25s; }
-.card:nth-child(3) .num { animation-delay: 0.5s; }
-
-@keyframes num-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .card .num { animation: none; }
 }
 
 .card h3 { font-size: 1.15rem; margin-bottom: 0.2em; }
@@ -866,14 +856,22 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   height: 100%;
   object-fit: cover;
 }
+/* 文章は中央に置くので、暗さも中央が一番濃くなるようにする。
+   斜めのグラデーションだけだと右端が薄く、そこに本文が乗って読めなくなっていた。
+   奥行きのための斜めの層と、可読性のための中央の層を重ねる。 */
 .photo-band::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(100deg,
-    rgba(20, 14, 6, 0.78) 0%,
-    rgba(20, 14, 6, 0.55) 55%,
-    rgba(20, 14, 6, 0.3) 100%);
+  background:
+    radial-gradient(ellipse 70% 100% at 50% 50%,
+      rgba(20, 14, 6, 0.72) 0%,
+      rgba(20, 14, 6, 0.52) 60%,
+      rgba(20, 14, 6, 0.3) 100%),
+    linear-gradient(100deg,
+      rgba(20, 14, 6, 0.55) 0%,
+      rgba(20, 14, 6, 0.4) 55%,
+      rgba(20, 14, 6, 0.34) 100%);
 }
 .photo-band .band-copy {
   position: relative;
@@ -881,10 +879,16 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   text-align: center;
   color: #fff;
   padding: 60px 24px;
-  max-width: 640px;
+  max-width: 700px;
 }
 .photo-band .band-copy h2 { color: #fff; margin-bottom: 0.4em; }
-.photo-band .band-copy p { color: rgba(255,255,255,0.86); margin-bottom: 0; }
+/* 最終行が「ん。」1文字だけで落ちていた。
+   balance + 700px で、1440px幅のとき 607px / 586px のほぼ均等な2行になる（実測） */
+.photo-band .band-copy p {
+  color: rgba(255,255,255,0.92);
+  margin-bottom: 0;
+  text-wrap: balance;
+}
 
 /* ---- サービス内の補足写真 ---- */
 .inline-photo {
@@ -968,12 +972,6 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
   display: flex; align-items: center; justify-content: center;
   background: var(--accent);
   font-size: 1.1rem;
-  animation: num-bounce 2.8s ease-in-out infinite;
-}
-.contact-card:nth-child(2) .icon { animation-delay: 0.4s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .contact-card .icon { animation: none; }
 }
 
 /* ---- DMへの導線（問い合わせの主役） ---- */
