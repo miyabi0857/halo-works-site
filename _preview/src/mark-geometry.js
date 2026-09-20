@@ -23,6 +23,17 @@ const CX = 80;
 const HOLE_R = 13;
 const ROOT_R = 36;
 const SINK = 1.5;    // 歯の根元をハブへ埋める量
+const CROWN = 5.0;   // 前後の面の甲高（中心が高い）
+
+/* 漆器の面はわずかに甲高になっていて、そこを光が流れる。
+   完全な平面だと法線がどこも同じになり、環境の映り込みが
+   一様になってプラスチックに見える（実際そう見えた）。
+   中心からの距離で緩く持ち上げる。 */
+function crown(p) {
+  const dx = p[0] - CX, dy = p[1] + CX;
+  const t = Math.min(1, Math.hypot(dx, dy) / 86);
+  return CROWN * (1 - t * t);
+}
 
 const Z0 = 0, Z1 = BEVEL, Z2 = DEPTH - BEVEL, Z3 = DEPTH;
 
@@ -77,32 +88,40 @@ export function positions(b) {
   const H = hubRings();
   const arr = new Float32Array(VERTS * 3);
   let w = 0;
-  const put = (pts, z) => { for (const p of pts) { arr[w++]=p[0]-CX; arr[w++]=p[1]+CX; arr[w++]=z-DEPTH/2; } };
+  /* face: +1 なら前面（手前へ膨らむ）、-1 なら背面、0 なら壁 */
+  const put = (pts, z, face) => {
+    for (const p of pts) {
+      arr[w++] = p[0] - CX;
+      arr[w++] = p[1] + CX;
+      arr[w++] = z - DEPTH / 2 + (face ? face * crown(p) : 0);
+    }
+  };
 
   /* ハブ：閉じた輪。外周 → 前面 → 穴の内壁 → 背面 と一周する */
+  const F = 1, B = -1, W = 0;
   const hub = [
-    [H.outIn, Z0, H.out, Z1],      // 背の外面取り
-    [H.out,   Z1, H.out, Z2],      // 外周の壁
-    [H.out,   Z2, H.outIn, Z3],    // 前の外面取り
-    [H.outIn, Z3, H.holeIn, Z3],   // 前面
-    [H.holeIn,Z3, H.hole, Z2],     // 前の穴面取り
-    [H.hole,  Z2, H.hole, Z1],     // 穴の内壁
-    [H.hole,  Z1, H.holeIn, Z0],   // 背の穴面取り
-    [H.holeIn,Z0, H.outIn, Z0],    // 背面
+    [H.outIn, Z0, B, H.out,   Z1, W],   // 背の外面取り
+    [H.out,   Z1, W, H.out,   Z2, W],   // 外周の壁
+    [H.out,   Z2, W, H.outIn, Z3, F],   // 前の外面取り
+    [H.outIn, Z3, F, H.holeIn,Z3, F],   // 前面
+    [H.holeIn,Z3, F, H.hole,  Z2, W],   // 前の穴面取り
+    [H.hole,  Z2, W, H.hole,  Z1, W],   // 穴の内壁
+    [H.hole,  Z1, W, H.holeIn,Z0, B],   // 背の穴面取り
+    [H.holeIn,Z0, B, H.outIn, Z0, B],   // 背面
   ];
-  for (const [a,za,c,zc] of hub) { put(a,za); put(c,zc); }
+  for (const [a,za,fa,c,zc,fc] of hub) { put(a,za,fa); put(c,zc,fc); }
 
   for (let k = 0; k < 9; k++) {
     const t = tooth(b, k);
     const st = [
-      [t.edgeIn, Z0, t.edge,  Z1],   // 背の面取り
-      [t.edge,   Z1, t.edge,  Z2],   // 外の壁
-      [t.edge,   Z2, t.edgeIn,Z3],   // 前の面取り
-      [t.edgeIn, Z3, t.root,  Z3],   // 前面（帽子）
-      [t.root,   Z3, t.root,  Z0],   // 根元の壁（ハブに埋まって見えない）
-      [t.root,   Z0, t.edgeIn,Z0],   // 背面（帽子）
+      [t.edgeIn, Z0, B, t.edge,  Z1, W],  // 背の面取り
+      [t.edge,   Z1, W, t.edge,  Z2, W],  // 外の壁
+      [t.edge,   Z2, W, t.edgeIn,Z3, F],  // 前の面取り
+      [t.edgeIn, Z3, F, t.root,  Z3, F],  // 前面（帽子）
+      [t.root,   Z3, F, t.root,  Z0, B],  // 根元の壁（ハブに埋まって見えない）
+      [t.root,   Z0, B, t.edgeIn,Z0, B],  // 背面（帽子）
     ];
-    for (const [a,za,c,zc] of st) { put(a,za); put(c,zc); }
+    for (const [a,za,fa,c,zc,fc] of st) { put(a,za,fa); put(c,zc,fc); }
   }
   return arr;
 }

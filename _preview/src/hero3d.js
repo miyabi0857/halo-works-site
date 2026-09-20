@@ -20,18 +20,26 @@ import {
 } from 'three';
 import { buildGeometry, positions } from './mark-geometry.js';
 
-/* 環境は画像を持たず、キャンバスの縦グラデーションから作る。
-   漆の艶は面の映り込みで出るので、光源だけだと平たくなる。
-   ファイルを足さずに映り込みを得るための手。 */
+/* 環境は画像を持たず、キャンバス相当のデータから作る。
+   漆の艶は「窓が映り込んでいる」形なので、環境をのっぺりさせると
+   ハイライトが広がってプラスチックに見える。
+   明るい帯を1本だけ通し、上下は落とす。 */
 function makeEnv(renderer) {
-  const w = 16, h = 64, data = new Float32Array(w * h * 4);
+  const w = 64, h = 128, data = new Float32Array(w * h * 4);
   for (let y = 0; y < h; y++) {
-    const t = y / (h - 1);
-    // 上：暖かい明るさ／下：沈んだ赤茶。漆器を上から照らした部屋を想定
-    const top = [1.35, 1.12, 0.92], bot = [0.10, 0.06, 0.05];
+    const v = y / (h - 1);
+    // 天頂side=0。0.18〜0.30 のあたりに窓の帯を置く
+    const band = Math.exp(-Math.pow((v - 0.235) / 0.040, 2));
+    const sky  = Math.pow(1 - v, 2.6) * 0.45;
+    const floor = Math.pow(v, 3.0) * 0.10;
     for (let x = 0; x < w; x++) {
       const i = (y * w + x) * 4;
-      for (let c = 0; c < 3; c++) data[i + c] = bot[c] + (top[c] - bot[c]) * Math.pow(1 - t, 1.7);
+      // 横方向にも少し濃淡をつけ、面が動いたときに艶が流れるようにする
+      const side = 0.82 + 0.18 * Math.cos(x / w * Math.PI * 2);
+      const e = (band * 2.15 + sky) * side + floor;
+      data[i]     = e * 1.00;
+      data[i + 1] = e * 0.86;
+      data[i + 2] = e * 0.74;
       data[i + 3] = 1;
     }
   }
@@ -54,7 +62,7 @@ export function initHero3D(canvas, opts = {}) {
   renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
   renderer.outputColorSpace = SRGBColorSpace;
   renderer.toneMapping = ACESFilmicToneMapping;
-  renderer.toneMappingExposure = 1.05;
+  renderer.toneMappingExposure = 1.0;
 
   const scene = new Scene();
   scene.environment = makeEnv(renderer);
@@ -82,15 +90,22 @@ export function initHero3D(canvas, opts = {}) {
   geo.morphAttributes.normal = [normalsFor(pLogo), normalsFor(pFlower)];
   const gGear = geo;
 
+  /* 漆。地は沈んだ赤茶で、光が当たったところだけ赤が出る。
+     上塗りの艶は clearcoatRoughness を詰めて細く鋭くする。
+     ここを 0.12 にしていたときはハイライトが広がって
+     プラスチックに見えていた。 */
   const material = new MeshPhysicalMaterial({
-    color: new Color(opts.color || '#a5361b'),
-    roughness: 0.28,
+    color: new Color(opts.color || '#5e1c0e'),
+    roughness: 0.52,          // 地はやや粗く。艶は上塗りが持つ
     metalness: 0.0,
-    clearcoat: 1.0,        // 漆の上塗り
-    clearcoatRoughness: 0.12,
-    sheen: 0.35,
-    sheenColor: new Color('#e2653f'),
-    envMapIntensity: 1.15,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.045,
+    ior: 1.5,
+    specularIntensity: 0.9,
+    sheen: 0.22,
+    sheenColor: new Color('#c2401f'),
+    sheenRoughness: 0.6,
+    envMapIntensity: 1.05,
   });
 
   const mesh = new Mesh(gGear, material);
@@ -98,9 +113,12 @@ export function initHero3D(canvas, opts = {}) {
   pivot.add(mesh);
   scene.add(pivot);
 
-  const key = new DirectionalLight(0xfff0e2, 2.5); key.position.set(-180, 240, 320); scene.add(key);
-  const rim = new DirectionalLight(0xff9d6b, 1.9); rim.position.set(260, -120, -220); scene.add(rim);
-  scene.add(new AmbientLight(0xffe9d8, 0.35));
+  /* 暗い地から立体を起こす。鍵光は絞り、縁を拾う光で輪郭を出す。
+     環境光を上げすぎると全体が持ち上がって漆の深さが消える */
+  const key = new DirectionalLight(0xfff2e6, 2.1); key.position.set(-210, 260, 300); scene.add(key);
+  const rim = new DirectionalLight(0xff8f55, 2.6); rim.position.set(300, -90, -260); scene.add(rim);
+  const fill = new DirectionalLight(0xffd9c0, 0.5); fill.position.set(120, -220, 240); scene.add(fill);
+  scene.add(new AmbientLight(0xffe4d2, 0.16));
 
   function resize() {
     const w = canvas.clientWidth, h = canvas.clientHeight;
@@ -121,11 +139,13 @@ export function initHero3D(canvas, opts = {}) {
     if (bloom <= 0.5) { inf[0] = bloom / 0.5; inf[1] = 0; }
     else { const u = (bloom - 0.5) / 0.5; inf[0] = 1 - u; inf[1] = u; }
 
+    /* 正面を向けすぎると、面の法線がどこも同じになって
+       環境の同じ場所ばかり映り、艶が動かない。
+       傾けておくと、咲くにつれて艶が面を流れる */
     pivot.rotation.z = -bloom * 0.62;
-    pivot.rotation.y = Math.sin(bloom * Math.PI) * 0.30;   // 咲く途中だけ少し傾ける
-    pivot.rotation.x = -0.16 + bloom * 0.10;
-    const s = 1 + bloom * 0.06;
-    pivot.scale.setScalar(s);
+    pivot.rotation.y = -0.22 + Math.sin(bloom * Math.PI) * 0.26;
+    pivot.rotation.x = -0.25 + bloom * 0.16;
+    pivot.scale.setScalar(1 + bloom * 0.06);
 
     renderer.render(scene, camera);
     requestAnimationFrame(frame);
