@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>B案ヒーロー 3D 確認用｜Gear Bloom</title>
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   前回「いまいち」だった原因は three.js が無いことではなく、
+   ルール2で封印したはずの骨格（ヒーロー2カラム＋中央寄せ＋
+   はみ出す要素ゼロ）をもう一度作ってしまったこと。
+
+   今回変えたのは3つ。
+   1. 2カラムをやめ、全面1枚にした。文字と物体を同じ面で重ねる
+   2. 文字を左の画面端まで断ち落とす（max-width の中央寄せをやめる）
+   3. 平面のSVGをやめ、漆の質感を持つ立体にした。
+      素材の根拠は要件定義の「弁柄＝建具や漆器に使われてきた赤茶」
+   ============================================================ */
+:root{
+  --bg:#141010;
+  --ink:#f4ece2; --ink-soft:#b3a294; --ink-faint:#7d6f64;
+  --accent:#e2653f; --accent-deep:#a5361b;
+  --line:#2c221d;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:'Archivo','Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  line-height:1.8; overflow-x:clip;
+}
+
+/* ---- 舞台。全面1枚。 ---- */
+.hero{ --bloom:0; position:relative; }
+html.js .hero{ height:260svh; }
+.pin{
+  position:relative; min-height:100svh; overflow:clip;
+  display:grid; grid-template-rows:1fr auto;
+}
+html.js .pin{ position:sticky; top:0; height:100svh; }
+
+/* 立体は面いっぱいに敷き、右へ断ち落とす */
+.stage{
+  position:absolute; inset:0;
+  /* 右と下へはみ出させる。画面に収まりきらないのが狙い */
+  right:-14vw; bottom:-8vh;
+  pointer-events:none;
+}
+.stage canvas{display:block;width:100%;height:100%}
+@media (max-width:860px){ .stage{right:-26vw;bottom:-2vh;top:16vh} }
+
+/* WebGLが使えないときに出す平面のマーク（ルール5） */
+.fallback{
+  position:absolute;inset:0;display:none;place-items:center;
+  color:var(--accent-deep);
+}
+.fallback svg{width:min(62vw,540px);height:auto;opacity:.9}
+html.no-webgl .fallback{display:grid}
+html.no-webgl .stage{display:none}
+
+/* ---- 文字。左端まで断ち落とす ---- */
+.copy{
+  position:relative; z-index:2; align-self:center;
+  padding:clamp(28px,6vh,72px) 0 0;
+  /* 中央寄せをやめ、左の画面端から始める */
+  padding-left:clamp(20px,5vw,84px);
+  max-width:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 1.5em;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+
+.h1{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-weight:900;
+  font-size:clamp(2.35rem,9.6vw,6.6rem);  /* 上限 約106px */
+  line-height:1.08; letter-spacing:-.025em;
+  margin:0 0 .46em;
+}
+.h1 .ln{display:block;white-space:nowrap}
+/* 2行目だけ画面の左端をはみ出させる。左右対称を壊すための1手 */
+.h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
+
+.rule{
+  width:min(380px,52vw);height:1px;background:var(--accent);margin:0 0 1.9em;
+  -webkit-mask-image:linear-gradient(90deg,#000 50%,transparent);
+          mask-image:linear-gradient(90deg,#000 50%,transparent);
+  -webkit-mask-size:.01% 100%;mask-size:.01% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+}
+html.js .rule.is-visible{animation:draw 1.15s .45s ease-out forwards}
+@keyframes draw{from{-webkit-mask-size:.01% 100%;mask-size:.01% 100%}
+                to{-webkit-mask-size:200% 100%;mask-size:200% 100%}}
+html:not(.js) .rule{-webkit-mask-image:none;mask-image:none}
+
+.sub{font-size:clamp(.95rem,1.35vw,1.1rem);color:var(--ink-soft);max-width:26em;margin:0 0 2.1em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 28px;border-radius:999px;font-weight:700;font-size:.93rem;
+  line-height:1.4;border:1.5px solid transparent;text-decoration:none;
+  transition:background-color .2s,color .2s,border-color .2s;
+}
+/* 暗い地なので、塗りは明るい弁柄＋暗い文字。実測コントラスト 6.1 */
+.btn-primary{background:var(--accent);color:#1a0f0a;border-color:var(--accent)}
+.btn-primary:hover{background:#f2825f;border-color:#f2825f}
+.btn-ghost{background:transparent;border-color:#5a4237;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* ---- 下端の一文。罫線1本で仕切るだけ（囲みを作らない） ---- */
+.tell{
+  position:relative;z-index:2;
+  border-top:1px solid var(--line);
+  padding:18px clamp(20px,5vw,84px) clamp(18px,4vh,34px);
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,3vw,40px);
+  align-items:baseline;
+  min-height:5.4em;
+}
+.tell__n{
+  font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,5vw,3.6rem);line-height:1;
+  color:var(--accent-deep);
+  /* 数字を図版として使う（ルール4の未使用の手札） */
+  opacity:calc(.35 + var(--bloom) * .65);
+}
+.tell__t{font-size:clamp(.85rem,1.2vw,.99rem);color:var(--ink-soft);max-width:46em;margin:0}
+.tell__t b{color:var(--ink);font-weight:700}
+html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s linear}
+
+@media (max-width:860px){
+  .h1{font-size:clamp(2.1rem,10.4vw,3.6rem)}
+  .h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
+  .copy{padding-top:14svh}
+  .sub{max-width:22em;margin-bottom:1.5em}
+  .cta{gap:9px;flex-wrap:nowrap}
+  .btn{padding:13px 17px;font-size:.86rem;white-space:nowrap}
+  .tell{grid-template-columns:1fr;gap:6px;min-height:7em}
+  html.js .hero{height:230svh}
+}
+@media (prefers-reduced-motion:reduce){
+  .rule{-webkit-mask-image:none;mask-image:none;animation:none}
+  html.js .tell__t{opacity:1}
+}
+.after{padding:70px clamp(20px,5vw,84px) 170px;color:var(--ink-faint);font-size:.82rem;border-top:1px solid var(--line)}
+</style>
+</head>
+<body>
+<script>document.documentElement.className+=' js';</script>
+
+<section class="hero" id="hero">
+ <div class="pin">
+  <div class="stage"><canvas id="gl"></canvas></div>
+
+  <div class="fallback" aria-hidden="true">
+    <svg viewBox="0 0 160 160"><path fill="currentColor" fill-rule="evenodd" d="M70.08,45.39 Q70.96,42.10 71.84,38.80 Q80.00,38.80 88.16,38.80 Q89.04,42.10 89.92,45.39 A36.00,36.00 0 0 1 94.64,47.11 Q98.17,43.62 103.74,41.18 Q110.72,45.58 115.88,52.02 Q113.53,56.89 109.85,59.87 A36.00,36.00 0 0 1 112.36,64.22 Q118.85,63.17 127.13,66.58 Q130.76,74.22 128.94,82.48 Q122.12,85.52 115.80,83.76 A36.00,36.00 0 0 1 114.93,88.71 Q122.13,92.63 126.88,103.63 Q125.77,112.35 117.92,116.30 Q108.71,113.66 105.01,105.90 A36.00,36.00 0 0 1 101.16,109.12 Q104.92,118.20 99.70,132.42 Q93.72,139.44 85.27,135.75 Q78.68,125.98 82.51,115.91 A36.00,36.00 0 0 1 77.49,115.91 Q74.14,126.83 57.66,135.15 Q48.27,137.84 45.49,128.47 Q46.96,114.47 58.84,109.12 A36.00,36.00 0 0 1 54.99,105.90 Q44.08,112.97 23.04,106.92 Q13.14,103.68 18.79,94.92 Q30.62,83.50 45.07,88.71 A36.00,36.00 0 0 1 44.20,83.76 Q29.75,81.91 16.53,60.17 Q9.77,51.27 20.83,49.65 Q39.68,48.36 47.64,64.22 A36.00,36.00 0 0 1 50.15,59.87 Q39.33,47.95 45.00,19.38 Q44.57,7.35 53.78,15.10 Q71.09,27.76 65.36,47.11 A36.00,36.00 0 0 1 70.08,45.39 Z M80.00,80.00 m-13.00,0 a13.00,13.00 0 1,0 26.00,0 a13.00,13.00 0 1,0 -26.00,0 Z"/></svg>
+  </div>
+
+  <div class="copy">
+    <span class="eyebrow">Nagasaki, Japan</span>
+    <h1 class="h1">
+      <span class="ln">歯車を、</span>
+      <span class="ln ln--out">咲かせる。</span>
+    </h1>
+    <div class="rule" id="rule"></div>
+    <p class="sub">
+      長崎で、ホームページと業務アプリを作っています。
+      会社ではなく、野﨑大雅が一人で最初から最後まで。
+    </p>
+    <div class="cta">
+      <a href="../contact.html" class="btn btn-primary">依頼・相談してみる</a>
+      <a href="../portfolio.html" class="btn btn-ghost">実績を見る</a>
+    </div>
+  </div>
+
+  <div class="tell">
+    <span class="tell__n">9</span>
+    <p class="tell__t">
+      歯は9枚。回るうちに花びらへ変わります。<b>Gear Bloom</b> という名前はそこから取りました。
+      ホームページも、業務アプリも、Excelのマクロも、<b>お店の歯車をひとつ回す仕事</b>だと思っています。
+    </p>
+  </div>
+ </div>
+</section>
+
+<div class="after">ここから下に、制作実績（ReAct!! ／ なぎさ堂 ／ トラットリア南風）が続きます。</div>
+
+<script type="module">
+import { initHero3D } from './hero3d.bundle.js';
+
+var hero = document.getElementById('hero');
+var api = initHero3D(document.getElementById('gl'), { color: '#a5361b' });
+
+if (!api) {
+  /* WebGLが使えない端末では平面のマークに落とす。
+     読めるかどうかをJSに委ねない（ルール5） */
+  document.documentElement.classList.add('no-webgl');
+} else {
+  var ticking = false;
+  function update() {
+    var r = hero.getBoundingClientRect();
+    var padB = parseFloat(getComputedStyle(hero).paddingBottom) || 0;
+    var span = Math.max(1, r.height - padB - innerHeight);
+    var p = (-r.top) / span;
+    p = p < 0 ? 0 : (p > 1 ? 1 : p);
+    hero.style.setProperty('--bloom', p.toFixed(3));
+    api.setBloom(p);
+    ticking = false;
+  }
+  addEventListener('scroll', function(){ if(ticking) return; ticking=true; requestAnimationFrame(update); }, {passive:true});
+  addEventListener('resize', update, {passive:true});
+  update();
+}
+document.getElementById('rule').classList.add('is-visible');
+</script>
+</body>
+</html>
