@@ -116,7 +116,7 @@ html.js .rule.is-visible{animation:draw 1.15s .45s ease-out forwards}
 html:not(.js) .rule{-webkit-mask-image:none;mask-image:none}
 
 .sub{font-size:clamp(.95rem,1.35vw,1.1rem);color:var(--ink-soft);max-width:26em;margin:0 0 2.1em}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 .btn{
   display:inline-flex;align-items:center;gap:10px;
   padding:15px 28px;border-radius:999px;font-weight:700;font-size:.93rem;
@@ -157,7 +157,7 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
   .h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
   .copy{padding-top:14svh}
   .sub{max-width:22em;margin-bottom:1.5em}
-  .cta{gap:9px;flex-wrap:nowrap}
+  .hero-cta{gap:9px;flex-wrap:nowrap}
   .btn{padding:13px 17px;font-size:.86rem;white-space:nowrap}
   .tell{grid-template-columns:1fr;gap:6px;min-height:7em}
   html.js .hero{height:230svh}
