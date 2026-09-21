@@ -279,6 +279,168 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
   .works__frame{margin-right:0;border-radius:10px 0 0 10px;margin-left:0}
   .works__index .n{font-size:1.8rem}
 }
+
+/* ==========================================================
+   ヒーロー・実績より下の共通部分
+   白いカード＋1pxの枠線＋角丸は使わない（ルール4）。
+   罫線と数字だけで組み、階層は明度差で作る。
+   ========================================================== */
+.wrap{padding:0 clamp(20px,5vw,84px);max-width:1180px}
+.sec-h{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-weight:900;font-size:clamp(1.6rem,4.2vw,2.9rem);
+  line-height:1.26;letter-spacing:-.015em;margin:0 0 .55em;
+}
+.sec-lead{color:var(--ink-soft);font-size:clamp(.9rem,1.3vw,1.02rem);margin:0;max-width:42em;text-wrap:pretty}
+.rule--s{width:min(300px,44vw);margin-bottom:1.6em}
+/* ヒーローと実績は自前で余白を持っているので、ここでまとめない。
+   section[id] で一括指定したら id="hero" にも当たり、
+   貼り付けた中身が81pxずれた */
+.can, .flow, .who, .faq, .cta{padding:clamp(56px,9vh,104px) 0}
+
+/* ---- できること ---- */
+.can{background:var(--bg);border-top:1px solid var(--line)}
+.can__list{list-style:none;margin:clamp(26px,4vh,44px) 0 0;padding:0}
+.can__list li{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:clamp(16px,3vw,40px);align-items:baseline;
+  padding:clamp(22px,3.4vh,34px) clamp(20px,5vw,84px);
+  border-top:1px solid var(--line-soft);
+}
+.can__list li:last-child{border-bottom:1px solid var(--line-soft)}
+.can__n{
+  font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(1.7rem,3vw,2.6rem);line-height:.9;color:var(--accent-dim);
+}
+.can__list h3{font-size:clamp(1.02rem,1.7vw,1.24rem);margin:0 0 .4em;font-weight:700}
+.can__list p{margin:0;color:var(--ink-soft);font-size:.92rem;max-width:44em;text-wrap:pretty}
+.can__price{
+  font-family:'Archivo','Zen Kaku Gothic New',sans-serif;font-weight:700;
+  font-size:clamp(1rem,1.8vw,1.35rem);color:var(--accent);white-space:nowrap;
+}
+.can__price i{font-style:normal;font-size:.62em;color:var(--ink-faint);margin-left:2px}
+
+/* ---- 料金と進め方 ---- */
+.flow{background:var(--surface-1);border-top:1px solid var(--line)}
+/* 格子の外枠は包む側で位置を合わせる。格子自身に padding を付けると
+   gap の地色が余白にはみ出し、左右に帯が残る */
+.wrap--grid{max-width:1180px}
+.facts{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--line-soft);
+  margin:clamp(28px,4.5vh,50px) 0 clamp(30px,5vh,56px);
+  border:1px solid var(--line-soft);
+}
+.fact{background:var(--surface-1);padding:clamp(20px,3vh,30px) clamp(16px,2.4vw,28px)}
+/* 数字を図版として使う（ルール4の未使用の手札） */
+.fact__n{
+  display:block;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,4.6vw,3.5rem);line-height:1;color:var(--accent);
+  margin-bottom:.34em;letter-spacing:-.02em;
+}
+.fact__n i{font-style:normal;font-size:.3em;color:var(--ink-soft);margin-left:4px;letter-spacing:.02em}
+.fact p{margin:0;font-size:.83rem;color:var(--ink-soft);text-wrap:pretty}
+
+.steps{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
+  border:1px solid var(--line-soft)}
+.steps li{background:var(--surface-1);display:grid;grid-template-columns:auto 1fr;gap:14px;
+  padding:clamp(18px,2.6vh,26px) clamp(16px,2vw,24px);align-items:start}
+.steps li>span{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:1.05rem;
+  color:var(--accent-dim);line-height:1.5;min-width:1.2em;
+}
+.steps h3{font-size:.98rem;margin:0 0 .35em;font-weight:700}
+.steps p{margin:0;font-size:.83rem;color:var(--ink-soft);text-wrap:pretty}
+
+/* ---- 誰がやるのか ---- */
+.who{background:var(--bg);border-top:1px solid var(--line)}
+.who__grid{
+  display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  gap:clamp(24px,4.5vw,64px);align-items:center;
+  padding-right:clamp(20px,5vw,84px);
+}
+/* 写真は左の画面端まで断ち切る（中央寄せを崩す一手） */
+.who__photo{position:relative;overflow:hidden;border-radius:0 140px 0 0;isolation:isolate}
+/* 明るい屋外写真をそのまま置くと、暗い地に穴が空いたように見える。
+   明度を落として弁柄側へ寄せ、四辺を地へ溶かす。
+   色相は足さず、暖色に寄せるだけ（補色を足さないという禁止事項を守る） */
+.who__photo img{
+  display:block;width:100%;height:auto;
+  filter:saturate(.55) brightness(.72) contrast(1.06);
+}
+.who__photo::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:var(--accent-deep);mix-blend-mode:color;opacity:.34;
+}
+.who__photo::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(to top,    var(--bg) 1%,  transparent 46%),
+    linear-gradient(to right,  var(--bg) 0%,  transparent 26%),
+    linear-gradient(to left,   var(--bg) 0%,  transparent 24%),
+    linear-gradient(to bottom, var(--bg) 0%,  transparent 20%);
+}
+.who__body{min-width:0}
+.who__name{font-size:1.28rem;font-weight:700;margin:0 0 1.2em}
+.who__name i{display:block;font-style:normal;font-size:.62rem;letter-spacing:.16em;
+  color:var(--ink-faint);margin-top:6px;text-transform:uppercase}
+.who__body p{color:var(--ink-soft);font-size:.94rem;max-width:44em;text-wrap:pretty}
+.who__pts{list-style:none;margin:1.8em 0 0;padding:0;display:grid;gap:0}
+.who__pts li{
+  border-top:1px solid var(--line-soft);padding:13px 0;
+  font-size:.87rem;color:var(--ink-soft);
+}
+.who__pts li:last-child{border-bottom:1px solid var(--line-soft)}
+
+/* ---- FAQ ---- */
+.faq{background:var(--surface-1);border-top:1px solid var(--line)}
+.faq__list{margin-top:clamp(24px,4vh,42px);padding:0 clamp(20px,5vw,84px);max-width:1180px}
+.faq__list details{border-top:1px solid var(--line-soft)}
+.faq__list details:last-child{border-bottom:1px solid var(--line-soft)}
+.faq__list summary{
+  list-style:none;cursor:pointer;padding:19px 34px 19px 0;position:relative;
+  font-weight:700;font-size:.99rem;
+}
+.faq__list summary::-webkit-details-marker{display:none}
+.faq__list summary::after{
+  content:"";position:absolute;right:6px;top:50%;width:11px;height:11px;
+  border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+  transform:translateY(-70%) rotate(45deg);transition:transform .22s ease;
+}
+.faq__list details[open] summary::after{transform:translateY(-20%) rotate(-135deg)}
+.faq__list summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.faq__list p{margin:0 0 20px;color:var(--ink-soft);font-size:.9rem;max-width:52em;text-wrap:pretty}
+
+/* ---- 問い合わせ ---- */
+.cta{background:var(--surface-2);border-top:1px solid var(--line)}
+.cta__in{max-width:760px}
+/* 「ところか／ら。」で割れていたので行を明示する。
+   一番長い行が全角10文字なので、桁からあふれない上限で刻む */
+.cta__h{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;font-weight:900;
+  font-size:clamp(1.55rem,6.2vw,3rem);line-height:1.22;letter-spacing:-.02em;margin:0 0 .5em;
+}
+.cta__h .ln{display:block;white-space:nowrap}
+.cta__in p{color:var(--ink-soft);font-size:.95rem;margin:0 0 2em;text-wrap:pretty}
+.cta__btns{display:flex;gap:12px;flex-wrap:wrap}
+
+.foot{background:var(--bg);border-top:1px solid var(--line);padding:26px 0}
+.foot__in{display:flex;justify-content:space-between;align-items:center;
+  font-size:.76rem;color:var(--ink-faint);letter-spacing:.06em}
+
+@media (max-width:860px){
+  .can__list li{grid-template-columns:auto 1fr;gap:12px 14px}
+  .can__price{grid-column:2;margin-top:.4em}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .who__grid{grid-template-columns:1fr;padding-right:0;gap:22px}
+  .who__photo{border-radius:0 0 0 0;max-height:52vh}
+  .who__photo img{object-fit:cover;max-height:52vh}
+  .who__body{padding:0 clamp(20px,5vw,84px)}
+}
+
 </style>
 </head>
 <body>
@@ -397,6 +559,155 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
   </p>
 </section>
 
+<!-- ==========================================================
+     できること。ヒーローの弧と同じ3つで、呼応させる。
+     カード（白い箱＋1px枠＋角丸）は使わない。ルール4の
+     「ウェブで最も見慣れた形」なので、罫線だけで組む。
+     ========================================================== -->
+<section class="can" id="can">
+  <div class="wrap">
+    <span class="eyebrow">Service</span>
+    <h2 class="sec-h">できること</h2>
+    <div class="rule rule--s" data-draw></div>
+  </div>
+  <ol class="can__list">
+    <li>
+      <span class="can__n">01</span>
+      <div>
+        <h3>ホームページ制作</h3>
+        <p>数ページの静的サイトが中心です。スマートフォンでの見え方に合わせて作ります。
+           サーバーを使わない構成にできるので、月々の維持費がかからないことが多いです。</p>
+      </div>
+      <span class="can__price">2万円<i>〜</i></span>
+    </li>
+    <li>
+      <span class="can__n">02</span>
+      <div>
+        <h3>業務アプリ開発</h3>
+        <p>タスク管理など、日々の業務で使う小規模なツール。
+           作る人ではなく、使う人がつまずく場所を考えて設計します。</p>
+      </div>
+      <span class="can__price">応相談</span>
+    </li>
+    <li>
+      <span class="can__n">03</span>
+      <div>
+        <h3>Excelマクロ制作</h3>
+        <p>集計・転記・レポート出力など、毎月くり返している作業を自動化します。
+           今のファイルをそのまま使える形にすることが多いです。</p>
+      </div>
+      <span class="can__price">応相談</span>
+    </li>
+  </ol>
+</section>
+
+<!-- ==========================================================
+     料金と進め方。DMから来た店主が一番知りたいところなので、
+     金額・支払い・修正回数・納期をひとまとめにする。
+     ========================================================== -->
+<section class="flow" id="flow">
+  <div class="wrap">
+    <span class="eyebrow">Price &amp; Flow</span>
+    <h2 class="sec-h">いくらで、どう進むか</h2>
+    <div class="rule rule--s" data-draw></div>
+    <p class="sec-lead">先に金額の考え方をお伝えします。あとから増えることのないようにしたいので。</p>
+  </div>
+
+  <div class="wrap wrap--grid">
+  <div class="facts">
+    <div class="fact"><span class="fact__n">2<i>万円〜</i></span><p>数ページの簡単なホームページの目安。内容が増えても8万円ほどまでが多いです。</p></div>
+    <div class="fact"><span class="fact__n">0<i>円</i></span><p>着手金はいただきません。納品してご確認いただいてからの一括払いです。</p></div>
+    <div class="fact"><span class="fact__n">2<i>回</i></span><p>納品時のご確認で気になる点は、2回まで無料で直します。</p></div>
+    <div class="fact"><span class="fact__n">0<i>円/月</i></span><p>サーバーを使わない構成なら維持費はかかりません。独自ドメインは年間数千円。</p></div>
+  </div>
+
+  </div>
+  <div class="wrap wrap--grid">
+  <ol class="steps">
+    <li><span>1</span><div><h3>ご相談</h3><p>InstagramのDMから。「何から相談すればいいか分からない」段階で構いません。</p></div></li>
+    <li><span>2</span><div><h3>ヒアリング</h3><p>どんなお店で、誰に見てほしくて、何を載せたいか。ここに一番時間をかけます。</p></div></li>
+    <li><span>3</span><div><h3>お見積り</h3><p>作業内容・金額・納期をメールで。ご了承の返信をいただいてから着手します。</p></div></li>
+    <li><span>4</span><div><h3>制作</h3><p>本業の合間に進めるため、余裕をもった日程でご相談させてください。</p></div></li>
+    <li><span>5</span><div><h3>ご確認・修正</h3><p>できあがったものを見ていただき、気になる点を直します。</p></div></li>
+    <li><span>6</span><div><h3>納品・お支払い</h3><p>ご納得いただいてから、一括でお支払いをお願いします。</p></div></li>
+  </ol>
+  </div>
+</section>
+
+<!-- ==========================================================
+     誰がやるのか。DMを受け取った店主が確かめたいのはここ。
+     ========================================================== -->
+<section class="who" id="who">
+  <div class="who__grid">
+    <div class="who__photo">
+      <img src="../assets/founder.jpg" alt="野﨑大雅の写真" loading="lazy" width="800" height="1000">
+    </div>
+    <div class="who__body">
+      <span class="eyebrow">Who</span>
+      <h2 class="sec-h">作るのは、この人間ひとりです</h2>
+      <div class="rule rule--s" data-draw></div>
+      <p class="who__name">野﨑 大雅<i>Gear Bloom 運営者</i></p>
+      <p>本業は企業の人事部門で、新卒採用と社内広報、それに自社ホームページの運営を担当しています。
+         その中で「作ってもらったはいいけれど、更新の仕方が分からず放置してしまう」ホームページを何度も見てきました。</p>
+      <p>同じことを、お付き合いするお店に経験してほしくない。それが始めた理由です。
+         まだ実績は多くありません。分からないことは分からないと伝えますし、実績の少なさも隠しません。
+         そのぶん、一件一件を確実にやります。</p>
+      <ul class="who__pts">
+        <li>専門用語を使わずに説明することに慣れています</li>
+        <li>平日は夜間、土日は日中。即日対応・24時間対応はしていません</li>
+        <li>お支払い完了後、データも著作権もお客様に帰属します</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="sec-h">よくあるご質問</h2>
+    <div class="rule rule--s" data-draw></div>
+  </div>
+  <div class="faq__list">
+    <details><summary>作ったあと、自分たちで更新できますか？</summary>
+      <p>ご希望に応じて、ログインして記事を投稿・編集できる管理画面をお付けできます。
+         ReAct!! 様の事例では、スマホから写真つきで投稿できる画面をご用意しました。</p></details>
+    <details><summary>毎月の維持費はかかりますか？</summary>
+      <p>構成によります。ReAct!! 様の事例ではサーバーを使わない構成にしているため、維持費はかかっていません。
+         独自ドメインを取得される場合は年間数千円程度が別途かかります。</p></details>
+    <details><summary>ネット予約や決済もお願いできますか？</summary>
+      <p>複雑な予約システムや決済は、別の仕組みが必要になり月額のサーバー費用が発生します。
+         できないことはできないとお伝えしますので、まずはご相談ください。</p></details>
+    <details><summary>対応できる時間帯を教えてください</summary>
+      <p>本業がありますので、平日は夜間中心、土日は日中から終日で対応できる場合があります。
+         即日対応・24時間対応は行っていません。お急ぎの場合は、お受けできるかを正直にお伝えします。</p></details>
+    <details><summary>写真がないのですが、大丈夫でしょうか</summary>
+      <p>大丈夫です。お持ちの写真を使うほか、絵で描き起こすこともできます。
+         この画面のマークも、写真を使わずに作ったものです。</p></details>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<section class="cta" id="cta">
+  <div class="wrap cta__in">
+    <h2 class="cta__h"><span class="ln">まず、</span><span class="ln">話を聞くところから。</span></h2>
+    <p>ホームページをお持ちでない方も、業務の困りごとだけでも構いません。
+       お断りいただいても、こちらから追いかけることはありません。</p>
+    <div class="cta__btns">
+      <a href="../contact.html" class="btn btn-primary">依頼・相談してみる</a>
+      <a href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener" class="btn btn-ghost">Instagram を見る</a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap foot__in">
+    <span>&copy; Gear Bloom</span>
+    <span>長崎県</span>
+  </div>
+</footer>
+
+
 <script src="gsap.min.js"></script>
 <script src="SplitText.min.js"></script>
 <script type="module">
@@ -446,6 +757,18 @@ document.getElementById('rule').classList.add('is-visible');
   }, { threshold:0, rootMargin:'0px 0px -20% 0px' });
   io.observe(r);
   setTimeout(function(){ r.classList.add('is-visible'); }, 5000);   // 保険
+})();
+
+/* 下のセクションの線も、そこまで来たら描く（写経01） */
+(function(){
+  var rs = document.querySelectorAll('[data-draw]');
+  if (!rs.length) return;
+  if (!('IntersectionObserver' in window)) { rs.forEach(function(r){r.classList.add('is-visible');}); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold:0, rootMargin:'0px 0px -18% 0px' });
+  rs.forEach(function(r){ io.observe(r); });
+  setTimeout(function(){ rs.forEach(function(r){ r.classList.add('is-visible'); }); }, 5000);
 })();
 
 /* 制作実績：索引を押すと静止画が入れ替わり、「動かす」で実物を読み込む。
