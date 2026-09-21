@@ -52,7 +52,10 @@ html.js .pin{ position:sticky; top:0; height:100svh; }
 .orb-t--1{opacity:clamp(0, calc((var(--bloom) - .22) * 3), 1)}
 .orb-t--2{opacity:clamp(0, calc((var(--bloom) - .36) * 3), 1)}
 .orb-t--3{opacity:clamp(0, calc((var(--bloom) - .50) * 3), 1)}
-@media (max-width:860px){ .orb-t{font-size:11px} .orbits{right:-26vw;bottom:-2vh;top:16vh} }
+@media (max-width:860px){
+  .orb-t{font-size:13px}
+  .orbits{left:-10vw;right:-10vw;top:1vh;bottom:64vh}
+}
 @media (prefers-reduced-motion:reduce){ .orb{stroke-dashoffset:0;opacity:.6} .orb-t{opacity:1} }
 /* JSが来ないときは弧を出さない（--bloom が動かず、中途半端に残るため）。
    WebGLだけ無い場合は --bloom が動くので、弧はそのまま効く */
@@ -66,7 +69,12 @@ html:not(.js) .orbits{display:none}
   pointer-events:none;
 }
 .stage canvas{display:block;width:100%;height:100%}
-@media (max-width:860px){ .stage{right:-26vw;bottom:-2vh;top:16vh} }
+/* スマホでは横に並べる余地がないので、上下に分ける。
+   立体を画面の上3割強に収め、文章はその下から始める。
+   これをしないと立体が本文とボタンに重なる */
+@media (max-width:860px){
+  .stage{left:-10vw;right:-10vw;top:1vh;bottom:64vh}
+}
 
 /* WebGLが使えないときに出す平面のマーク（ルール5） */
 .fallback{
@@ -116,7 +124,7 @@ html.js .rule.is-visible{animation:draw 1.15s .45s ease-out forwards}
 html:not(.js) .rule{-webkit-mask-image:none;mask-image:none}
 
 .sub{font-size:clamp(.95rem,1.35vw,1.1rem);color:var(--ink-soft);max-width:26em;margin:0 0 2.1em}
-.hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.hero__cta{display:flex;gap:12px;flex-wrap:wrap}
 .btn{
   display:inline-flex;align-items:center;gap:10px;
   padding:15px 28px;border-radius:999px;font-weight:700;font-size:.93rem;
@@ -155,9 +163,9 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
 @media (max-width:860px){
   .h1{font-size:clamp(2.1rem,10.4vw,3.6rem)}
   .h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
-  .copy{padding-top:14svh}
+  .copy{padding-top:35svh}
   .sub{max-width:22em;margin-bottom:1.5em}
-  .hero-cta{gap:9px;flex-wrap:nowrap}
+  .hero__cta{gap:9px;flex-wrap:nowrap}
   .btn{padding:13px 17px;font-size:.86rem;white-space:nowrap}
   .tell{grid-template-columns:1fr;gap:6px;min-height:7em}
   html.js .hero{height:230svh}

@@ -306,42 +306,22 @@ nav.main-nav a[aria-current="page"]::after {
 .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
 /* ---- Hero ---- */
-.hero {
-  position: relative;
-  padding: 64px 0 72px;
-  overflow: hidden;
-}
+
 
 /* 方眼紙のうっすらした目。ぼかした光の玉をやめた代わりに、
    ここだけ平面のテクスチャで地を作る。上下は消えるようにマスクする。 */
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px);
-  background-size: 46px 46px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 66%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, #000 34%, #000 66%, transparent 100%);
-  pointer-events: none;
-}
 
-.hero-inner { position: relative; z-index: 1; }
+
+
 
 /* minmax(0, ...) にしないと、ショーケース側の中身が列幅を押し広げてしまう。
    左右を等分にしているのは、これより文章側を狭くすると
    「地域の会社・お店のための」がまとまりの途中で折り返して行が崩れるため。 */
-.hero-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 48px;
-  align-items: center;
-}
+
 /* 見出しが2行に収まる幅を確保する（本文の行長は .lead 側の 52ch で別途制限） */
-.hero-copy { max-width: 700px; min-width: 0; }
+
 @media (max-width: 980px) {
-  .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+  
 }
 
 /* ---- 制作物のショーケース（ブラウザ窓の中で実物が動く） ----
@@ -532,54 +512,30 @@ nav.main-nav a[aria-current="page"]::after {
    （収まらないとまとまり単位で行が落ち、右側に大きな余白が残るため） */
 /* 英字を主役の大きさで置き、意味は直下の日本語が受け持つ。
    和文をこの大きさまで上げると字面が詰まって重くなるため、役割を分けている。 */
-.hero h1 {
-  font-size: clamp(2.6rem, 7vw, 5.4rem);
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.02em;
-  margin: 0 0 24px;
-  text-transform: uppercase;
-  text-wrap: initial;
-}
-.hero h1 .line {
-  display: block;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: line-pop 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-.hero h1 .line:nth-child(2) { animation-delay: 0.12s; }
+
+
+
 
 @keyframes line-pop {
   to { opacity: 1; transform: none; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero h1 .line { opacity: 1; transform: none; animation: none; }
+  
 }
 
 /* 実質の見出し。英字より小さいが、本文よりはっきり太い */
-.hero-sub {
-  font-size: clamp(1.15rem, 2.1vw, 1.5rem);
-  font-weight: 700;
-  line-height: 1.62;
-  letter-spacing: 0.01em;
-  margin: 0 0 18px;
-}
 
-.hero .lead {
-  font-size: 1rem;
-  color: var(--ink-soft);
-  max-width: 34em;
-  margin-bottom: 30px;
-}
+
+
 
 .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
 
 /* スマホでは、制作物の枠をできるだけ最初の画面に入れたい。
    見出し・本文・ボタンで1画面を使い切らないよう詰める。 */
 @media (max-width: 560px) {
-  .hero { padding-top: 34px; padding-bottom: 48px; }
-  .hero .lead { font-size: 1rem; line-height: 1.7; }
+  
+  
   .hero-cta { gap: 10px; }
   .hero-cta .btn { padding: 12px 18px; font-size: 0.88rem; }
 }
@@ -1062,70 +1018,21 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
 .form-status[hidden] { display: none !important; }
 
 /* ---- 制作の流れ（縦の線でつなぐ。番号は本当の順序なので数字を使う） ---- */
-.flow { position: relative; display: grid; gap: 34px; max-width: 720px; }
-.flow::before {
-  content: "";
-  position: absolute;
-  left: 25px;
-  top: 12px;
-  bottom: 12px;
-  width: 2px;
-  background: repeating-linear-gradient(
-    var(--line) 0 6px, transparent 6px 12px
-  );
-}
-.flow-step {
-  position: relative;
-  display: grid;
-  grid-template-columns: 52px 1fr;
-  gap: 22px;
-  align-items: start;
-}
-.flow-step .no {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--surface);
-  border: 2px solid var(--ink);
-  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
-  font-weight: 600;
-  font-size: 1.05rem;
-  z-index: 1;
-}
-.flow-step:last-child .no { background: var(--sand); }
-.flow-step h3 { font-size: 1.08rem; margin-bottom: 4px; }
-.flow-step p { color: var(--ink-soft); font-size: 0.94rem; margin-bottom: 0; }
+
+
+
+
+
+
+
 
 /* ---- よくあるご質問 ---- */
-.faq { display: grid; gap: 0; max-width: 760px; }
-.faq-item {
-  border-top: 1px solid var(--line);
-  padding: 24px 0;
-}
-.faq-item:last-child { border-bottom: 1px solid var(--line); }
-.faq-item h3 {
-  position: relative;
-  padding-left: 38px;
-  font-size: 1.05rem;
-  margin-bottom: 8px;
-}
-.faq-item h3::before {
-  content: "Q";
-  position: absolute;
-  left: 0;
-  top: -1px;
-  font-family: 'Archivo', 'Zen Kaku Gothic New', sans-serif;
-  color: var(--accent);
-  font-size: 1.2rem;
-}
-.faq-item p {
-  padding-left: 38px;
-  color: var(--ink-soft);
-  font-size: 0.95rem;
-  margin-bottom: 0;
-}
+
+
+
+
+
+
 
 /* ---- フッター ---- */
 footer {
