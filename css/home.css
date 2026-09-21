@@ -1,0 +1,420 @@
+/* ==========================================================
+   トップページ専用。共通の配色・ヘッダー・ボタンは css/style.css。
+   ヒーローの立体は js/hero3d.bundle.js（three.js を自前で同梱）。
+   ========================================================== */
+/* ============================================================
+   前回「いまいち」だった原因は three.js が無いことではなく、
+   ルール2で封印したはずの骨格（ヒーロー2カラム＋中央寄せ＋
+   はみ出す要素ゼロ）をもう一度作ってしまったこと。
+
+   今回変えたのは3つ。
+   1. 2カラムをやめ、全面1枚にした。文字と物体を同じ面で重ねる
+   2. 文字を左の画面端まで断ち落とす（max-width の中央寄せをやめる）
+   3. 平面のSVGをやめ、漆の質感を持つ立体にした。
+      素材の根拠は要件定義の「弁柄＝建具や漆器に使われてきた赤茶」
+   ============================================================ */
+html{-webkit-text-size-adjust:100%}
+
+/* ---- 舞台。全面1枚。 ---- */
+.hero{ --bloom:0; position:relative; }
+html.js .hero{ height:260svh; }
+.pin{
+  position:relative; min-height:100svh; overflow:clip;
+  display:grid; grid-template-rows:1fr auto;
+}
+html.js .pin{ position:sticky; top:0; height:100svh; }
+
+/* ---- 弧。物体と同じ場所に重ね、奥行きの層にする ---- */
+.orbits{
+  position:absolute; inset:0; right:-14vw; bottom:-8vh;
+  pointer-events:none; z-index:0;
+}
+.orbits svg{width:100%;height:100%;display:block;overflow:visible}
+/* 円を「描く」。stroke-dasharray ではなくマスクの幅を伸ばす（写経01）。
+   進行は --bloom から取り、半径が大きい弧ほど遅れて描かれる */
+.orb{
+  transform-origin:200px 200px;
+  transform:rotate(-90deg);
+  stroke-dasharray:var(--len) var(--len);
+  stroke-dashoffset:calc(var(--len) * (1 - var(--p)));
+  opacity:calc(.25 + var(--p) * .75);
+}
+.orb--1{--len:742; --p:clamp(0, calc(var(--bloom) * 2.4), 1)}
+.orb--2{--len:955; --p:clamp(0, calc((var(--bloom) - .16) * 2.4), 1)}
+.orb--3{--len:1169;--p:clamp(0, calc((var(--bloom) - .32) * 2.4), 1)}
+
+/* ラベルはSVGの中に置く。画面外で切れないよう、真上ではなく
+   右上（-32度）の空いたところへ。弧と一緒に拡大縮小される */
+.orb-t{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-size:9px; letter-spacing:.1em; fill:var(--ink-soft);
+}
+.orb-t--1{opacity:clamp(0, calc((var(--bloom) - .22) * 3), 1)}
+.orb-t--2{opacity:clamp(0, calc((var(--bloom) - .36) * 3), 1)}
+.orb-t--3{opacity:clamp(0, calc((var(--bloom) - .50) * 3), 1)}
+@media (max-width:860px){ .orb-t{font-size:11px} .orbits{right:-26vw;bottom:-2vh;top:16vh} }
+@media (prefers-reduced-motion:reduce){ .orb{stroke-dashoffset:0;opacity:.6} .orb-t{opacity:1} }
+/* JSが来ないときは弧を出さない（--bloom が動かず、中途半端に残るため）。
+   WebGLだけ無い場合は --bloom が動くので、弧はそのまま効く */
+html:not(.js) .orbits{display:none}
+
+/* 立体は面いっぱいに敷き、右へ断ち落とす */
+.stage{
+  position:absolute; inset:0;
+  /* 右と下へはみ出させる。画面に収まりきらないのが狙い */
+  right:-14vw; bottom:-8vh;
+  pointer-events:none;
+}
+.stage canvas{display:block;width:100%;height:100%}
+@media (max-width:860px){ .stage{right:-26vw;bottom:-2vh;top:16vh} }
+
+/* WebGLが使えないときに出す平面のマーク（ルール5） */
+.fallback{
+  position:absolute;inset:0;display:none;place-items:center;
+  color:var(--accent-deep);
+}
+.fallback svg{width:min(62vw,540px);height:auto;opacity:.9}
+html.no-webgl .fallback{display:grid}
+html.no-webgl .stage{display:none}
+
+/* ---- 文字。左端まで断ち落とす ---- */
+.copy{
+  position:relative; z-index:2; align-self:center;
+  padding:clamp(28px,6vh,72px) 0 0;
+  /* 中央寄せをやめ、左の画面端から始める */
+  padding-left:clamp(20px,5vw,84px);
+  max-width:none;
+}
+.eyebrow{
+  display:inline-flex;align-items:center;gap:12px;
+  font-size:.7rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  color:var(--accent);margin:0 0 1.5em;
+}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--accent)}
+
+.h1{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-weight:900;
+  font-size:clamp(2.35rem,9.6vw,6.6rem);  /* 上限 約106px */
+  line-height:1.08; letter-spacing:-.025em;
+  margin:0 0 .46em;
+}
+.h1 .ln{display:block;white-space:nowrap}
+/* 2行目だけ画面の左端をはみ出させる。左右対称を壊すための1手 */
+.h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
+
+.rule{
+  width:min(380px,52vw);height:1px;background:var(--accent);margin:0 0 1.9em;
+  -webkit-mask-image:linear-gradient(90deg,#000 50%,transparent);
+          mask-image:linear-gradient(90deg,#000 50%,transparent);
+  -webkit-mask-size:.01% 100%;mask-size:.01% 100%;
+  -webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+}
+html.js .rule.is-visible{animation:draw 1.15s .45s ease-out forwards}
+@keyframes draw{from{-webkit-mask-size:.01% 100%;mask-size:.01% 100%}
+                to{-webkit-mask-size:200% 100%;mask-size:200% 100%}}
+html:not(.js) .rule{-webkit-mask-image:none;mask-image:none}
+
+.sub{font-size:clamp(.95rem,1.35vw,1.1rem);color:var(--ink-soft);max-width:26em;margin:0 0 2.1em}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:15px 28px;border-radius:999px;font-weight:700;font-size:.93rem;
+  line-height:1.4;border:1.5px solid transparent;text-decoration:none;
+  transition:background-color .2s,color .2s,border-color .2s;
+}
+/* 暗い地なので、塗りは明るい弁柄＋暗い文字。実測コントラスト 6.1 */
+.btn-primary{background:var(--accent);color:#1a0f0a;border-color:var(--accent)}
+.btn-primary:hover{background:#f2825f;border-color:#f2825f}
+.btn-ghost{background:transparent;border-color:#5a4237;color:var(--ink)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+/* ---- 下端の一文。罫線1本で仕切るだけ（囲みを作らない） ---- */
+.tell{
+  position:relative;z-index:2;
+  background:var(--surface-1);
+  border-top:1px solid var(--line);
+  padding:18px clamp(20px,5vw,84px) clamp(18px,4vh,34px);
+  display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,3vw,40px);
+  align-items:baseline;
+  min-height:5.4em;
+}
+.tell__n{
+  font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,5vw,3.6rem);line-height:1;
+  /* 数字を図版として使う（ルール4の未使用の手札）。
+     accent-deep だと 2.73 で基準3.0に届かないので accent-dim を使う */
+  color:var(--accent-dim);
+  opacity:calc(.35 + var(--bloom) * .65);
+}
+.tell__t{font-size:clamp(.85rem,1.2vw,.99rem);color:var(--ink-soft);max-width:46em;margin:0}
+.tell__t b{color:var(--ink);font-weight:700}
+html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s linear}
+
+@media (max-width:860px){
+  .h1{font-size:clamp(2.1rem,10.4vw,3.6rem)}
+  .h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
+  .copy{padding-top:14svh}
+  .sub{max-width:22em;margin-bottom:1.5em}
+  .cta{gap:9px;flex-wrap:nowrap}
+  .btn{padding:13px 17px;font-size:.86rem;white-space:nowrap}
+  .tell{grid-template-columns:1fr;gap:6px;min-height:7em}
+  html.js .hero{height:230svh}
+}
+@media (prefers-reduced-motion:reduce){
+  .rule{-webkit-mask-image:none;mask-image:none;animation:none}
+  html.js .tell__t{opacity:1}
+}
+/* ---- 制作実績 ---- */
+.works{
+  position:relative;background:var(--surface-1);
+  border-top:1px solid var(--line);
+  padding:clamp(56px,9vh,110px) 0 clamp(60px,9vh,120px);
+  overflow-x:clip;
+}
+.works__head{padding:0 clamp(20px,5vw,84px);max-width:760px}
+.works__h{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-weight:900;font-size:clamp(1.7rem,4.6vw,3.1rem);
+  line-height:1.24;letter-spacing:-.015em;margin:0 0 .6em;
+}
+.rule--w{margin-bottom:1.5em}
+/* 末尾が「す。」だけで落ちていたので均す */
+.works__lead{color:var(--ink-soft);font-size:clamp(.9rem,1.3vw,1.02rem);margin:0;text-wrap:balance}
+
+/* 左の索引と右の枠。等分にせず、枠は右の画面端まで断ち切る */
+.works__body{
+  margin-top:clamp(30px,5vh,56px);
+  display:grid;
+  grid-template-columns:minmax(230px,.9fr) minmax(0,2.1fr);
+  gap:clamp(22px,4vw,56px);
+  align-items:start;
+  padding-left:clamp(20px,5vw,84px);
+}
+
+.works__index{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.works__index button{
+  width:100%;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;
+  background:none;border:0;border-top:1px solid var(--line-soft);
+  padding:18px 4px;text-align:left;color:inherit;cursor:pointer;font:inherit;
+  transition:border-color .2s,background-color .2s;
+}
+.works__index li:last-child button{border-bottom:1px solid var(--line-soft)}
+/* 数字は見出しではなく図版。大きく、暗く、文字より奥に置く */
+.works__index .n{
+  font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:.9;
+  color:var(--accent-dim);transition:color .2s;
+}
+.works__index .t{display:block}
+.works__index .t b{display:block;font-size:1.02rem;font-weight:700;letter-spacing:.01em}
+.works__index .t i{display:block;font-style:normal;font-size:.79rem;color:var(--ink-faint);margin-top:3px}
+.works__index button:hover{background:var(--surface-2)}
+.works__index button[aria-selected="true"]{border-top-color:var(--accent)}
+.works__index button[aria-selected="true"] .n{color:var(--accent)}
+.works__index button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* 枠は右端を断ち切る。画面に収まりきらないのが狙い */
+.works__frame{
+  position:relative;border-radius:10px 0 0 10px;overflow:hidden;
+  background:var(--chrome);margin-right:calc(clamp(20px,5vw,84px) * -1 - 4vw);
+}
+.works__frame .bar{display:flex;align-items:center;gap:14px;padding:10px 14px;background:var(--chrome)}
+.works__frame .dots{display:flex;gap:6px;flex-shrink:0}
+.works__frame .dots i{width:9px;height:9px;border-radius:50%;background:#2e2521}
+.works__frame .dots i:first-child{background:var(--accent-deep)}
+.works__frame .url{
+  flex:1;min-width:0;font-family:'Archivo',sans-serif;font-size:.7rem;letter-spacing:.02em;
+  color:var(--chrome-ink);background:#171110;border-radius:999px;padding:5px 14px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.works__frame .view{position:relative;aspect-ratio:1120/700;background:var(--chrome)}
+.works__frame .view img,.works__frame .view iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:0;display:block;object-fit:cover;object-position:top;
+}
+.works__frame .play{
+  position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:999px;border:0;cursor:pointer;
+  background:rgba(12,9,8,.86);color:#f4ece2;font:inherit;font-size:.86rem;font-weight:700;
+  backdrop-filter:blur(6px);
+}
+.works__frame .play svg{width:15px;height:15px}
+.works__frame .play:hover{background:var(--accent);color:#1a0f0a}
+.works__frame .play:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.works__note{
+  text-wrap:pretty;
+  margin:clamp(26px,4vh,44px) 0 0;
+  padding:0 clamp(20px,5vw,84px);
+  max-width:56em;color:var(--ink-faint);font-size:.82rem;
+}
+
+@media (max-width:860px){
+  .works__body{grid-template-columns:1fr;padding-right:0;gap:22px}
+  .works__frame{margin-right:0;border-radius:10px 0 0 10px;margin-left:0}
+  .works__index .n{font-size:1.8rem}
+}
+
+/* ==========================================================
+   ヒーロー・実績より下の共通部分
+   白いカード＋1pxの枠線＋角丸は使わない（ルール4）。
+   罫線と数字だけで組み、階層は明度差で作る。
+   ========================================================== */
+.wrap{padding:0 clamp(20px,5vw,84px);max-width:1180px}
+.sec-h{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-weight:900;font-size:clamp(1.6rem,4.2vw,2.9rem);
+  line-height:1.26;letter-spacing:-.015em;margin:0 0 .55em;
+}
+.sec-lead{color:var(--ink-soft);font-size:clamp(.9rem,1.3vw,1.02rem);margin:0;max-width:42em;text-wrap:pretty}
+.rule--s{width:min(300px,44vw);margin-bottom:1.6em}
+/* ヒーローと実績は自前で余白を持っているので、ここでまとめない。
+   section[id] で一括指定したら id="hero" にも当たり、
+   貼り付けた中身が81pxずれた */
+.can, .flow, .who, .faq, .cta{padding:clamp(56px,9vh,104px) 0}
+
+/* ---- できること ---- */
+.can{background:var(--bg);border-top:1px solid var(--line)}
+.can__list{list-style:none;margin:clamp(26px,4vh,44px) 0 0;padding:0}
+.can__list li{
+  display:grid;
+  grid-template-columns:auto minmax(0,1fr) auto;
+  gap:clamp(16px,3vw,40px);align-items:baseline;
+  padding:clamp(22px,3.4vh,34px) clamp(20px,5vw,84px);
+  border-top:1px solid var(--line-soft);
+}
+.can__list li:last-child{border-bottom:1px solid var(--line-soft)}
+.can__n{
+  font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(1.7rem,3vw,2.6rem);line-height:.9;color:var(--accent-dim);
+}
+.can__list h3{font-size:clamp(1.02rem,1.7vw,1.24rem);margin:0 0 .4em;font-weight:700}
+.can__list p{margin:0;color:var(--ink-soft);font-size:.92rem;max-width:44em;text-wrap:pretty}
+.can__price{
+  font-family:'Archivo','Zen Kaku Gothic New',sans-serif;font-weight:700;
+  font-size:clamp(1rem,1.8vw,1.35rem);color:var(--accent);white-space:nowrap;
+}
+.can__price i{font-style:normal;font-size:.62em;color:var(--ink-faint);margin-left:2px}
+
+/* ---- 料金と進め方 ---- */
+.flow{background:var(--surface-1);border-top:1px solid var(--line)}
+/* 格子の外枠は包む側で位置を合わせる。格子自身に padding を付けると
+   gap の地色が余白にはみ出し、左右に帯が残る */
+.wrap--grid{max-width:1180px}
+.facts{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:var(--line-soft);
+  margin:clamp(28px,4.5vh,50px) 0 clamp(30px,5vh,56px);
+  border:1px solid var(--line-soft);
+}
+.fact{background:var(--surface-1);padding:clamp(20px,3vh,30px) clamp(16px,2.4vw,28px)}
+/* 数字を図版として使う（ルール4の未使用の手札） */
+.fact__n{
+  display:block;font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(2.2rem,4.6vw,3.5rem);line-height:1;color:var(--accent);
+  margin-bottom:.34em;letter-spacing:-.02em;
+}
+.fact__n i{font-style:normal;font-size:.3em;color:var(--ink-soft);margin-left:4px;letter-spacing:.02em}
+.fact p{margin:0;font-size:.83rem;color:var(--ink-soft);text-wrap:pretty}
+
+.steps{list-style:none;margin:0;padding:0;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);
+  border:1px solid var(--line-soft)}
+.steps li{background:var(--surface-1);display:grid;grid-template-columns:auto 1fr;gap:14px;
+  padding:clamp(18px,2.6vh,26px) clamp(16px,2vw,24px);align-items:start}
+.steps li>span{
+  font-family:'Archivo',sans-serif;font-weight:800;font-size:1.05rem;
+  /* 16.8px は「大きい文字」の緩和を受けられないので、accent をそのまま使う */
+  color:var(--accent);line-height:1.5;min-width:1.2em;
+}
+.steps h3{font-size:.98rem;margin:0 0 .35em;font-weight:700}
+.steps p{margin:0;font-size:.83rem;color:var(--ink-soft);text-wrap:pretty}
+
+/* ---- 誰がやるのか ---- */
+.who{background:var(--bg);border-top:1px solid var(--line)}
+.who__grid{
+  display:grid;grid-template-columns:minmax(0,.78fr) minmax(0,1.22fr);
+  gap:clamp(24px,4.5vw,64px);align-items:center;
+  padding-right:clamp(20px,5vw,84px);
+}
+/* 写真は左の画面端まで断ち切る（中央寄せを崩す一手） */
+.who__photo{position:relative;overflow:hidden;border-radius:0 140px 0 0;isolation:isolate}
+/* 明るい屋外写真をそのまま置くと、暗い地に穴が空いたように見える。
+   明度を落として弁柄側へ寄せ、四辺を地へ溶かす。
+   色相は足さず、暖色に寄せるだけ（補色を足さないという禁止事項を守る） */
+.who__photo img{
+  display:block;width:100%;height:auto;
+  filter:saturate(.55) brightness(.72) contrast(1.06);
+}
+.who__photo::before{
+  content:"";position:absolute;inset:0;z-index:1;
+  background:var(--accent-deep);mix-blend-mode:color;opacity:.34;
+}
+.who__photo::after{
+  content:"";position:absolute;inset:0;z-index:2;
+  background:
+    linear-gradient(to top,    var(--bg) 1%,  transparent 46%),
+    linear-gradient(to right,  var(--bg) 0%,  transparent 26%),
+    linear-gradient(to left,   var(--bg) 0%,  transparent 24%),
+    linear-gradient(to bottom, var(--bg) 0%,  transparent 20%);
+}
+.who__body{min-width:0}
+.who__name{font-size:1.28rem;font-weight:700;margin:0 0 1.2em}
+.who__name i{display:block;font-style:normal;font-size:.62rem;letter-spacing:.16em;
+  color:var(--ink-faint);margin-top:6px;text-transform:uppercase}
+.who__body p{color:var(--ink-soft);font-size:.94rem;max-width:44em;text-wrap:pretty}
+.who__pts{list-style:none;margin:1.8em 0 0;padding:0;display:grid;gap:0}
+.who__pts li{
+  border-top:1px solid var(--line-soft);padding:13px 0;
+  font-size:.87rem;color:var(--ink-soft);
+}
+.who__pts li:last-child{border-bottom:1px solid var(--line-soft)}
+
+/* ---- FAQ ---- */
+.faq{background:var(--surface-1);border-top:1px solid var(--line)}
+.faq__list{margin-top:clamp(24px,4vh,42px);padding:0 clamp(20px,5vw,84px);max-width:1180px}
+.faq__list details{border-top:1px solid var(--line-soft)}
+.faq__list details:last-child{border-bottom:1px solid var(--line-soft)}
+.faq__list summary{
+  list-style:none;cursor:pointer;padding:19px 34px 19px 0;position:relative;
+  font-weight:700;font-size:.99rem;
+}
+.faq__list summary::-webkit-details-marker{display:none}
+.faq__list summary::after{
+  content:"";position:absolute;right:6px;top:50%;width:11px;height:11px;
+  border-right:1.5px solid var(--accent);border-bottom:1.5px solid var(--accent);
+  transform:translateY(-70%) rotate(45deg);transition:transform .22s ease;
+}
+.faq__list details[open] summary::after{transform:translateY(-20%) rotate(-135deg)}
+.faq__list summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.faq__list p{margin:0 0 20px;color:var(--ink-soft);font-size:.9rem;max-width:52em;text-wrap:pretty}
+
+/* ---- 問い合わせ ---- */
+.cta{background:var(--surface-2);border-top:1px solid var(--line)}
+.cta__in{max-width:760px}
+/* 「ところか／ら。」で割れていたので行を明示する。
+   一番長い行が全角10文字なので、桁からあふれない上限で刻む */
+.cta__h{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;font-weight:900;
+  font-size:clamp(1.55rem,6.2vw,3rem);line-height:1.22;letter-spacing:-.02em;margin:0 0 .5em;
+}
+.cta__h .ln{display:block;white-space:nowrap}
+.cta__in p{color:var(--ink-soft);font-size:.95rem;margin:0 0 2em;text-wrap:pretty}
+.cta__btns{display:flex;gap:12px;flex-wrap:wrap}
+
+.foot{background:var(--bg);border-top:1px solid var(--line);padding:26px 0}
+.foot__in{display:flex;justify-content:space-between;align-items:center;
+  font-size:.76rem;color:var(--ink-faint);letter-spacing:.06em}
+
+@media (max-width:860px){
+  .can__list li{grid-template-columns:auto 1fr;gap:12px 14px}
+  .can__price{grid-column:2;margin-top:.4em}
+  .facts{grid-template-columns:repeat(2,1fr)}
+  .steps{grid-template-columns:1fr}
+  .who__grid{grid-template-columns:1fr;padding-right:0;gap:22px}
+  .who__photo{border-radius:0 0 0 0;max-height:52vh}
+  .who__photo img{object-fit:cover;max-height:52vh}
+  .who__body{padding:0 clamp(20px,5vw,84px)}
+}

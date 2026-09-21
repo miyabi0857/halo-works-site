@@ -410,10 +410,15 @@ function initScrollReveal() {
       observer.unobserve(el);
       el.classList.add('reveal-in');
       // 演出が終わったらクラスを外し、ホバー時の変形とぶつからないようにする
-      el.addEventListener('animationend', () => {
+      const done = () => {
         el.classList.remove('reveal-init', 'reveal-in');
         el.style.animationDelay = '';
-      }, { once: true });
+      };
+      el.addEventListener('animationend', done, { once: true });
+      /* animationend は取りこぼすことがある（演出中にタブを裏へ回した等）。
+         取りこぼすと reveal-init の opacity:0 が残って中身が読めなくなるので、
+         演出の長さ（最長1秒）＋遅延（最長440ms）を超えたら必ず戻す。 */
+      setTimeout(done, 1800);
     });
   }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
 

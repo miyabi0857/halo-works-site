@@ -22,42 +22,48 @@
 @import url('https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap');
 
 :root {
-  --bg: #faf8f4;
-  --surface: #ffffff;
-  --surface-soft: #efe7db;
-  --ink: #1a1310;
-  --ink-soft: #5c4d44;
-  --ink-faint: #8a7a6e;
-  /* 配色は「弁柄（赤茶）」の一色相でまとめる。
-     --accent が主役、--sand はその淡い側で、どちらも同じ暖色系。
-     【重要】補色（緑・青など）を主役級の彩度で足さないこと。
-     以前ここに深緑を混ぜてオリーブに濁らせた失敗がある。
-     2色を混ぜたグラデーションも作らない（中間色が必ず濁る）。 */
-  --accent: #c2401f;
-  /* 小さい文字・リンクはこちら。#c2401f は大きい面では効くが、
-     本文サイズだと生成りの地に対してコントラストが足りない */
-  --accent-ink: #8f3a20;
-  --sand: #eee3d5;
-  --line: #e5ddd2;
-  --shadow: 0 20px 45px -25px rgba(36, 26, 21, 0.35);
+  /* 2026-09-21、トップページの刷新に合わせて地を暗い側へ寄せた。
+     色相は弁柄の1色のまま。階層は彩度ではなく明度差で作る
+     （要件定義の禁止事項：補色を主役級の彩度で足さない）。
+     以前は明るい生成りが既定で、暗い側は prefers-color-scheme で
+     出していたが、トップが暗い地になったので既定を入れ替えた。 */
+  --bg: #120e0d;
+  --surface: #1a1412;
+  --surface-1: #1a1412;
+  --surface-2: #231a16;
+  --surface-soft: #231a1680;
+  --ink: #f4ece2;
+  --ink-soft: #b3a294;
+  /* #7d6f64 だと小さい文字で 3.52〜3.96 しかなく、基準の4.5に届かない。
+     #9a8b7e なら 5.17〜5.82（実測） */
+  --ink-faint: #9a8b7e;
+  --accent: #e2653f;
+  /* 暗い地の上では、小さい文字ほど明るい側が読みやすい */
+  --accent-ink: #efa88e;
+  --accent-deep: #a5361b;
+  /* 特大の数字に使う。#6b2b17 は 1.72 しかなかった。
+     #b4472a で 3.15〜3.54（大きい文字の基準3.0を満たす） */
+  --accent-dim: #b4472a;
+  --sand: #4a3a30;
+  --line: #2c221d;
+  --line-soft: #201a17;
+  /* ブラウザ枠の暗いバー。以前は --ink が暗かったのでそれを流用していたが、
+     地を暗い側へ入れ替えたときに白いバーになってしまった。専用に持つ */
+  --chrome: #0c0908;
+  --chrome-ink: #c4b3a6;
+  --shadow: 0 20px 45px -25px rgba(0, 0, 0, 0.65);
   --radius-lg: 20px;
   --radius-md: 12px;
   --max-width: 1080px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #1a1512;
-    --surface: #221b17;
-    --surface-soft: #2a221c80;
-    --ink: #efe7dd;
-    --ink-soft: #b5a89d;
-    --ink-faint: #85786d;
-    --accent: #e2653f;
-    --accent-ink: #efa88e;
-    --sand: #6b5546;
-    --line: #362b24;
-    --shadow: 0 20px 45px -25px rgba(0, 0, 0, 0.6);
+/* 明るい地を明示的に選んでいる人にだけ、元の生成りを返す */
+@media (prefers-color-scheme: light) {
+  :root[data-theme="light"] {
+    --bg: #faf8f4; --surface: #ffffff; --surface-soft: #efe7db;
+    --ink: #1a1310; --ink-soft: #5c4d44; --ink-faint: #8a7a6e;
+    --accent: #c2401f; --accent-ink: #8f3a20;
+    --sand: #eee3d5; --line: #e5ddd2;
   }
 }
 
@@ -282,17 +288,20 @@ nav.main-nav a[aria-current="page"]::after {
 
 .btn-primary {
   background: var(--accent);
-  color: #ffffff;
+  /* 暗い地では白文字だとコントラストが3.41しかなく、
+     0.95rem太字は「大きい文字」の緩和も受けられない。
+     文字を地色側へ振ると5.32になる（実測） */
+  color: #1a0f0a;
   border-color: var(--accent);
 }
-.btn-primary:hover { background: var(--accent-ink); border-color: var(--accent-ink); }
+.btn-primary:hover { background: #f2825f; border-color: #f2825f; }
 
 .btn-ghost {
   background: transparent;
   border-color: var(--accent);
   color: var(--accent-ink);
 }
-.btn-ghost:hover { background: var(--accent); color: #ffffff; }
+.btn-ghost:hover { background: var(--accent); color: #1a0f0a; }
 
 .btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
 
@@ -367,7 +376,7 @@ nav.main-nav a[aria-current="page"]::after {
   z-index: 1;
   border-radius: 10px;
   overflow: hidden;
-  background: var(--ink);
+  background: var(--chrome);
 }
 
 .work-bar {
@@ -375,7 +384,7 @@ nav.main-nav a[aria-current="page"]::after {
   align-items: center;
   gap: 14px;
   padding: 10px 14px;
-  background: var(--ink);
+  background: var(--chrome);
 }
 .work-dots { display: flex; gap: 6px; flex-shrink: 0; }
 .work-dots i {
@@ -443,8 +452,8 @@ nav.main-nav a[aria-current="page"]::after {
   font-family: inherit;
   font-size: 0.82rem;
   font-weight: 700;
-  color: var(--surface);
-  background: color-mix(in srgb, var(--ink) 88%, transparent);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--chrome) 88%, transparent);
   backdrop-filter: blur(6px);
   border: 1px solid color-mix(in srgb, var(--surface) 30%, transparent);
   border-radius: 999px;
@@ -737,17 +746,17 @@ section.alt { background: var(--surface); border-top: 1px solid var(--line); bor
 .case-study:hover { transform: rotate(0deg); }
 
 .browser-frame {
-  background: var(--ink);
+  background: var(--chrome);
   padding: 10px 14px;
   display: flex;
   align-items: center;
   gap: 8px;
 }
-.browser-frame .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ink-faint); opacity: 0.6; }
+.browser-frame .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--chrome-ink); opacity: 0.7; }
 .browser-frame .url {
   margin-left: 10px;
   font-size: 0.78rem;
-  color: #cfd2e0;
+  color: var(--chrome-ink);
   font-family: 'Archivo', sans-serif;
   background: rgba(255,255,255,0.08);
   padding: 4px 12px;

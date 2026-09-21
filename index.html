@@ -3,11 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gear Bloom｜Web制作・業務アプリ・Excelマクロ</title>
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#120e0d">
+<title>Gear Bloom｜長崎のWeb制作・業務アプリ・Excelマクロ</title>
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Gear Bloom">
 <meta property="og:locale" content="ja_JP">
-<meta property="og:title" content="Gear Bloom｜地域の会社・お店のためのWeb制作">
+<meta property="og:title" content="Gear Bloom｜長崎で、ホームページを作っています">
 <meta property="og:description" content="長崎県内の会社・お店のためのホームページ制作、業務アプリ開発、Excelマクロ作成を承っています。">
 <meta property="og:url" content="https://gearbloom.jp/">
 <meta property="og:image" content="https://gearbloom.jp/assets/ogp.png">
@@ -15,14 +17,14 @@
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="長崎県内の会社・お店のためのホームページ制作、業務アプリ開発、Excelマクロ作成を承っています。">
-<link rel="stylesheet" href="css/style.css?v=20260913h">
+<link rel="stylesheet" href="css/style.css?v=20260921a">
+<link rel="stylesheet" href="css/home.css?v=20260921a">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon-32.png" sizes="64x64">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 <body>
-
-<div class="scroll-progress"></div>
+<script>document.documentElement.className+=' js';</script>
 
 <header class="site-header">
   <div class="container">
@@ -41,337 +43,259 @@
 </header>
 
 <main>
+<section class="hero" id="hero">
+ <div class="pin">
+  <!-- 3本の弧。飾りではなく「3つがひとつの軸で回っている」という主張を運ぶ。
+       描画はマスクの幅を伸ばす技（写経01・toyox）。
+       半径ごとに進む速さを変えてあり、奥行きは calc がCSS側で出す（写経02・upvege） -->
+  <div class="orbits" aria-hidden="true">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+      <g fill="none" stroke-linecap="round">
+        <circle class="orb orb--1" cx="200" cy="200" r="118" stroke="var(--accent-dim)" stroke-width="1"/>
+        <circle class="orb orb--2" cx="200" cy="200" r="152" stroke="var(--accent-dim)" stroke-width="1"/>
+        <circle class="orb orb--3" cx="200" cy="200" r="186" stroke="var(--accent-dim)" stroke-width="1"/>
+      </g>
+      <g class="orb-texts">
+        <text class="orb-t orb-t--1" x="309.1" y="141.5">ホームページ</text>
+        <text class="orb-t orb-t--2" x="337.9" y="123.5">業務アプリ</text>
+        <text class="orb-t orb-t--3" x="366.7" y="105.4">Excelマクロ</text>
+      </g>
+    </svg>
+  </div>
 
-  <section class="hero">
-    <div class="container container--wide hero-inner">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">Nagasaki, Japan</span>
-          <h1><span class="line">Web made</span><span class="line">to last</span></h1>
-          <p class="hero-sub">「作って終わり」にしない、<br>地域の会社・お店のWeb制作。</p>
-          <p class="lead">
-            長崎で、ホームページと業務アプリを作っています。
-            ここに並んでいるのは実際に公開しているページで、そのまま動かせます。
-          </p>
-          <div class="hero-cta">
-            <a href="contact.html" class="btn btn-primary">依頼・相談してみる</a>
-            <a href="portfolio.html" class="btn btn-ghost">実績を見る</a>
-          </div>
-        </div>
+  <div class="stage"><canvas id="gl"></canvas></div>
 
-        <!-- 制作物そのものをヒーローにする。
-             静止画を先に出して即座に描画し、押されたときだけ実物を読み込む
-             （デモは写真を埋め込んでいて1MB前後あり、最初から読むと重いため） -->
-        <div class="work">
-          <!-- 屋号の由来（歯車の歯が花びらに変わる）を平面の図形にしたもの。
-               意味のない装飾を置かないための選択で、枠の後ろに半分隠れる。 -->
-          <svg class="work-deco work-deco--a" viewBox="0 0 120 120" aria-hidden="true">
-            <path d="M60 0 L71 38 L109 27 L82 60 L109 93 L71 82 L60 120 L49 82 L11 93 L38 60 L11 27 L49 38 Z" fill="currentColor"/>
-          </svg>
-          <svg class="work-deco work-deco--b" viewBox="0 0 120 120" aria-hidden="true">
-            <path d="M60 6 A27 27 0 0 1 60 60 A27 27 0 0 1 60 114 A27 27 0 0 1 60 60 A27 27 0 0 1 60 6 Z" fill="currentColor"/>
-            <path d="M6 60 A27 27 0 0 1 60 60 A27 27 0 0 1 114 60 A27 27 0 0 1 60 60 A27 27 0 0 1 6 60 Z" fill="currentColor"/>
-          </svg>
+  <div class="fallback" aria-hidden="true">
+    <svg viewBox="0 0 160 160"><path fill="currentColor" fill-rule="evenodd" d="M70.08,45.39 Q70.96,42.10 71.84,38.80 Q80.00,38.80 88.16,38.80 Q89.04,42.10 89.92,45.39 A36.00,36.00 0 0 1 94.64,47.11 Q98.17,43.62 103.74,41.18 Q110.72,45.58 115.88,52.02 Q113.53,56.89 109.85,59.87 A36.00,36.00 0 0 1 112.36,64.22 Q118.85,63.17 127.13,66.58 Q130.76,74.22 128.94,82.48 Q122.12,85.52 115.80,83.76 A36.00,36.00 0 0 1 114.93,88.71 Q122.13,92.63 126.88,103.63 Q125.77,112.35 117.92,116.30 Q108.71,113.66 105.01,105.90 A36.00,36.00 0 0 1 101.16,109.12 Q104.92,118.20 99.70,132.42 Q93.72,139.44 85.27,135.75 Q78.68,125.98 82.51,115.91 A36.00,36.00 0 0 1 77.49,115.91 Q74.14,126.83 57.66,135.15 Q48.27,137.84 45.49,128.47 Q46.96,114.47 58.84,109.12 A36.00,36.00 0 0 1 54.99,105.90 Q44.08,112.97 23.04,106.92 Q13.14,103.68 18.79,94.92 Q30.62,83.50 45.07,88.71 A36.00,36.00 0 0 1 44.20,83.76 Q29.75,81.91 16.53,60.17 Q9.77,51.27 20.83,49.65 Q39.68,48.36 47.64,64.22 A36.00,36.00 0 0 1 50.15,59.87 Q39.33,47.95 45.00,19.38 Q44.57,7.35 53.78,15.10 Q71.09,27.76 65.36,47.11 A36.00,36.00 0 0 1 70.08,45.39 Z M80.00,80.00 m-13.00,0 a13.00,13.00 0 1,0 26.00,0 a13.00,13.00 0 1,0 -26.00,0 Z"/></svg>
+  </div>
 
-          <div class="work-frame">
-            <div class="work-bar">
-              <span class="work-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="work-url" id="workUrl">miyabi0857.github.io/react-yosakoi-site/</span>
-            </div>
-            <div class="work-view" id="workView">
-              <img id="workShot" src="assets/demo-react.jpg" width="1120" height="700"
-                   alt="制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている">
-              <button type="button" class="work-play" id="workPlay">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 L18.5 12 L8 18.5 Z" fill="currentColor"/></svg>
-                このページを動かす
-              </button>
-            </div>
-          </div>
+  <div class="copy">
+    <span class="eyebrow">Nagasaki, Japan</span>
+    <h1 class="h1">
+      <span class="ln">歯車を、</span>
+      <span class="ln ln--out">咲かせる。</span>
+    </h1>
+    <div class="rule" id="rule"></div>
+    <p class="sub">
+      長崎で、ホームページと業務アプリを作っています。
+      会社ではなく、野﨑大雅が一人で最初から最後まで。
+    </p>
+    <div class="cta">
+      <a href="contact.html" class="btn btn-primary">依頼・相談してみる</a>
+      <a href="portfolio.html" class="btn btn-ghost">実績を見る</a>
+    </div>
+  </div>
 
-          <div class="work-tabs" role="tablist" aria-label="制作したページ">
-            <button type="button" role="tab" aria-selected="true" data-i="0">
-              ReAct!!<span>ご依頼いただいた制作</span>
-            </button>
-            <button type="button" role="tab" aria-selected="false" data-i="1">
-              なぎさ堂<span>制作サンプル／美容室</span>
-            </button>
-            <button type="button" role="tab" aria-selected="false" data-i="2">
-              トラットリア南風<span>制作サンプル／飲食店</span>
-            </button>
-          </div>
-        </div>
+  <div class="tell">
+    <span class="tell__n">9</span>
+    <p class="tell__t">
+      歯は9枚。回るうちに花びらへ変わります。<b>Gear Bloom</b> という名前はそこから取りました。
+      ホームページも、業務アプリも、Excelのマクロも、<b>お店の歯車をひとつ回す仕事</b>だと思っています。
+    </p>
+  </div>
+ </div>
+</section>
+
+<!-- ==========================================================
+     制作実績。ヒーローの直後に置く（「歯車→花を先に、実績は直後」）。
+     骨格はまた2カラムにならないよう、左の索引と右の枠を
+     非対称にずらし、枠は右の画面端まで断ち切る。
+     数字は見出しではなく図版として置く（ルール4の未使用の手札）。
+     ========================================================== -->
+<section class="works" id="works">
+  <div class="works__head">
+    <span class="eyebrow">Works</span>
+    <h2 class="works__h">口で言うより、<br>動かして見てもらう。</h2>
+    <div class="rule rule--w" id="rule2"></div>
+    <p class="works__lead">
+      並んでいるのは実際に公開しているページです。押すとこの枠の中で本物が動きます。
+    </p>
+  </div>
+
+  <div class="works__body">
+    <ol class="works__index" role="tablist" aria-label="制作したページ">
+      <li>
+        <button type="button" role="tab" aria-selected="true" data-i="0">
+          <span class="n">01</span>
+          <span class="t"><b>ReAct!!</b><i>ご依頼いただいた制作</i></span>
+        </button>
+      </li>
+      <li>
+        <button type="button" role="tab" aria-selected="false" data-i="1">
+          <span class="n">02</span>
+          <span class="t"><b>なぎさ堂</b><i>制作サンプル／美容室</i></span>
+        </button>
+      </li>
+      <li>
+        <button type="button" role="tab" aria-selected="false" data-i="2">
+          <span class="n">03</span>
+          <span class="t"><b>トラットリア南風</b><i>制作サンプル／飲食店</i></span>
+        </button>
+      </li>
+    </ol>
+
+    <div class="works__frame">
+      <div class="bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="url" id="wUrl">miyabi0857.github.io/react-yosakoi-site/</span>
+      </div>
+      <div class="view" id="wView">
+        <img id="wShot" src="assets/demo-react.jpg" width="1120" height="700"
+             alt="制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている">
+        <button type="button" class="play" id="wPlay">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 L18.5 12 L8 18.5 Z" fill="currentColor"/></svg>
+          このページを動かす
+        </button>
       </div>
     </div>
-  </section>
+  </div>
 
-  <section class="alt">
-    <div class="container">
-      <div class="section-head">
-        <span class="eyebrow">Service</span>
-        <h2>対応できること</h2>
-        <p style="color:var(--ink-soft)">3つの領域を、一人で最初から最後まで担当します。</p>
+  <p class="works__note">
+    実績としてお見せできるのは ReAct!! 様の1件だけです。残りの2つは、
+    こういうものが作れますという見本として自分で作ったものです。
+  </p>
+</section>
+
+<!-- ==========================================================
+     できること。ヒーローの弧と同じ3つで、呼応させる。
+     カード（白い箱＋1px枠＋角丸）は使わない。ルール4の
+     「ウェブで最も見慣れた形」なので、罫線だけで組む。
+     ========================================================== -->
+<section class="can" id="can">
+  <div class="wrap">
+    <span class="eyebrow">Service</span>
+    <h2 class="sec-h">できること</h2>
+    <div class="rule rule--s" data-draw></div>
+  </div>
+  <ol class="can__list">
+    <li>
+      <span class="can__n">01</span>
+      <div>
+        <h3>ホームページ制作</h3>
+        <p>数ページの静的サイトが中心です。スマートフォンでの見え方に合わせて作ります。
+           サーバーを使わない構成にできるので、月々の維持費がかからないことが多いです。</p>
       </div>
-      <div class="grid-3">
-        <div class="card card--sticker">
-          <span class="num">01</span>
-          <!-- ブラウザ窓のイラスト -->
-          <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
-            <rect x="12" y="14" width="104" height="70" rx="7" fill="var(--sand)"/>
-            <rect x="6" y="8" width="104" height="70" rx="7" fill="var(--surface)" stroke="currentColor" stroke-width="2.6"/>
-            <path d="M6 24 H110" stroke="currentColor" stroke-width="2.6"/>
-            <circle cx="16" cy="16" r="2.6" fill="var(--accent)"/>
-            <circle cx="25" cy="16" r="2.6" fill="var(--sand)"/>
-            <circle cx="34" cy="16" r="2.6" fill="currentColor" opacity="0.25"/>
-            <rect x="14" y="33" width="38" height="26" rx="4" fill="var(--accent)" stroke="currentColor" stroke-width="2.2"/>
-            <rect x="60" y="34" width="38" height="5" rx="2.5" fill="currentColor" opacity="0.35"/>
-            <rect x="60" y="44" width="30" height="5" rx="2.5" fill="currentColor" opacity="0.35"/>
-            <rect x="60" y="54" width="36" height="5" rx="2.5" fill="currentColor" opacity="0.35"/>
-            <rect x="14" y="66" width="60" height="5" rx="2.5" fill="currentColor" opacity="0.2"/>
-            <path d="M84 62 L100 76 L93 77 L97 86 L92 88 L88 79 L83 84 Z" fill="var(--surface)" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
-          </svg>
-          <h3>ホームページ制作</h3>
-          <p>数ページ程度の静的サイトを中心に、スマートフォン閲覧に対応した形で制作します。</p>
-        </div>
-        <div class="card card--sticker">
-          <span class="num">02</span>
-          <!-- チェックリストのイラスト -->
-          <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
-            <rect x="40" y="12" width="52" height="76" rx="10" fill="var(--accent)"/>
-            <rect x="33" y="5" width="52" height="76" rx="10" fill="var(--surface)" stroke="currentColor" stroke-width="2.6"/>
-            <rect x="49" y="11" width="20" height="3.5" rx="1.75" fill="currentColor" opacity="0.4"/>
-            <circle cx="45" cy="30" r="5" fill="var(--sand)" stroke="currentColor" stroke-width="2.2"/>
-            <path d="M42.6 30 L44.4 32 L47.6 28" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="55" y="27.5" width="22" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="45" cy="47" r="5" fill="var(--sand)" stroke="currentColor" stroke-width="2.2"/>
-            <path d="M42.6 47 L44.4 49 L47.6 45" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="55" y="44.5" width="17" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="45" cy="64" r="5" fill="var(--surface)" stroke="currentColor" stroke-width="2.2"/>
-            <rect x="55" y="61.5" width="20" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <circle cx="93" cy="66" r="13" fill="var(--sand)" stroke="currentColor" stroke-width="2.6"/>
-            <path d="M93 60 V72 M87 66 H99" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
-          </svg>
-          <h3>業務アプリ開発</h3>
-          <p>タスク管理など、日々の業務で使う小規模なツールを、使う人の手間を減らす視点で設計します。</p>
-        </div>
-        <div class="card card--sticker">
-          <span class="num">03</span>
-          <!-- 表計算＋自動化のイラスト -->
-          <svg class="card-illust" viewBox="0 0 120 92" fill="none" aria-hidden="true">
-            <rect x="14" y="18" width="100" height="62" rx="6" fill="var(--sand)"/>
-            <rect x="8" y="12" width="100" height="62" rx="6" fill="var(--surface)" stroke="currentColor" stroke-width="2.6"/>
-            <path d="M8 28 H108" stroke="currentColor" stroke-width="2.6"/>
-            <path d="M8 28 V18 A6 6 0 0 1 14 12 H102 A6 6 0 0 1 108 18 V28 Z" fill="var(--sand)"/>
-            <path d="M42 28 V74 M75 28 V74 M8 47 H108 M8 61 H108" stroke="currentColor" stroke-width="1.8" opacity="0.45"/>
-            <rect x="16" y="35" width="18" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <rect x="49" y="35" width="18" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <rect x="16" y="52" width="18" height="4.5" rx="2.25" fill="currentColor" opacity="0.3"/>
-            <path d="M76 44 L92 44 L84 58 L96 58 L74 84 L80 64 L69 64 Z" fill="var(--accent)" stroke="currentColor" stroke-width="2.6" stroke-linejoin="round"/>
-          </svg>
-          <h3>Excelマクロ制作</h3>
-          <p>集計・転記・レポート出力など、繰り返し作業をマクロで自動化します。</p>
-        </div>
+      <span class="can__price">2万円<i>〜</i></span>
+    </li>
+    <li>
+      <span class="can__n">02</span>
+      <div>
+        <h3>業務アプリ開発</h3>
+        <p>タスク管理など、日々の業務で使う小規模なツール。
+           作る人ではなく、使う人がつまずく場所を考えて設計します。</p>
       </div>
-      <div style="text-align:center; margin-top:36px;">
-        <a href="service.html" class="btn btn-ghost">対応内容・金額目安を見る</a>
+      <span class="can__price">応相談</span>
+    </li>
+    <li>
+      <span class="can__n">03</span>
+      <div>
+        <h3>Excelマクロ制作</h3>
+        <p>集計・転記・レポート出力など、毎月くり返している作業を自動化します。
+           今のファイルをそのまま使える形にすることが多いです。</p>
       </div>
+      <span class="can__price">応相談</span>
+    </li>
+  </ol>
+</section>
+
+<!-- ==========================================================
+     料金と進め方。DMから来た店主が一番知りたいところなので、
+     金額・支払い・修正回数・納期をひとまとめにする。
+     ========================================================== -->
+<section class="flow" id="flow">
+  <div class="wrap">
+    <span class="eyebrow">Price &amp; Flow</span>
+    <h2 class="sec-h">いくらで、どう進むか</h2>
+    <div class="rule rule--s" data-draw></div>
+    <p class="sec-lead">先に金額の考え方をお伝えします。あとから増えることのないようにしたいので。</p>
+  </div>
+
+  <div class="wrap wrap--grid">
+  <div class="facts">
+    <div class="fact"><span class="fact__n">2<i>万円〜</i></span><p>数ページの簡単なホームページの目安。内容が増えても8万円ほどまでが多いです。</p></div>
+    <div class="fact"><span class="fact__n">0<i>円</i></span><p>着手金はいただきません。納品してご確認いただいてからの一括払いです。</p></div>
+    <div class="fact"><span class="fact__n">2<i>回</i></span><p>納品時のご確認で気になる点は、2回まで無料で直します。</p></div>
+    <div class="fact"><span class="fact__n">0<i>円/月</i></span><p>サーバーを使わない構成なら維持費はかかりません。独自ドメインは年間数千円。</p></div>
+  </div>
+
+  </div>
+  <div class="wrap wrap--grid">
+  <ol class="steps">
+    <li><span>1</span><div><h3>ご相談</h3><p>InstagramのDMから。「何から相談すればいいか分からない」段階で構いません。</p></div></li>
+    <li><span>2</span><div><h3>ヒアリング</h3><p>どんなお店で、誰に見てほしくて、何を載せたいか。ここに一番時間をかけます。</p></div></li>
+    <li><span>3</span><div><h3>お見積り</h3><p>作業内容・金額・納期をメールで。ご了承の返信をいただいてから着手します。</p></div></li>
+    <li><span>4</span><div><h3>制作</h3><p>本業の合間に進めるため、余裕をもった日程でご相談させてください。</p></div></li>
+    <li><span>5</span><div><h3>ご確認・修正</h3><p>できあがったものを見ていただき、気になる点を直します。</p></div></li>
+    <li><span>6</span><div><h3>納品・お支払い</h3><p>ご納得いただいてから、一括でお支払いをお願いします。</p></div></li>
+  </ol>
+  </div>
+</section>
+
+<!-- ==========================================================
+     誰がやるのか。DMを受け取った店主が確かめたいのはここ。
+     ========================================================== -->
+<section class="who" id="who">
+  <div class="who__grid">
+    <div class="who__photo">
+      <img src="assets/founder.jpg" alt="野﨑大雅の写真" loading="lazy" width="800" height="1000">
     </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="split">
-        <div class="photo-frame" style="--tilt:-2deg;">
-          <img src="assets/owner-tablet.jpg" alt="店内でタブレットを見ながら笑顔で立つ店主" loading="lazy" width="1600" height="1067">
-        </div>
-        <div>
-          <span class="eyebrow">For you</span>
-          <h2>こんな方のお役に立てます</h2>
-          <ul class="checklist">
-            <li>ホームページを持っておらず、InstagramなどSNSだけで発信している</li>
-            <li>昔サイトを作ったが、更新のしかたが分からず放置してしまっている</li>
-            <li>お店・会社の雰囲気やこだわりを、もっと知ってもらいたい</li>
-            <li>毎月の集計や転記の作業に、時間を取られている</li>
-            <li>何をどう相談すればいいのか、そこから分からない</li>
-          </ul>
-        </div>
-      </div>
+    <div class="who__body">
+      <span class="eyebrow">Who</span>
+      <h2 class="sec-h">作るのは、この人間ひとりです</h2>
+      <div class="rule rule--s" data-draw></div>
+      <p class="who__name">野﨑 大雅<i>Gear Bloom 運営者</i></p>
+      <p>本業は企業の人事部門で、新卒採用と社内広報、それに自社ホームページの運営を担当しています。
+         その中で「作ってもらったはいいけれど、更新の仕方が分からず放置してしまう」ホームページを何度も見てきました。</p>
+      <p>同じことを、お付き合いするお店に経験してほしくない。それが始めた理由です。
+         まだ実績は多くありません。分からないことは分からないと伝えますし、実績の少なさも隠しません。
+         そのぶん、一件一件を確実にやります。</p>
+      <ul class="who__pts">
+        <li>専門用語を使わずに説明することに慣れています</li>
+        <li>平日は夜間、土日は日中。即日対応・24時間対応はしていません</li>
+        <li>お支払い完了後、データも著作権もお客様に帰属します</li>
+      </ul>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section>
-    <div class="container">
-      <div class="section-head left">
-        <span class="eyebrow">About</span>
-        <h2>本業で培った視点を活かします</h2>
-      </div>
-      <!-- ここはカードにせず、罫線だけのテキストブロックにして主役（サービス3枚）を邪魔しない -->
-      <div class="stack">
-        <div class="stack-item" data-reveal="up">
-          <h3>丁寧なヒアリング</h3>
-          <p>認識のズレを防ぐため、依頼内容を丁寧に確認してから制作を始めます。</p>
-        </div>
-        <div class="stack-item" data-reveal="up">
-          <h3>使う側の目線</h3>
-          <p>企業の人事部門で新卒採用・社内広報を担当し、自社ホームページの運営にも携わってきた経験から、
-            「使う人がつまずく点」を想像して設計します。</p>
-        </div>
-        <div class="stack-item" data-reveal="up">
-          <h3>正直な進め方</h3>
-          <p>分からないことは分からないと伝え、実績の少なさも隠さず、確実さで信頼を積み重ねます。</p>
-        </div>
-      </div>
+<!-- ========================================================== -->
+<section class="faq" id="faq">
+  <div class="wrap">
+    <span class="eyebrow">FAQ</span>
+    <h2 class="sec-h">よくあるご質問</h2>
+    <div class="rule rule--s" data-draw></div>
+  </div>
+  <div class="faq__list">
+    <details><summary>作ったあと、自分たちで更新できますか？</summary>
+      <p>ご希望に応じて、ログインして記事を投稿・編集できる管理画面をお付けできます。
+         ReAct!! 様の事例では、スマホから写真つきで投稿できる画面をご用意しました。</p></details>
+    <details><summary>毎月の維持費はかかりますか？</summary>
+      <p>構成によります。ReAct!! 様の事例ではサーバーを使わない構成にしているため、維持費はかかっていません。
+         独自ドメインを取得される場合は年間数千円程度が別途かかります。</p></details>
+    <details><summary>ネット予約や決済もお願いできますか？</summary>
+      <p>複雑な予約システムや決済は、別の仕組みが必要になり月額のサーバー費用が発生します。
+         できないことはできないとお伝えしますので、まずはご相談ください。</p></details>
+    <details><summary>対応できる時間帯を教えてください</summary>
+      <p>本業がありますので、平日は夜間中心、土日は日中から終日で対応できる場合があります。
+         即日対応・24時間対応は行っていません。お急ぎの場合は、お受けできるかを正直にお伝えします。</p></details>
+    <details><summary>写真がないのですが、大丈夫でしょうか</summary>
+      <p>大丈夫です。お持ちの写真を使うほか、絵で描き起こすこともできます。
+         この画面のマークも、写真を使わずに作ったものです。</p></details>
+  </div>
+</section>
+
+<!-- ========================================================== -->
+<section class="cta" id="cta">
+  <div class="wrap cta__in">
+    <h2 class="cta__h"><span class="ln">まず、</span><span class="ln">話を聞くところから。</span></h2>
+    <p>ホームページをお持ちでない方も、業務の困りごとだけでも構いません。
+       お断りいただいても、こちらから追いかけることはありません。</p>
+    <div class="cta__btns">
+      <a href="contact.html" class="btn btn-primary">依頼・相談してみる</a>
+      <a href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener" class="btn btn-ghost">Instagram を見る</a>
     </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-head left">
-        <span class="eyebrow">Greeting</span>
-        <h2>ごあいさつ</h2>
-      </div>
-      <div class="greeting">
-        <img class="avatar" src="assets/founder.jpg" alt="野﨑大雅の写真" data-reveal="wipe">
-        <div class="greeting-body">
-          <p class="name">野﨑 大雅</p>
-          <p class="role">Gear Bloom 運営者／本業：人事部門（新卒採用・社内広報・自社ホームページ運営）</p>
-          <p>
-            はじめまして、Gear Bloomを一人で運営している野﨑 大雅と申します。本業では人事部門で
-            新卒採用や社内広報を担当し、自社のホームページ運営にも携わってきました。
-          </p>
-          <p>
-            その中で、「作ってもらったはいいけれど、更新の仕方が分からず放置してしまう」
-            ホームページを何度も見てきました。同じことを、お付き合いするお店・会社様には
-            経験してほしくないという思いから、副業としてGear Bloomを始めました。
-          </p>
-          <p>
-            まだ実績は多くありませんが、丁寧なヒアリングと、使う方の立場に立った設計で、
-            一件一件確実に向き合っていきます。どうぞよろしくお願いいたします。
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="container">
-      <div class="section-head left">
-        <span class="eyebrow">Flow</span>
-        <h2>ご依頼から納品までの流れ</h2>
-        <p style="color:var(--ink-soft)">はじめてホームページを作る方にも分かるよう、順番にご説明します。</p>
-      </div>
-      <div class="flow">
-        <div class="flow-step">
-          <span class="no">1</span>
-          <div>
-            <h3>ご相談・お問い合わせ</h3>
-            <p>InstagramのDMからご連絡ください。「何から相談すればいいか分からない」段階で構いません。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="no">2</span>
-          <div>
-            <h3>ヒアリング</h3>
-            <p>どんなお店・会社なのか、誰に見てほしいのか、何を載せたいのかをお伺いします。ここに一番時間をかけます。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="no">3</span>
-          <div>
-            <h3>お見積り・内容のご確認</h3>
-            <p>作業内容・金額・納期をメールでお送りします。ご了承の返信をいただいてから着手します。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="no">4</span>
-          <div>
-            <h3>制作</h3>
-            <p>本業の合間に進めるため、余裕をもったスケジュールでご相談させてください。無理な納期はお約束しません。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="no">5</span>
-          <div>
-            <h3>ご確認・修正</h3>
-            <p>できあがったものをご覧いただき、気になる点を直します。2回までは無料で対応します。</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <span class="no">6</span>
-          <div>
-            <h3>納品・お支払い</h3>
-            <p>内容にご納得いただいてから、一括でお支払いをお願いします。着手金はいただきません。</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="photo-band">
-    <img src="assets/desk-work.jpg" alt="木製のデスクでノートパソコンに向かう手元" loading="lazy" width="1600" height="1067">
-    <div class="band-copy">
-      <h2>平日の夜と休日に、一件ずつ。</h2>
-      <p>
-        数をこなすことはできませんが、その分ひとつの案件にじっくり向き合います。
-        急ぎのご依頼にはお応えできないこともありますが、無理な約束はいたしません。
-      </p>
-    </div>
-  </section>
-
-  <section>
-    <div class="container">
-      <div class="section-head left">
-        <span class="eyebrow">FAQ</span>
-        <h2>よくあるご質問</h2>
-      </div>
-      <div class="faq">
-        <div class="faq-item">
-          <h3>費用はどのくらいかかりますか？</h3>
-          <p>数ページの簡単なホームページで2万円〜8万円程度が目安です。作業量によって変わりますので、
-            ご相談内容をお伺いしてからお見積りします。実績を増やしている段階のため、
-            案件によっては初回限定のモニター価格でご案内する場合があります。</p>
-        </div>
-        <div class="faq-item">
-          <h3>支払いのタイミングはいつですか？</h3>
-          <p>納品後、内容をご確認いただいてからの一括払いです。着手金はいただいていません。</p>
-        </div>
-        <div class="faq-item">
-          <h3>修正は何回までお願いできますか？</h3>
-          <p>納品時のご確認で気になる点があれば、2回までは無料で修正します。
-            それ以降の修正や大きな仕様変更は、別途ご相談のうえお見積りします。</p>
-        </div>
-        <div class="faq-item">
-          <h3>作ったあと、自分たちで更新できますか？</h3>
-          <p>ご希望に応じて、ログインして記事を投稿・編集できる管理画面をお付けできます。
-            実績ページのReAct!!様の事例では、スマホから写真つきで投稿できる画面をご用意しました。</p>
-        </div>
-        <div class="faq-item">
-          <h3>毎月の維持費はかかりますか？</h3>
-          <p>構成によります。ReAct!!様の事例ではサーバーを使わない構成にしているため、維持費はかかっていません。
-            独自ドメイン（〇〇.com など）を取得される場合は、年間数千円程度が別途かかります。</p>
-        </div>
-        <div class="faq-item">
-          <h3>作ったホームページの権利はどうなりますか？</h3>
-          <p>お支払い完了後、データ・著作権ともにお客様に帰属します。</p>
-        </div>
-        <div class="faq-item">
-          <h3>対応できる時間帯を教えてください</h3>
-          <p>本業がありますので、平日は夜間中心、土日は日中〜終日で対応できる場合があります。
-            即日対応・24時間対応は行っていません。お急ぎの場合はその旨をお知らせください。
-            現実的にお受けできるかどうかを正直にお伝えします。</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="alt">
-    <div class="container" style="text-align:center;">
-      <span class="eyebrow">Contact</span>
-      <h2 style="margin-bottom:0.3em;">まずはお気軽にご相談ください</h2>
-      <p style="color:var(--ink-soft); margin-bottom:28px;">ホームページをお持ちでない方も、業務の困りごとだけでも構いません。</p>
-      <a href="contact.html" class="btn btn-primary">依頼・お問い合わせ</a>
-    </div>
-  </section>
-
+  </div>
+</section>
 </main>
 
 <footer class="container">
@@ -379,6 +303,127 @@
   <a href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener">Instagram</a>
 </footer>
 
-<script src="js/main.js?v=20260913h"></script>
+<script src="js/main.js?v=20260921a"></script>
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/SplitText.min.js"></script>
+<script type="module">
+import { initHero3D } from './js/hero3d.bundle.js';
+
+var hero = document.getElementById('hero');
+/* 色は hero3d.js 側で漆に合わせてあるので、ここから渡して上書きしない。
+   以前ここに '#a5361b' を書いていて、沈めた地の色が効いていなかった */
+var api = initHero3D(document.getElementById('gl'));
+
+/* WebGLが使えない端末では平面のマークに落とす。
+   ただし --bloom はCSSだけで効く部分（弧・ラベル・下の一文）にも
+   使っているので、立体の有無にかかわらず必ず更新する */
+if (!api) document.documentElement.classList.add('no-webgl');
+
+var ticking = false;
+function update() {
+  var r = hero.getBoundingClientRect();
+  var padB = parseFloat(getComputedStyle(hero).paddingBottom) || 0;
+  var span = Math.max(1, r.height - padB - innerHeight);
+  var p = (-r.top) / span;
+  p = p < 0 ? 0 : (p > 1 ? 1 : p);
+  hero.style.setProperty('--bloom', p.toFixed(3));
+  if (api) api.setBloom(p);
+  ticking = false;
+}
+addEventListener('scroll', function(){ if(ticking) return; ticking=true; requestAnimationFrame(update); }, {passive:true});
+addEventListener('resize', update, {passive:true});
+update();
+
+/* 保険：下の一文は本文なので、スクロールしなければ読めないのは困る。
+   5秒経っても進行が動いていなければ、素の表示に戻す（ルール5） */
+setTimeout(function () {
+  var bl = parseFloat(getComputedStyle(hero).getPropertyValue('--bloom'));
+  if (bl > 0.01) return;
+  var t = document.querySelector('.tell__t');
+  if (t) { t.style.transition = 'opacity .4s'; t.style.opacity = '1'; }
+}, 5000);
+document.getElementById('rule').classList.add('is-visible');
+/* 実績の線は、そこまでスクロールしてから描く（写経01） */
+(function(){
+  var r = document.getElementById('rule2');
+  if (!r) return;
+  if (!('IntersectionObserver' in window)) { r.classList.add('is-visible'); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold:0, rootMargin:'0px 0px -20% 0px' });
+  io.observe(r);
+  setTimeout(function(){ r.classList.add('is-visible'); }, 5000);   // 保険
+})();
+
+/* 下のセクションの線も、そこまで来たら描く（写経01） */
+(function(){
+  var rs = document.querySelectorAll('[data-draw]');
+  if (!rs.length) return;
+  if (!('IntersectionObserver' in window)) { rs.forEach(function(r){r.classList.add('is-visible');}); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold:0, rootMargin:'0px 0px -18% 0px' });
+  rs.forEach(function(r){ io.observe(r); });
+  setTimeout(function(){ rs.forEach(function(r){ r.classList.add('is-visible'); }); }, 5000);
+})();
+
+/* 制作実績：索引を押すと静止画が入れ替わり、「動かす」で実物を読み込む。
+   デモは写真を埋め込んでいて1MB前後あるので、押されたときだけ取りに行く */
+(function () {
+  var WORKS = [
+    { url:'https://miyabi0857.github.io/react-yosakoi-site/', label:'miyabi0857.github.io/react-yosakoi-site/',
+      shot:'../assets/demo-react.jpg', alt:'制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている' },
+    { url:'../demo/salon/', label:'gearbloom.jp/demo/salon/',
+      shot:'../assets/demo-salon.jpg', alt:'美容室なぎさ堂の制作サンプル。生成り色の紙面に花の写真' },
+    { url:'../demo/trattoria/', label:'gearbloom.jp/demo/trattoria/',
+      shot:'../assets/demo-trattoria.jpg', alt:'トラットリア南風の制作サンプル。黒板のメニューが並ぶ紙面' }
+  ];
+  var tabs = document.querySelectorAll('.works__index button');
+  var shot = document.getElementById('wShot');
+  var urlEl = document.getElementById('wUrl');
+  var view = document.getElementById('wView');
+  var play = document.getElementById('wPlay');
+  var cur = 0, live = null;
+
+  function clearLive(){ if(live){ live.remove(); live=null; play.hidden=false; shot.hidden=false; } }
+  function select(i) {
+    cur = i; clearLive();
+    tabs.forEach(function(t,j){ t.setAttribute('aria-selected', j===i ? 'true':'false'); });
+    shot.src = WORKS[i].shot; shot.alt = WORKS[i].alt;
+    urlEl.textContent = WORKS[i].label;
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ select(+t.dataset.i); }); });
+  play.addEventListener('click', function () {
+    if (live) return;
+    live = document.createElement('iframe');
+    live.src = WORKS[cur].url;
+    live.title = WORKS[cur].label + ' の実物';
+    live.loading = 'lazy';
+    view.appendChild(live);
+    play.hidden = true; shot.hidden = true;
+  });
+})();
+
+/* 見出しを1字ずつ立ち上げる（写経03・e-chubu の値をそのまま）。
+   終わったら self.revert() でDOMを戻すので span は残らない */
+(function () {
+  var el = document.querySelector('.h1');
+  if (!el || !window.gsap || !window.SplitText) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  gsap.registerPlugin(SplitText);
+  document.fonts.ready.then(function () {
+    SplitText.create(el, {
+      type:'chars', autoSplit:true, charsClass:'js-char', tag:'span', reduceWhiteSpace:false,
+      onSplit:function (self) {
+        return gsap.from(self.chars, {
+          scaleY:0.4, yPercent:10, alpha:0, duration:0.8,
+          ease:'elastic.out(1.2,0.6)', stagger:0.025,
+          onComplete:function(){ self.revert(); }
+        });
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
