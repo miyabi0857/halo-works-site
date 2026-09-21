@@ -22,10 +22,14 @@
       素材の根拠は要件定義の「弁柄＝建具や漆器に使われてきた赤茶」
    ============================================================ */
 :root{
-  --bg:#141010;
+  /* 色は弁柄の1色相のまま。階層は彩度ではなく明度差で作る
+     （要件定義の禁止事項：補色を主役級の彩度で足さない） */
+  --bg:#120e0d;
+  --surface-1:#1a1412;
+  --surface-2:#231a16;
   --ink:#f4ece2; --ink-soft:#b3a294; --ink-faint:#7d6f64;
-  --accent:#e2653f; --accent-deep:#a5361b;
-  --line:#2c221d;
+  --accent:#e2653f; --accent-deep:#a5361b; --accent-dim:#6b2b17;
+  --line:#2c221d; --line-soft:#201a17;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -43,6 +47,40 @@ html.js .hero{ height:260svh; }
   display:grid; grid-template-rows:1fr auto;
 }
 html.js .pin{ position:sticky; top:0; height:100svh; }
+
+/* ---- 弧。物体と同じ場所に重ね、奥行きの層にする ---- */
+.orbits{
+  position:absolute; inset:0; right:-14vw; bottom:-8vh;
+  pointer-events:none; z-index:0;
+}
+.orbits svg{width:100%;height:100%;display:block;overflow:visible}
+/* 円を「描く」。stroke-dasharray ではなくマスクの幅を伸ばす（写経01）。
+   進行は --bloom から取り、半径が大きい弧ほど遅れて描かれる */
+.orb{
+  transform-origin:200px 200px;
+  transform:rotate(-90deg);
+  stroke-dasharray:var(--len) var(--len);
+  stroke-dashoffset:calc(var(--len) * (1 - var(--p)));
+  opacity:calc(.25 + var(--p) * .75);
+}
+.orb--1{--len:742; --p:clamp(0, calc(var(--bloom) * 2.4), 1)}
+.orb--2{--len:955; --p:clamp(0, calc((var(--bloom) - .16) * 2.4), 1)}
+.orb--3{--len:1169;--p:clamp(0, calc((var(--bloom) - .32) * 2.4), 1)}
+
+/* ラベルはSVGの中に置く。画面外で切れないよう、真上ではなく
+   右上（-32度）の空いたところへ。弧と一緒に拡大縮小される */
+.orb-t{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-size:9px; letter-spacing:.1em; fill:var(--ink-soft);
+}
+.orb-t--1{opacity:clamp(0, calc((var(--bloom) - .22) * 3), 1)}
+.orb-t--2{opacity:clamp(0, calc((var(--bloom) - .36) * 3), 1)}
+.orb-t--3{opacity:clamp(0, calc((var(--bloom) - .50) * 3), 1)}
+@media (max-width:860px){ .orb-t{font-size:11px} .orbits{right:-26vw;bottom:-2vh;top:16vh} }
+@media (prefers-reduced-motion:reduce){ .orb{stroke-dashoffset:0;opacity:.6} .orb-t{opacity:1} }
+/* JSが来ないときは弧を出さない（--bloom が動かず、中途半端に残るため）。
+   WebGLだけ無い場合は --bloom が動くので、弧はそのまま効く */
+html:not(.js) .orbits{display:none}
 
 /* 立体は面いっぱいに敷き、右へ断ち落とす */
 .stage{
@@ -119,6 +157,7 @@ html:not(.js) .rule{-webkit-mask-image:none;mask-image:none}
 /* ---- 下端の一文。罫線1本で仕切るだけ（囲みを作らない） ---- */
 .tell{
   position:relative;z-index:2;
+  background:var(--surface-1);
   border-top:1px solid var(--line);
   padding:18px clamp(20px,5vw,84px) clamp(18px,4vh,34px);
   display:grid;grid-template-columns:auto 1fr;gap:clamp(14px,3vw,40px);
@@ -150,7 +189,96 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
   .rule{-webkit-mask-image:none;mask-image:none;animation:none}
   html.js .tell__t{opacity:1}
 }
-.after{padding:70px clamp(20px,5vw,84px) 170px;color:var(--ink-faint);font-size:.82rem;border-top:1px solid var(--line)}
+/* ---- 制作実績 ---- */
+.works{
+  position:relative;background:var(--surface-1);
+  border-top:1px solid var(--line);
+  padding:clamp(56px,9vh,110px) 0 clamp(60px,9vh,120px);
+  overflow-x:clip;
+}
+.works__head{padding:0 clamp(20px,5vw,84px);max-width:760px}
+.works__h{
+  font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
+  font-weight:900;font-size:clamp(1.7rem,4.6vw,3.1rem);
+  line-height:1.24;letter-spacing:-.015em;margin:0 0 .6em;
+}
+.rule--w{margin-bottom:1.5em}
+/* 末尾が「す。」だけで落ちていたので均す */
+.works__lead{color:var(--ink-soft);font-size:clamp(.9rem,1.3vw,1.02rem);margin:0;text-wrap:balance}
+
+/* 左の索引と右の枠。等分にせず、枠は右の画面端まで断ち切る */
+.works__body{
+  margin-top:clamp(30px,5vh,56px);
+  display:grid;
+  grid-template-columns:minmax(230px,.9fr) minmax(0,2.1fr);
+  gap:clamp(22px,4vw,56px);
+  align-items:start;
+  padding-left:clamp(20px,5vw,84px);
+}
+
+.works__index{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.works__index button{
+  width:100%;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;
+  background:none;border:0;border-top:1px solid var(--line-soft);
+  padding:18px 4px;text-align:left;color:inherit;cursor:pointer;font:inherit;
+  transition:border-color .2s,background-color .2s;
+}
+.works__index li:last-child button{border-bottom:1px solid var(--line-soft)}
+/* 数字は見出しではなく図版。大きく、暗く、文字より奥に置く */
+.works__index .n{
+  font-family:'Archivo',sans-serif;font-weight:800;
+  font-size:clamp(1.9rem,3.4vw,2.9rem);line-height:.9;
+  color:var(--accent-dim);transition:color .2s;
+}
+.works__index .t{display:block}
+.works__index .t b{display:block;font-size:1.02rem;font-weight:700;letter-spacing:.01em}
+.works__index .t i{display:block;font-style:normal;font-size:.79rem;color:var(--ink-faint);margin-top:3px}
+.works__index button:hover{background:var(--surface-2)}
+.works__index button[aria-selected="true"]{border-top-color:var(--accent)}
+.works__index button[aria-selected="true"] .n{color:var(--accent)}
+.works__index button:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+
+/* 枠は右端を断ち切る。画面に収まりきらないのが狙い */
+.works__frame{
+  position:relative;border-radius:10px 0 0 10px;overflow:hidden;
+  background:#0c0908;margin-right:calc(clamp(20px,5vw,84px) * -1 - 4vw);
+}
+.works__frame .bar{display:flex;align-items:center;gap:14px;padding:10px 14px;background:#0c0908}
+.works__frame .dots{display:flex;gap:6px;flex-shrink:0}
+.works__frame .dots i{width:9px;height:9px;border-radius:50%;background:#2e2521}
+.works__frame .dots i:first-child{background:var(--accent-deep)}
+.works__frame .url{
+  flex:1;min-width:0;font-family:'Archivo',sans-serif;font-size:.7rem;letter-spacing:.02em;
+  color:#8c7a6f;background:#171110;border-radius:999px;padding:5px 14px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.works__frame .view{position:relative;aspect-ratio:1120/700;background:#0c0908}
+.works__frame .view img,.works__frame .view iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:0;display:block;object-fit:cover;object-position:top;
+}
+.works__frame .play{
+  position:absolute;left:50%;bottom:22px;transform:translateX(-50%);
+  display:inline-flex;align-items:center;gap:9px;
+  padding:12px 22px;border-radius:999px;border:0;cursor:pointer;
+  background:rgba(12,9,8,.86);color:#f4ece2;font:inherit;font-size:.86rem;font-weight:700;
+  backdrop-filter:blur(6px);
+}
+.works__frame .play svg{width:15px;height:15px}
+.works__frame .play:hover{background:var(--accent);color:#1a0f0a}
+.works__frame .play:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+.works__note{
+  text-wrap:pretty;
+  margin:clamp(26px,4vh,44px) 0 0;
+  padding:0 clamp(20px,5vw,84px);
+  max-width:56em;color:var(--ink-faint);font-size:.82rem;
+}
+
+@media (max-width:860px){
+  .works__body{grid-template-columns:1fr;padding-right:0;gap:22px}
+  .works__frame{margin-right:0;border-radius:10px 0 0 10px;margin-left:0}
+  .works__index .n{font-size:1.8rem}
+}
 </style>
 </head>
 <body>
@@ -158,6 +286,24 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
 
 <section class="hero" id="hero">
  <div class="pin">
+  <!-- 3本の弧。飾りではなく「3つがひとつの軸で回っている」という主張を運ぶ。
+       描画はマスクの幅を伸ばす技（写経01・toyox）。
+       半径ごとに進む速さを変えてあり、奥行きは calc がCSS側で出す（写経02・upvege） -->
+  <div class="orbits" aria-hidden="true">
+    <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+      <g fill="none" stroke-linecap="round">
+        <circle class="orb orb--1" cx="200" cy="200" r="118" stroke="var(--accent-dim)" stroke-width="1"/>
+        <circle class="orb orb--2" cx="200" cy="200" r="152" stroke="var(--accent-dim)" stroke-width="1"/>
+        <circle class="orb orb--3" cx="200" cy="200" r="186" stroke="var(--accent-dim)" stroke-width="1"/>
+      </g>
+      <g class="orb-texts">
+        <text class="orb-t orb-t--1" x="309.1" y="141.5">ホームページ</text>
+        <text class="orb-t orb-t--2" x="337.9" y="123.5">業務アプリ</text>
+        <text class="orb-t orb-t--3" x="366.7" y="105.4">Excelマクロ</text>
+      </g>
+    </svg>
+  </div>
+
   <div class="stage"><canvas id="gl"></canvas></div>
 
   <div class="fallback" aria-hidden="true">
@@ -191,7 +337,65 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
  </div>
 </section>
 
-<div class="after">ここから下に、制作実績（ReAct!! ／ なぎさ堂 ／ トラットリア南風）が続きます。</div>
+<!-- ==========================================================
+     制作実績。ヒーローの直後に置く（「歯車→花を先に、実績は直後」）。
+     骨格はまた2カラムにならないよう、左の索引と右の枠を
+     非対称にずらし、枠は右の画面端まで断ち切る。
+     数字は見出しではなく図版として置く（ルール4の未使用の手札）。
+     ========================================================== -->
+<section class="works" id="works">
+  <div class="works__head">
+    <span class="eyebrow">Works</span>
+    <h2 class="works__h">口で言うより、<br>動かして見てもらう。</h2>
+    <div class="rule rule--w" id="rule2"></div>
+    <p class="works__lead">
+      並んでいるのは実際に公開しているページです。押すとこの枠の中で本物が動きます。
+    </p>
+  </div>
+
+  <div class="works__body">
+    <ol class="works__index" role="tablist" aria-label="制作したページ">
+      <li>
+        <button type="button" role="tab" aria-selected="true" data-i="0">
+          <span class="n">01</span>
+          <span class="t"><b>ReAct!!</b><i>ご依頼いただいた制作</i></span>
+        </button>
+      </li>
+      <li>
+        <button type="button" role="tab" aria-selected="false" data-i="1">
+          <span class="n">02</span>
+          <span class="t"><b>なぎさ堂</b><i>制作サンプル／美容室</i></span>
+        </button>
+      </li>
+      <li>
+        <button type="button" role="tab" aria-selected="false" data-i="2">
+          <span class="n">03</span>
+          <span class="t"><b>トラットリア南風</b><i>制作サンプル／飲食店</i></span>
+        </button>
+      </li>
+    </ol>
+
+    <div class="works__frame">
+      <div class="bar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="url" id="wUrl">miyabi0857.github.io/react-yosakoi-site/</span>
+      </div>
+      <div class="view" id="wView">
+        <img id="wShot" src="../assets/demo-react.jpg" width="1120" height="700"
+             alt="制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている">
+        <button type="button" class="play" id="wPlay">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5 L18.5 12 L8 18.5 Z" fill="currentColor"/></svg>
+          このページを動かす
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <p class="works__note">
+    実績としてお見せできるのは ReAct!! 様の1件だけです。残りの2つは、
+    こういうものが作れますという見本として自分で作ったものです。
+  </p>
+</section>
 
 <script src="gsap.min.js"></script>
 <script src="SplitText.min.js"></script>
@@ -199,29 +403,87 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
 import { initHero3D } from './hero3d.bundle.js';
 
 var hero = document.getElementById('hero');
-var api = initHero3D(document.getElementById('gl'), { color: '#a5361b' });
+/* 色は hero3d.js 側で漆に合わせてあるので、ここから渡して上書きしない。
+   以前ここに '#a5361b' を書いていて、沈めた地の色が効いていなかった */
+var api = initHero3D(document.getElementById('gl'));
 
-if (!api) {
-  /* WebGLが使えない端末では平面のマークに落とす。
-     読めるかどうかをJSに委ねない（ルール5） */
-  document.documentElement.classList.add('no-webgl');
-} else {
-  var ticking = false;
-  function update() {
-    var r = hero.getBoundingClientRect();
-    var padB = parseFloat(getComputedStyle(hero).paddingBottom) || 0;
-    var span = Math.max(1, r.height - padB - innerHeight);
-    var p = (-r.top) / span;
-    p = p < 0 ? 0 : (p > 1 ? 1 : p);
-    hero.style.setProperty('--bloom', p.toFixed(3));
-    api.setBloom(p);
-    ticking = false;
-  }
-  addEventListener('scroll', function(){ if(ticking) return; ticking=true; requestAnimationFrame(update); }, {passive:true});
-  addEventListener('resize', update, {passive:true});
-  update();
+/* WebGLが使えない端末では平面のマークに落とす。
+   ただし --bloom はCSSだけで効く部分（弧・ラベル・下の一文）にも
+   使っているので、立体の有無にかかわらず必ず更新する */
+if (!api) document.documentElement.classList.add('no-webgl');
+
+var ticking = false;
+function update() {
+  var r = hero.getBoundingClientRect();
+  var padB = parseFloat(getComputedStyle(hero).paddingBottom) || 0;
+  var span = Math.max(1, r.height - padB - innerHeight);
+  var p = (-r.top) / span;
+  p = p < 0 ? 0 : (p > 1 ? 1 : p);
+  hero.style.setProperty('--bloom', p.toFixed(3));
+  if (api) api.setBloom(p);
+  ticking = false;
 }
+addEventListener('scroll', function(){ if(ticking) return; ticking=true; requestAnimationFrame(update); }, {passive:true});
+addEventListener('resize', update, {passive:true});
+update();
+
+/* 保険：下の一文は本文なので、スクロールしなければ読めないのは困る。
+   5秒経っても進行が動いていなければ、素の表示に戻す（ルール5） */
+setTimeout(function () {
+  var bl = parseFloat(getComputedStyle(hero).getPropertyValue('--bloom'));
+  if (bl > 0.01) return;
+  var t = document.querySelector('.tell__t');
+  if (t) { t.style.transition = 'opacity .4s'; t.style.opacity = '1'; }
+}, 5000);
 document.getElementById('rule').classList.add('is-visible');
+/* 実績の線は、そこまでスクロールしてから描く（写経01） */
+(function(){
+  var r = document.getElementById('rule2');
+  if (!r) return;
+  if (!('IntersectionObserver' in window)) { r.classList.add('is-visible'); return; }
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); } });
+  }, { threshold:0, rootMargin:'0px 0px -20% 0px' });
+  io.observe(r);
+  setTimeout(function(){ r.classList.add('is-visible'); }, 5000);   // 保険
+})();
+
+/* 制作実績：索引を押すと静止画が入れ替わり、「動かす」で実物を読み込む。
+   デモは写真を埋め込んでいて1MB前後あるので、押されたときだけ取りに行く */
+(function () {
+  var WORKS = [
+    { url:'https://miyabi0857.github.io/react-yosakoi-site/', label:'miyabi0857.github.io/react-yosakoi-site/',
+      shot:'../assets/demo-react.jpg', alt:'制作したReAct!!のホームページ。黒い背景に赤いロゴが光っている' },
+    { url:'../demo/salon/', label:'gearbloom.jp/demo/salon/',
+      shot:'../assets/demo-salon.jpg', alt:'美容室なぎさ堂の制作サンプル。生成り色の紙面に花の写真' },
+    { url:'../demo/trattoria/', label:'gearbloom.jp/demo/trattoria/',
+      shot:'../assets/demo-trattoria.jpg', alt:'トラットリア南風の制作サンプル。黒板のメニューが並ぶ紙面' }
+  ];
+  var tabs = document.querySelectorAll('.works__index button');
+  var shot = document.getElementById('wShot');
+  var urlEl = document.getElementById('wUrl');
+  var view = document.getElementById('wView');
+  var play = document.getElementById('wPlay');
+  var cur = 0, live = null;
+
+  function clearLive(){ if(live){ live.remove(); live=null; play.hidden=false; shot.hidden=false; } }
+  function select(i) {
+    cur = i; clearLive();
+    tabs.forEach(function(t,j){ t.setAttribute('aria-selected', j===i ? 'true':'false'); });
+    shot.src = WORKS[i].shot; shot.alt = WORKS[i].alt;
+    urlEl.textContent = WORKS[i].label;
+  }
+  tabs.forEach(function(t){ t.addEventListener('click', function(){ select(+t.dataset.i); }); });
+  play.addEventListener('click', function () {
+    if (live) return;
+    live = document.createElement('iframe');
+    live.src = WORKS[cur].url;
+    live.title = WORKS[cur].label + ' の実物';
+    live.loading = 'lazy';
+    view.appendChild(live);
+    play.hidden = true; shot.hidden = true;
+  });
+})();
 
 /* 見出しを1字ずつ立ち上げる（写経03・e-chubu の値をそのまま）。
    終わったら self.revert() でDOMを戻すので span は残らない */
