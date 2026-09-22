@@ -25,8 +25,11 @@ html.js .hero{ height:260svh; }
 html.js .pin{ position:sticky; top:0; height:100svh; }
 
 /* ---- 弧。物体と同じ場所に重ね、奥行きの層にする ---- */
+/* 弧は立体と同じ枠にすると、縦に合わせて拡大され画面外で切れる
+   （実測で外側の弧が上下ともはみ出し、ラベルが見えなくなった）。
+   上下を詰めて、弧全体が画面に収まる大きさにする */
 .orbits{
-  position:absolute; inset:0; right:-14vw; bottom:-1vh;
+  position:absolute; left:26%; right:-14vw; top:9vh; bottom:9vh;
   pointer-events:none; z-index:0;
 }
 .orbits svg{width:100%;height:100%;display:block;overflow:visible}
@@ -45,9 +48,12 @@ html.js .pin{ position:sticky; top:0; height:100svh; }
 
 /* ラベルはSVGの中に置く。画面外で切れないよう、真上ではなく
    右上（-32度）の空いたところへ。弧と一緒に拡大縮小される */
+/* 弧の外側に置き、起点から左へ流す。
+   弧の上に置いていたときは、内側のラベルが花びらと重なっていた */
 .orb-t{
   font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
   font-size:9px; letter-spacing:.1em; fill:var(--ink-soft);
+  text-anchor:end;
 }
 .orb-t--1{opacity:clamp(0, calc((var(--bloom) - .22) * 3), 1)}
 .orb-t--2{opacity:clamp(0, calc((var(--bloom) - .36) * 3), 1)}
@@ -57,7 +63,7 @@ html.js .pin{ position:sticky; top:0; height:100svh; }
      スマホでは起点から左へ流し、弧の内側に収める */
   .orb-t{font-size:13px;text-anchor:end}
   /* 横へはみ出させるとラベルが画面外で切れるので、スマホでは収める */
-  .orbits{left:0;right:0;top:23vh;bottom:29vh}
+  .orbits{left:0;right:0;top:27vh;bottom:38vh}
 }
 @media (prefers-reduced-motion:reduce){ .orb{stroke-dashoffset:0;opacity:.6} .orb-t{opacity:1} }
 /* JSが来ないときは弧を出さない（--bloom が動かず、中途半端に残るため）。
@@ -69,8 +75,9 @@ html:not(.js) .orbits{display:none}
   position:absolute; inset:0;
   /* 右へはみ出させる。画面に収まりきらないのが狙い。
      下へ大きく出すと立体の中心が画面の54%まで下がるので、
-     中央に見えるところまでに留める */
-  right:-14vw; bottom:-1vh;
+     中央に見えるところまでに留める。
+     左を空けるのは、見出しと立体が重ならないようにするため */
+  left:26%; right:-14vw; bottom:-1vh;
   pointer-events:none;
 }
 .stage canvas{display:block;width:100%;height:100%}
@@ -80,7 +87,7 @@ html:not(.js) .orbits{display:none}
 /* スマホは立体を画面の中央に置く。上3割に寄せていたときは
    中心が画面の19%にあり、上端で変形しているように見えていた */
 @media (max-width:860px){
-  .stage{left:-12vw;right:-12vw;top:23vh;bottom:29vh}
+  .stage{left:-10vw;right:-10vw;top:27vh;bottom:38vh}
 }
 
 /* WebGLが使えないときに出す平面のマーク（ルール5） */
@@ -110,7 +117,10 @@ html.no-webgl .stage{display:none}
 .h1{
   font-family:'Zen Kaku Gothic New','Hiragino Sans',sans-serif;
   font-weight:900;
-  font-size:clamp(2.35rem,9.6vw,6.6rem);  /* 上限 約106px */
+  /* 見出しが3行になったので上限を下げる。
+     一番長い行「ホームページを」は全角7文字なので、
+     1440pxで約77px。立体の手前で収まる */
+  font-size:clamp(2.2rem,7.4vw,4.8rem);
   line-height:1.08; letter-spacing:-.025em;
   margin:0 0 .46em;
 }
@@ -177,7 +187,7 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
   .sub{max-width:22em;margin-bottom:1.5em}
   .hero__cta{gap:9px;flex-wrap:nowrap}
   .btn{padding:13px 17px;font-size:.86rem;white-space:nowrap}
-  .tell{grid-template-columns:1fr;gap:6px;min-height:7em}
+  .tell{grid-template-columns:1fr;gap:4px;min-height:5.4em}
   html.js .hero{height:230svh}
 }
 @media (prefers-reduced-motion:reduce){
