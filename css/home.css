@@ -26,7 +26,7 @@ html.js .pin{ position:sticky; top:0; height:100svh; }
 
 /* ---- 弧。物体と同じ場所に重ね、奥行きの層にする ---- */
 .orbits{
-  position:absolute; inset:0; right:-14vw; bottom:-8vh;
+  position:absolute; inset:0; right:-14vw; bottom:-1vh;
   pointer-events:none; z-index:0;
 }
 .orbits svg{width:100%;height:100%;display:block;overflow:visible}
@@ -53,8 +53,11 @@ html.js .pin{ position:sticky; top:0; height:100svh; }
 .orb-t--2{opacity:clamp(0, calc((var(--bloom) - .36) * 3), 1)}
 .orb-t--3{opacity:clamp(0, calc((var(--bloom) - .50) * 3), 1)}
 @media (max-width:860px){
-  .orb-t{font-size:13px}
-  .orbits{left:-10vw;right:-10vw;top:1vh;bottom:64vh}
+  /* 起点から右へ流すと画面外で切れる（実測で48px超過）。
+     スマホでは起点から左へ流し、弧の内側に収める */
+  .orb-t{font-size:13px;text-anchor:end}
+  /* 横へはみ出させるとラベルが画面外で切れるので、スマホでは収める */
+  .orbits{left:0;right:0;top:23vh;bottom:29vh}
 }
 @media (prefers-reduced-motion:reduce){ .orb{stroke-dashoffset:0;opacity:.6} .orb-t{opacity:1} }
 /* JSが来ないときは弧を出さない（--bloom が動かず、中途半端に残るため）。
@@ -64,16 +67,20 @@ html:not(.js) .orbits{display:none}
 /* 立体は面いっぱいに敷き、右へ断ち落とす */
 .stage{
   position:absolute; inset:0;
-  /* 右と下へはみ出させる。画面に収まりきらないのが狙い */
-  right:-14vw; bottom:-8vh;
+  /* 右へはみ出させる。画面に収まりきらないのが狙い。
+     下へ大きく出すと立体の中心が画面の54%まで下がるので、
+     中央に見えるところまでに留める */
+  right:-14vw; bottom:-1vh;
   pointer-events:none;
 }
 .stage canvas{display:block;width:100%;height:100%}
 /* スマホでは横に並べる余地がないので、上下に分ける。
    立体を画面の上3割強に収め、文章はその下から始める。
    これをしないと立体が本文とボタンに重なる */
+/* スマホは立体を画面の中央に置く。上3割に寄せていたときは
+   中心が画面の19%にあり、上端で変形しているように見えていた */
 @media (max-width:860px){
-  .stage{left:-10vw;right:-10vw;top:1vh;bottom:64vh}
+  .stage{left:-12vw;right:-12vw;top:23vh;bottom:29vh}
 }
 
 /* WebGLが使えないときに出す平面のマーク（ルール5） */
@@ -163,7 +170,10 @@ html.js .tell__t{opacity:calc((var(--bloom) - .5) * 2.4);transition:opacity .25s
 @media (max-width:860px){
   .h1{font-size:clamp(2.1rem,10.4vw,3.6rem)}
   .h1 .ln--out{margin-left:calc(clamp(20px,5vw,84px) * -1)}
-  .copy{padding-top:35svh}
+  /* 見出しを上、説明とボタンを下端へ寄せ、あいだを立体に譲る。
+     貼り付くとヘッダー（72px）の真下に来るので、その分を空ける */
+  .copy{padding-top:calc(72px + 2.5svh);display:flex;flex-direction:column;height:100%}
+  .sub{margin-top:auto}
   .sub{max-width:22em;margin-bottom:1.5em}
   .hero__cta{gap:9px;flex-wrap:nowrap}
   .btn{padding:13px 17px;font-size:.86rem;white-space:nowrap}

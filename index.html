@@ -324,7 +324,13 @@ function update() {
   var r = hero.getBoundingClientRect();
   var padB = parseFloat(getComputedStyle(hero).paddingBottom) || 0;
   var span = Math.max(1, r.height - padB - innerHeight);
-  var p = (-r.top) / span;
+  var raw = (-r.top) / span;
+  raw = raw < 0 ? 0 : (raw > 1 ? 1 : raw);
+  /* 貼り付きが完成する前に咲き始めると、立体が上へ動きながら変形して
+     もったいない。前後に「ため」を作り、歯車のまま止まっている時間と、
+     咲ききった姿を見せる時間をそれぞれ確保する。 */
+  var HOLD_IN = 0.16, HOLD_OUT = 0.12;
+  var p = (raw - HOLD_IN) / (1 - HOLD_IN - HOLD_OUT);
   p = p < 0 ? 0 : (p > 1 ? 1 : p);
   hero.style.setProperty('--bloom', p.toFixed(3));
   if (api) api.setBloom(p);
