@@ -1,9 +1,13 @@
+const fs2 = require('fs');
 const { chromium } = require('playwright');
 const PAGES = ['index.html','service.html','portfolio.html','contact.html','hakadori.html','hakadori-guide.html'];
 function lum(h){const c=h.match(/\w\w/g).map(x=>{let v=parseInt(x,16)/255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4)});return .2126*c[0]+.7152*c[1]+.0722*c[2];}
 (async () => {
-  const b = await chromium.launch({ executablePath:'/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
-    args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist'] });
+  // クラウド環境のプリインストール済みパスがあればそれを使い、無ければ通常インストール（npx playwright install）を使う
+  const cloudPath = '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
+  const launchOpts = { args:['--use-gl=swiftshader','--enable-unsafe-swiftshader','--ignore-gpu-blocklist'] };
+  if (fs2.existsSync(cloudPath)) launchOpts.executablePath = cloudPath;
+  const b = await chromium.launch(launchOpts);
   let bad = 0;
   for (const f of PAGES) {
     for (const [tag,w,h] of [['PC',1440,900],['SP',390,844]]) {
