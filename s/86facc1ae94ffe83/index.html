@@ -241,38 +241,31 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
 }
 
 /* ---- walk-in: the noren is pushed and flips up like real cloth (two hinged parts) ---- */
-.walk .noren{perspective:760px;perspective-origin:50% 115%;transform-style:preserve-3d;
+.walk .noren{perspective:620px;perspective-origin:50% 88%;transform-style:preserve-3d;
   transform:translateX(-50%) translateY(calc(max(0, var(--p) - .5) * -340%))}
 .walk .noren__p{background:none;box-shadow:none;clip-path:none;transform-style:preserve-3d;
   filter:brightness(calc(1 - var(--q,0) * .42))}
-.walk .sa,.walk .sb{position:absolute;left:0;right:0;transform-origin:50% 0;backface-visibility:visible;
-  box-shadow:inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06)}
-.walk .sa{top:0;height:62%;transform-style:preserve-3d}
-.walk .sb{top:calc(100% - 2px);height:calc(61.3% + 2px);transform-style:preserve-3d;
-  transform:rotateX(calc(var(--q,0) * 46deg));
-  box-shadow:inset 0 -18px 22px rgba(0,0,0,.10), inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06);
-  clip-path:polygon(0 0,100% 0,100% 99%,93% 99.8%,86% 99.2%,74% 100%,61% 99.4%,49% 99.9%,37% 99.2%,24% 99.8%,12% 99.4%,0 99.8%)}
-.walk .sb::after{content:"";position:absolute;left:0;right:0;bottom:5.5%;height:1px;background:repeating-linear-gradient(90deg, rgba(80,60,35,.35) 0 6px, transparent 6px 10px)}
-.walk .sb::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,calc(var(--q,0) * .35)),transparent 60%)}
-.walk .sa .noren__mark{top:71%}
 .walk .noren__p::after{display:none}
-.walk .np1{transform:rotateX(calc(var(--q,0) * 70deg))}
-.walk .np0{transform:rotateY(calc(var(--q,0) * 24deg)) rotateX(calc(var(--q,0) * 58deg)) translateX(calc(var(--q,0) * -10%))}
-.walk .np2{transform:rotateY(calc(var(--q,0) * -24deg)) rotateX(calc(var(--q,0) * 58deg)) translateX(calc(var(--q,0) * 10%))}
-.walk .np0 .sb{transform:rotateX(calc(var(--q,0) * 38deg)) rotateZ(calc(var(--q,0) * 4deg))}
-.walk .np2 .sb{transform:rotateX(calc(var(--q,0) * 38deg)) rotateZ(calc(var(--q,0) * -4deg))}
-.walk .sa,.walk .sb{background:
-    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+
+/* ---- walk-in: soft cloth made of thin hinged strips (positions computed in JS) ---- */
+.walk .noren__p{background:none;box-shadow:none;clip-path:none;animation:none;transform-style:preserve-3d;filter:none}
+.walk .np0{transform:rotateY(calc(var(--q,0) * 16deg)) translateX(calc(var(--q,0) * -8%))}
+.walk .np2{transform:rotateY(calc(var(--q,0) * -16deg)) translateX(calc(var(--q,0) * 8%))}
+.seg{position:absolute;left:0;right:0;top:0;display:block;transform-origin:50% 0;backface-visibility:visible;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .34  0 0 0 0 .25  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>"),
     repeating-linear-gradient(0deg, rgba(90,70,40,.05) 0 1px, transparent 1px 3px),
     repeating-linear-gradient(90deg, rgba(90,70,40,.05) 0 1px, transparent 1px 3px),
     linear-gradient(90deg, rgba(0,0,0,.07) 0%, rgba(255,255,255,.10) 9%, rgba(0,0,0,.02) 20%, rgba(0,0,0,.08) 33%, rgba(255,255,255,.08) 46%, rgba(0,0,0,.05) 60%, rgba(255,255,255,.10) 74%, rgba(0,0,0,.06) 88%, rgba(0,0,0,.10) 100%),
-    linear-gradient(#efe5cf,#efe5cf);
-  background-size:160px 160px, 300px 300px, auto, auto, auto, auto;
-  background-blend-mode:multiply, multiply, normal, normal, normal, normal;
-  }
-.walk .sa{box-shadow:inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06)}
-.walk .sb{box-shadow:inset 0 -18px 22px rgba(0,0,0,.08), inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06)}
+    linear-gradient(#efe5cf,#efe5cf);background-repeat:repeat;background-blend-mode:multiply, multiply, normal, normal, normal, normal;
+  box-shadow:inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06)}
+.np1 .seg{background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20200%20200%22%3E%3Cdefs%3E%3Cg%20id%3D%22pad%22%3E%20%3Cpath%20fill%3D%22%23221f1b%22%20d%3D%22M-50%208%20C-54%20-8%20-40%20-19%20-26%20-14%20C-20%20-27%20-4%20-31%206%20-24%20C16%20-31%2036%20-25%2037%20-12%20C49%20-15%2056%20-2%2050%208%20C45%2015%2035%2015%2028%2010%20C22%2017%2010%2017%204%2012%20C-2%2017%20-14%2017%20-20%2011%20C-28%2016%20-41%2015%20-50%208%20Z%22%2F%3E%20%3Cpath%20fill%3D%22none%22%20stroke%3D%22%23221f1b%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22%20d%3D%22M-46%2014%20Q-36%2022%20-24%2017%20M-8%2017%20Q2%2023%2012%2018%20M26%2016%20Q36%2022%2046%2014%22%2F%3E%20%3Cg%20fill%3D%22none%22%20stroke%3D%22%23efe5cf%22%20stroke-width%3D%222.4%22%20stroke-linecap%3D%22round%22%3E%20%3Cpath%20d%3D%22M-34%203%20Q0%20-6%2034%203%22%2F%3E%20%3Cpath%20d%3D%22M0%20-6%20V-20%20M-10%20-5%20L-16%20-17%20M10%20-5%20L16%20-17%20M-21%20-2%20L-31%20-11%20M21%20-2%20L31%20-11%22%2F%3E%20%3C%2Fg%3E%20%3C%2Fg%3E%3C%2Fdefs%3E%20%3Ccircle%20cx%3D%22100%22%20cy%3D%22100%22%20r%3D%2290%22%20fill%3D%22none%22%20stroke%3D%22%23221f1b%22%20stroke-width%3D%229%22%2F%3E%20%3Cg%20fill%3D%22%23221f1b%22%3E%20%3Cpath%20d%3D%22M96%2062%20C90%2072%20104%2079%20102%2088%20C100%2098%2084%20102%2086%20116%20C88%20127%2099%20132%2096%20141%20C93%20146%2084%20148%2078%20150%20H126%20C117%20146%20112%20140%20115%20130%20C118%20119%20106%20114%20107%20106%20C108%2098%20117%2093%20114%2083%20C112%2074%20104%2070%20105%2062%20Z%22%2F%3E%20%3Cpath%20d%3D%22M92%20110%20C84%20108%2076%20104%2070%2099%20L73%2096%20C79%20100%2086%20103%2094%20104%20Z%22%2F%3E%20%3Cpath%20d%3D%22M106%2099%20C114%2098%20122%2095%20130%2091%20L132%2095%20C124%2099%20116%20102%20107%20104%20Z%22%2F%3E%20%3Cpath%20d%3D%22M64%20150%20H136%20V157%20H64%20Z%22%2F%3E%20%3Cpath%20d%3D%22M69%20158%20H131%20L128%20171%20H72%20Z%22%2F%3E%20%3Cpath%20d%3D%22M74%20171%20H84%20V175%20H74%20Z%20M116%20171%20H126%20V175%20H116%20Z%22%2F%3E%20%3C%2Fg%3E%20%3Cuse%20href%3D%22%23pad%22%20transform%3D%22translate%28100%2046%29%20scale%28.74%29%22%2F%3E%20%3Cuse%20href%3D%22%23pad%22%20transform%3D%22translate%2856%2090%29%20scale%28.66%29%22%2F%3E%20%3Cuse%20href%3D%22%23pad%22%20transform%3D%22translate%28144%2090%29%20scale%28.66%29%22%2F%3E%20%3C%2Fsvg%3E") no-repeat, url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .34  0 0 0 0 .25  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>"),
+    repeating-linear-gradient(0deg, rgba(90,70,40,.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(90,70,40,.05) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, rgba(0,0,0,.07) 0%, rgba(255,255,255,.10) 9%, rgba(0,0,0,.02) 20%, rgba(0,0,0,.08) 33%, rgba(255,255,255,.08) 46%, rgba(0,0,0,.05) 60%, rgba(255,255,255,.10) 74%, rgba(0,0,0,.06) 88%, rgba(0,0,0,.10) 100%),
+    linear-gradient(#efe5cf,#efe5cf);background-blend-mode:normal, multiply, multiply, normal, normal, normal, normal}
+.seg:last-child{clip-path:polygon(0 0,100% 0,100% 96%,93% 99%,86% 96.5%,74% 100%,61% 97%,49% 99.5%,37% 96.5%,24% 99%,12% 97%,0 99%);box-shadow:inset 0 -14px 18px rgba(0,0,0,.08), inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06)}
 </style>
 <script>document.documentElement.className += " js";</script>
 </head>
@@ -313,7 +306,7 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
     <div class="front">
       
       <div class="door"><div class="inside"><img src="https://images.unsplash.com/photo-1561641250-c06551cf3b02?w=1600&q=75&auto=format&fit=crop" alt=""></div></div>
-      <div class="noren " aria-hidden="true"><span class="noren__rod"></span><span class="lamp"></span><div class="noren__p np0"><span class="sa cloth"><span class="sb cloth"></span></span></div><div class="noren__p np1"><span class="sa cloth"><span class="noren__mark"><svg viewBox="0 0 200 200"><use href="#mon"/></svg></span><span class="sb cloth"></span></span></div><div class="noren__p np2"><span class="sa cloth"><span class="sb cloth"></span></span></div></div>
+      <div class="noren " aria-hidden="true"><span class="noren__rod"></span><span class="lamp"></span><div class="noren__p np0"></div><div class="noren__p np1"></div><div class="noren__p np2"></div></div>
       <span class="plate">ROOTS</span>
     </div>
     <div class="walk__in"><div class="inside" style="--cd:0s"><img src="https://images.unsplash.com/photo-1561641250-c06551cf3b02?w=1600&q=75&auto=format&fit=crop" alt="">
@@ -403,7 +396,7 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
     var r = sec.getBoundingClientRect(), max = sec.offsetHeight - innerHeight;
     var p = Math.min(1, Math.max(0, -r.top / max));
     st.style.setProperty('--p', p.toFixed(4));
-    st.style.setProperty('--q', Math.min(1, Math.max(0, (p - .06) / .5)).toFixed(4));
+    st.style.setProperty('--q', Math.min(1, Math.max(0, (p - .04) / .42)).toFixed(4));
     document.body.classList.toggle('entered', p >= .8 || r.top <= -max);
   }
   addEventListener('scroll', f, {passive:true}); addEventListener('resize', f); f();
@@ -434,6 +427,59 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
     li.forEach(function(el, i){ el.classList.toggle('on', p > .08 + i * .2); });
   }
   addEventListener('scroll', g, {passive:true}); g();
+})();
+</script>
+
+<script>
+(function(){
+  /* 暖簾を細い帯の連なりにして、奥へ柔らかくめくる（布のしなりを帯ごとの角度で近似） */
+  var st = document.getElementById('stage'); if (!st) return;
+  var N = 10, rows = [];
+  st.querySelectorAll('.walk .noren__p').forEach(function(p, pi){
+    var segs = [];
+    for (var k = 0; k < N; k++){ var s = document.createElement('i'); s.className = 'seg'; p.appendChild(s); segs.push(s); }
+    rows.push({el:p, segs:segs, pi:pi});
+  });
+  function layout(){
+    rows.forEach(function(r){
+      var W = r.el.offsetWidth, H = r.el.offsetHeight, sh = H / N;
+      r.sh = sh;
+      r.segs.forEach(function(s, k){
+        s.style.height = (sh + 3) + 'px';
+        var y = -k * sh, pos = '0 ' + y + 'px', lay = [pos,pos,pos,pos,pos,pos];
+        var size = ['160px 160px','300px 300px','auto','auto', W + 'px ' + H + 'px','auto'];
+        if (r.pi === 1){
+          var mw = Math.min(W * .62, 300);
+          lay.unshift(((W - mw) / 2) + 'px ' + (H * .44 - mw / 2 + y) + 'px'); size.unshift(mw + 'px ' + mw + 'px');
+        }
+        s.style.backgroundPosition = lay.join(','); s.style.backgroundSize = size.join(',');
+      });
+    });
+  }
+  var t0 = performance.now();
+  function frame(now){
+    var q = parseFloat(getComputedStyle(st).getPropertyValue('--q')) || 0;
+    var t = (now - t0) / 1000;
+    rows.forEach(function(r){
+      var y = 0, z = 0;
+      var qq = Math.min(1, q * (r.pi === 1 ? 1.1 : .95));          /* 真ん中の布を先に押す */
+      r.segs.forEach(function(s, k){
+        var u = (k + .5) / N;
+        /* 負の角度＝奥へ。上はわずか、下ほど大きく曲がる */
+        var e = qq * qq * (3 - 2 * qq);
+        var bend = -e * (8 + 142 * Math.pow(u, 1.15));
+        var lag = Math.sin(Math.PI * Math.min(1, qq * 1.25)) * 22 * u * u;   /* 裾が少し遅れてついてくる */
+        var idle = Math.sin(t * 1.3 + k * .55 + r.pi) * 1.6 * u * (1 - qq);   /* 止まっている間のかすかな揺れ */
+        var a = bend + lag + idle;
+        s.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,' + z.toFixed(2) + 'px) rotateX(' + a.toFixed(2) + 'deg)';
+        s.style.filter = k === 0 && qq === 0 ? '' : 'brightness(' + (1 - Math.min(.5, Math.max(0, -a) / 220)).toFixed(3) + ')';
+        var rad = a * Math.PI / 180;
+        y += r.sh * Math.cos(rad); z += r.sh * Math.sin(rad);
+      });
+    });
+    requestAnimationFrame(frame);
+  }
+  layout(); addEventListener('resize', layout); requestAnimationFrame(frame);
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
