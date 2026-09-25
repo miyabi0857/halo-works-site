@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>虫屋 PUPA｜島原半島初の昆虫ショップ</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="虫屋 PUPA｜島原半島初の昆虫ショップ">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/55a3a227c428f97e/">
+<meta property="og:image" content="https://gearbloom.jp/s/55a3a227c428f97e/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<script>document.documentElement.className += ' js';</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="世界各地のカブトムシ・クワガタ・その他生物、飼育用品。標本製作・飼育相談・レンタルスペース。長崎県島原市萩が丘。営業日は毎月かわります。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+One&family=Yomogi&family=BIZ+UDPGothic:wght@400;700&display=swap" rel="stylesheet">
+<!--
+  参考：少年少女創造性育成事業（公益財団法人 市村清新技術財団）https://www.sgkz.or.jp/develop/
+  借りた手法：手描きの小物が弾性で飛び出してから漂う（ScrollFloatReveal の elastic.out(1,0.45)・scale .78 から）、
+  見出しを1字ずつ跳ねさせる、紙の地に多色の差し色。配色・書体・構図・主役は別系統にしている。
+  写真：Unsplash（Unsplash License。商用可・クレジット不要）photo-1619532474053、photo-1632906383642。たたき台用の仮写真
+-->
+<style>
+:root{
+  --paper:#FBF7EC;
+  --grid:rgba(27,60,140,.09);
+  --navy:#1B3C8C;
+  --navy-deep:#122a66;
+  --yellow:#F5D31C;
+  --green:#3C9A5B;
+  --orange:#EE7F22;
+  --red:#D9442B;
+  --ink:#1d2233;
+  --muted:#5b6275;
+  --pop:"Mochiy Pop One", "BIZ UDPGothic", sans-serif;
+  --hand:"Yomogi", "BIZ UDPGothic", sans-serif;
+  --body:"BIZ UDPGothic", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--body);color:var(--ink);line-height:1.8;
+  background-color:var(--paper);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size:28px 28px;
+  overflow-x:hidden;
+}
+a{color:inherit}
+
+/* ---------- header ---------- */
+.top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px clamp(16px,4vw,56px);position:relative;z-index:5;
+}
+.logo{display:flex;align-items:baseline;gap:.5em;text-decoration:none;color:var(--navy)}
+.logo b{font-family:var(--pop);font-weight:400;font-size:1.7rem;letter-spacing:.02em;line-height:1}
+.logo small{font-family:var(--hand);font-size:.85rem;color:var(--muted)}
+.nav{display:flex;gap:28px;list-style:none;font-weight:700;font-size:.95rem}
+.nav a{text-decoration:none;color:var(--navy)}
+.nav a:hover{text-decoration:underline wavy var(--orange) 2px;text-underline-offset:6px}
+@media (max-width:760px){.nav{display:none}.logo small{display:none}}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;overflow-x:clip;
+  min-height:calc(100svh - 80px);
+  padding:clamp(16px,3vw,40px) clamp(16px,4vw,56px) 80px;
+}
+.hero__lead{position:relative;z-index:5;max-width:min(52%,640px);padding-top:clamp(20px,6vw,90px)}
+.hero__kicker{
+  font-family:var(--hand);font-size:clamp(1rem,1.5vw,1.25rem);color:var(--navy);
+  display:inline-block;margin-bottom:.5em;
+  background:linear-gradient(transparent 62%, rgba(245,211,28,.75) 62% 92%, transparent 92%);padding:0 .15em;
+}
+.hero__title{font-family:var(--pop);font-weight:400;color:var(--navy);font-size:clamp(2.8rem,6.6vw,6.4rem);line-height:1.12;letter-spacing:-.02em;
+  text-shadow:0 0 0 var(--paper), 4px 4px 0 var(--paper), -4px -4px 0 var(--paper), 4px -4px 0 var(--paper), -4px 4px 0 var(--paper)}
+.hero__title .l{display:block;white-space:nowrap}
+.hero__title .hl{color:var(--ink)}
+.hero__title .ch{display:inline-block}
+html.js .hero__title .ch{animation:charPop .9s cubic-bezier(.2,1.6,.35,1) both;animation-delay:calc(.25s + var(--i) * .045s)}
+@keyframes charPop{0%{opacity:0;transform:translateY(.35em) scaleY(.4)}45%{opacity:1}100%{opacity:1;transform:none}}
+.hero__sub{margin-top:1.1em;font-size:clamp(.95rem,1.2vw,1.05rem);max-width:27em}
+
+.stage{position:absolute;z-index:2;right:clamp(16px,6vw,110px);top:clamp(20px,3vw,40px);width:clamp(340px,46vw,660px)}
+.p1{--bw:100%;--ar:1/0.9;--md:16s}
+.stage .p2{position:absolute;z-index:3;right:-5%;top:-6%;--bw:28%;--md:11s}
+
+/* labels (like a picture-book diagram) */
+.tag{position:absolute;z-index:4;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.tag b{font-family:var(--pop);font-weight:400;font-size:clamp(1rem,1.5vw,1.3rem);color:var(--navy);background:#fff;padding:.25em .7em;border-radius:999px;box-shadow:3px 4px 0 var(--yellow)}
+.tag small{display:block;width:max-content;font-family:var(--hand);font-size:.85rem;color:var(--ink);margin-top:6px;background:rgba(251,247,236,.94);padding:.1em .6em;border-radius:6px}
+.tag i{flex:none;display:block;width:clamp(30px,4vw,64px);height:2px;background:var(--navy);position:relative}
+.tag i::after{content:"";position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:var(--navy);transform:translateY(-50%)}
+.tag--l i::after{right:-4px}.tag--r i::after{left:-4px}
+.tag--r{flex-direction:row-reverse}
+.t1{left:-12%;top:30%}
+.t2{right:-8%;top:52%;flex-direction:row}
+.t2 i::after{left:-4px;right:auto}
+.t3{left:-10%;top:62%}
+.t4{right:6%;bottom:2%;flex-direction:row}
+.t4 i::after{left:-4px;right:auto}
+
+/* today stamp */
+.today{
+  position:absolute;z-index:6;left:-9%;bottom:-6%;
+  width:clamp(160px,13vw,190px);aspect-ratio:1;border-radius:50%;background:var(--yellow);color:var(--navy);
+  display:grid;place-content:center;text-align:center;transform:rotate(-8deg);
+  box-shadow:0 0 0 6px var(--paper), 0 0 0 9px var(--navy);
+}
+.today__k{font-family:var(--hand);font-size:.9rem;line-height:1.4}
+.today__r{font-family:var(--pop);font-size:clamp(1rem,1.2vw,1.2rem);line-height:1.35;white-space:nowrap}
+.today__r b{font-weight:400;font-size:.62em;margin-right:.4em}
+.today__n{display:inline-block;margin-top:6px;font-size:.7rem;font-weight:700;color:var(--navy);text-decoration:none;border-bottom:2px solid var(--navy)}
+
+/* ---------- stickers ---------- */
+.st{position:absolute;z-index:2;pointer-events:none;width:var(--w)}
+.st svg{display:block;width:100%;height:auto;overflow:visible}
+.st__in{display:block;animation:float var(--fd,6s) ease-in-out infinite alternate;animation-delay:var(--fdel,0s)}
+html.js .st{animation:stickerPop 1.05s cubic-bezier(.25,1.7,.4,1) both;animation-delay:var(--pd,.6s)}
+@keyframes stickerPop{
+  0%{opacity:0;transform:scale(.6) rotate(var(--r0,-12deg))}
+  40%{opacity:1}
+  100%{opacity:1;transform:scale(1) rotate(0)}
+}
+@keyframes float{
+  0%{transform:translate(0,0) rotate(var(--rot,0deg))}
+  100%{transform:translate(var(--fx,4px),var(--fy,-10px)) rotate(calc(var(--rot,0deg) + 4deg))}
+}
+@media (prefers-reduced-motion:reduce){
+  html.js .st, html.js .hero__title .ch, .st__in{animation:none!important}
+}
+
+.st--kabuto{display:none}
+.st--kuwa{display:none}
+.st--loupe{--w:clamp(56px,5vw,84px);top:6%;left:44%;--rot:-18deg;--pd:.95s;--fd:7s}
+.st--leaf{--w:clamp(46px,4vw,64px);bottom:10%;right:2%;--rot:25deg;--pd:1.05s;--fd:5s}
+.st--pin{--w:clamp(28px,2.4vw,38px);top:66%;left:40%;--rot:-10deg;--pd:1.15s;--fd:4.5s}
+.st--spark{--w:clamp(30px,2.6vw,40px);top:8%;left:.6%;--rot:0deg;--pd:1.2s;--fd:4s}
+
+
+/* ---------- amoeba photo frame ---------- */
+.blob{position:relative;width:var(--bw);aspect-ratio:var(--ar,1/1)}
+.blob__back,.blob__img{
+  position:absolute;inset:0;
+  border-radius:58% 42% 51% 49% / 46% 56% 44% 54%;
+  animation:morph var(--md,14s) ease-in-out infinite alternate;
+}
+.blob__back{background:var(--bc,var(--yellow));transform:translate(var(--bx,14px),var(--by,12px)) rotate(8deg);animation-delay:-5s}
+.blob__img{overflow:hidden;background:#dfe7d3}
+.blob__img img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes morph{
+  0%  {border-radius:58% 42% 51% 49% / 46% 56% 44% 54%}
+  35% {border-radius:44% 56% 38% 62% / 58% 42% 60% 40%}
+  70% {border-radius:62% 38% 57% 43% / 40% 60% 43% 57%}
+  100%{border-radius:48% 52% 64% 36% / 52% 38% 62% 48%}
+}
+@media (prefers-reduced-motion:reduce){.blob__back,.blob__img{animation:none}}
+/* placeholder until real photos are provided */
+.ph{
+  position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:6px;text-align:center;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.35), transparent 45%),
+    linear-gradient(150deg,var(--p1,#7fa35c),var(--p2,#3f5f2c));
+  color:#fff;font-family:var(--hand);font-size:clamp(.8rem,1.1vw,1rem);line-height:1.5;padding:18%;
+}
+.ph svg{width:34px;height:34px;opacity:.9}
+.ph b{font-family:var(--body);font-weight:700;font-size:.72em;opacity:.85;letter-spacing:.04em}
+
+/* scroll cue */
+.cue{
+  position:absolute;left:clamp(16px,4vw,56px);bottom:18px;z-index:3;
+  font-family:var(--hand);color:var(--navy);font-size:1rem;text-decoration:none;
+  display:flex;align-items:center;gap:.4em;
+}
+.cue svg{width:22px;height:30px}
+
+/* ---------- mobile ---------- */
+@media (max-width:860px){
+  .hero{min-height:auto;padding-top:8px;display:flex;flex-direction:column}
+  .hero__lead{max-width:none;padding-top:8px}
+  .hero__title{font-size:clamp(2.4rem,11.5vw,3.8rem)}
+  .stage{position:relative;right:auto;top:auto;width:100%;margin-top:26px}
+  .tag{position:static}
+  .tags{display:grid;grid-template-columns:1fr 1fr;gap:14px 10px;margin-top:22px}
+  .tag i{display:none}
+  .tag{white-space:normal}
+  .tag small{width:auto}
+  .tag b{font-size:.84rem;white-space:nowrap}
+  .st--leaf{display:none}
+  .box__switch span{width:100%}
+  .tag b{font-size:1rem}
+  .today{left:-4px;right:auto;bottom:auto;top:10%;width:132px}
+  .stage .p2{--bw:34%;top:-10%}
+  .today__r{font-size:.95rem}
+  .st--loupe{top:6px;left:auto;right:10px;--w:54px}
+  .st--pin,.st--spark{display:none}
+}
+@media (min-width:861px){.tags{display:contents}}
+
+/* ================= below the hero ================= */
+.sec{position:relative;overflow-x:clip;padding:clamp(72px,10vw,140px) clamp(16px,4vw,56px)}
+.sec__head{position:relative;margin-bottom:clamp(36px,5vw,64px)}
+.sec__en{display:block;font-family:var(--hand);font-size:clamp(1rem,1.4vw,1.2rem);color:var(--orange);transform:rotate(-3deg);transform-origin:left;margin-bottom:.2em}
+.sec__ttl{font-family:var(--pop);font-weight:400;color:var(--navy);font-size:clamp(2.2rem,5.4vw,4.6rem);line-height:1.15;letter-spacing:-.02em}
+.sec__lead{margin-top:.9em;max-width:34em;font-size:clamp(.95rem,1.2vw,1.05rem)}
+
+/* reveal: class only, motion lives in CSS */
+html.js .rv{opacity:0;transform:translateY(26px) scale(.97);transition:opacity .7s ease, transform .9s cubic-bezier(.25,1.6,.4,1)}
+html.js .rv.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}}
+
+/* ---------- things: picture-book spreads ---------- */
+.things{list-style:none;display:grid;gap:clamp(56px,8vw,110px)}
+.thing{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,4vw,64px);align-items:center}
+.thing:nth-child(even){grid-template-columns:minmax(0,6fr) minmax(0,5fr)}
+.thing:nth-child(even) .thing__pic{order:2}
+.thing__pic{position:relative;justify-self:center;width:100%;max-width:460px}
+.thing__pic .blob{--bw:100%;--ar:1/0.88}
+.thing:nth-child(2) .thing__pic .blob{--ar:1/1}
+.thing__no{position:absolute;z-index:3;top:-18px;left:-10px;font-family:var(--pop);font-size:clamp(3rem,6vw,5rem);line-height:1;color:var(--yellow);-webkit-text-stroke:2px var(--navy)}
+.thing:nth-child(even) .thing__no{left:auto;right:-6px}
+.thing__tag{display:inline-block;font-family:var(--hand);font-size:.95rem;color:var(--navy);border:2px solid var(--navy);border-radius:999px;padding:.05em .8em;margin-bottom:.8em;background:#fff}
+.thing__ttl{font-family:var(--pop);font-weight:400;color:var(--navy);font-size:clamp(1.6rem,3vw,2.5rem);line-height:1.25}
+.thing__txt{margin-top:.9em;max-width:31em}
+.thing__txt strong{color:var(--navy);background:linear-gradient(transparent 62%, rgba(245,211,28,.7) 62%)}
+.note{
+  margin-top:22px;max-width:31em;position:relative;
+  background:#fff;padding:18px 20px 16px 22px;transform:rotate(-1deg);
+  box-shadow:5px 7px 0 rgba(27,60,140,.12);
+}
+.note::before{content:"";position:absolute;top:-12px;left:22px;width:84px;height:24px;background:rgba(238,127,34,.55);transform:rotate(-5deg)}
+.note__ttl{font-family:var(--pop);color:var(--red);font-size:1.05rem;margin-bottom:.3em}
+.note p{font-size:.92rem;line-height:1.75}
+.note ul{margin:.3em 0 0 1.2em;font-size:.92rem;line-height:1.75}
+
+/* ---------- breed space: the centerpiece ---------- */
+.breed{
+  margin-top:clamp(64px,9vw,120px);
+  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.25fr);gap:clamp(28px,4vw,64px);align-items:center;
+}
+.breed__price{font-family:var(--pop);color:var(--navy);line-height:1.1;margin-top:.5em}
+.breed__price b{font-weight:400;font-size:clamp(3.4rem,7vw,6.2rem);color:var(--ink)}
+.breed__price span{font-size:clamp(1.1rem,1.8vw,1.5rem)}
+.breed__price small{display:block;font-family:var(--body);font-weight:700;font-size:.9rem;color:var(--muted);margin-top:.4em}
+.breed__for{list-style:none;margin-top:1.2em;display:grid;gap:.4em}
+.breed__for li{font-family:var(--hand);font-size:1.1rem;padding-left:1.5em;position:relative}
+.breed__for li::before{content:"";position:absolute;left:0;top:.45em;width:.9em;height:.9em;border:2.5px solid var(--green);border-radius:3px}
+.breed__for li::after{content:"";position:absolute;left:.22em;top:.52em;width:.35em;height:.6em;border:solid var(--green);border-width:0 3px 3px 0;transform:rotate(40deg)}
+
+.box{position:relative;background:#fff;padding:clamp(18px,2.6vw,32px);box-shadow:10px 14px 0 rgba(27,60,140,.13)}
+.box__switch{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;align-items:center}
+.box__switch span{font-family:var(--hand);color:var(--muted);margin-right:4px}
+.box__switch button{
+  font:inherit;font-family:var(--pop);font-size:1rem;color:var(--navy);background:#fff;cursor:pointer;
+  border:2.5px solid var(--navy);border-radius:999px;padding:.25em 1em;transition:background .2s, transform .2s;
+}
+.box__switch button[aria-pressed="true"]{background:var(--yellow);transform:translateY(-2px);box-shadow:0 3px 0 var(--navy)}
+.box__frame{
+  position:relative;aspect-ratio:60/46;
+  border:3px solid var(--navy);border-radius:8px;background:#f3ecdc;
+  padding:clamp(6px,1.2vw,14px);display:grid;align-content:center;
+}
+.box__bottles{display:grid;gap:clamp(3px,.6vw,7px)}
+.box__bottles i{
+  display:block;aspect-ratio:1;border-radius:50%;
+  background:radial-gradient(circle at 50% 50%, #fff 0 22%, transparent 23%), radial-gradient(circle at 38% 34%, #a8845b, #5d4128 72%);
+  border:2.5px solid var(--navy);
+}
+.box__bottles.is-800{grid-template-columns:repeat(8,1fr);padding:0 1%}
+.box__bottles.is-1600{grid-template-columns:repeat(6,1fr);padding:0 6%}
+html.js .box.is-in .box__bottles i{animation:bottleIn .55s cubic-bezier(.25,1.7,.4,1) both;animation-delay:calc(var(--k) * 18ms)}
+@keyframes bottleIn{0%{opacity:0;transform:scale(.3)}100%{opacity:1;transform:none}}
+.box__dims{display:flex;justify-content:space-between;margin-top:8px;font-weight:700;font-size:.85rem;color:var(--navy)}
+.box__count{margin-top:14px;font-family:var(--pop);color:var(--navy);font-size:clamp(1.2rem,2vw,1.6rem);line-height:1.3}
+.box__count b{font-weight:400;font-size:1.8em;color:var(--ink)}
+.box__foot{margin-top:6px;font-size:.78rem;color:var(--muted)}
+
+/* ---------- mottos ---------- */
+.mottos-sec{background:var(--navy);color:#fff;border-radius:48px 48px 0 0;margin-top:clamp(40px,6vw,80px)}
+.mottos-sec .sec__ttl{color:#fff}
+.mottos-sec .sec__en{color:var(--yellow)}
+.mottos{list-style:none;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(12px,2vw,28px);border-top:2px solid rgba(255,255,255,.5);padding-top:18px}
+.mo__n{display:block;font-family:var(--pop);font-size:clamp(3.4rem,6.4vw,6rem);line-height:.95;color:transparent;-webkit-text-stroke:2px #fff}
+.mo--hl .mo__n{color:var(--yellow);-webkit-text-stroke:0}
+.mo__t{display:block;font-family:var(--pop);font-size:clamp(1rem,1.4vw,1.25rem);margin-top:8px}
+.mo__d{display:block;font-size:.86rem;line-height:1.75;margin-top:6px;opacity:.9}
+.mottos-sec__src{margin-top:26px;font-size:.8rem;opacity:.75}
+
+/* ---------- access ---------- */
+.access{background:var(--navy);color:#fff;padding-top:0;padding-bottom:clamp(32px,5vw,64px)}
+.access__in{background:var(--paper);color:var(--ink);border-radius:48px;padding:clamp(40px,6vw,80px) clamp(20px,4vw,56px);
+  background-image:linear-gradient(var(--grid) 1px, transparent 1px),linear-gradient(90deg, var(--grid) 1px, transparent 1px);background-size:28px 28px}
+.access__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,4vw,56px);align-items:start}
+.info{display:grid;gap:0}
+.info div{display:grid;grid-template-columns:6.5em 1fr;gap:12px;padding:16px 0;border-bottom:2px dashed rgba(27,60,140,.25)}
+.info dt{font-family:var(--hand);color:var(--muted);font-size:1.05rem}
+.info dd{font-weight:700;line-height:1.7}
+.info dd small{display:block;font-weight:400;color:var(--muted);font-size:.85rem}
+.info dd b{font-family:var(--pop);font-weight:400;color:var(--navy);font-size:1.3rem;margin-right:.3em}
+.map{position:relative}
+.map__frame{position:relative;aspect-ratio:1/0.85;border-radius:32px;overflow:hidden;border:3px solid var(--navy);box-shadow:10px 12px 0 var(--yellow);background:#e8e2d2}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.dm{
+  display:inline-flex;align-items:center;gap:.6em;margin-top:28px;
+  font-family:var(--pop);font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--navy);text-decoration:none;
+  background:var(--yellow);padding:.7em 1.4em;border-radius:999px;box-shadow:0 5px 0 var(--navy);
+  transition:transform .2s, box-shadow .2s;
+}
+.dm:hover{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
+.access__small{margin-top:14px;font-size:.85rem;color:var(--muted)}
+
+.foot{background:var(--navy);color:#fff;padding:40px clamp(16px,4vw,56px) 48px;text-align:center}
+.foot b{font-family:var(--pop);font-weight:400;font-size:1.5rem}
+.foot p{font-size:.78rem;opacity:.75;margin-top:10px;line-height:1.7}
+
+@media (max-width:860px){
+  .thing,.thing:nth-child(even){grid-template-columns:1fr}
+  .thing:nth-child(even) .thing__pic{order:0}
+  .thing__pic{max-width:340px}
+  .breed{grid-template-columns:1fr}
+  .box__bottles i{border-width:1.5px}
+  .mottos{grid-template-columns:1fr;gap:16px}
+  .mottos li{display:grid;grid-template-columns:3.4rem 1fr;column-gap:12px}
+  .mo__n{grid-row:span 2;font-size:3.2rem}
+  .mo__t{margin-top:4px}
+  .mottos-sec{border-radius:32px 32px 0 0}
+  .access__in{border-radius:28px}
+  .access__grid{grid-template-columns:1fr}
+  .info div{grid-template-columns:5.2em 1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <a class="logo" href="#"><b>虫屋 PUPA</b><small>むしや ピューパ</small></a>
+  <ul class="nav">
+    <li><a href="#breed">ブリードスペース</a></li>
+    <li><a href="#things">できること</a></li>
+    <li><a href="#access">アクセス</a></li>
+    <li><a href="https://www.instagram.com/kabuto64_pupa/" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero__lead">
+    <p class="hero__kicker">島原半島初の昆虫ショップ</p>
+    <h1 class="hero__title" aria-label="見て、えらんで、育ててみる。">
+      <span class="l" aria-hidden="true">見て、</span>
+      <span class="l hl" aria-hidden="true">えらんで、</span>
+      <span class="l" aria-hidden="true">育ててみる。</span>
+    </h1>
+    <p class="hero__sub">世界各地のカブトムシ・クワガタと、育てるための道具がそろう店。はじめての人にも、育て方からお話しします。</p>
+  </div>
+
+  <div class="stage">
+  <div class="p1 blob" aria-hidden="true" style="--bc:var(--yellow);--bx:18px;--by:16px">
+    <div class="blob__back"></div>
+    <div class="blob__img"><img src="https://images.unsplash.com/photo-1619532474053-e9de8d7d4046?w=1000&q=75&auto=format&fit=crop" alt=""></div>
+  </div>
+  <div class="p2 blob" aria-hidden="true" style="--bc:var(--green);--bx:-10px;--by:10px">
+    <div class="blob__back"></div>
+    <div class="blob__img"><img src="https://images.unsplash.com/photo-1632906383642-57ddbea6481e?w=1000&q=75&auto=format&fit=crop" alt=""></div>
+  </div>
+    <div class="tags">
+      <p class="tag tag--l t1"><span><b>昆虫くじ</b><small>なにが出るかは、ひいてのお楽しみ</small></span><i></i></p>
+      <p class="tag t2"><i></i><span><b>飼育相談</b><small>はじめての飼育も、気軽にどうぞ</small></span></p>
+      <p class="tag tag--l t3"><span><b>標本づくり</b><small>亡くなった虫を、脚や触角の修復まで</small></span><i></i></p>
+      <p class="tag t4"><i></i><span><b>レンタルブリードスペース</b><small>1区画 月1,000円。夏の温度管理や置き場所に</small></span></p>
+    </div>
+    <aside class="today" id="hours">
+      <p class="today__k">営業時間</p>
+      <p class="today__r"><b>平日</b>18-21時</p>
+      <p class="today__r"><b>土日祝</b>13-20時</p>
+      <a class="today__n" href="https://www.instagram.com/kabuto64_pupa/" target="_blank" rel="noopener">営業日はInstagramで</a>
+    </aside>
+  </div>
+
+  <!-- stickers (decoration only) -->
+  <span class="st st--kabuto" aria-hidden="true"><span class="st__in">
+    <svg viewBox="0 0 120 170">
+      <defs>
+        <g id="kabuto">
+          <path d="M53 50 C52 36 49 24 44 10 L52 15 L58 4 L62 4 L68 15 L76 10 C71 24 68 36 67 50 Z"/>
+          <ellipse cx="60" cy="62" rx="25" ry="17"/>
+          <path d="M34 80 C34 70 46 74 60 74 C74 74 86 70 86 80 L84 128 C82 150 70 162 60 162 C50 162 38 150 36 128 Z"/>
+          <path d="M36 66 L20 56 L12 40" fill="none"/>
+          <path d="M84 66 L100 56 L108 40" fill="none"/>
+          <path d="M36 96 L16 98 L6 88" fill="none"/>
+          <path d="M84 96 L104 98 L114 88" fill="none"/>
+          <path d="M38 124 L18 138 L14 156" fill="none"/>
+          <path d="M82 124 L102 138 L106 156" fill="none"/>
+        </g>
+      </defs>
+      <use href="#kabuto" fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+      <use href="#kabuto" fill="#1B3C8C" stroke="#1B3C8C" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M60 78 L60 158" stroke="#122a66" stroke-width="2.5"/>
+      <path d="M46 88 C44 104 45 120 48 134" stroke="#F5D31C" stroke-width="4" stroke-linecap="round" fill="none" opacity=".9"/>
+      <ellipse cx="52" cy="58" rx="7" ry="3.5" fill="#F5D31C" opacity=".9"/>
+    </svg>
+  </span></span>
+
+  <span class="st st--kuwa" aria-hidden="true"><span class="st__in">
+    <svg viewBox="0 0 120 160">
+      <defs>
+        <g id="kuwa">
+          <path d="M50 44 C40 36 32 22 36 6 C40 16 44 24 54 30 Z"/>
+          <path d="M70 44 C80 36 88 22 84 6 C80 16 76 24 66 30 Z"/>
+          <path d="M46 46 C46 36 74 36 74 46 L72 54 L48 54 Z"/>
+          <ellipse cx="60" cy="64" rx="21" ry="12"/>
+          <path d="M38 80 C38 72 48 76 60 76 C72 76 82 72 82 80 L80 124 C78 142 68 152 60 152 C52 152 42 142 40 124 Z"/>
+          <path d="M40 66 L24 58 L18 44" fill="none"/>
+          <path d="M80 66 L96 58 L102 44" fill="none"/>
+          <path d="M40 96 L22 98 L12 90" fill="none"/>
+          <path d="M80 96 L98 98 L108 90" fill="none"/>
+          <path d="M42 122 L24 134 L20 150" fill="none"/>
+          <path d="M78 122 L96 134 L100 150" fill="none"/>
+        </g>
+      </defs>
+      <use href="#kuwa" fill="#fff" stroke="#fff" stroke-width="14" stroke-linejoin="round" stroke-linecap="round"/>
+      <use href="#kuwa" fill="#6B3B1F" stroke="#4a2814" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M60 80 L60 148" stroke="#3a1f0f" stroke-width="2.5"/>
+      <path d="M48 90 C47 104 48 118 51 130" stroke="#F5D31C" stroke-width="3.5" stroke-linecap="round" fill="none" opacity=".75"/>
+    </svg>
+  </span></span>
+
+  <span class="st st--loupe" aria-hidden="true"><span class="st__in">
+    <svg viewBox="0 0 100 110">
+      <g stroke-linecap="round">
+        <path d="M58 60 L88 98" stroke="#fff" stroke-width="26"/>
+        <circle cx="42" cy="42" r="32" fill="#fff" stroke="#fff" stroke-width="12"/>
+        <path d="M60 62 L86 96" stroke="#EE7F22" stroke-width="13"/>
+        <circle cx="42" cy="42" r="28" fill="#dff0fb" stroke="#1B3C8C" stroke-width="7"/>
+        <path d="M27 34 C30 26 36 22 44 21" stroke="#fff" stroke-width="5" fill="none"/>
+      </g>
+    </svg>
+  </span></span>
+
+  <span class="st st--leaf" aria-hidden="true"><span class="st__in">
+    <svg viewBox="0 0 80 100">
+      <path d="M40 96 C12 76 6 40 40 4 C74 40 68 76 40 96 Z" fill="#fff" stroke="#fff" stroke-width="12" stroke-linejoin="round"/>
+      <path d="M40 96 C12 76 6 40 40 4 C74 40 68 76 40 96 Z" fill="#3C9A5B" stroke="#2c7a45" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M40 90 L40 16 M40 44 L26 32 M40 60 L54 48 M40 74 L28 64" stroke="#e7f5dc" stroke-width="3" stroke-linecap="round" fill="none"/>
+    </svg>
+  </span></span>
+
+  <span class="st st--pin" aria-hidden="true"><span class="st__in">
+    <svg viewBox="0 0 40 110">
+      <path d="M20 30 L20 104" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+      <circle cx="20" cy="18" r="16" fill="#fff"/>
+      <path d="M20 30 L20 104" stroke="#8a93a8" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="20" cy="18" r="12" fill="#D9442B"/>
+      <circle cx="15" cy="13" r="3.5" fill="#fff" opacity=".7"/>
+    </svg>
+  </span></span>
+
+  <span class="st st--spark" aria-hidden="true"><span class="st__in">
+    <svg viewBox="0 0 60 60">
+      <g stroke-linecap="round" fill="none">
+        <path d="M30 6 L30 20 M52 30 L38 30 M12 12 L22 22 M48 12 L38 22" stroke="#fff" stroke-width="12"/>
+        <path d="M30 6 L30 20 M52 30 L38 30 M12 12 L22 22 M48 12 L38 22" stroke="#EE7F22" stroke-width="5"/>
+      </g>
+    </svg>
+  </span></span>
+
+  <a class="cue" href="#things">
+    <svg viewBox="0 0 22 30" aria-hidden="true"><path d="M11 2 C8 10 14 16 11 26 M4 19 L11 27 L18 19" fill="none" stroke="#1B3C8C" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    できること
+  </a>
+</section>
+
+<section class="sec" id="things">
+  <div class="sec__head rv">
+    <span class="sec__en">what you can do</span>
+    <h2 class="sec__ttl">虫屋PUPAで、<br>できること。</h2>
+    <p class="sec__lead">買う、育てる、相談する、残す。虫とのつきあい方をまるごと手伝う店です。</p>
+  </div>
+
+  <ol class="things">
+    <li class="thing">
+      <div class="thing__pic rv">
+        <span class="thing__no" aria-hidden="true">1</span>
+        <div class="blob" aria-hidden="true" style="--bc:var(--orange);--bx:16px;--by:14px">
+          <div class="blob__back"></div>
+          <div class="blob__img"><img src="https://images.unsplash.com/photo-1568108691108-4da98625b499?w=1000&q=75&auto=format&fit=crop" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="thing__body rv">
+        <span class="thing__tag">生き物と飼育用品</span>
+        <h3 class="thing__ttl">世界の虫たちに、<br>島原で会える。</h3>
+        <p class="thing__txt">世界各地のカブトムシ・クワガタ、その他の生き物と、育てるための用品をそろえています。<strong>島原半島ではじめての昆虫ショップ</strong>です。店頭では昆虫くじも（実施の予定はInstagramでお知らせします）。</p>
+      </div>
+    </li>
+
+    <li class="thing">
+      <div class="thing__pic rv">
+        <span class="thing__no" aria-hidden="true">2</span>
+        <div class="blob" aria-hidden="true" style="--bc:var(--green);--bx:-14px;--by:14px">
+          <div class="blob__back"></div>
+          <div class="blob__img"><img src="https://images.unsplash.com/photo-1657049016607-0a376708752f?w=1000&q=75&auto=format&fit=crop" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="thing__body rv">
+        <span class="thing__tag">飼育相談</span>
+        <h3 class="thing__ttl">はじめての一匹から、<br>気軽に聞いてください。</h3>
+        <p class="thing__txt">エサは、温度は、ケースの大きさは。飼いはじめの「これで合ってる？」に、店頭でお答えします。虫屋PUPAがいちばん大切にしているのは、<strong>子どもの「初めての感動」</strong>です。</p>
+      </div>
+    </li>
+
+    <li class="thing">
+      <div class="thing__pic rv">
+        <span class="thing__no" aria-hidden="true">3</span>
+        <div class="blob" aria-hidden="true" style="--bc:var(--yellow);--bx:16px;--by:12px">
+          <div class="blob__back"></div>
+          <div class="blob__img"><img src="https://images.unsplash.com/photo-1681414844371-c7f2bb3c8569?w=1000&q=75&auto=format&fit=crop" alt="" loading="lazy"></div>
+        </div>
+      </div>
+      <div class="thing__body rv">
+        <span class="thing__tag">標本製作</span>
+        <h3 class="thing__ttl">大切に育てた虫を、<br>標本にして残す。</h3>
+        <p class="thing__txt">採集した虫や、大切に飼育して亡くなってしまった虫を、半永久的に残せる標本に仕上げます。<strong>脚や触角が欠けてしまっていても修復できます。</strong>料金は来店かInstagramのDMでご相談ください。</p>
+        <div class="note">
+          <p class="note__ttl">亡くなってしまったときのお願い</p>
+          <ul>
+            <li>すぐに飼育ケースから取り出してください</li>
+            <li>冷凍するか、乾燥させてください</li>
+          </ul>
+          <p>傷みが進むと作業が難しくなり、お受けできない場合があります。欠けた脚や触角も、捨てずに保管しておいてください。</p>
+        </div>
+      </div>
+    </li>
+  </ol>
+
+  <div class="breed" id="breed">
+    <div class="breed__txt rv">
+      <span class="thing__tag">レンタルブリードスペース</span>
+      <h3 class="thing__ttl">家に置ききれない分は、<br>お店にあずける。</h3>
+      <p class="breed__price"><b>1,000</b><span>円／月・1区画</span><small>大人も子どもも同じ料金です</small></p>
+      <ul class="breed__for">
+        <li>夏場の温度管理が不安</li>
+        <li>家では飼育スペースが足りない</li>
+        <li>飼育のコストを抑えたい</li>
+      </ul>
+      <p class="thing__txt">こんなときに。空き状況はInstagramのDMか、店頭でお問い合わせください。</p>
+    </div>
+
+    <div class="box rv" id="box">
+      <div class="box__switch" role="group" aria-label="ボトルの大きさ">
+        <span>ボトルの大きさ</span>
+        <button type="button" data-size="800" aria-pressed="true">800cc</button>
+        <button type="button" data-size="1600" aria-pressed="false">1600cc</button>
+      </div>
+      <div class="box__frame" aria-hidden="true">
+        <div class="box__bottles is-800" id="bottles"></div>
+      </div>
+      <div class="box__dims" aria-hidden="true"><span>横 60cm</span><span>奥行 46cm × 高さ 30cm</span></div>
+      <p class="box__count" aria-live="polite">1区画に、<b id="bottleNum">約48</b>本。</p>
+      <p class="box__foot">上から見た図です。本数はお店の案内にもとづく目安です。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec mottos-sec" id="mottos">
+  <div class="sec__head rv">
+    <span class="sec__en">our motto</span>
+    <h2 class="sec__ttl">5つのモットー</h2>
+    <p class="sec__lead">年のはじめに、お店が掲げた約束です。</p>
+  </div>
+  <ol class="mottos rv">
+    <li class="mo"><span class="mo__n">1</span><span class="mo__t">命を尊重する</span><span class="mo__d">すべての生き物を大切に扱い、正しい飼育と販売を。</span></li>
+    <li class="mo"><span class="mo__n">2</span><span class="mo__t">正直である</span><span class="mo__d">お客様にも、ブリーダーにも、仲間にも誠実な商いを。</span></li>
+    <li class="mo"><span class="mo__n">3</span><span class="mo__t">学びを届ける</span><span class="mo__d">昆虫の魅力と、その背景にある自然や環境のことまで。</span></li>
+    <li class="mo mo--hl"><span class="mo__n">4</span><span class="mo__t">子ども目線を忘れない</span><span class="mo__d">「初めての感動」を何より大切に。安心・安全な場を守ります。</span></li>
+    <li class="mo"><span class="mo__n">5</span><span class="mo__t">地域と共に歩む</span><span class="mo__d">島原の自然と人に感謝して、この場所で続けていきます。</span></li>
+  </ol>
+</section>
+
+<section class="sec access" id="access">
+  <div class="access__in">
+    <div class="sec__head rv">
+      <span class="sec__en">access</span>
+      <h2 class="sec__ttl">お店への行きかた</h2>
+    </div>
+    <div class="access__grid">
+      <div class="rv">
+        <dl class="info">
+          <div><dt>店名</dt><dd>虫屋 PUPA（むしや ピューパ）</dd></div>
+          <div><dt>住所</dt><dd>〒855-0854<br>長崎県島原市萩が丘2丁目5675</dd></div>
+          <div><dt>営業時間</dt><dd><b>平日</b>18:00-21:00<br><b>土日祝</b>13:00-20:00<small>営業日は月ごとにかわります。その月の予定はInstagramのカレンダー投稿でお知らせしています。</small></dd></div>
+          <div><dt>駐車場</dt><dd>あり<small>場所はInstagramのハイライト「駐車場」でご案内しています。</small></dd></div>
+          <div><dt>お問い合わせ</dt><dd>InstagramのDM、または店頭で</dd></div>
+        </dl>
+        <a class="dm" href="https://www.instagram.com/kabuto64_pupa/" target="_blank" rel="noopener">Instagramで今月の営業日を見る</a>
+        <p class="access__small">ブリーダーさんも募集しています。くわしくはInstagramのハイライトをご覧ください。</p>
+      </div>
+      <div class="map rv">
+        <div class="map__frame">
+          <iframe title="虫屋PUPAの地図" src="https://maps.google.com/maps?q=%E9%95%B7%E5%B4%8E%E7%9C%8C%E5%B3%B6%E5%8E%9F%E5%B8%82%E8%90%A9%E3%81%8C%E4%B8%982%E4%B8%81%E7%9B%AE5675&z=16&hl=ja&output=embed" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <b>虫屋 PUPA</b>
+  <p>長崎県島原市萩が丘2丁目5675　／　Instagram @kabuto64_pupa<br>
+  ※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもので、実際のお店の写真に差し替えます。</p>
+</footer>
+
+<script>
+(function(){
+  /* 1字ずつ跳ねる。演出が終わったら分割を元に戻す（写経03の revert） */
+  var lines = document.querySelectorAll('.hero__title .l');
+  var i = 0;
+  if (document.documentElement.classList.contains('js') &&
+      !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    lines.forEach(function(line){
+      var t = line.textContent; line.textContent = '';
+      Array.from(t).forEach(function(c){
+        var s = document.createElement('span');
+        s.className = 'ch'; s.style.setProperty('--i', i++); s.textContent = c;
+        line.appendChild(s);
+      });
+      line.dataset.text = t;
+    });
+    setTimeout(function(){
+      lines.forEach(function(line){ line.textContent = line.dataset.text; });
+    }, 250 + i * 45 + 1000);
+  }
+
+
+  /* 出現：クラスを付けるだけ。動きはCSS（toyoxの手法） */
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -12% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('is-in'); }); }
+  /* 保険：5秒たっても画面内で隠れたままなら、演出をやめて全部見せる */
+  setTimeout(function(){
+    var stuck = Array.prototype.some.call(rv, function(el){
+      var r = el.getBoundingClientRect();
+      return r.top < innerHeight && r.bottom > 0 && !el.classList.contains('is-in');
+    });
+    if (stuck) document.documentElement.classList.remove('js');
+  }, 5000);
+
+  /* レンタル区画：ボトルの本数を図で見せる */
+  var wrap = document.getElementById('bottles'), num = document.getElementById('bottleNum');
+  function fill(size){
+    var n = size === '1600' ? 24 : 48, html = '';
+    for (var k = 0; k < n; k++) html += '<i style="--k:' + k + '"></i>';
+    wrap.className = 'box__bottles is-' + size; wrap.innerHTML = html;
+    num.textContent = '約' + n;
+  }
+  fill('800');
+  document.querySelectorAll('.box__switch button').forEach(function(b){
+    b.addEventListener('click', function(){
+      document.querySelectorAll('.box__switch button').forEach(function(x){ x.setAttribute('aria-pressed', x === b); });
+      fill(b.dataset.size);
+    });
+  });
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
