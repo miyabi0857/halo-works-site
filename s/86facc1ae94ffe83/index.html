@@ -60,17 +60,36 @@ a{color:inherit}
 .noren__p{
   position:relative;height:100%;
   background:
-    repeating-linear-gradient(90deg, rgba(0,0,0,.035) 0 2px, transparent 2px 7px),
-    linear-gradient(180deg, #f1e9d7 0%, #e8dec8 55%, #ddd1b8 100%);
-  box-shadow:inset 0 -14px 20px rgba(0,0,0,.08), inset 8px 0 14px rgba(0,0,0,.05), inset -8px 0 14px rgba(0,0,0,.05);
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .3  0 0 0 0 .22  0 0 0 .32 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='300'><filter id='s'><feTurbulence type='fractalNoise' baseFrequency='.012 .35' numOctaves='2' seed='4'/><feColorMatrix values='0 0 0 0 .4  0 0 0 0 .34  0 0 0 0 .25  0 0 0 .18 0'/></filter><rect width='100%' height='100%' filter='url(%23s)'/></svg>"),
+    repeating-linear-gradient(0deg, rgba(90,70,40,.05) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(90deg, rgba(90,70,40,.05) 0 1px, transparent 1px 3px),
+    linear-gradient(90deg, rgba(0,0,0,.07) 0%, rgba(255,255,255,.10) 9%, rgba(0,0,0,.02) 20%, rgba(0,0,0,.08) 33%, rgba(255,255,255,.08) 46%, rgba(0,0,0,.05) 60%, rgba(255,255,255,.10) 74%, rgba(0,0,0,.06) 88%, rgba(0,0,0,.10) 100%),
+    linear-gradient(180deg, #f3ead7 0%, #ebe0c8 60%, #dfd2b5 100%);
+  background-size:160px 160px, 300px 300px, auto, auto, auto, auto;
+  background-blend-mode:multiply, multiply, normal, normal, normal, normal;
+  box-shadow:inset 0 -18px 22px rgba(0,0,0,.10), inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06);
+  clip-path:polygon(0 0,100% 0,100% 99.6%,93% 99.9%,86% 99.5%,74% 100%,61% 99.6%,49% 99.95%,37% 99.5%,24% 99.9%,12% 99.6%,0 99.9%);
   transform-origin:50% 0;will-change:transform;
+  animation:sway var(--sw,5.5s) ease-in-out infinite alternate;animation-delay:var(--sd,0s);
 }
-.noren__p + .noren__p{border-left:1px solid rgba(0,0,0,.12)}
-.noren__p::before{ /* loops (chi) on the rod */
-  content:"";position:absolute;left:8%;right:8%;top:-12px;height:16px;
-  background:repeating-linear-gradient(90deg, #e3d8c0 0 14px, transparent 14px 46px);
+.np0{--sw:5.2s;--sd:-1.3s}.np1{--sw:6s;--sd:-3s}.np2{--sw:5.6s;--sd:-.4s}
+@keyframes sway{from{rotate:-.5deg}to{rotate:.6deg}}
+@media (prefers-reduced-motion:reduce){.noren__p{animation:none}}
+.noren__p::after{ /* sewn hem near the bottom */
+  content:"";position:absolute;left:0;right:0;bottom:3.2%;height:1px;
+  background:repeating-linear-gradient(90deg, rgba(80,60,35,.35) 0 6px, transparent 6px 10px);
 }
-.noren__mark{position:absolute;left:50%;top:44%;width:min(62%,300px);aspect-ratio:1;transform:translate(-50%,-50%);color:var(--sumi)}
+.noren__p + .noren__p{border-left:1px solid rgba(0,0,0,.14)}
+.noren__p::before{ /* loops (chi) on the rod: folded cloth tabs */
+  content:"";position:absolute;left:0;right:0;top:-15px;height:18px;
+  background:
+    linear-gradient(90deg,#cdbf9f,#e6dbc2 45%,#d3c5a6) 14% 0/16px 100% no-repeat,
+    linear-gradient(90deg,#cdbf9f,#e6dbc2 45%,#d3c5a6) 50% 0/16px 100% no-repeat,
+    linear-gradient(90deg,#cdbf9f,#e6dbc2 45%,#d3c5a6) 86% 0/16px 100% no-repeat;
+  filter:drop-shadow(0 1px 1px rgba(0,0,0,.35));
+}
+.noren__mark{position:absolute;left:50%;top:44%;width:min(62%,300px);aspect-ratio:1;transform:translate(-50%,-50%);color:#221f1b;opacity:.9;mix-blend-mode:multiply;filter:url(#dye)}
 .noren__mark svg{width:100%;height:100%}
 
 .lamp{position:absolute;left:50%;transform:translateX(-50%);width:34px;height:22px;z-index:4}
@@ -96,7 +115,7 @@ html.js .blurin{opacity:0;filter:blur(10px);animation:blurin 1.4s ease forwards;
 
 .walk{position:relative;height:260vh;background:var(--night)}
 .walk__stage{position:sticky;top:0;height:100vh;overflow:hidden;--p:0}
-.front{position:absolute;inset:0;transform-origin:50% 58%;transform:scale(calc(1 + var(--p) * 1.9));
+.front{position:absolute;inset:0;transform-origin:50% 58%;transform:scale(calc(1 + var(--p) * 1.25));
   background:
     repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 2px, transparent 2px 38px),
     radial-gradient(ellipse at 50% 18%, rgba(242,198,117,.20), transparent 55%),
@@ -107,14 +126,14 @@ html.js .blurin{opacity:0;filter:blur(10px);animation:blurin 1.4s ease forwards;
 .door .inside{inset:0;opacity:calc(.45 + var(--p) * 1.2);z-index:1}
 .door .inside img{filter:brightness(.55) blur(calc((1 - var(--p)) * 3px))}
 .door .inside::after{display:none}
-.walk .noren{left:50%;top:14%;width:min(58vw,560px);height:52%;transform:translateX(-50%);z-index:2}
-.walk .np0{transform:translateY(calc(var(--p) * -120%)) rotate(calc(var(--p) * 3deg))}
-.walk .np2{transform:translateY(calc(var(--p) * -120%)) rotate(calc(var(--p) * -3deg))}
-.walk .np1{transform:translateY(calc(var(--p) * -128%))}
-.walk .lamp{top:calc(14% - 46px)}
+.walk .noren{left:50%;top:14%;width:min(58vw,560px);height:52%;transform:translateX(-50%) translateY(calc(var(--p) * -175%));z-index:2}
+.walk .np0{transform:translateY(calc(var(--p) * -22%)) rotate(calc(var(--p) * 4deg))}
+.walk .np2{transform:translateY(calc(var(--p) * -22%)) rotate(calc(var(--p) * -4deg))}
+.walk .np1{transform:translateY(calc(var(--p) * -30%))}
+.walk .noren .lamp{top:-50px}
 .plate{position:absolute;right:calc(50% - min(29vw,280px) - 110px);top:40%;font-family:var(--en);letter-spacing:.3em;color:#c9bca0;font-size:.9rem;writing-mode:vertical-rl}
 .walk__hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);white-space:nowrap;color:#cfc4ab;font-size:.8rem;letter-spacing:.3em;opacity:calc(1 - var(--p) * 4);z-index:5}
-.walk__in{position:absolute;inset:0;z-index:6;opacity:calc(var(--p) * 3 - 2.1);pointer-events:none}
+.walk__in{position:absolute;inset:0;z-index:6;opacity:calc(var(--p) * 7 - 5.6);pointer-events:none}
 @media (max-width:760px){
   .door,.walk .noren{width:78vw}
   .plate{display:none}
@@ -225,6 +244,7 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
       <path d="M0 -6 V-20 M-10 -5 L-16 -17 M10 -5 L16 -17 M-21 -2 L-31 -11 M21 -2 L31 -11"/>
     </g>
   </g>
+  <filter id="dye"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" result="t"/><feDisplacementMap in="SourceGraphic" in2="t" scale="1.6"/></filter>
   <symbol id="mon" viewBox="0 0 200 200">
     <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="9"/>
     <g fill="currentColor">
@@ -249,9 +269,9 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
 <section class="walk" id="walk">
   <div class="walk__stage" id="stage">
     <div class="front">
-      <span class="lamp" style="left:50%"></span>
+      
       <div class="door"><div class="inside"><img src="https://images.unsplash.com/photo-1561641250-c06551cf3b02?w=1600&q=75&auto=format&fit=crop" alt=""></div></div>
-      <div class="noren " aria-hidden="true"><span class="noren__rod"></span><div class="noren__p np0"></div><div class="noren__p np1"><span class="noren__mark"><svg viewBox="0 0 200 200"><use href="#mon"/></svg></span></div><div class="noren__p np2"></div></div>
+      <div class="noren " aria-hidden="true"><span class="noren__rod"></span><span class="lamp"></span><div class="noren__p np0"></div><div class="noren__p np1"><span class="noren__mark"><svg viewBox="0 0 200 200"><use href="#mon"/></svg></span></div><div class="noren__p np2"></div></div>
       <span class="plate">ROOTS</span>
     </div>
     <div class="walk__in"><div class="inside" style="--cd:0s"><img src="https://images.unsplash.com/photo-1561641250-c06551cf3b02?w=1600&q=75&auto=format&fit=crop" alt="">
