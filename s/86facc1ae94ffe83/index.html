@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>盆栽屋 ROOTS｜佐世保・戸尾町の盆栽店</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="盆栽屋 ROOTS｜佐世保・戸尾町の盆栽店">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/86facc1ae94ffe83/">
+<meta property="og:image" content="https://gearbloom.jp/s/86facc1ae94ffe83/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="伝統とモダンが心地よく調和する、佐世保の盆栽屋。盆栽の奥深さを、もっと身近に、もっとおしゃれに。長崎県佐世保市戸尾町13-2 1F。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@400;600;800&family=Marcellus&display=swap" rel="stylesheet">
+<!--
+  参考：
+  ・帆山亭（https://www.hozantei.com/）… 夜の写真に白抜きの縦書き明朝、letter-spacing .8em、ぼかしから浮かび上がる出方
+  ・土と風（https://tsuchitokaze.co.jp/）… 生成りの地（#fff9f4）と灰茶の差し色、余白の取り方
+  暖簾の丸紋は先方のロゴを見本に線を引き直したもの。成約後は正式なロゴデータに差し替える。
+  写真：Unsplash（Unsplash License。商用可・クレジット不要）。たたき台用の仮写真
+-->
+<style>
+:root{
+  --sumi:#1a1916;
+  --night:#23211d;
+  --cloth:#EDE4D0;
+  --cloth-d:#d8ccb2;
+  --washi:#F5F0E6;
+  --matsu:#3E5A3A;
+  --tsuchi:#8A6A4A;
+  --akari:#F2C675;
+  --ink:#2a2723;
+  --mute:#8d877b;
+  --min:"Shippori Mincho B1", serif;
+  --en:"Marcellus", serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--min);color:var(--ink);background:var(--washi);line-height:1.9;overflow-x:hidden}
+a{color:inherit}
+.mon{display:block;color:var(--sumi)}
+
+.top{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,48px);color:var(--cloth);mix-blend-mode:difference}
+.top a{text-decoration:none}
+.top__logo{display:flex;align-items:center;gap:10px;font-family:var(--en);font-size:1.15rem;letter-spacing:.2em}
+.top__logo svg{width:30px;height:30px;color:currentColor;--cloth:#000}
+.top__nav{display:flex;gap:26px;list-style:none;font-size:.85rem;letter-spacing:.2em}
+@media (max-width:760px){.top__nav{display:none}}
+
+/* ---------- the noren ---------- */
+.noren{position:absolute;display:grid;grid-template-columns:repeat(3,1fr);gap:0;--cloth:#EDE4D0}
+.noren__rod{position:absolute;left:-3%;right:-3%;top:-10px;height:8px;border-radius:4px;background:linear-gradient(#5b4632,#2e2419);z-index:3;box-shadow:0 3px 6px rgba(0,0,0,.4)}
+.noren__p{
+  position:relative;height:100%;
+  background:
+    repeating-linear-gradient(90deg, rgba(0,0,0,.035) 0 2px, transparent 2px 7px),
+    linear-gradient(180deg, #f1e9d7 0%, #e8dec8 55%, #ddd1b8 100%);
+  box-shadow:inset 0 -14px 20px rgba(0,0,0,.08), inset 8px 0 14px rgba(0,0,0,.05), inset -8px 0 14px rgba(0,0,0,.05);
+  transform-origin:50% 0;will-change:transform;
+}
+.noren__p + .noren__p{border-left:1px solid rgba(0,0,0,.12)}
+.noren__p::before{ /* loops (chi) on the rod */
+  content:"";position:absolute;left:8%;right:8%;top:-12px;height:16px;
+  background:repeating-linear-gradient(90deg, #e3d8c0 0 14px, transparent 14px 46px);
+}
+.noren__mark{position:absolute;left:50%;top:44%;width:min(62%,300px);aspect-ratio:1;transform:translate(-50%,-50%);color:var(--sumi)}
+.noren__mark svg{width:100%;height:100%}
+
+.lamp{position:absolute;left:50%;transform:translateX(-50%);width:34px;height:22px;z-index:4}
+.lamp::before{content:"";position:absolute;inset:0;border-radius:40% 40% 0 0;background:linear-gradient(#bfb39a,#8f8570)}
+.lamp::after{content:"";position:absolute;left:50%;top:12px;width:14px;height:18px;border-radius:50% 50% 45% 45%;transform:translateX(-50%);background:#fff3d2;box-shadow:0 0 18px 6px rgba(242,198,117,.9), 0 0 120px 60px rgba(242,198,117,.25)}
+
+.tate{writing-mode:vertical-rl;font-family:var(--min);font-weight:600;letter-spacing:.5em;line-height:1.9}
+html.js .blurin{opacity:0;filter:blur(10px);animation:blurin 1.4s ease forwards;animation-delay:var(--bd,.2s)}
+@keyframes blurin{to{opacity:1;filter:blur(0)}}
+@media (prefers-reduced-motion:reduce){html.js .blurin{opacity:1;filter:none;animation:none}}
+
+.inside{position:absolute;inset:0;overflow:hidden;background:var(--sumi)}
+.inside img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(.72)}
+.inside::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg, rgba(20,19,17,.72) 0%, rgba(20,19,17,.1) 55%, rgba(20,19,17,.35) 100%)}
+.in__catch{position:absolute;z-index:2;right:clamp(28px,8vw,140px);top:clamp(80px,14vh,140px);color:#fff;font-size:clamp(1.9rem,3.4vw,3.1rem);letter-spacing:.4em;line-height:2.1;font-weight:600;white-space:nowrap;text-shadow:0 2px 20px rgba(0,0,0,.4)}
+.in__lead{position:absolute;z-index:2;left:clamp(20px,5vw,80px);bottom:clamp(40px,9vh,90px);color:#f2ecdf;max-width:30em}
+.in__en{font-family:var(--en);letter-spacing:.3em;font-size:.78rem;color:var(--akari);margin-bottom:.8em}
+.in__txt{font-size:clamp(.95rem,1.25vw,1.1rem);line-height:2.1}
+@media (max-width:760px){
+  .in__catch{right:14px;top:86px;font-size:1.65rem;letter-spacing:.3em}
+  .in__lead{left:18px;right:80px;bottom:40px}
+}
+
+.walk{position:relative;height:260vh;background:var(--night)}
+.walk__stage{position:sticky;top:0;height:100vh;overflow:hidden;--p:0}
+.front{position:absolute;inset:0;transform-origin:50% 58%;transform:scale(calc(1 + var(--p) * 1.9));
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.018) 0 2px, transparent 2px 38px),
+    radial-gradient(ellipse at 50% 18%, rgba(242,198,117,.20), transparent 55%),
+    linear-gradient(#2b2925,#1b1a17)}
+.door{position:absolute;left:50%;top:14%;width:min(58vw,560px);height:78%;transform:translateX(-50%);
+  background:linear-gradient(rgba(242,198,117,.10),rgba(0,0,0,.2)),#2a2824;box-shadow:0 0 0 12px #141311, 0 0 60px rgba(0,0,0,.6);overflow:hidden}
+.door::after{content:"";position:absolute;left:50%;top:0;bottom:0;width:4px;background:#26231f}
+.door .inside{inset:0;opacity:calc(.45 + var(--p) * 1.2);z-index:1}
+.door .inside img{filter:brightness(.55) blur(calc((1 - var(--p)) * 3px))}
+.door .inside::after{display:none}
+.walk .noren{left:50%;top:14%;width:min(58vw,560px);height:52%;transform:translateX(-50%);z-index:2}
+.walk .np0{transform:translateY(calc(var(--p) * -120%)) rotate(calc(var(--p) * 3deg))}
+.walk .np2{transform:translateY(calc(var(--p) * -120%)) rotate(calc(var(--p) * -3deg))}
+.walk .np1{transform:translateY(calc(var(--p) * -128%))}
+.walk .lamp{top:calc(14% - 46px)}
+.plate{position:absolute;right:calc(50% - min(29vw,280px) - 110px);top:40%;font-family:var(--en);letter-spacing:.3em;color:#c9bca0;font-size:.9rem;writing-mode:vertical-rl}
+.walk__hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);white-space:nowrap;color:#cfc4ab;font-size:.8rem;letter-spacing:.3em;opacity:calc(1 - var(--p) * 4);z-index:5}
+.walk__in{position:absolute;inset:0;z-index:6;opacity:calc(var(--p) * 3 - 2.1);pointer-events:none}
+@media (max-width:760px){
+  .door,.walk .noren{width:78vw}
+  .plate{display:none}
+}
+
+/* after entering: the noren rests as a short valance fixed on top for the rest of the page (from hero 2) */
+.valance{position:fixed;left:0;right:0;top:0;height:64px;z-index:30;display:grid;grid-template-columns:repeat(3,1fr);
+  transform:translateY(-115%);transition:transform .9s cubic-bezier(.6,0,.2,1);--cloth:#EDE4D0;box-shadow:0 4px 14px rgba(0,0,0,.18)}
+.entered .valance{transform:none}
+.valance span{position:relative;background:repeating-linear-gradient(90deg, rgba(0,0,0,.035) 0 2px, transparent 2px 7px),linear-gradient(#efe6d3,#ddd1b8);box-shadow:inset 0 -10px 14px rgba(0,0,0,.08)}
+.valance span + span{border-left:1px solid rgba(0,0,0,.12)}
+.valance::before{content:"";position:absolute;left:0;right:0;top:0;height:6px;background:linear-gradient(#5b4632,#2e2419);z-index:2}
+.valance svg{position:absolute;left:50%;top:50%;width:40px;height:40px;transform:translate(-50%,-44%);color:var(--sumi)}
+.entered .top{mix-blend-mode:normal;color:var(--ink);padding-top:0;padding-bottom:0;height:64px}
+.entered .top__logo svg{display:none}
+
+/* ================= below the hero ================= */
+.sec{position:relative;overflow-x:clip;padding:clamp(90px,12vw,170px) clamp(16px,5vw,80px)}
+.sec__en{display:block;font-family:var(--en);font-size:.8rem;letter-spacing:.34em;color:var(--tsuchi);margin-bottom:1.2em}
+html.js .rv{opacity:0;filter:blur(8px);transform:translateY(16px);transition:opacity 1.2s ease, filter 1.2s ease, transform 1.2s ease}
+html.js .rv.is-in{opacity:1;filter:none;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;filter:none;transform:none;transition:none}}
+
+/* about */
+.about{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,1.1fr);gap:clamp(28px,5vw,90px);align-items:center;background:var(--washi)}
+.about__tate{font-size:clamp(1.6rem,2.8vw,2.4rem);letter-spacing:.42em;line-height:2.2;color:var(--ink);white-space:nowrap}
+.about__txt p{font-size:clamp(.95rem,1.15vw,1.05rem);line-height:2.3}
+.about__txt p + p{margin-top:1.4em}
+.about__txt b{font-weight:600;border-bottom:1px solid var(--tsuchi)}
+.about__pic{position:relative;aspect-ratio:4/5;overflow:hidden}
+.about__pic img{width:100%;height:100%;object-fit:cover}
+.about__pic::after{content:"";position:absolute;inset:14px;border:1px solid rgba(237,228,208,.55)}
+
+/* the meaning of one pot (goyo-matsu) */
+.imi{background:var(--sumi);color:#eee6d6;padding-top:0;padding-bottom:0}
+.imi__wrap{position:relative;height:320vh}
+.imi__stage{position:sticky;top:0;height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);align-items:center;gap:clamp(20px,4vw,60px);padding:clamp(80px,12vh,120px) clamp(16px,5vw,80px) 40px;overflow:hidden}
+.imi__pic{position:relative;height:min(74vh,640px);overflow:hidden}
+.imi__pic img{width:100%;height:100%;object-fit:cover;filter:brightness(.8)}
+.imi__name{position:absolute;left:18px;top:18px;writing-mode:vertical-rl;font-size:clamp(1.4rem,2.2vw,2rem);letter-spacing:.4em;font-weight:600;color:#fff;text-shadow:0 2px 14px rgba(0,0,0,.5)}
+.imi__head .sec__en{color:var(--akari)}
+.imi__ttl{font-size:clamp(1.5rem,2.6vw,2.3rem);font-weight:600;letter-spacing:.14em;line-height:1.7}
+.imi__lead{margin-top:.8em;font-size:.95rem;line-height:2.1;color:#cfc6b4;max-width:28em}
+.imi__list{list-style:none;display:flex;flex-direction:row-reverse;justify-content:flex-end;gap:clamp(14px,2.2vw,34px);margin-top:clamp(24px,4vh,44px);height:clamp(250px,40vh,380px)}
+.imi__list li{writing-mode:vertical-rl;opacity:.12;filter:blur(3px);transition:opacity .8s ease, filter .8s ease}
+.imi__list li.on{opacity:1;filter:none}
+.imi__list b{display:block;font-size:clamp(1.15rem,1.7vw,1.5rem);font-weight:600;letter-spacing:.3em;color:#fff;margin-left:.5em}
+.imi__list small{font-size:.85rem;letter-spacing:.14em;line-height:1.9;color:#cfc6b4}
+.imi__src{margin-top:18px;font-size:.75rem;color:#8d877b}
+
+/* bonsai */
+.bonsai{background:var(--washi)}
+.bonsai__head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:clamp(30px,4vw,56px)}
+.bonsai__ttl{font-size:clamp(1.5rem,2.6vw,2.3rem);font-weight:600;letter-spacing:.14em}
+.bonsai__note{font-size:.88rem;color:var(--mute);max-width:26em}
+.gal{display:grid;grid-template-columns:1.2fr .8fr 1fr;gap:clamp(10px,1.6vw,22px);align-items:start}
+.gal figure{position:relative;overflow:hidden}
+.gal figure:nth-child(2){margin-top:14%}
+.gal figure:nth-child(3){margin-top:6%}
+.gal img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 1.2s ease}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;right:12px;top:12px;writing-mode:vertical-rl;font-size:1rem;letter-spacing:.4em;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.6)}
+
+/* access */
+.access{background:var(--washi);padding-top:0}
+.access__in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(24px,4vw,64px);border-top:1px solid #d8cfbf;padding-top:clamp(60px,8vw,110px)}
+.access__ttl{font-size:clamp(1.5rem,2.6vw,2.3rem);font-weight:600;letter-spacing:.14em;margin-bottom:1em}
+.info div{display:grid;grid-template-columns:6em 1fr;gap:10px;padding:14px 0;border-bottom:1px solid #e2dacb;font-size:.95rem}
+.info dt{color:var(--mute);letter-spacing:.2em}
+.info dd small{display:block;color:var(--mute);font-size:.8rem}
+.info a{text-decoration:none;border-bottom:1px solid var(--tsuchi)}
+.ig{display:inline-flex;align-items:center;gap:12px;margin-top:28px;text-decoration:none;letter-spacing:.3em;font-size:.95rem;border:1px solid var(--ink);padding:.9em 2em;transition:background .3s,color .3s}
+.ig:hover{background:var(--ink);color:var(--washi)}
+.map{position:relative;aspect-ratio:4/3;filter:grayscale(.85) contrast(.95)}
+.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+
+.foot{background:var(--sumi);color:#cfc6b4;text-align:center;padding:60px 16px 56px}
+.foot svg{width:56px;height:56px;color:var(--cloth);--cloth:var(--sumi);display:block;margin:0 auto 14px}
+.foot b{font-family:var(--en);letter-spacing:.34em;font-weight:400;color:#eee6d6}
+.foot p{font-size:.75rem;line-height:1.9;margin-top:12px;opacity:.8}
+
+@media (max-width:860px){
+  .about{grid-template-columns:1fr;justify-items:start}
+  .about__tate{writing-mode:horizontal-tb;letter-spacing:.14em;font-size:1.6rem;line-height:1.8;white-space:normal}
+  .imi__stage{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-items:start;padding-top:84px;gap:14px}
+  .imi__pic{height:26vh}
+  .imi__ttl{font-size:1.3rem}
+  .imi__lead{font-size:.82rem;line-height:1.9}
+  .imi__list{height:34vh;margin-top:14px;gap:10px}
+  .imi__list b{font-size:1.05rem}
+  .imi__list small{font-size:.74rem}
+  .bonsai__head{flex-direction:column;align-items:flex-start}
+  .gal{grid-template-columns:1fr 1fr}
+  .gal figure:nth-child(3){grid-column:1/-1;margin-top:0}
+  .gal figure:nth-child(3) img{aspect-ratio:16/10}
+  .access__in{grid-template-columns:1fr}
+}
+</style>
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <g id="pad">
+    <path fill="currentColor" d="M-50 8 C-54 -8 -40 -19 -26 -14 C-20 -27 -4 -31 6 -24 C16 -31 36 -25 37 -12 C49 -15 56 -2 50 8 C45 15 35 15 28 10 C22 17 10 17 4 12 C-2 17 -14 17 -20 11 C-28 16 -41 15 -50 8 Z"/>
+    <path fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" d="M-46 14 Q-36 22 -24 17 M-8 17 Q2 23 12 18 M26 16 Q36 22 46 14"/>
+    <g fill="none" stroke="var(--cloth,#EDE4D0)" stroke-width="2.4" stroke-linecap="round">
+      <path d="M-34 3 Q0 -6 34 3"/>
+      <path d="M0 -6 V-20 M-10 -5 L-16 -17 M10 -5 L16 -17 M-21 -2 L-31 -11 M21 -2 L31 -11"/>
+    </g>
+  </g>
+  <symbol id="mon" viewBox="0 0 200 200">
+    <circle cx="100" cy="100" r="90" fill="none" stroke="currentColor" stroke-width="9"/>
+    <g fill="currentColor">
+      <path d="M96 62 C90 72 104 79 102 88 C100 98 84 102 86 116 C88 127 99 132 96 141 C93 146 84 148 78 150 H126 C117 146 112 140 115 130 C118 119 106 114 107 106 C108 98 117 93 114 83 C112 74 104 70 105 62 Z"/>
+      <path d="M92 110 C84 108 76 104 70 99 L73 96 C79 100 86 103 94 104 Z"/>
+      <path d="M106 99 C114 98 122 95 130 91 L132 95 C124 99 116 102 107 104 Z"/>
+      <path d="M64 150 H136 V157 H64 Z"/>
+      <path d="M69 158 H131 L128 171 H72 Z"/>
+      <path d="M74 171 H84 V175 H74 Z M116 171 H126 V175 H116 Z"/>
+    </g>
+    <use href="#pad" transform="translate(100 46) scale(.74)"/>
+    <use href="#pad" transform="translate(56 90) scale(.66)"/>
+    <use href="#pad" transform="translate(144 90) scale(.66)"/>
+  </symbol>
+</defs></svg>
+<header class="top">
+  <a class="top__logo" href="#"><svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mon"/></svg>ROOTS</a>
+  <ul class="top__nav"><li><a href="#about">ROOTSについて</a></li><li><a href="#bonsai">盆栽</a></li><li><a href="#access">アクセス</a></li><li><a href="https://www.instagram.com/roots_bonsai_sasebo/" target="_blank" rel="noopener">Instagram</a></li></ul>
+</header>
+<div class="valance" aria-hidden="true"><span></span><span><svg viewBox="0 0 200 200"><use href="#mon"/></svg></span><span></span></div>
+<main>
+<section class="walk" id="walk">
+  <div class="walk__stage" id="stage">
+    <div class="front">
+      <span class="lamp" style="left:50%"></span>
+      <div class="door"><div class="inside"><img src="https://images.unsplash.com/photo-1561641250-c06551cf3b02?w=1600&q=75&auto=format&fit=crop" alt=""></div></div>
+      <div class="noren " aria-hidden="true"><span class="noren__rod"></span><div class="noren__p np0"></div><div class="noren__p np1"><span class="noren__mark"><svg viewBox="0 0 200 200"><use href="#mon"/></svg></span></div><div class="noren__p np2"></div></div>
+      <span class="plate">ROOTS</span>
+    </div>
+    <div class="walk__in"><div class="inside" style="--cd:0s"><img src="https://images.unsplash.com/photo-1561641250-c06551cf3b02?w=1600&q=75&auto=format&fit=crop" alt="">
+    <p class="tate in__catch " style="--bd:var(--cd,.3s)">盆栽を、<br>もっと身近に。</p>
+    <div class="in__lead " style="--bd:calc(var(--cd,.3s) + .4s)">
+      <p class="in__en">BONSAI SHOP ROOTS / SASEBO</p>
+      <p class="in__txt">伝統とモダンが、心地よく調和する盆栽屋。<br>佐世保・戸尾町に、2026年7月ひらきました。</p>
+    </div>
+    </div></div>
+    <p class="walk__hint">SCROLL　暖簾をくぐって、どうぞ</p>
+  </div>
+</section>
+
+<section class="sec about" id="about">
+  <p class="tate about__tate rv">伝統と、<br>モダンのあいだ。</p>
+  <div class="about__txt rv">
+    <span class="sec__en">ABOUT ROOTS</span>
+    <p>佐世保・戸尾町の盆栽屋、ROOTS（ルーツ）です。<br>盆栽園<b>「恵松園」</b>とともに、盆栽という文化に、新しいカルチャーを重ねる店としてひらきました。</p>
+    <p>一歩足を踏み入れれば、伝統とモダンが心地よく調和する空間。<br>盆栽の奥深さを、もっと身近に、もっとおしゃれに。<br>はじめての一鉢を探しに、ふらりとお立ち寄りください。</p>
+  </div>
+  <figure class="about__pic rv"><img src="https://images.unsplash.com/photo-1470364693235-a4fe27c60914?w=1000&q=75&auto=format&fit=crop" alt="" loading="lazy"></figure>
+</section>
+
+<section class="sec imi" id="bonsai-imi">
+  <div class="imi__wrap" id="imi">
+    <div class="imi__stage">
+      <figure class="imi__pic"><img src="https://images.unsplash.com/photo-1599598177991-ec67b5c37318?w=1200&q=75&auto=format&fit=crop" alt="" loading="lazy"><figcaption class="imi__name">五葉松</figcaption></figure>
+      <div class="imi__body">
+        <div class="imi__head">
+          <span class="sec__en">THE MEANING OF ONE POT</span>
+          <h2 class="imi__ttl">一鉢に、意味を込めて。</h2>
+          <p class="imi__lead">盆栽は、木そのものに願いが託されています。たとえば五葉松には、こんな意味が。開店祝いや贈り物に、意味ごと選ぶ一鉢を。</p>
+        </div>
+        <ol class="imi__list" id="imiList">
+          <li><b>商売繁盛</b><small>「御用を待つ」に通じる</small></li>
+          <li><b>不老長寿</b><small>一年中、青々とした常緑</small></li>
+          <li><b>魔除け</b><small>古くから門松にも</small></li>
+          <li><b>一家団欒</b><small>花言葉は夫婦和合とも</small></li>
+        </ol>
+        <p class="imi__src">※ROOTSのInstagram投稿「五葉松」より</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec bonsai" id="bonsai">
+  <div class="bonsai__head rv">
+    <div><span class="sec__en">BONSAI</span><h2 class="bonsai__ttl">店にならぶ、木々。</h2></div>
+    <p class="bonsai__note">松からもみじまで。季節ごとの顔をもつ一鉢を、店頭でご覧いただけます。入荷の様子はInstagramでお知らせしています。</p>
+  </div>
+  <div class="gal">
+    <figure class="rv"><img src="https://images.unsplash.com/photo-1632161286719-5afe9b5d954b?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"><figcaption>佇む</figcaption></figure>
+    <figure class="rv"><img src="https://images.unsplash.com/photo-1641412722397-3be359096577?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"><figcaption>うねる</figcaption></figure>
+    <figure class="rv"><img src="https://images.unsplash.com/photo-1648410775702-b201a9f15c20?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"><figcaption>ひろがる</figcaption></figure>
+  </div>
+</section>
+
+<section class="sec access" id="access">
+  <div class="access__in">
+    <div class="rv">
+      <span class="sec__en">ACCESS</span>
+      <h2 class="access__ttl">お店への道</h2>
+      <dl class="info">
+        <div><dt>店名</dt><dd>盆栽屋 ROOTS（ルーツ）</dd></div>
+        <div><dt>住所</dt><dd>〒857-0864<br>長崎県佐世保市戸尾町13-2 1F</dd></div>
+        <div><dt>電話</dt><dd><a href="tel:07085643967">070-8564-3967</a></dd></div>
+        <div><dt>営業</dt><dd>営業日・時間はInstagramでご確認ください<small>ご来店前にお電話いただくと確実です</small></dd></div>
+      </dl>
+      <a class="ig" href="https://www.instagram.com/roots_bonsai_sasebo/" target="_blank" rel="noopener">INSTAGRAM</a>
+    </div>
+    <div class="map rv"><iframe title="ROOTSの地図" src="https://maps.google.com/maps?q=%E9%95%B7%E5%B4%8E%E7%9C%8C%E4%BD%90%E4%B8%96%E4%BF%9D%E5%B8%82%E6%88%B8%E5%B0%BE%E7%94%BA13-2&z=16&hl=ja&output=embed" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+  </div>
+</section>
+</main>
+<footer class="foot">
+  <svg viewBox="0 0 200 200" aria-hidden="true"><use href="#mon"/></svg>
+  <b>ROOTS</b>
+  <p>盆栽屋 ルーツ　長崎県佐世保市戸尾町13-2 1F<br>
+  ※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもの、丸紋は暖簾をもとに描き起こしたもので、実際の写真・ロゴデータに差し替えます。</p>
+</footer>
+
+<script>
+(function(){
+  /* CSS変数ひとつ（--p）で暖簾と奥行きを動かす（写経02の手法） */
+  var sec = document.getElementById('walk'), st = document.getElementById('stage');
+  function f(){
+    var r = sec.getBoundingClientRect(), max = sec.offsetHeight - innerHeight;
+    var p = Math.min(1, Math.max(0, -r.top / max));
+    st.style.setProperty('--p', p.toFixed(4));
+    document.body.classList.toggle('entered', p >= .8 || r.top <= -max);
+  }
+  addEventListener('scroll', f, {passive:true}); addEventListener('resize', f); f();
+})();
+</script>
+<script>
+(function(){
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('is-in'); }); }
+  setTimeout(function(){
+    var stuck = Array.prototype.some.call(rv, function(el){
+      var r = el.getBoundingClientRect();
+      return r.top < innerHeight && r.bottom > 0 && !el.classList.contains('is-in');
+    });
+    if (stuck) document.documentElement.classList.remove('js');
+  }, 5000);
+
+  /* 一鉢の意味：スクロールに合わせて、縦書きの願いがひとつずつ灯る */
+  var w = document.getElementById('imi'), li = document.querySelectorAll('#imiList li');
+  function g(){
+    var r = w.getBoundingClientRect(), max = w.offsetHeight - innerHeight;
+    var p = Math.min(1, Math.max(0, -r.top / max));
+    li.forEach(function(el, i){ el.classList.toggle('on', p > .08 + i * .2); });
+  }
+  addEventListener('scroll', g, {passive:true}); g();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
