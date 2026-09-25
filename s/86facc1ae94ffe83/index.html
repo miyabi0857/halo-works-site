@@ -138,7 +138,7 @@ html.js .blurin{opacity:0;filter:blur(10px);animation:blurin 1.4s ease forwards;
 .door .inside img{filter:brightness(.55) blur(calc((1 - var(--p)) * 3px))}
 .door .inside::after{display:none}
 .walk .noren{left:50%;top:14%;width:min(58vw,560px);height:52%;z-index:2}
-.walk .noren .lamp{top:-50px}
+.walk .noren .lamp{top:-60px}
 .plate{position:absolute;right:calc(50% - min(29vw,280px) - 110px);top:40%;font-family:var(--en);letter-spacing:.3em;color:#c9bca0;font-size:.9rem;writing-mode:vertical-rl}
 .walk__hint{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);white-space:nowrap;color:#cfc4ab;font-size:.8rem;letter-spacing:.3em;opacity:calc(1 - var(--p) * 4);z-index:5}
 .walk__in{position:absolute;inset:0;z-index:6;opacity:calc(var(--p) * 7 - 5.6);pointer-events:none}
@@ -267,10 +267,12 @@ html.js .rv.is-in{opacity:1;filter:none;transform:none}
     linear-gradient(#efe5cf,#efe5cf);background-blend-mode:normal, multiply, multiply, normal, normal, normal, normal}
 .seg:last-child{clip-path:polygon(0 0,100% 0,100% 96%,93% 99%,86% 96.5%,74% 100%,61% 97%,49% 99.5%,37% 96.5%,24% 99%,12% 97%,0 99%);box-shadow:inset 0 -14px 18px rgba(0,0,0,.08), inset 6px 0 10px rgba(0,0,0,.06), inset -6px 0 10px rgba(0,0,0,.06)}
 
-/* rod sits clearly in front of the cloth loops (avoids z-fighting flicker in 3D) */
-.walk .noren__rod{transform:translateZ(4px)}
-.walk .noren .lamp{transform:translateX(-50%) translateZ(6px)}
-.walk .noren__p::before{opacity:calc(1 - var(--q,0) * 10);transform:translateZ(-1px)}
+/* the rod passes THROUGH the loops: rod sits behind, loops wrap it from the front */
+.walk .noren__rod{transform:translateZ(-3px)}
+.walk .noren .lamp{transform:translateX(-50%) translateZ(-3px)}
+.walk .noren .lamp::after{box-shadow:0 0 10px 3px rgba(242,198,117,.85)}
+.walk .front::before{content:"";position:absolute;left:50%;top:calc(14% - 40px);width:900px;height:620px;transform:translate(-50%,-50%);pointer-events:none;background:radial-gradient(closest-side, rgba(242,198,117,.22), rgba(242,198,117,0));opacity:calc(1 - var(--p) * 1.6);z-index:3}
+.walk .noren__p::before{top:-17px;height:21px;transform:translateZ(1px);opacity:calc(1 - var(--q,0) * 1.6)}
 </style>
 <script>document.documentElement.className += " js";</script>
 </head>
