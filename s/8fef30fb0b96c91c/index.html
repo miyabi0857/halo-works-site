@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>B-smile kumi｜長崎市のバランスボール教室</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="B-smile kumi｜長崎市のバランスボール教室">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/8fef30fb0b96c91c/">
+<meta property="og:image" content="https://gearbloom.jp/s/8fef30fb0b96c91c/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="座って弾む、やさしいバランスボールエクササイズ。お子さま連れOKのクラス、60〜80代のゆったりクラス、ママ向けクラス。保健師・看護師資格をもつインストラクターがご案内します。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Kiwi+Maru:wght@400;500&family=M+PLUS+1p:wght@400;700&family=Comfortaa:wght@500;700&display=swap" rel="stylesheet">
+<!--
+  参考：
+  ・mindfulconnect（https://mindfulconnect.jp/）… テイスト。淡い地に、やわらかい粒が行ったり来たりしながら漂う軽さ（rotate1: translateX 0→60px・rotate -20→0deg を 2〜3s alternate）
+  ・にじのわクリニック（https://nijinowa-clinic.jp/）… 要素。大きな円の中に内容を収める区画、縦書き（letter-spacing .2em）、玉が線を転がるスクロール表示
+  配色は先方の赤いボールとチラシのピンクから取り、書体・構図は別系統にしている。
+  写真：Unsplash（Unsplash License。商用可・クレジット不要）。たたき台用の仮写真
+-->
+<style>
+:root{
+  --paper:#FFF7F3;
+  --blush:#FDE4DD;
+  --ball:#E8483F;
+  --ball-deep:#C4352E;
+  --pink:#F4B3A8;
+  --butter:#FFD36E;
+  --sage:#9CC7A6;
+  --ink:#4A3530;
+  --muted:#8C716A;
+  --round:"Kiwi Maru", "M PLUS 1p", sans-serif;
+  --body:"M PLUS 1p", sans-serif;
+  --en:"Comfortaa", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);color:var(--ink);background:var(--paper);line-height:1.9;overflow-x:hidden}
+a{color:inherit}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding:22px clamp(16px,4vw,56px);position:relative;z-index:6}
+.logo{text-decoration:none;display:flex;align-items:baseline;gap:.6em}
+.logo b{font-family:var(--en);font-weight:700;font-size:1.35rem;color:var(--ball);letter-spacing:.02em}
+.logo small{font-family:var(--round);font-size:.85rem;color:var(--muted)}
+.nav{display:flex;gap:26px;list-style:none;font-size:.92rem}
+.nav a{text-decoration:none}
+.nav a:hover{color:var(--ball)}
+@media (max-width:760px){.nav{display:none}}
+@media (max-width:860px){.dot{display:none}}
+
+/* ---------- the ball: a circle window that sits and bounces ---------- */
+.ball{position:relative;width:var(--d);aspect-ratio:1;--dur:2.6s}
+.ball__body{
+  position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  border:clamp(5px,.7vw,9px) solid var(--ring,var(--ball));background:var(--ring,var(--ball));
+  transform-origin:50% 100%;
+  animation:bounce var(--dur) cubic-bezier(.45,0,.55,1) infinite;animation-delay:var(--dl,0s);
+}
+.ball__body img{width:100%;height:100%;object-fit:cover;display:block;border-radius:50%}
+.ball__body::after{ /* gloss: makes the window read as a ball */
+  content:"";position:absolute;left:14%;top:9%;width:34%;height:22%;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(255,255,255,.75), rgba(255,255,255,0));
+  transform:rotate(-28deg);pointer-events:none;
+}
+.ball::before{ /* floor shadow */
+  content:"";position:absolute;left:14%;right:14%;bottom:-5%;height:8%;border-radius:50%;
+  background:radial-gradient(closest-side, rgba(74,53,48,.22), rgba(74,53,48,0));
+  animation:shadow var(--dur) cubic-bezier(.45,0,.55,1) infinite;animation-delay:var(--dl,0s);
+}
+@keyframes bounce{
+  0%,100%{transform:translateY(0) scale(1.03,.95)}
+  18%{transform:translateY(-1.5%) scale(1,1)}
+  50%{transform:translateY(-6%) scale(.99,1.01)}
+  82%{transform:translateY(-1.5%) scale(1,1)}
+}
+@keyframes shadow{0%,100%{transform:scaleX(1);opacity:1}50%{transform:scaleX(.78);opacity:.55}}
+
+/* drifting small balls (the "petals" of the reference, turned into balls) */
+.dot{position:absolute;z-index:1;width:var(--s);aspect-ratio:1;border-radius:50%;background:var(--c);
+  animation:drift var(--t,2.8s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+.dot::after{content:"";position:absolute;left:18%;top:14%;width:30%;height:22%;border-radius:50%;background:rgba(255,255,255,.55);transform:rotate(-28deg)}
+@keyframes drift{from{transform:translate(0,0) rotate(-20deg)}to{transform:translate(var(--dx,24px),var(--dy,-10px)) rotate(0)}}
+
+/* vertical copy (from the clinic) */
+.tate{writing-mode:vertical-rl;font-family:var(--round);letter-spacing:.24em;line-height:2;color:var(--ink)}
+
+.cred{display:inline-flex;align-items:center;gap:.6em;font-size:.88rem;background:#fff;border-radius:999px;padding:.35em 1.1em .35em .45em;box-shadow:0 2px 0 rgba(232,72,63,.18)}
+.cred i{flex:none;width:1.9em;height:1.9em;border-radius:50%;background:var(--ball);display:grid;place-items:center;color:#fff;font-style:normal;font-family:var(--round);font-size:.8em}
+
+/* scroll cue: a little ball rolls down a line (from the clinic) */
+.cue{position:absolute;z-index:5;left:clamp(16px,4vw,56px);bottom:22px;display:flex;align-items:flex-end;gap:10px;text-decoration:none;font-family:var(--en);font-size:.72rem;letter-spacing:.14em;color:var(--muted)}
+.cue span{position:relative;display:block;width:1px;height:54px;background:var(--pink)}
+.cue span::after{content:"";position:absolute;left:-5px;top:0;width:11px;height:11px;border-radius:50%;background:var(--ball);animation:roll 2.4s cubic-bezier(.6,0,.3,1) infinite}
+@keyframes roll{0%{transform:translateY(0);opacity:0}15%{opacity:1}85%{opacity:1}100%{transform:translateY(46px);opacity:0}}
+
+html.js .fu{opacity:0;transform:translateY(18px);animation:fu 1.1s ease forwards;animation-delay:var(--fd,.1s)}
+@keyframes fu{to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.ball__body,.ball::before,.dot,.cue span::after{animation:none!important} html.js .fu{opacity:1;transform:none;animation:none}}
+
+.hero{position:relative;overflow-x:clip;min-height:calc(100svh - 80px);padding:8px clamp(16px,4vw,56px) 90px;display:grid;place-items:center}
+.ring{position:relative;width:min(88vw,800px);aspect-ratio:1;border-radius:50%;background:var(--blush);display:grid;place-items:center;
+  box-shadow:inset -30px -40px 80px rgba(232,72,63,.10)}
+.ring::after{content:"";position:absolute;left:16%;top:9%;width:30%;height:18%;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.8), rgba(255,255,255,0));transform:rotate(-28deg)}
+.ring__in{position:relative;z-index:2;text-align:center;padding:0 12%}
+.hero__kicker{font-family:var(--en);font-size:.78rem;letter-spacing:.2em;color:var(--ball);margin-bottom:1em}
+.hero__title{font-family:var(--round);font-weight:500;font-size:clamp(2rem,4vw,3.6rem);line-height:1.45;letter-spacing:.04em}
+.hero__title em{font-style:normal;color:var(--ball)}
+.hero__sub{margin:1em auto 0;max-width:24em;font-size:clamp(.9rem,1.1vw,1rem)}
+.who{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:22px}
+.who a{display:block;text-decoration:none;background:#fff;border-radius:999px;padding:.5em 1.2em;font-family:var(--round);font-size:.95rem;box-shadow:0 3px 0 var(--pink);transition:transform .2s}
+.who a:hover{transform:translateY(-2px)}
+.who small{display:block;font-family:var(--body);font-size:.7rem;color:var(--muted);line-height:1.3}
+.ring .cred{margin-top:18px;font-size:.8rem}
+.orbit{position:absolute;z-index:3}
+.o1{left:-4%;top:14%}.o2{right:-6%;top:30%}.o3{left:6%;bottom:2%}
+.tate2{position:absolute;right:clamp(16px,4vw,56px);top:4%;font-size:clamp(.95rem,1.3vw,1.15rem);z-index:4}
+@media (max-width:860px){
+  .hero{padding-left:8px;padding-right:8px}
+  .ring{width:min(96vw,560px)}
+  .ring__in{padding:0 11%}
+  .hero__kicker{font-size:.6rem;letter-spacing:.12em}
+  .hero__title{font-size:clamp(1.4rem,6.6vw,2.2rem)}
+  .hero__sub{font-size:.82rem}
+  .who a{font-size:.8rem;padding:.4em .9em}
+  .who small{display:none}
+  .ring .cred{display:none}
+  .o1 .ball{--d:92px!important}.o2 .ball{--d:78px!important}.o3 .ball{--d:84px!important}
+  .o1{left:-4%;top:-2%}.o2{right:-4%;top:-6%}.o3{left:-2%;bottom:-4%}
+  .tate2{display:none}
+}
+
+/* ================= below the hero ================= */
+.sec{position:relative;overflow-x:clip;padding:clamp(64px,8vw,110px) clamp(16px,4vw,56px)}
+.sec__head{text-align:center;margin-bottom:clamp(36px,5vw,60px)}
+.sec__en{display:block;font-family:var(--en);font-size:.78rem;letter-spacing:.22em;color:var(--ball);margin-bottom:.6em}
+.sec__ttl{font-family:var(--round);font-weight:500;font-size:clamp(1.7rem,3.4vw,2.8rem);line-height:1.5;letter-spacing:.04em}
+.sec__lead{margin:1em auto 0;max-width:32em;font-size:clamp(.92rem,1.1vw,1rem)}
+
+html.js .rv{opacity:0;transform:translateY(22px);transition:opacity .9s ease, transform 1.1s cubic-bezier(.2,.8,.2,1)}
+html.js .rv.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}}
+
+/* ---------- finder: who will join? ---------- */
+.finder{max-width:1100px;margin:0 auto}
+.finder__q{text-align:center;font-family:var(--round);font-size:clamp(1.1rem,1.8vw,1.4rem);margin-bottom:18px}
+.finder__opts{list-style:none;display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.finder__opts button{
+  font:inherit;font-family:var(--round);font-size:clamp(.9rem,1.2vw,1.02rem);color:var(--ink);cursor:pointer;
+  background:#fff;border:2px solid var(--pink);border-radius:999px;padding:.55em 1.3em;transition:all .25s;
+}
+.finder__opts button:hover{border-color:var(--ball)}
+.finder__opts button[aria-pressed="true"]{background:var(--ball);border-color:var(--ball);color:#fff;transform:translateY(-2px);box-shadow:0 4px 0 var(--ball-deep)}
+.finder__ans{
+  margin:26px auto 0;max-width:40em;min-height:5.2em;text-align:center;font-size:clamp(.95rem,1.2vw,1.05rem);line-height:1.9;
+  background:#fff;border-radius:28px;padding:18px 26px;box-shadow:0 3px 0 var(--blush);
+}
+.finder__ans b{font-family:var(--round);font-weight:500;color:var(--ball)}
+
+.classes{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(16px,2.4vw,36px);margin-top:clamp(40px,6vw,70px);align-items:start}
+.cl{display:grid;justify-items:center;text-align:center;transition:opacity .4s, filter .4s}
+.cl .ball{margin-bottom:26px}
+.cl .ball__body{animation-play-state:paused}
+.cl.is-match .ball__body,.cl.is-match .ball::before{animation-play-state:running}
+.classes.has-pick .cl:not(.is-match){opacity:.38;filter:saturate(.4)}
+.cl__tag{font-family:var(--en);font-size:.7rem;letter-spacing:.16em;color:var(--ball)}
+.cl__ttl{font-family:var(--round);font-weight:500;font-size:clamp(1.1rem,1.6vw,1.35rem);margin:.2em 0 .5em}
+.cl__txt{font-size:.88rem;line-height:1.85;text-align:left}
+.cl__pts{list-style:none;margin-top:10px;display:grid;gap:4px;text-align:left;font-size:.82rem;justify-self:stretch}
+.cl__pts li{padding-left:1.2em;position:relative}
+.cl__pts li::before{content:"";position:absolute;left:0;top:.62em;width:.6em;height:.6em;border-radius:50%;background:var(--pink)}
+.classes__note{margin-top:34px;text-align:center;font-size:.85rem;color:var(--muted)}
+
+/* ---------- instructor: everything inside one circle (from the clinic) ---------- */
+.kumi{background:linear-gradient(var(--paper),var(--paper))}
+.kumi__ring{
+  position:relative;margin:0 auto;width:min(92vw,760px);aspect-ratio:1;border-radius:50%;background:var(--blush);
+  display:grid;place-items:center;box-shadow:inset -30px -40px 80px rgba(232,72,63,.10);
+}
+.kumi__ring::after{content:"";position:absolute;left:16%;top:8%;width:28%;height:16%;border-radius:50%;background:radial-gradient(closest-side, rgba(255,255,255,.8), rgba(255,255,255,0));transform:rotate(-28deg)}
+.kumi__in{position:relative;z-index:2;display:grid;grid-template-columns:auto 1fr;gap:clamp(18px,3vw,40px);align-items:center;padding:0 13%}
+.kumi__photo{width:clamp(120px,15vw,200px);aspect-ratio:1;border-radius:50%;background:#fff;border:clamp(5px,.7vw,9px) solid var(--ball);display:grid;place-content:center;text-align:center;font-size:.7rem;line-height:1.5;color:var(--muted);padding:14%}
+.kumi__name{font-family:var(--round);font-weight:500;font-size:clamp(1.4rem,2.4vw,2rem)}
+.kumi__name small{font-family:var(--en);font-size:.75rem;letter-spacing:.14em;color:var(--ball);margin-left:.6em}
+.kumi__txt{margin-top:.6em;font-size:clamp(.86rem,1.05vw,.98rem);line-height:1.9}
+.kumi__creds{list-style:none;margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.kumi__creds li{background:#fff;border-radius:999px;padding:.25em .9em;font-size:.76rem}
+.kumi__creds li b{color:var(--ball);font-weight:700}
+.kumi__tate{position:absolute;right:clamp(16px,6vw,110px);top:clamp(60px,9vw,140px);font-size:clamp(.95rem,1.3vw,1.15rem)}
+
+/* ---------- how to join: three balls on a line ---------- */
+.steps{list-style:none;position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(16px,3vw,48px);max-width:1040px;margin:0 auto}
+.steps::before{content:"";position:absolute;left:16%;right:16%;top:clamp(34px,3.6vw,48px);height:2px;background:repeating-linear-gradient(90deg,var(--pink) 0 10px,transparent 10px 18px)}
+.st{position:relative;text-align:center}
+.st__n{position:relative;z-index:1;display:grid;place-items:center;margin:0 auto 18px;width:clamp(68px,7.2vw,96px);aspect-ratio:1;border-radius:50%;background:var(--c);color:#fff;font-family:var(--en);font-weight:700;font-size:clamp(1.3rem,2vw,1.8rem)}
+.st__n::after{content:"";position:absolute;left:16%;top:12%;width:32%;height:22%;border-radius:50%;background:rgba(255,255,255,.5);transform:rotate(-28deg)}
+.st__ttl{font-family:var(--round);font-weight:500;font-size:clamp(1.05rem,1.5vw,1.25rem)}
+.st__txt{margin-top:.5em;font-size:.88rem;line-height:1.85}
+.bring{max-width:760px;margin:clamp(40px,5vw,60px) auto 0;background:#fff;border-radius:32px;padding:22px 30px;display:grid;grid-template-columns:auto 1fr;gap:10px 24px;font-size:.92rem}
+.bring dt{font-family:var(--round);color:var(--ball)}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:40px}
+.cta a{display:inline-flex;align-items:center;gap:.5em;text-decoration:none;font-family:var(--round);font-size:clamp(1rem,1.4vw,1.15rem);padding:.8em 1.8em;border-radius:999px;transition:transform .2s, box-shadow .2s}
+.cta .line{background:#06C755;color:#fff;box-shadow:0 5px 0 #04963f}
+.cta .ig{background:#fff;color:var(--ink);box-shadow:0 5px 0 var(--pink)}
+.cta a:hover{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.15)}
+.cta__note{text-align:center;margin-top:16px;font-size:.82rem;color:var(--muted)}
+
+.foot{background:var(--ball);color:#fff;text-align:center;padding:40px 16px 48px;border-radius:48px 48px 0 0}
+.foot b{font-family:var(--en);font-size:1.3rem}
+.foot p{font-size:.76rem;opacity:.9;margin-top:10px;line-height:1.8}
+
+@media (max-width:860px){
+  .classes{grid-template-columns:1fr 1fr;gap:34px 14px}
+  .cl .ball{--d:min(38vw,170px)!important}
+  .cl__txt{font-size:.8rem}
+  .cl__pts{font-size:.76rem}
+  .kumi__ring{width:auto;aspect-ratio:auto;border-radius:40px;padding:44px 22px}
+  .kumi__ring::after{display:none}
+  .kumi__in{grid-template-columns:1fr;justify-items:center;text-align:center;padding:0}
+  .kumi__creds{justify-content:center}
+  .kumi__photo{width:140px;height:140px;padding:12px;font-size:.66rem}
+  .sec__ttl{font-size:clamp(1.3rem,6vw,1.7rem)}
+  .hero{min-height:auto!important;padding-bottom:80px!important}
+  .kumi__tate{display:none}
+  .steps{grid-template-columns:1fr;gap:26px}
+  .steps::before{left:clamp(34px,7vw,48px);right:auto;top:10%;bottom:10%;width:2px;height:auto;background:repeating-linear-gradient(180deg,var(--pink) 0 10px,transparent 10px 18px)}
+  .st{display:grid;grid-template-columns:auto 1fr;gap:0 16px;text-align:left;align-items:start}
+  .st__n{grid-row:span 2;margin:0}
+  .bring{grid-template-columns:1fr;border-radius:24px;padding:18px 20px}
+}
+</style>
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+<header class="top">
+  <a class="logo" href="#"><b>B-smile kumi</b><small>バランスボール教室・長崎</small></a>
+  <ul class="nav">
+    <li><a href="#classes">クラス</a></li>
+    <li><a href="#kumi">インストラクター</a></li>
+    <li><a href="#join">参加のしかた</a></li>
+    <li><a href="https://www.instagram.com/smile.bb_kumi/" target="_blank" rel="noopener">Instagram</a></li>
+  </ul>
+</header>
+<main>
+<section class="hero">
+  <span class="dot" aria-hidden="true" style="--s:clamp(14px,1.6vw,24px);--c:var(--butter);left:12%;top:50%;--t:2.6s;--dx:20px;--dy:-10px;--dl:0s"></span>
+<span class="dot" aria-hidden="true" style="--s:clamp(20px,2.2vw,32px);--c:var(--sage);right:14%;bottom:12%;--t:3s;--dx:-24px;--dy:-8px;--dl:-.8s"></span>
+<span class="dot" aria-hidden="true" style="--s:clamp(10px,1vw,16px);--c:var(--ball);right:30%;top:6%;--t:2.2s;--dx:16px;--dy:8px;--dl:-.4s"></span>
+  <div class="ring fu" style="--fd:.1s">
+    <div class="orbit o1"><div class="ball " style="--d:clamp(120px,13vw,190px);--ring:var(--sage);--dl:-.4s;--dur:2.9s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1702648158754-484755fadf79?w=1000&q=75&auto=format&fit=crop" alt=""></div></div></div>
+    <div class="orbit o2"><div class="ball " style="--d:clamp(100px,11vw,160px);--ring:var(--butter);--dl:-1.1s;--dur:2.4s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1734059013982-311d54536059?w=1000&q=75&auto=format&fit=crop" alt=""></div></div></div>
+    <div class="orbit o3"><div class="ball " style="--d:clamp(110px,12vw,170px);--ring:var(--pink);--dl:-1.8s;--dur:2.7s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1657664073337-31394d7e5c7a?w=1000&q=75&auto=format&fit=crop" alt=""></div></div></div>
+    <div class="ring__in">
+      <p class="hero__kicker fu" style="--fd:.3s">BALANCE BALL EXERCISE / NAGASAKI</p>
+      <h1 class="hero__title fu" style="--fd:.45s">座って、弾んで、<br><em>笑顔</em>になる。</h1>
+      <p class="hero__sub fu" style="--fd:.6s">ボールの上でやさしく弾む有酸素運動。あなたに合うクラスから、はじめてみませんか。</p>
+      <ul class="who fu" style="--fd:.75s">
+        <li><a href="#classes">お子さまと一緒に<small>レギュラークラス</small></a></li>
+        <li><a href="#classes">椅子からでも<small>ゆったりクラス・60〜80代</small></a></li>
+        <li><a href="#classes">ママのリフレッシュに<small>ママ向けクラス</small></a></li>
+      </ul>
+      <p class="cred fu" style="--fd:.9s"><i>看</i>保健師・看護師の資格をもつインストラクターです</p>
+    </div>
+  </div>
+  <p class="tate tate2 fu" style="--fd:1s">はずむ、ほぐれる、わらう。</p>
+  <a class="cue" href="#classes"><span></span>SCROLL</a>
+</section>
+
+<section class="sec" id="classes">
+  <div class="sec__head rv">
+    <span class="sec__en">FIND YOUR CLASS</span>
+    <h2 class="sec__ttl">あなたに合うクラスは、どれ？</h2>
+    <p class="sec__lead">年齢も体力も、お子さま連れかどうかも、人それぞれ。参加する方を選ぶと、合うクラスが弾みます。</p>
+  </div>
+
+  <div class="finder rv">
+    <p class="finder__q">どなたが参加しますか？</p>
+    <ul class="finder__opts" role="group" aria-label="参加する方">
+      <li><button type="button" data-pick="self" aria-pressed="false">自分ひとりで</button></li>
+      <li><button type="button" data-pick="kids" aria-pressed="false">子どもと一緒に</button></li>
+      <li><button type="button" data-pick="senior" aria-pressed="false">60〜80代・ボールが不安</button></li>
+      <li><button type="button" data-pick="mama" aria-pressed="false">産後のママ</button></li>
+    </ul>
+    <p class="finder__ans" id="ans" aria-live="polite">上のボタンを押すと、ここにご案内が出ます。</p>
+  </div>
+
+  <ul class="classes" id="classList">
+    <li class="cl rv" data-for="self kids">
+      <div class="ball" style="--d:clamp(150px,17vw,230px);--ring:var(--ball);--dur:2.5s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1758798458635-f01402b40919?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"></div></div>
+      <span class="cl__tag">REGULAR</span>
+      <h3 class="cl__ttl">レギュラークラス</h3>
+      <p class="cl__txt">音楽に合わせて弾む、いちばん基本のクラス。はじめての方も大歓迎です。</p>
+      <ul class="cl__pts"><li>お子さま連れOK</li><li>定員8名程度の少人数</li></ul>
+    </li>
+    <li class="cl rv" data-for="senior">
+      <div class="ball" style="--d:clamp(150px,17vw,230px);--ring:var(--sage);--dur:2.9s;--dl:-.6s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1702648158754-484755fadf79?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"></div></div>
+      <span class="cl__tag">GENTLE</span>
+      <h3 class="cl__ttl">ゆったりクラス</h3>
+      <p class="cl__txt">60〜80代の方を中心に、座って弾むやさしい運動。自分のペースで体力づくり。</p>
+      <ul class="cl__pts"><li>ボールが不安なら椅子でも参加OK</li><li>西山台自治会館で月1回</li></ul>
+    </li>
+    <li class="cl rv" data-for="self kids">
+      <div class="ball" style="--d:clamp(150px,17vw,230px);--ring:var(--butter);--dur:2.4s;--dl:-1.2s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1734059013982-311d54536059?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"></div></div>
+      <span class="cl__tag">HALL</span>
+      <h3 class="cl__ttl">市民会館レッスン</h3>
+      <p class="cl__txt">広い会場で、みんなで弾むクラス。最後はゆったりリラックスする時間も。</p>
+      <ul class="cl__pts"><li>お子さま連れ大歓迎</li><li>夕方からの回もあります</li></ul>
+    </li>
+    <li class="cl rv" data-for="mama">
+      <div class="ball" style="--d:clamp(150px,17vw,230px);--ring:var(--pink);--dur:2.7s;--dl:-1.8s" aria-hidden="true"><div class="ball__body"><img src="https://images.unsplash.com/photo-1657664073337-31394d7e5c7a?w=900&q=75&auto=format&fit=crop" alt="" loading="lazy"></div></div>
+      <span class="cl__tag">FOR MAMA</span>
+      <h3 class="cl__ttl">ママ向けクラス</h3>
+      <p class="cl__txt">子育て中のママのリフレッシュに。産後のからだについて学んだインストラクターがご案内します。</p>
+      <ul class="cl__pts"><li>内容はお問い合わせください</li></ul>
+    </li>
+  </ul>
+  <p class="classes__note rv">開催日・時間・料金は、毎月InstagramとLINEでお知らせしています。</p>
+</section>
+
+<section class="sec kumi" id="kumi">
+  <div class="sec__head rv">
+    <span class="sec__en">INSTRUCTOR</span>
+    <h2 class="sec__ttl">教えるのは、こんな人です。</h2>
+  </div>
+  <div class="kumi__ring rv">
+    <div class="kumi__in">
+      <div class="kumi__photo">ご本人の写真に<br>差し替えます</div>
+      <div>
+        <p class="kumi__name">くみ<small>B-smile kumi</small></p>
+        <p class="kumi__txt">長崎・五島市出身。保健師・看護師の資格をもつバランスボールインストラクターです。2026年7月から長崎市でレッスンをはじめました。モットーは「BB exerciseで笑顔絶やさぬ」。趣味はランニングです。</p>
+        <ul class="kumi__creds">
+          <li><b>保健師・看護師</b>資格</li>
+          <li>(一社)体力メンテナンス協会認定 <b>バランスボールインストラクター</b></li>
+          <li><b>産後専門スキル認証</b>受講済</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <p class="tate kumi__tate rv">笑顔、絶やさぬように。</p>
+</section>
+
+<section class="sec" id="join">
+  <div class="sec__head rv">
+    <span class="sec__en">HOW TO JOIN</span>
+    <h2 class="sec__ttl">参加のしかた</h2>
+  </div>
+  <ol class="steps">
+    <li class="st rv"><span class="st__n" style="--c:var(--ball)">1</span><p class="st__ttl">日程を見る</p><p class="st__txt">その月のスケジュールを、InstagramとLINEで毎月お知らせしています。</p></li>
+    <li class="st rv"><span class="st__n" style="--c:var(--butter)">2</span><p class="st__ttl">申し込む</p><p class="st__txt">LINEかInstagramのDMで、参加したい日をお知らせください。</p></li>
+    <li class="st rv"><span class="st__n" style="--c:var(--sage)">3</span><p class="st__ttl">当日、弾む</p><p class="st__txt">動きやすい服装で、気軽にどうぞ。わからないことは申し込みのときに聞いてください。</p></li>
+  </ol>
+  <dl class="bring rv">
+    <dt>持ち物</dt><dd>動きやすい服装・タオル・飲み物</dd>
+    <dt>ボール</dt><dd>ゆったりクラスはボールをご用意しています。ほかのクラスは申し込みの際にご確認ください</dd>
+  </dl>
+  <div class="cta rv">
+    <a class="line" href="https://lin.ee/olQndFL4" target="_blank" rel="noopener">LINEで問い合わせる</a>
+    <a class="ig" href="https://www.instagram.com/smile.bb_kumi/" target="_blank" rel="noopener">Instagramで日程を見る</a>
+  </div>
+  <p class="cta__note rv">はじめての方、お子さま連れの方、運動が久しぶりの方も、お気軽にどうぞ。</p>
+</section>
+</main>
+<footer class="foot">
+  <b>B-smile kumi</b>
+  <p>長崎市のバランスボール教室　／　Instagram @smile.bb_kumi<br>
+  ※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもので、実際の教室の写真に差し替えます。</p>
+</footer>
+
+
+<script>
+(function(){
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('is-in'); }); }
+  setTimeout(function(){
+    var stuck = Array.prototype.some.call(rv, function(el){
+      var r = el.getBoundingClientRect();
+      return r.top < innerHeight && r.bottom > 0 && !el.classList.contains('is-in');
+    });
+    if (stuck) document.documentElement.classList.remove('js');
+  }, 5000);
+
+  /* あなたに合うクラス：選んだ人に合うボールだけが弾む */
+  var ANS = {
+    self:   '<b>レギュラークラス</b>か<b>市民会館レッスン</b>がおすすめです。定員8名程度の少人数なので、はじめてでも一人ひとり見てもらえます。',
+    kids:   '<b>レギュラークラス</b>か<b>市民会館レッスン</b>へどうぞ。お子さま連れOKで、子ども用のボールで一緒に参加できた回もあります。',
+    senior: '<b>ゆったりクラス</b>がおすすめです。座って弾むやさしい運動で、ボールが不安な方は椅子に座ったままでも参加できます。',
+    mama:   '<b>ママ向けクラス</b>がおすすめです。インストラクターは産後のからだについて学んでおり、保健師・看護師の資格もあります。'
+  };
+  var list = document.getElementById('classList'), ans = document.getElementById('ans');
+  var btns = document.querySelectorAll('.finder__opts button');
+  btns.forEach(function(b){
+    b.addEventListener('click', function(){
+      var k = b.dataset.pick;
+      btns.forEach(function(x){ x.setAttribute('aria-pressed', x === b); });
+      ans.innerHTML = ANS[k];
+      list.classList.add('has-pick');
+      list.querySelectorAll('.cl').forEach(function(c){
+        c.classList.toggle('is-match', c.dataset.for.split(' ').indexOf(k) >= 0);
+      });
+    });
+  });
+  /* 何も選んでいないときは全部弾ませておく */
+  list.querySelectorAll('.cl').forEach(function(c){ c.classList.add('is-match'); });
+  /* ヒーローの入口ボタンからも選べるように */
+  var map = {'お子さまと一緒に':'kids','椅子からでも':'senior','ママのリフレッシュに':'mama'};
+  document.querySelectorAll('.who a').forEach(function(a){
+    a.addEventListener('click', function(){
+      var key = map[a.firstChild.textContent.trim()];
+      var t = key && document.querySelector('.finder__opts button[data-pick="' + key + '"]');
+      if (t) t.click();
+    });
+  });
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
