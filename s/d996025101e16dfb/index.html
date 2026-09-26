@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>プロテクトシェイプ長崎｜長与町の護身術×フィットネス</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="プロテクトシェイプ長崎｜長与町の護身術×フィットネス">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/d996025101e16dfb/">
+<meta property="og:image" content="https://gearbloom.jp/s/d996025101e16dfb/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="護身術×フィットネスの新感覚エクササイズ。毎週木曜19時、長与町・高田学園百合野校舎（旧高田小学校）体育館。運動が苦手な方、女性・子どもも大歓迎。体験・見学1回無料。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Zen+Kaku+Gothic+Antique:wght@400;500;700;900&display=swap" rel="stylesheet">
+<!--
+  参考（Dr.TRAININGをベースに、尼崎ボクシングジムのエッセンスを少量）：
+  ・Dr.TRAINING（https://drtraining.jp/）… 白地に差し色1色、赤い札で「根拠」を示す、左から走る色帯、小さな縦書き
+  ・尼崎ボクシングジム（https://amagasakiboxing.com/）… 写真を grayscale(100%) にして1色を重ねる、背景に Anton の巨大な英字
+  配色・書体・構図は別系統にしている。写真：Unsplash（Unsplash License。商用可・クレジット不要）。たたき台用の仮写真
+-->
+<style>
+:root{
+  --white:#FFFFFF;
+  --paper:#F6F6F4;
+  --ink:#16213A;
+  --gray:#6E7482;
+  --red:#E3264F;
+  --red-d:#B81A3C;
+  --en:"Anton", sans-serif;
+  --jp:"Zen Kaku Gothic Antique", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--jp);color:var(--ink);background:var(--white);line-height:1.85;overflow-x:hidden}
+a{color:inherit}
+.top{position:absolute;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:20px clamp(16px,4vw,48px)}
+.logo{text-decoration:none;line-height:1.1}
+.logo b{display:block;font-family:var(--en);font-weight:400;font-size:1.45rem;letter-spacing:.04em}
+.logo b i{font-style:normal;color:var(--red)}
+.logo small{font-size:.7rem;font-weight:700;color:var(--gray);letter-spacing:.1em}
+.nav{display:flex;gap:26px;list-style:none;font-size:.86rem;font-weight:700}
+.nav a{text-decoration:none}
+.nav .cta{background:var(--red);color:#fff;padding:.55em 1.3em;position:relative;overflow:hidden}
+@media (max-width:760px){.nav li:not(:last-child){display:none}}
+/* duotone photo: grayscale + navy multiply (from A) */
+.duo{position:relative;overflow:hidden;background:var(--ink)}
+.duo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) contrast(1.1);mix-blend-mode:luminosity;opacity:.85}
+.duo::after{content:"";position:absolute;inset:0;background:var(--ink);mix-blend-mode:multiply;opacity:.55}
+/* red label (from B) */
+.tag{display:inline-block;background:var(--red);color:#fff;font-weight:900;font-size:.85rem;letter-spacing:.08em;padding:.25em .8em}
+/* red sweep (from B) */
+.sweep{position:relative;display:inline-block;overflow:hidden}
+html.js .sweep::after{content:"";position:absolute;inset:0;background:var(--red);transform:translateX(-101%);animation:sweep 1.1s cubic-bezier(.7,0,.2,1) forwards;animation-delay:var(--sd,.3s)}
+html.js .sweep > span{opacity:0;animation:show 0s linear forwards;animation-delay:calc(var(--sd,.3s) + .55s)}
+@keyframes sweep{0%{transform:translateX(-101%)}50%{transform:translateX(0)}100%{transform:translateX(101%)}}
+@keyframes show{to{opacity:1}}
+.bgword{position:absolute;z-index:0;font-family:var(--en);line-height:.85;color:var(--ink);opacity:.05;white-space:nowrap;pointer-events:none;user-select:none}
+.tate{writing-mode:vertical-rl;font-size:.72rem;letter-spacing:.3em;color:var(--gray);font-weight:700}
+.facts{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.88rem;font-weight:700}
+.facts span b{color:var(--red)}
+.btn{display:inline-flex;align-items:center;gap:.8em;text-decoration:none;background:var(--ink);color:#fff;font-weight:900;padding:1em 1.8em;letter-spacing:.06em}
+.btn::after{content:"";width:22px;height:1px;background:#fff}
+@media (prefers-reduced-motion:reduce){html.js .sweep::after{animation:none;display:none}html.js .sweep > span{opacity:1;animation:none}}
+
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;gap:clamp(20px,4vw,60px);padding:110px clamp(16px,5vw,80px) 60px;overflow:hidden}
+.hero .bgword{left:-1vw;bottom:-2vw;font-size:clamp(9rem,22vw,22rem)}
+.lead{position:relative;z-index:2}
+.h1{font-weight:900;font-size:clamp(2.2rem,4.2vw,3.9rem);line-height:1.35;letter-spacing:.02em;margin:.5em 0 .6em}
+.h1 .sweep{color:var(--red)}
+.sub{max-width:28em;color:var(--gray);font-weight:500;margin-bottom:22px}
+.hero .btn{margin-top:26px}
+.pic{position:relative;z-index:2;height:min(74vh,660px)}
+.pic .duo{height:100%}
+.pic .tate{position:absolute;right:-26px;top:0}
+.pic .badge{position:absolute;left:-28px;bottom:36px;width:118px;height:118px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-content:center;text-align:center;font-weight:900;line-height:1.3;font-size:.92rem}
+.pic .badge b{font-family:var(--en);font-weight:400;font-size:1.9rem;display:block;line-height:1}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:90px}.pic{height:56vh}.pic .tate{display:none}.pic .badge{left:auto;right:12px;bottom:-24px}}
+
+/* ================= below the hero ================= */
+.sec{position:relative;overflow-x:clip;padding:clamp(80px,10vw,140px) clamp(16px,5vw,80px)}
+.sec .bgword{font-size:clamp(7rem,16vw,16rem)}
+.head{position:relative;z-index:1;margin-bottom:clamp(30px,4vw,56px)}
+.head .en{display:block;font-family:var(--en);font-size:.9rem;letter-spacing:.14em;color:var(--red);margin-bottom:.4em}
+.head h2{font-weight:900;font-size:clamp(1.7rem,3.2vw,2.8rem);line-height:1.4}
+.head h2 em{font-style:normal;color:var(--red)}
+.head p{margin-top:.8em;max-width:34em;color:var(--gray);font-weight:500}
+html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease, transform .8s ease}
+html.js .rv.is-in{opacity:1;transform:none}
+/* red sweep on scroll */
+.sw{position:relative;overflow:hidden}
+html.js .sw::after{content:"";position:absolute;inset:0;z-index:3;background:var(--red);transform:translateX(-101%)}
+html.js .sw.is-in::after{animation:sweep 1s cubic-bezier(.7,0,.2,1) forwards;animation-delay:var(--sd,0s)}
+html.js .sw > *{opacity:0}
+html.js .sw.is-in > *{animation:show 0s linear forwards;animation-delay:calc(var(--sd,0s) + .5s)}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}html.js .sw::after{display:none}html.js .sw > *{opacity:1}}
+
+/* two effects */
+.fx{background:var(--paper)}
+.fx .bgword{right:-1vw;top:2vw}
+.cols{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,3vw,48px)}
+.col__h{display:flex;align-items:baseline;gap:.6em;border-bottom:3px solid var(--ink);padding-bottom:10px;margin-bottom:6px}
+.col__h b{font-family:var(--en);font-weight:400;font-size:clamp(2.4rem,4.6vw,4rem);line-height:1}
+.col.s .col__h{border-color:var(--red)}.col.s .col__h b{color:var(--red)}
+.col__h span{font-weight:900}
+.col ul{list-style:none}
+.col li{display:flex;align-items:center;gap:16px;padding:18px 0;border-bottom:1px solid #dcdde2}
+.col li i{flex:none;font-style:normal;font-family:var(--en);font-size:1.3rem;color:var(--gray);width:2em}
+.col li strong{font-weight:900;font-size:clamp(1.05rem,1.5vw,1.25rem)}
+.col li small{display:block;font-weight:500;color:var(--gray);font-size:.85rem}
+.fx__both{position:relative;z-index:1;margin-top:28px;display:flex;align-items:center;gap:14px;font-weight:900;font-size:1.05rem}
+.fx__both::before{content:"";width:40px;height:3px;background:var(--red)}
+
+/* safe but real */
+.real{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.knife{position:relative;aspect-ratio:16/10;background:var(--ink);display:grid;place-items:center;overflow:hidden}
+.knife svg{width:78%;height:auto}
+.knife .blade{fill:#8b93a6;transition:fill .15s}
+.knife .glow{position:absolute;inset:0;background:radial-gradient(circle at 62% 50%, rgba(227,38,79,.55), transparent 55%);opacity:0}
+.knife .beep{position:absolute;right:8%;top:10%;font-family:var(--en);font-size:clamp(2rem,4vw,3.4rem);color:#fff;opacity:0;letter-spacing:.06em}
+.knife.hit .blade{animation:bladehit .9s ease-out}
+@keyframes bladehit{0%,40%{fill:var(--red)}100%{fill:#8b93a6}}
+.knife.hit .glow,.knife.hit .beep{animation:flash .9s ease-out forwards}
+@keyframes flash{0%{opacity:0}15%{opacity:1}100%{opacity:0}}
+.knife .note{position:absolute;left:12px;bottom:10px;color:#9ea6b8;font-size:.75rem}
+.real__txt p{line-height:2}
+.real__txt p + p{margin-top:1em}
+.real__txt b{background:linear-gradient(transparent 62%, rgba(227,38,79,.2) 62%)}
+
+/* class info */
+.info{background:var(--ink);color:#fff}
+.info .head h2{color:#fff}
+.info .bgword{color:#fff;opacity:.05;left:-1vw;bottom:-3vw}
+.info__grid{position:relative;z-index:1;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,4vw,64px);align-items:start}
+.tbl div{display:grid;grid-template-columns:7em 1fr;gap:14px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.18)}
+.tbl dt{color:#9ea6b8;font-weight:700}
+.tbl dd{font-weight:700}
+.tbl dd small{display:block;color:#9ea6b8;font-weight:500;font-size:.82rem}
+.tbl dd b{font-family:var(--en);font-weight:400;font-size:1.7rem;letter-spacing:.02em;margin-right:.1em}
+.for{background:#fff;color:var(--ink);padding:clamp(20px,2.6vw,30px)}
+.for p.t{font-weight:900;font-size:1.1rem;margin-bottom:10px}
+.for ul{list-style:none;display:grid;gap:8px}
+.for li{padding-left:1.4em;position:relative;font-weight:700}
+.for li::before{content:"";position:absolute;left:0;top:.55em;width:.8em;height:.8em;background:var(--red)}
+.for .m{margin-top:14px;color:var(--gray);font-size:.88rem}
+
+/* coach */
+.coach{display:grid;grid-template-columns:minmax(0,.7fr) minmax(0,1.3fr);gap:clamp(24px,4vw,64px);align-items:center}
+.coach__ph{aspect-ratio:4/5;background:var(--paper);display:grid;place-content:center;text-align:center;color:var(--gray);font-size:.85rem;line-height:1.7;border-left:6px solid var(--red)}
+.coach__name{font-weight:900;font-size:clamp(1.6rem,2.8vw,2.3rem);line-height:1.3}
+.coach__name small{display:block;font-size:.45em;color:var(--gray);margin-bottom:.4em}
+.coach p{margin-top:1em;line-height:2}
+.biz{margin-top:24px;border:2px solid var(--ink);padding:18px 22px;display:grid;grid-template-columns:auto 1fr;gap:4px 18px;align-items:center}
+.biz .tag{grid-row:span 2;opacity:1;color:#fff;background:var(--red)}
+.biz b{font-weight:900}
+.biz span{font-size:.9rem;color:var(--gray)}
+
+/* trial */
+.trial{background:var(--red);color:#fff;text-align:center}
+.trial .bgword{color:#fff;opacity:.08;left:50%;top:50%;transform:translate(-50%,-50%)}
+.trial h2{position:relative;z-index:1;font-weight:900;font-size:clamp(1.9rem,4vw,3.4rem);line-height:1.35}
+.trial p{position:relative;z-index:1;margin-top:.8em;font-weight:700}
+.trial .ways{position:relative;z-index:1;display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:30px}
+.trial .ways a{display:inline-flex;align-items:center;gap:.6em;text-decoration:none;font-weight:900;padding:1em 1.8em;background:#fff;color:var(--ink)}
+.trial .ways a.tel{background:var(--ink);color:#fff}
+.trial .small{font-size:.8rem;font-weight:500;opacity:.9;margin-top:14px}
+.foot{background:var(--ink);color:#c9cdd8;text-align:center;padding:40px 16px 46px;font-size:.78rem;line-height:1.9}
+.foot b{display:block;font-family:var(--en);font-weight:400;font-size:1.3rem;color:#fff;letter-spacing:.04em}
+.foot b i{font-style:normal;color:var(--red)}
+
+@media (max-width:860px){
+  .cols,.real,.info__grid,.coach{grid-template-columns:1fr}
+  .coach__ph{max-width:260px}
+  .tbl div{grid-template-columns:5.5em 1fr}
+  .fx .bgword{display:none}
+  .biz{grid-template-columns:1fr}.biz .tag{grid-row:auto;justify-self:start}
+}
+</style>
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+<main>
+<header class="top">
+  <a class="logo" href="#"><b>PROTECT <i>SHAPE</i></b><small>プロテクトシェイプ長崎</small></a>
+  <ul class="nav"><li><a href="#learn">なにを学ぶ？</a></li><li><a href="#class">クラス</a></li><li><a href="#coach">講師</a></li><li><a class="cta" href="#trial">無料体験</a></li></ul>
+</header>
+<section class="hero">
+  <p class="bgword" aria-hidden="true">PROTECT</p>
+  <div class="lead">
+    <span class="tag">護身術 × フィットネス</span>
+    <h1 class="h1">自分を守る力で、<br><span class="sweep" style="--sd:.4s"><span>しなやかに。</span></span></h1>
+    <p class="sub">いざという時に役立つ護身術を、体を動かすエクササイズとして。運動が苦手な方も、女性やお子さまも、無理なく続けられます。</p>
+    <p class="facts"><span>毎週<b>木曜</b> 19:00〜20:00</span><span>長与町・旧高田小学校 体育館</span><span>体験・見学<b>1回無料</b></span></p>
+    <a class="btn" href="#trial">無料体験を申し込む</a>
+  </div>
+  <div class="pic">
+    <div class="duo"><img src="https://images.unsplash.com/photo-1590556409324-aa1d726e5c3c?w=1400&q=75&auto=format&fit=crop" alt=""></div>
+    <span class="tate">SELF DEFENSE × FITNESS / NAGAYO</span>
+    <p class="badge"><span>月謝<b>3,000</b>円</span></p>
+  </div>
+</section>
+
+<section class="sec fx" id="learn">
+  <p class="bgword" aria-hidden="true">× SHAPE</p>
+  <div class="head rv">
+    <span class="en">WHAT YOU GET</span>
+    <h2>守る力と、しなやかな体。<br><em>1時間で、ふたつ。</em></h2>
+    <p>ボクシングと空手をベースにした護身術を、体を動かすエクササイズとして行います。</p>
+  </div>
+  <div class="cols">
+    <div class="col p">
+      <p class="col__h"><b>PROTECT</b><span>身を守る</span></p>
+      <ul>
+        <li class="sw"><i>01</i><div><strong>日常で役立つ、リアルな護身術</strong><small>いざという時に、体が動くように</small></div></li>
+        <li class="sw" style="--sd:.15s"><i>02</i><div><strong>護身スキルで、自信がつく</strong><small>自分と大切な人を守る力を</small></div></li>
+      </ul>
+    </div>
+    <div class="col s">
+      <p class="col__h"><b>SHAPE</b><span>体を整える</span></p>
+      <ul>
+        <li class="sw"><i>03</i><div><strong>シェイプアップ＆ダイエット</strong><small>楽しく体を動かしながら</small></div></li>
+        <li class="sw" style="--sd:.15s"><i>04</i><div><strong>体力・柔軟性の向上</strong><small>無理なく体力づくり</small></div></li>
+        <li class="sw" style="--sd:.3s"><i>05</i><div><strong>ストレス発散・リフレッシュ</strong><small>仕事や家事のあとの1時間に</small></div></li>
+      </ul>
+    </div>
+  </div>
+  <p class="fx__both rv">そして、いっしょに汗をかく仲間ができます。</p>
+</section>
+
+<section class="sec">
+  <div class="real">
+    <div class="knife rv" id="knife"><svg viewBox="0 0 400 120" aria-hidden="true">
+  <path class="blade" d="M20 60 L230 40 L250 44 L250 76 L230 80 Z"/>
+  <rect x="250" y="30" width="14" height="60" rx="3" fill="#c9cdd8"/>
+  <rect x="264" y="44" width="116" height="32" rx="10" fill="#2a3450"/>
+  <g stroke="#16213A" stroke-width="3"><path d="M284 44v32M304 44v32M324 44v32M344 44v32M364 44v32"/></g>
+</svg><span class="glow"></span><span class="beep">BEEP!</span><span class="note">練習用ナイフのイメージ</span></div>
+    <div class="real__txt rv">
+      <div class="head" style="margin-bottom:18px"><span class="en">SAFE, BUT REAL</span><h2>安全に。<br><em>でも、本気で。</em></h2></div>
+      <p>レッスンでは、<b>当たると光って音が鳴る練習用のナイフ</b>なども使います。本物の危険はなく、それでいて「当たった」「よけられた」がはっきり分かります。</p>
+      <p>ケガをしない道具で、実際に役立つ動きを。初心者・未経験の方も、安心して参加できます。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec info" id="class">
+  <p class="bgword" aria-hidden="true">EVERY THU</p>
+  <div class="head rv"><span class="en">CLASS</span><h2>クラスのご案内</h2></div>
+  <div class="info__grid">
+    <dl class="tbl rv">
+      <div><dt>日時</dt><dd>毎週木曜 19:00〜20:00<small>祝日はお休みです</small></dd></div>
+      <div><dt>場所</dt><dd>高田学園 百合野校舎（旧高田小学校）体育館<small>長崎県西彼杵郡長与町</small></dd></div>
+      <div><dt>月謝</dt><dd><b>3,000</b>円<small>入会金は無料です</small></dd></div>
+      <div><dt>体験・見学</dt><dd>1回無料</dd></div>
+      <div><dt>持ち物</dt><dd>上履き・タオル・飲み物</dd></div>
+    </dl>
+    <div class="for rv">
+      <p class="t">こんな方に</p>
+      <ul><li>運動が苦手な方、初心者・未経験の方</li><li>女性やお子さま</li><li>お子さまと一緒に通いたい方</li><li>男性も大歓迎です</li></ul>
+      <p class="m">女性・子どもを中心に作られたプログラムです。月ごとのレッスン日程はInstagramでお知らせしています。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="coach">
+  <div class="coach">
+    <div class="coach__ph rv">講師の写真に<br>差し替えます</div>
+    <div class="rv">
+      <div class="head" style="margin-bottom:0"><span class="en">COACH</span></div>
+      <p class="coach__name"><small>SELF DEFENSE GYM 代表</small>竹村 剛</p>
+      <p>ボクシングと空手をベースにした、実践的な護身術を教えています。2026年から長崎で護身術のワークショップを開き、9月からは毎週の「プロテクトシェイプ」として、より多くの方が続けやすい形でお届けしています。</p>
+      <div class="biz"><span class="tag">企業・団体の方へ</span><b>福利厚生としてのご相談も</b><span>従業員の方の防犯・健康づくりに。内容はお問い合わせください。</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec trial" id="trial">
+  <p class="bgword" aria-hidden="true">TRY</p>
+  <h2>まずは1回、<br>体験・見学から。</h2>
+  <p>体験・見学は1回無料です。お気軽にご連絡ください。</p>
+  <div class="ways">
+    <a href="https://www.instagram.com/self.defense.gym.nagasaki/" target="_blank" rel="noopener">InstagramのDMで申し込む</a>
+    <a class="tel" href="tel:09074737575">電話する 090-7473-7575</a>
+  </div>
+  <p class="small">お電話に出られなかった場合は、折り返しご連絡します。</p>
+</section>
+</main>
+<footer class="foot">
+  <b>PROTECT <i>SHAPE</i></b>
+  プロテクトシェイプ長崎（Self Defense Gym）　長崎県西彼杵郡長与町<br>
+  ※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもので、実際の写真に差し替えます。
+</footer>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.rv, .sw');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -12% 0px'});
+    els.forEach(function(el){ io.observe(el); });
+  } else { els.forEach(function(el){ el.classList.add('is-in'); }); }
+  setTimeout(function(){
+    var stuck = Array.prototype.some.call(els, function(el){
+      var r = el.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0 && !el.classList.contains('is-in');
+    });
+    if (stuck) document.documentElement.classList.remove('js');
+  }, 5000);
+  /* 練習用ナイフ：画面に入ったら「当たった」ように光る。触れても光る */
+  var k = document.getElementById('knife');
+  function hit(){ k.classList.remove('hit'); void k.offsetWidth; k.classList.add('hit'); }
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting) setTimeout(hit, 700); }); }, {threshold:.6}).observe(k);
+  }
+  k.addEventListener('pointerenter', hit); k.addEventListener('click', hit);
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
