@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="no-referrer">
+<title>島原生活応援｜島原市の介護保険外サービス</title>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="島原生活応援｜島原市の介護保険外サービス">
+<meta property="og:description" content="Gear Bloomがご提案用に作成したホームページのたたき台です。">
+<meta property="og:url" content="https://gearbloom.jp/s/cc663fc6cc395809/">
+<meta property="og:image" content="https://gearbloom.jp/s/cc663fc6cc395809/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="買い物、通院の付き添い、お墓参り、スマホの操作まで。島原市の現役介護福祉士が、暮らしの「ちょっと困った」をお手伝いします。30分2,000円から。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&family=Klee+One:wght@600&family=M+PLUS+2:wght@400;500;700;800&display=swap" rel="stylesheet">
+<!--
+  参考：
+  ・キヤスク（https://kiyasuku.com/）… 手元の大きな写真に白い縦書き明朝（letter-spacing .14em）、縫い目のような点線の区切り
+  ・旬の駅 生産者募集（https://farmer.syunnoeki.com/）… 手描きの吹き出し、画面の端に常に出ている問い合わせカード、橙と緑と焦げ茶の配色
+  配色・書体・構図は別系統にしている。写真：Unsplash（Unsplash License。商用可・クレジット不要）。たたき台用の仮写真
+-->
+<style>
+:root{
+  --kinari:#FBF6EE;
+  --sumi:#3F3630;
+  --mute:#8A7E74;
+  --daidai:#E0663A;
+  --midori:#2F8A5B;
+  --line:#06C755;
+  --sand:#EFE4D2;
+  --min:"Hina Mincho", serif;
+  --hand:"Klee One", cursive;
+  --go:"M PLUS 2", sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--go);color:var(--sumi);background:var(--kinari);line-height:1.9;overflow-x:hidden}
+a{color:inherit}
+.top{position:absolute;inset:0 0 auto 0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:18px clamp(16px,4vw,48px)}
+.logo{text-decoration:none;display:flex;align-items:center;gap:10px}
+.logo i{width:38px;height:38px;border-radius:50%;background:var(--midori);display:grid;place-items:center;color:#fff;font-style:normal;font-weight:800;font-size:.95rem}
+.logo b{font-weight:800;font-size:1.1rem;letter-spacing:.08em}
+.logo small{display:block;font-size:.68rem;color:var(--mute);font-weight:500;letter-spacing:.06em;line-height:1.2}
+.nav{display:flex;gap:24px;list-style:none;font-size:.88rem;font-weight:500}
+.nav a{text-decoration:none}
+@media (max-width:760px){.nav{display:none}}
+.tate{writing-mode:vertical-rl;font-family:var(--min);letter-spacing:.16em;line-height:2}
+.dash{height:0;border-top:2px dashed currentColor;opacity:.35}
+/* hand-drawn bubble */
+.bub{position:absolute;z-index:4;font-family:var(--hand);font-weight:600;font-size:clamp(.9rem,1.25vw,1.08rem);line-height:1.5;color:var(--sumi);
+  background:#fff;padding:.7em 1.1em;border-radius:1.6em 1.6em 1.6em .3em;box-shadow:0 3px 0 rgba(63,54,48,.12);white-space:nowrap}
+.bub::after{content:"";position:absolute;left:14px;bottom:-9px;width:16px;height:12px;background:#fff;clip-path:polygon(0 0,100% 0,0 100%)}
+.bub.r{border-radius:1.6em 1.6em .3em 1.6em}.bub.r::after{left:auto;right:14px;clip-path:polygon(0 0,100% 0,100% 100%)}
+.bub em{font-style:normal;color:var(--daidai)}
+html.js .bub{opacity:0;transform:translateY(10px) scale(.94);animation:pop .7s cubic-bezier(.2,1.4,.4,1) forwards;animation-delay:var(--d,.6s)}
+@keyframes pop{to{opacity:1;transform:none}}
+/* sticky LINE card (from the reference's contact card) */
+.card{position:fixed;z-index:30;right:clamp(12px,2vw,28px);bottom:clamp(12px,3vh,28px);width:220px;background:#fff;border-radius:18px;
+  box-shadow:0 10px 30px rgba(63,54,48,.18);padding:14px 16px 16px;text-align:center}
+.card p{font-size:.78rem;color:var(--mute);line-height:1.5}
+.card b{display:block;font-size:.98rem;margin:.2em 0 .5em}
+.card a{display:block;text-decoration:none;background:var(--line);color:#fff;font-weight:700;border-radius:999px;padding:.6em 0;font-size:.95rem}
+.card small{display:block;margin-top:.5em;font-size:.72rem;color:var(--mute)}
+@media (max-width:760px){.card{left:12px;right:12px;width:auto;bottom:10px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:10px;text-align:left;padding:10px 12px}
+  .card p{display:none}.card b{margin:0;font-size:.88rem}.card a{padding:.6em 1.2em}.card small{display:none}}
+@media (prefers-reduced-motion:reduce){html.js .bub{opacity:1;transform:none;animation:none}}
+
+.hero{position:relative;min-height:100svh;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(20px,4vw,64px);align-items:center;padding:110px clamp(16px,5vw,80px) 90px;overflow:hidden}
+.qa{position:relative}
+.qa__ttl{font-family:var(--min);font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.6;letter-spacing:.06em}
+.qa__ttl em{font-style:normal;color:var(--daidai)}
+.qa__list{list-style:none;margin-top:28px;display:grid;gap:14px}
+.qa__list li{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center}
+.qa__list .bub{position:relative;animation-delay:var(--d)}
+.qa__list .ans{font-weight:800;color:var(--midori);font-size:1.02rem;white-space:nowrap}
+html.js .qa__list .ans{opacity:0;animation:pop .6s ease forwards;animation-delay:calc(var(--d) + .35s)}
+.qa__note{margin-top:24px;font-size:.92rem;color:var(--mute)}
+.qa__note b{color:var(--sumi)}
+.stack{position:relative;height:min(72vh,620px)}
+.stack figure{position:absolute;overflow:hidden;border-radius:6px;box-shadow:0 14px 30px rgba(63,54,48,.16)}
+.stack img{width:100%;height:100%;object-fit:cover;display:block}
+.s1{left:0;top:0;width:66%;height:62%}.s2{right:0;top:18%;width:48%;height:44%}.s3{left:14%;bottom:0;width:52%;height:40%}
+.stack .tate{position:absolute;left:-2.4em;top:4%;font-size:clamp(1rem,1.4vw,1.25rem);color:var(--sumi)}
+@media (max-width:860px){.hero{grid-template-columns:1fr;padding-top:96px}.stack{height:62vw}.stack .tate{display:none}.qa__list .bub{white-space:normal}}
+
+/* ================= below the hero ================= */
+.sec{position:relative;overflow-x:clip;padding:clamp(80px,10vw,140px) clamp(16px,5vw,80px)}
+.sec__head{margin-bottom:clamp(30px,4vw,56px)}
+.sec__k{display:inline-block;font-weight:800;color:var(--midori);letter-spacing:.12em;font-size:.85rem;margin-bottom:.6em}
+.sec__ttl{font-family:var(--min);font-size:clamp(1.7rem,3vw,2.6rem);line-height:1.6;letter-spacing:.06em}
+.sec__ttl em{font-style:normal;color:var(--daidai)}
+.sec__lead{margin-top:.8em;max-width:34em;color:var(--mute)}
+.stitch{border:0;border-top:2px dashed rgba(63,54,48,.25);margin:0 clamp(16px,5vw,80px)}
+html.js .rv{opacity:0;transform:translateY(18px);transition:opacity .8s ease, transform .8s ease}
+html.js .rv.is-in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;transform:none;transition:none}}
+
+/* things: grouped Q&A */
+.groups{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(30px,4vw,60px) clamp(24px,4vw,70px)}
+.grp__ttl{display:flex;align-items:baseline;gap:.6em;font-weight:800;font-size:1.05rem;margin-bottom:14px}
+.grp__ttl span{font-family:var(--hand);color:var(--daidai);font-size:.9rem}
+.grp ul{list-style:none;display:grid;gap:12px}
+.grp li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}
+.grp .bub{position:relative;opacity:1;transform:none;animation:none;white-space:normal}
+.grp .ans{font-weight:700;color:var(--midori);font-size:.92rem;line-height:1.5}
+.things__note{margin-top:34px;font-size:.92rem;color:var(--mute)}
+
+/* price calculator */
+.price{background:var(--sand)}
+.calc{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,64px);align-items:start}
+.table{border-top:2px dashed rgba(63,54,48,.3)}
+.table div{display:flex;justify-content:space-between;align-items:baseline;padding:14px 4px;border-bottom:2px dashed rgba(63,54,48,.3)}
+.table dt{font-weight:700}
+.table dd{font-weight:800;font-size:1.5rem}
+.table dd small{font-size:.55em;margin-left:.2em}
+.pnotes{list-style:none;margin-top:20px;display:grid;gap:8px;font-size:.88rem}
+.pnotes li{padding-left:1.2em;position:relative}
+.pnotes li::before{content:"";position:absolute;left:0;top:.7em;width:.55em;height:.55em;border-radius:50%;background:var(--daidai)}
+.sim{background:#fff;border-radius:22px;padding:clamp(22px,3vw,34px);box-shadow:0 10px 24px rgba(63,54,48,.1)}
+.sim__q{font-family:var(--hand);font-weight:600;font-size:1.15rem}
+.sim__opts{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 20px}
+.sim__opts button{font:inherit;font-weight:700;font-size:.95rem;cursor:pointer;color:var(--sumi);background:var(--kinari);border:2px solid transparent;border-radius:999px;padding:.45em 1.1em;transition:all .2s}
+.sim__opts button[aria-pressed="true"]{background:var(--daidai);color:#fff}
+.sim__eg{font-size:.85rem;color:var(--mute);min-height:1.6em}
+.sim__out{margin-top:10px;display:flex;align-items:baseline;gap:.3em;flex-wrap:wrap}
+.sim__out b{font-weight:800;font-size:clamp(2.8rem,5vw,4rem);line-height:1;letter-spacing:-.02em}
+.sim__out span{font-weight:700}
+.sim__how{margin-top:10px;font-size:.85rem;color:var(--mute)}
+.sim__foot{margin-top:16px;padding-top:12px;border-top:2px dashed rgba(63,54,48,.2);font-size:.8rem;color:var(--mute)}
+
+/* who */
+.who{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) auto;gap:clamp(24px,4vw,64px);align-items:center}
+.who__ph{aspect-ratio:4/5;border:2px dashed rgba(63,54,48,.35);border-radius:10px;padding:14px}
+.who__ph div{width:100%;height:100%;border-radius:4px;background:var(--sand);display:grid;place-content:center;text-align:center;color:var(--mute);font-size:.85rem;line-height:1.7}
+.who__txt p{line-height:2.1}
+.who__txt p + p{margin-top:1.1em}
+.who__txt b{background:linear-gradient(transparent 62%, rgba(224,102,58,.22) 62%)}
+.who__tate{font-size:clamp(1.2rem,1.8vw,1.6rem);height:fit-content}
+.who__tags{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.who__tags li{background:#fff;border-radius:999px;padding:.3em 1em;font-size:.85rem;font-weight:700}
+
+/* flow */
+.flow{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,28px);counter-reset:f}
+.flow li{position:relative;padding-top:18px;border-top:2px dashed rgba(63,54,48,.3)}
+.flow__n{display:block;font-weight:800;color:var(--daidai);font-size:.85rem;letter-spacing:.12em}
+.flow__t{font-weight:800;font-size:1.1rem;margin:.3em 0 .4em}
+.flow__d{font-size:.9rem;color:var(--mute);line-height:1.8}
+.cta{margin-top:clamp(40px,5vw,64px);text-align:center}
+.cta a{display:inline-block;text-decoration:none;background:var(--line);color:#fff;font-weight:800;font-size:1.1rem;border-radius:999px;padding:.9em 2.4em;box-shadow:0 5px 0 #04963f}
+.cta p{margin-top:12px;font-size:.85rem;color:var(--mute)}
+
+.foot{background:var(--sumi);color:#e8ddd0;text-align:center;padding:48px 16px 120px}
+.foot b{font-weight:800;letter-spacing:.1em}
+.foot p{font-size:.76rem;line-height:1.9;margin-top:10px;opacity:.85}
+
+@media (max-width:860px){
+  .groups,.calc,.who{grid-template-columns:1fr}
+  .who__tate{display:none}
+  .who__ph{max-width:260px}
+  .flow{grid-template-columns:1fr 1fr;gap:28px 16px}
+  .sec__ttl{font-size:clamp(1.3rem,6vw,1.7rem);letter-spacing:.02em}
+}
+</style>
+<script>document.documentElement.className += " js";</script>
+</head>
+<body>
+<main>
+<header class="top">
+  <a class="logo" href="#"><i>島</i><span><b>島原生活応援</b><small>島原市の介護保険外サービス</small></span></a>
+  <ul class="nav"><li><a href="#things">頼めること</a></li><li><a href="#price">料金</a></li><li><a href="#who">どんな人？</a></li><li><a href="#flow">ご利用の流れ</a></li></ul>
+</header>
+<section class="hero">
+  <div class="qa">
+    <h1 class="qa__ttl">こんなこと、<br><em>頼んでいいのかな。</em></h1>
+    <ul class="qa__list">
+      <li><p class="bub" style="--d:.5s">お墓の掃除をお願いしたい</p><span class="ans">はい、承ります</span></li>
+      <li><p class="bub" style="--d:1s">スマホでPayPayを使いたい</p><span class="ans">一緒にやりましょう</span></li>
+      <li><p class="bub" style="--d:1.5s">病院まで付き添ってほしい</p><span class="ans">介助もできます</span></li>
+    </ul>
+    <p class="qa__note"><b>島原市の現役介護福祉士</b>が、30分2,000円から伺います。</p>
+  </div>
+  <div class="stack">
+    <figure class="s1"><img src="https://images.unsplash.com/photo-1609815981831-9f59d2c66f51?w=1000&q=75&auto=format&fit=crop" alt=""></figure>
+    <figure class="s2"><img src="https://images.unsplash.com/photo-1620856902651-ce18d6d31d42?w=800&q=75&auto=format&fit=crop" alt=""></figure>
+    <figure class="s3"><img src="https://images.unsplash.com/photo-1570913196376-dacb677ef459?w=800&q=75&auto=format&fit=crop" alt=""></figure>
+    <p class="tate">島原の、暮らしのそばに。</p>
+  </div>
+</section>
+
+<section class="sec" id="things">
+  <div class="sec__head rv">
+    <span class="sec__k">頼めること</span>
+    <h2 class="sec__ttl">「こんなことで悪いかな」は、<br><em>いりません。</em></h2>
+    <p class="sec__lead">介護保険では頼めないことも、介護保険外サービスならお手伝いできます。</p>
+  </div>
+  <div class="groups">
+    <div class="grp rv"><p class="grp__ttl">毎日の暮らし<span>買い物・家事</span></p><ul><li><p class="bub">重たいものを買ってきてほしい</p><span class="ans">買い物、お任せください</span></li><li><p class="bub">部屋の片付けや洗濯が大変</p><span class="ans">掃除・洗濯・食事の準備も</span></li><li><p class="bub">お中元の準備を頼みたい</p><span class="ans">季節の用事も承ります</span></li></ul></div>
+    <div class="grp rv"><p class="grp__ttl">からだと通院<span>通院・お薬・見守り</span></p><ul><li><p class="bub">病院まで付き添ってほしい</p><span class="ans">付き添い・介助ができます</span></li><li><p class="bub">薬を受け取ってきてほしい</p><span class="ans">お薬のことも</span></li><li><p class="bub">ひとり暮らしの親が心配</p><span class="ans">見守りもご相談ください</span></li></ul></div>
+    <div class="grp rv"><p class="grp__ttl">お出かけ<span>外出・旅行・お墓参り</span></p><ul><li><p class="bub">お盆前にお墓の掃除を</p><span class="ans">お墓参りの準備も</span></li><li><p class="bub">美容室や外食に行きたい</p><span class="ans">一緒にお出かけします</span></li><li><p class="bub">旅行に付き添ってほしい</p><span class="ans">長時間はご相談のうえで</span></li></ul></div>
+    <div class="grp rv"><p class="grp__ttl">スマホとお金<span>困りごと・楽しみ</span></p><ul><li><p class="bub">PayPayの使い方が分からない</p><span class="ans">スマホ操作、一緒に</span></li><li><p class="bub">振り込みのやり方が不安</p><span class="ans">お金のお困りごとも</span></li><li><p class="bub">将棋の相手がほしい</p><span class="ans">趣味のお相手も喜んで</span></li></ul></div>
+  </div>
+  <p class="things__note rv">ここにないことも、まずはLINEでご相談ください。</p>
+</section>
+
+<section class="sec price" id="price">
+  <div class="sec__head rv">
+    <span class="sec__k">料金</span>
+    <h2 class="sec__ttl">いくらかかるか、<br><em>先に分かります。</em></h2>
+  </div>
+  <div class="calc">
+    <div class="rv">
+      <dl class="table">
+        <div><dt>30分</dt><dd>2,000<small>円</small></dd></div>
+        <div><dt>60分（基本料金）</dt><dd>3,850<small>円</small></dd></div>
+        <div><dt>延長30分ごと</dt><dd>2,000<small>円</small></dd></div>
+      </dl>
+      <ul class="pnotes">
+        <li>表示はすべて税込です</li>
+        <li>5時間以上のご利用や旅行への同行は、ご相談のうえ料金を決めます</li>
+        <li>入場料・高速道路料金・駐車場料金・立て替えた買い物代などの実費は、ご利用者様のご負担です</li>
+        <li>キャンセル料はいただいていません</li>
+      </ul>
+    </div>
+    <div class="sim rv">
+      <p class="sim__q">どのくらいの時間、お願いしますか？</p>
+      <div class="sim__opts" role="group" aria-label="ご利用時間">
+        <button type="button" data-m="30">30分</button>
+        <button type="button" data-m="60" aria-pressed="true">1時間</button>
+        <button type="button" data-m="90">1時間半</button>
+        <button type="button" data-m="120">2時間</button>
+        <button type="button" data-m="180">3時間</button>
+        <button type="button" data-m="240">4時間</button>
+        <button type="button" data-m="300">5時間〜</button>
+      </div>
+            <p class="sim__out" aria-live="polite"><b id="yen">3,850</b><span id="unit">円（税込）</span></p>
+      <p class="sim__how" id="how">基本料金</p>
+      <p class="sim__foot">実費は別になります。料金表にもとづく目安です。</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="who">
+  <div class="who">
+    <div class="who__ph rv"><div>ご本人の写真に<br>差し替えます</div></div>
+    <div class="who__txt rv">
+      <span class="sec__k">どんな人？</span>
+      <h2 class="sec__ttl">島原で働く、<br><em>現役の介護福祉士</em>です。</h2>
+      <p>ふだんは介護の現場で働きながら、空いた時間に「島原生活応援」として活動しています。<b>介護の仕事で身につけたことを、地元・島原の暮らしに役立てたい</b>という思いで、2026年7月に始めました。</p>
+      <p>0歳の子どもを育てながらの活動のため、急な体調不良などでやむを得ず日程の変更をお願いすることがあります。そのぶん<b>キャンセル料はいただかず</b>、できる限り早くご連絡して、誠実に対応します。</p>
+      <ul class="who__tags"><li>介護福祉士</li><li>島原市</li><li>LINE・電話・メールで受付</li></ul>
+    </div>
+    <p class="tate who__tate rv">小さな一歩が、<br>大きな支えに。</p>
+  </div>
+</section>
+
+<hr class="stitch">
+
+<section class="sec" id="flow">
+  <div class="sec__head rv">
+    <span class="sec__k">ご利用の流れ</span>
+    <h2 class="sec__ttl">まずは、LINEで<br><em>ひとこと</em>どうぞ。</h2>
+  </div>
+  <ol class="flow">
+    <li class="rv"><span class="flow__n">STEP 1</span><p class="flow__t">LINEで相談</p><p class="flow__d">困っていることを、そのまま送ってください。</p></li>
+    <li class="rv"><span class="flow__n">STEP 2</span><p class="flow__t">日時を決める</p><p class="flow__d">空いている時間をご案内します。料金の目安もこのときにお伝えします。</p></li>
+    <li class="rv"><span class="flow__n">STEP 3</span><p class="flow__t">当日、伺います</p><p class="flow__d">島原市内を中心に、ご自宅などへ伺ってお手伝いします。</p></li>
+    <li class="rv"><span class="flow__n">STEP 4</span><p class="flow__t">お支払い</p><p class="flow__d">ご利用時間の料金と、立て替えた実費をお支払いいただきます。</p></li>
+  </ol>
+  <div class="cta rv"><a href="https://lin.ee/QLOsUAV" target="_blank" rel="noopener">LINEで相談する</a><p>電話・メール・InstagramのDMでも受け付けています。</p></div>
+</section>
+</main>
+<footer class="foot">
+  <b>島原生活応援</b>
+  <p>長崎県島原市の介護保険外サービス　／　Instagram @shimabara93<br>
+  ※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもので、実際の写真に差し替えます。</p>
+</footer>
+
+<aside class="card"><p>ご予約・ご相談は</p><b>まずはLINEで気軽に</b><a href="https://lin.ee/QLOsUAV" target="_blank" rel="noopener">LINEで相談する</a><small>空いている時間もLINEでご案内します</small></aside>
+<script>
+(function(){
+  var rv = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+    }, {rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){ io.observe(el); });
+  } else { rv.forEach(function(el){ el.classList.add('is-in'); }); }
+  setTimeout(function(){
+    var stuck = Array.prototype.some.call(rv, function(el){
+      var r = el.getBoundingClientRect(); return r.top < innerHeight && r.bottom > 0 && !el.classList.contains('is-in');
+    });
+    if (stuck) document.documentElement.classList.remove('js');
+  }, 5000);
+
+  /* 料金の目安：公開されている料金表（30分2,000円／60分3,850円／延長30分ごと2,000円）どおりに計算 */
+  var EG = {};
+  function yen(m){ return m <= 30 ? 2000 : 3850 + Math.ceil((m - 60) / 30) * 2000; }
+  function how(m){ if (m <= 30) return '30分の料金'; if (m === 60) return '基本料金'; return '基本料金 3,850円 ＋ 延長' + ((m - 60) / 30) + '回 × 2,000円'; }
+  var bs = document.querySelectorAll('.sim__opts button');
+  function show(m){
+    bs.forEach(function(b){ b.setAttribute('aria-pressed', +b.dataset.m === m); });
+    if (m >= 300){
+      document.getElementById('yen').textContent = 'ご相談';
+      document.getElementById('unit').textContent = '';
+      document.getElementById('how').textContent = '5時間以上や旅行への同行は、内容をうかがって料金を決めます';
+    } else {
+      document.getElementById('yen').textContent = yen(m).toLocaleString();
+      document.getElementById('unit').textContent = '円（税込）';
+      document.getElementById('how').textContent = how(m);
+    }
+  }
+  bs.forEach(function(b){ b.addEventListener('click', function(){ show(+b.dataset.m); }); });
+  show(60);
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body>
+</html>
