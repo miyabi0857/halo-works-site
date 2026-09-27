@@ -110,6 +110,10 @@ html.js .rv.is-in{opacity:1;transform:none}
 .coffee .ph img{width:100%;height:100%;object-fit:cover}
 .coffee .txt p{margin-top:1.2em;max-width:26em}
 
+.coffee .cph{position:relative;overflow:visible}.coffee .cph .main{width:100%;height:100%;overflow:hidden}
+.coffee .cph .sub{position:absolute;left:-14%;bottom:-14%;width:36%;aspect-ratio:3/4;overflow:hidden;border:6px solid var(--bg2);box-shadow:0 18px 30px rgba(56,44,23,.22)}
+.coffee .cph .sub img{width:100%;height:100%;object-fit:cover}
+@media (max-width:860px){.coffee .cph{width:84%;margin:0 0 50px auto}}
 /* access */
 .access{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(28px,5vw,90px);align-items:start}
 .access dl{margin-top:1.4em;border-top:1px solid #cfc8b8}
@@ -123,6 +127,49 @@ html.js .rv.is-in{opacity:1;transform:none}
 .foot{text-align:center;padding:50px 18px 56px;border-top:1px solid #cfc8b8}
 .foot b{display:block;font-family:var(--serif);font-weight:400;font-size:2.2rem;line-height:1}
 .foot p{margin-top:12px;font-size:.78rem;color:var(--mute);line-height:1.9}
+
+/* ---- scroll: hero words part (nobori goes up, kudari goes down) ---- */
+.word span:first-child,.sitter{translate:0 calc(var(--hp,0) * -34vh)}
+.word span:nth-child(2){translate:0 calc(var(--hp,0) * 22vh)}
+.foot1{opacity:calc(1 - var(--hp,0) * 1.6)}
+/* ---- parallax collage ---- */
+[data-sp]{translate:0 var(--py,0px);will-change:translate}
+.about .ph{overflow:visible}
+.about .ph .main{position:relative;width:100%;height:100%;overflow:hidden}
+.about .ph .sub{position:absolute;overflow:hidden;box-shadow:0 18px 30px rgba(56,44,23,.22);border:6px solid var(--bg2)}
+.about .ph .sub img{width:100%;height:100%;object-fit:cover}
+.about .ph .s1{width:42%;aspect-ratio:3/4;right:-16%;bottom:-12%}
+.about .ph .s2{width:34%;aspect-ratio:1;left:-9%;top:-8%}
+/* ---- walk the shelves: vertical scroll moves the row sideways ---- */
+.walk{position:relative;height:420vh;background:var(--bg)}
+.walk .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;grid-template-columns:minmax(0,1fr)}
+.walk .hd{padding:clamp(80px,10vh,110px) clamp(18px,5vw,80px) 0;display:flex;justify-content:space-between;align-items:end;gap:10px 20px;flex-wrap:wrap}
+.walk .hd .big{font-size:clamp(3rem,7vw,6.4rem)}
+.walk .hd p{font-size:.92rem;color:var(--mute);max-width:24em}
+.walk .track{align-self:center;display:flex;align-items:center;gap:clamp(24px,4vw,64px);padding:0 clamp(18px,5vw,80px);width:max-content;will-change:transform}
+.walk figure{position:relative;flex:none;margin:0}
+.walk figure .fr{overflow:hidden;height:100%}
+.walk figure img{width:100%;height:100%;object-fit:cover;scale:1.12;transition:scale .8s}
+.walk figure:hover img{scale:1.02}
+.walk figcaption{position:absolute;left:0;bottom:-30px;display:flex;gap:10px;white-space:nowrap;font-family:var(--cg);font-style:italic;font-size:.95rem;color:var(--mute)}
+.walk figcaption b{font-style:normal;font-weight:400;color:var(--red)}
+.walk .t1{width:clamp(220px,26vw,380px);height:min(50vh,470px)}
+.walk .t2{width:clamp(200px,22vw,320px);height:min(34vh,320px);margin-top:16vh}
+.walk .t3{width:clamp(260px,32vw,480px);height:min(42vh,400px);margin-top:-12vh}
+.walk .t4{width:clamp(180px,18vw,270px);height:min(40vh,360px);margin-top:10vh}
+.walk .word2{flex:none;font-family:var(--serif);font-size:clamp(5rem,13vw,12rem);line-height:.9;color:transparent;-webkit-text-stroke:1px #a99e88;padding:0 2vw}
+.walk .bar{height:14px;margin:0 clamp(18px,5vw,80px) clamp(28px,5vh,48px);background:linear-gradient(#7b5a3a,#5c4128);border-radius:2px;position:relative;box-shadow:0 10px 18px rgba(56,44,23,.2)}
+.walk .bar i{position:absolute;top:-26px;font-family:var(--cg);font-style:italic;font-size:.9rem;color:var(--mute);white-space:nowrap}
+@media (max-width:860px){
+  .about .ph{width:84%;margin:20px auto 50px}
+  .walk{height:520vh}
+  .walk .t1{height:42vh}.walk .t2{height:28vh;margin-top:12vh}.walk .t3{height:32vh;margin-top:-8vh}.walk .t4{height:32vh}
+}
+@media (prefers-reduced-motion:reduce){
+  .word span,.sitter,[data-sp]{translate:none!important}
+  .walk{height:auto}.walk .pin{position:relative;height:auto;padding-bottom:40px}.walk .track{overflow-x:auto;width:auto;padding-bottom:40px}
+}
+
 @media (max-width:860px){
   .about,.coffee,.access{grid-template-columns:1fr}
   .shelf{gap:14px}
@@ -148,7 +195,11 @@ html.js .rv.is-in{opacity:1;transform:none}
 </section>
 
 <section class="sec about" id="shelf">
-  <figure class="ph warm rv"><img src="https://images.unsplash.com/photo-1633101635884-93a9992960fa?w=1100&q=78&auto=format&fit=crop" alt="" loading="lazy"></figure>
+  <figure class="ph warm rv">
+    <div class="main"><img src="https://images.unsplash.com/photo-1633101635884-93a9992960fa?w=1100&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+    <div class="sub s2" data-sp=".08"><img src="https://images.unsplash.com/photo-1729259586624-fbff74362a5c?w=500&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+    <div class="sub s1" data-sp=".18"><img src="https://images.unsplash.com/photo-1782874651724-7a132272b876?w=600&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+  </figure>
   <div class="txt rv">
     <span class="en">about the shelf</span>
     <h2 class="h2">古いものと新しいものが、<br>同じ棚にならんでいます。</h2>
@@ -159,6 +210,30 @@ html.js .rv.is-in{opacity:1;transform:none}
       <li>波佐見焼・有田焼<span>Hasami &amp; Arita</span></li>
       <li>古いもの、海の向こうのもの<span>and more</span></li>
     </ul>
+  </div>
+</section>
+
+
+<section class="walk" id="walk" aria-label="棚のあいだを歩く">
+  <div class="pin">
+    <div class="hd">
+      <p class="big">Walk the shelves.</p>
+      <p>スクロールすると、棚のあいだを歩くように進みます。<br>※写真はすべてイメージです。</p>
+    </div>
+    <div class="track" id="track">
+      <figure class="t1"><div class="fr"><img src="https://images.unsplash.com/photo-1784022163360-dcad8281514e?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>01</b>an old shop, somewhere</figcaption></figure>
+      <figure class="t2"><div class="fr"><img src="https://images.unsplash.com/photo-1624347443725-dac2bcc04c82?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>02</b>a radio</figcaption></figure>
+      <span class="word2" aria-hidden="true">Old</span>
+      <figure class="t3"><div class="fr"><img src="https://images.unsplash.com/photo-1781000640723-8143b066f2cc?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>03</b>cups, Hasami</figcaption></figure>
+      <figure class="t4"><div class="fr"><img src="https://images.unsplash.com/photo-1786282667688-742dd35b3747?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>04</b>an amber bottle</figcaption></figure>
+      <figure class="t2"><div class="fr"><img src="https://images.unsplash.com/photo-1629440400842-9108c0ccf336?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>05</b>a clay teapot</figcaption></figure>
+      <span class="word2" aria-hidden="true">&amp; New</span>
+      <figure class="t1"><div class="fr"><img src="https://images.unsplash.com/photo-1758380742318-4074cce52ec4?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>06</b>a mirror, a chair</figcaption></figure>
+      <figure class="t4"><div class="fr"><img src="https://images.unsplash.com/photo-1778088442551-78af47b1e3f7?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>07</b>an oil lamp</figcaption></figure>
+      <figure class="t3"><div class="fr"><img src="https://images.unsplash.com/photo-1655203297308-7f042d67d09e?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>08</b>a desk lamp</figcaption></figure>
+      <figure class="t2"><div class="fr"><img src="https://images.unsplash.com/photo-1606377695906-236fdfcef767?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><figcaption><b>09</b>a cup of tea</figcaption></figure>
+    </div>
+    <div class="bar"><i>you are here →</i></div>
   </div>
 </section>
 
@@ -183,7 +258,8 @@ html.js .rv.is-in{opacity:1;transform:none}
     <h2 class="h2">見てまわったら、<br>奥のカウンターでひと息。</h2>
     <p>店の奥には小さなカウンターがあって、オリジナルのコーヒーを飲めます。買いものの途中でも、ちょっと休みたいだけでも、どうぞ。</p>
   </div>
-  <figure class="ph warm rv"><img src="https://images.unsplash.com/photo-1595434091143-b375ced5fe5c?w=1000&q=78&auto=format&fit=crop" alt="" loading="lazy"></figure>
+  <figure class="ph warm rv cph"><div class="main"><img src="https://images.unsplash.com/photo-1595434091143-b375ced5fe5c?w=1000&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+    <div class="sub" data-sp=".2"><img src="https://images.unsplash.com/photo-1483678777699-a2340573e155?w=500&q=78&auto=format&fit=crop" alt="" loading="lazy"></div></figure>
 </section>
 
 <section class="sec access" id="access">
@@ -225,6 +301,22 @@ html.js .rv.is-in{opacity:1;transform:none}
     var stuck=Array.prototype.some.call(rv,function(el){var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0&&!el.classList.contains('is-in');});
     if(stuck) document.documentElement.classList.remove('js');
   },5000);
+})();
+
+(function(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var hero=document.querySelector('.hero'), sp=[].slice.call(document.querySelectorAll('[data-sp]'));
+  var walk=document.getElementById('walk'), track=document.getElementById('track'), tick=false;
+  function f(){
+    tick=false; var vh=innerHeight;
+    var hp=Math.min(1,Math.max(0,scrollY/vh)); hero.style.setProperty('--hp',hp.toFixed(3));
+    sp.forEach(function(el){var r=el.parentNode.getBoundingClientRect();var c=(r.top+r.height/2-vh/2);el.style.setProperty('--py',(c*parseFloat(el.dataset.sp)).toFixed(1)+'px');});
+    var r=walk.getBoundingClientRect(), total=walk.offsetHeight-vh, p=Math.min(1,Math.max(0,-r.top/total));
+    var dist=Math.max(0,track.scrollWidth-innerWidth); track.style.transform='translate3d('+(-dist*p).toFixed(1)+'px,0,0)';
+    var bi=walk.querySelector('.bar i'); bi.style.left=((bi.parentNode.clientWidth-bi.offsetWidth)*p).toFixed(1)+'px';
+  }
+  addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(f);}},{passive:true});
+  addEventListener('resize',f); f();
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
