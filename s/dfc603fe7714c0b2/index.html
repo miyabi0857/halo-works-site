@@ -2,7 +2,7 @@
 <html lang="ja"><head>
 <script>document.documentElement.className += " js";</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Archivo+Black&family=Archivo:wght@500;700;800&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--red:#e5222a;--yel:#f7c600;--grn:#1fa24a;--blu:#1f86d6;--ink:#141414;--paper:#f6f3ec;--mute:#6f6a60;
   --en:"Archivo Black",sans-serif;--en2:"Archivo",sans-serif;--disp:"Dela Gothic One",sans-serif;--jp:"Zen Kaku Gothic New",sans-serif}
@@ -91,40 +91,34 @@ html.js .rv.is-in{opacity:1;translate:0 0}
 .msg .dots i:nth-child(2){animation-delay:.15s}.msg .dots i:nth-child(3){animation-delay:.3s}.msg .dots i:nth-child(4){animation-delay:.45s}
 @keyframes bob{50%{translate:0 -10px}}
 
-/* services as sticker cards */
-.serv .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(36px,5vw,60px)}
-.card{position:relative;background:#fff;border:3px solid var(--ink);border-radius:18px;padding:22px 20px 20px;box-shadow:6px 6px 0 var(--ink);transition:translate .25s, box-shadow .25s, rotate .25s}
-.card:hover{translate:-3px -3px;box-shadow:9px 9px 0 var(--ink);rotate:-1deg}
-.card .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;border:3px solid var(--ink)}
-.card .ic svg{width:26px;height:26px}
-.card b{display:block;margin-top:14px;font-family:var(--disp);font-weight:400;font-size:1.2rem}
-.card small{display:block;font-family:var(--en);font-size:.68rem;letter-spacing:.14em;color:var(--mute)}
-.card p{margin-top:.6em;font-size:.88rem;line-height:1.7}
-.card.wide{grid-column:span 2;background:var(--yel)}
-.more{margin-top:clamp(40px,5vw,60px);border-top:3px dashed #cfc8b8;padding-top:28px}
-.more h3{font-family:var(--disp);font-weight:400;font-size:1.2rem}
-.more ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
-.more li{border:2px solid var(--ink);border-radius:99px;padding:.3em 1em;font-weight:700;font-size:.88rem;background:#fff}
-.more .note{margin-top:12px;font-size:.78rem;color:var(--mute)}
-
-/* neon wall (centerpiece): draw with finger or mouse, it lights up like a neon tube */
-.neon{background:#0d0d0f;color:#fff}
-.neon .kick{color:#bbb}
-.neon .lead{color:#cfcfcf}
-.stage{position:relative;margin-top:clamp(28px,4vw,44px);height:min(64vh,560px);border-radius:18px;overflow:hidden;background:#111 url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=1600&q=70&auto=format&fit=crop") center/cover;box-shadow:0 0 0 3px #2a2a2a}
-.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,.35),rgba(0,0,0,.82))}
-.stage canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
-.stage .tip{position:absolute;left:50%;bottom:16px;translate:-50% 0;font-size:.8rem;font-weight:700;color:#fff;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:.35em 1em;pointer-events:none;transition:opacity .5s;white-space:nowrap}
-.ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:18px}
-.ctrl .cols{display:flex;gap:8px}
-.ctrl .cols button{width:34px;height:34px;border-radius:50%;border:3px solid #0d0d0f;box-shadow:0 0 0 2px #444;cursor:pointer}
-.ctrl .cols button[aria-pressed="true"]{box-shadow:0 0 0 3px #fff,0 0 14px var(--c)}
-.ctrl form{display:flex;gap:8px;flex:1;min-width:240px}
-.ctrl input{flex:1;min-width:0;font:inherit;font-weight:700;padding:.55em .9em;border-radius:10px;border:2px solid #444;background:#1a1a1d;color:#fff}
-.ctrl .b{font:inherit;font-weight:700;padding:.55em 1.1em;border-radius:10px;border:2px solid #fff;background:#fff;color:#111;cursor:pointer;white-space:nowrap}
-.ctrl .b.ghost{background:transparent;color:#fff;border-color:#555}
-.neon .note{margin-top:14px;font-size:.78rem;color:#9a9a9a}
-@media (max-width:640px){.stage{height:56vh}}
+/* services: photo panels that stack up as you scroll, a sticker slaps on each */
+.serv{padding-bottom:40px}
+.stack{margin-top:clamp(30px,4vw,50px)}
+.panel{position:sticky;top:calc(78px + var(--i) * 12px);height:min(76vh,640px);margin-bottom:6vh;border-radius:22px;overflow:hidden;background:#111;color:#fff;border:3px solid var(--ink);box-shadow:0 -10px 30px rgba(0,0,0,.18);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);transform-origin:50% 0;scale:var(--sc,1);filter:brightness(var(--br,1))}
+.panel .ph{position:relative;overflow:hidden}
+.panel .ph img{width:100%;height:100%;object-fit:cover;scale:1.08;transition:scale 1.2s}
+.panel.in .ph img{scale:1}
+.panel .tx{position:relative;padding:clamp(24px,4vw,56px);display:flex;flex-direction:column;justify-content:flex-end;background:var(--bg)}
+.panel .no{position:absolute;right:clamp(16px,3vw,36px);top:clamp(10px,2vw,24px);font-family:var(--en);font-size:clamp(4rem,9vw,8rem);line-height:1;color:rgba(255,255,255,.14)}
+.panel .tx b{font-family:var(--disp);font-weight:400;font-size:clamp(1.9rem,3.6vw,3rem);line-height:1.2}
+.panel .tx small{display:block;margin-top:.4em;font-family:var(--en);letter-spacing:.2em;font-size:.78rem;opacity:.8}
+.panel .tx p{margin-top:1em;font-weight:500;max-width:22em}
+.panel.dark .tx{color:var(--ink)}
+.panel.dark .no{color:rgba(0,0,0,.12)}
+.panel .lbl{position:absolute;left:clamp(14px,3vw,34px);top:clamp(14px,3vw,34px);z-index:2;font-family:var(--en2);font-weight:800;color:#fff;border:3px solid #fff;border-radius:99px;padding:.45em 1.2em;box-shadow:0 6px 0 rgba(0,0,0,.14),0 10px 22px rgba(0,0,0,.25);rotate:-6deg;opacity:0;scale:2.2;transition:opacity .2s .25s, scale .45s cubic-bezier(.2,1.6,.4,1) .25s}
+.panel.in .lbl{opacity:1;scale:1}
+.belt{margin:clamp(10px,3vw,30px) calc(-1 * clamp(16px,5vw,80px)) 0;background:var(--ink);color:#fff;overflow:hidden;padding:18px 0;rotate:-2deg}
+.belt .row{display:flex;gap:14px;width:max-content;animation:belt 36s linear infinite}
+.belt span{font-weight:700;border:2px solid #fff;border-radius:99px;padding:.3em 1.1em;white-space:nowrap}
+.belt span:nth-child(4n+1){background:var(--red);border-color:var(--red)}.belt span:nth-child(4n+3){background:var(--blu);border-color:var(--blu)}
+@keyframes belt{to{translate:-50% 0}}
+.belt-note{margin-top:18px;font-size:.78rem;color:var(--mute)}
+@media (max-width:760px){
+  .panel{grid-template-columns:1fr;grid-template-rows:minmax(0,1.15fr) auto;height:min(78vh,620px);top:calc(70px + var(--i) * 8px)}
+  .panel .tx{padding:20px 20px 24px}
+  .panel .tx p{font-size:.9rem}
+}
+@media (prefers-reduced-motion:reduce){.panel{position:relative;top:auto}.panel .lbl{opacity:1;scale:1}.belt .row{animation:none}}
 
 /* works */
 .works{background:var(--paper)}
@@ -186,31 +180,10 @@ html.js .rv.is-in{opacity:1;translate:0 0}
 <section class="sec serv" id="service">
   <span class="kick rv"><i class="c2"></i>SERVICE</span>
   <h2 class="h2 rv">できること。</h2>
-  <div class="grid"><div class="card rv"><span class="ic c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg></span><b>店舗看板</b><small>SHOP SIGN</small><p>お店の顔になる看板を。</p></div><div class="card rv"><span class="ic c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><b>屋内サイン</b><small>INDOOR SIGN</small><p>店内やオフィスのサインも。</p></div><div class="card rv"><span class="ic c3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-6h14l2 6v5H3z"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M3 13h18"/></svg></span><b>カーラッピング</b><small>CAR WRAPPING</small><p>社用車やトラックを、走る看板に。</p></div><div class="card rv"><span class="ic c4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg></span><b>窓ガラスフィルム</b><small>WINDOW FILM</small><p>窓を使ったウインドウサイン。</p></div><div class="card rv"><span class="ic c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><b>各種施工</b><small>INSTALLATION</small><p>看板の取り付けまで。</p></div><div class="card rv"><span class="ic c3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4h13l-3 4 3 4H4"/></svg></span><b>イベント・装飾</b><small>EVENT</small><p>展示やイベントの装飾も。</p></div><div class="card rv"><span class="ic c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg></span><b>デザイン制作</b><small>DESIGN</small><p>何を伝えたいか、から一緒に考えます。</p></div><div class="card wide rv"><b>看板のこと、まずはお電話で。</b><p>「こんな看板にしたい」がまだぼんやりしていても大丈夫です。お話を聞きながら、形にしていきます。</p><p style="margin-top:.8em"><a href="tel:0958437233" style="font-family:var(--en);font-size:1.4rem;text-decoration:none">095-843-7233 →</a></p></div></div>
-  <div class="more rv">
-    <h3>こんなことも、ご相談ください。</h3>
-    <ul><li>大型インクジェットプリント</li><li>ステッカー</li><li>プラスチック加工</li><li>レーザー加工</li><li>LEDサイン</li><li>Tシャツ・マグカップのプリント</li><li>垂れ幕・横断幕・のぼり</li><li>看板の撤去・電球交換</li></ul>
-    <p class="note">※会社のウェブサイト（準備中のページ）に掲載されている営業品目から</p>
-  </div>
-</section>
-
-<section class="sec neon" id="neon">
-  <span class="kick rv"><i class="c3"></i>TRY IT</span>
-  <h2 class="h2 rv">光る看板を、<br>描いてみる。</h2>
-  <p class="lead rv">壁に指やマウスで線を描くと、ネオン管になって灯ります。文字を入れて「灯す」を押すと、看板の文字として光ります。</p>
-  <div class="stage rv" id="stage"><canvas id="cv" aria-label="ネオンを描くキャンバス"></canvas><span class="tip" id="tip">ここに描いてみてください</span></div>
-  <div class="ctrl rv">
-    <div class="cols" role="group" aria-label="色">
-      <button type="button" style="background:#ff3b41;--c:#ff3b41" data-c="#ff3b41" aria-label="赤" aria-pressed="true"></button>
-      <button type="button" style="background:#ffd21a;--c:#ffd21a" data-c="#ffd21a" aria-label="黄" aria-pressed="false"></button>
-      <button type="button" style="background:#2fe06a;--c:#2fe06a" data-c="#2fe06a" aria-label="緑" aria-pressed="false"></button>
-      <button type="button" style="background:#2fa3ff;--c:#2fa3ff" data-c="#2fa3ff" aria-label="青" aria-pressed="false"></button>
-      <button type="button" style="background:#ffffff;--c:#ffffff" data-c="#ffffff" aria-label="白" aria-pressed="false"></button>
-    </div>
-    <form id="tf"><input id="ti" type="text" maxlength="14" placeholder="店名を入れてみる" aria-label="光らせる文字"><button class="b" type="submit">灯す</button></form>
-    <button class="b ghost" type="button" id="clr">消す</button>
-  </div>
-  <p class="note rv">※このページの中だけで動く、描いて遊べる見本です。ホームページには、こうした「触って楽しい」仕掛けも入れられます。</p>
+  <div class="stack" id="stack"><article class="panel " style="--i:0;--bg:var(--red)"><div class="ph"><img src="https://images.unsplash.com/photo-1620194544222-8c956ca15f1d?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c1">SHOP SIGN</span></div><div class="tx"><span class="no">01</span><b>店舗看板</b><small>SHOP SIGN</small><p>お店の顔になる看板を。通りから見つけてもらうための、いちばん大事な一枚です。</p></div></article><article class="panel dark" style="--i:1;--bg:var(--yel)"><div class="ph"><img src="https://images.unsplash.com/photo-1618623266812-f5075ba99663?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c2">INDOOR SIGN</span></div><div class="tx"><span class="no">02</span><b>屋内サイン</b><small>INDOOR SIGN</small><p>店内やオフィスのサインも。入ってからの「迷わない」をつくります。</p></div></article><article class="panel " style="--i:2;--bg:var(--grn)"><div class="ph"><img src="https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c3">CAR WRAPPING</span></div><div class="tx"><span class="no">03</span><b>カーラッピング</b><small>CAR WRAPPING</small><p>社用車やトラックを、走る看板に。まちを走るたびに名前が広がります。</p></div></article><article class="panel " style="--i:3;--bg:var(--blu)"><div class="ph"><img src="https://images.unsplash.com/photo-1554466343-d340fa1a13f7?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c4">WINDOW FILM</span></div><div class="tx"><span class="no">04</span><b>窓ガラスフィルム</b><small>WINDOW FILM</small><p>窓を使ったウインドウサイン。ガラス越しに、お店の中の雰囲気まで伝えます。</p></div></article><article class="panel dark" style="--i:4;--bg:#f4f1ea"><div class="ph"><img src="https://images.unsplash.com/photo-1567093597754-35b79c864763?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c1">INSTALLATION</span></div><div class="tx"><span class="no">05</span><b>各種施工</b><small>INSTALLATION</small><p>作った看板の取り付けまで。</p></div></article><article class="panel " style="--i:5;--bg:var(--ink)"><div class="ph"><img src="https://images.unsplash.com/photo-1766086893043-d38b06175015?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c2">EVENT</span></div><div class="tx"><span class="no">06</span><b>イベント・装飾</b><small>EVENT</small><p>展示やイベントの装飾も。</p></div></article><article class="panel dark" style="--i:6;--bg:var(--yel)"><div class="ph"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c3">DESIGN</span></div><div class="tx"><span class="no">07</span><b>デザイン制作</b><small>DESIGN</small><p>何を伝えたいか、から一緒に考えます。</p></div></article></div>
+  <p class="h2 rv" style="font-size:clamp(1.2rem,2.4vw,1.8rem);margin-top:40px">こんなことも、ご相談ください。</p>
+  <div class="belt" aria-label="大型インクジェットプリント、ステッカー、プラスチック加工、レーザー加工、LEDサイン、Tシャツ・マグカップのプリント、垂れ幕・横断幕・のぼり、看板の撤去・電球交換"><div class="row"><span>大型インクジェットプリント</span><span>ステッカー</span><span>プラスチック加工</span><span>レーザー加工</span><span>LEDサイン</span><span>Tシャツ・マグカップのプリント</span><span>垂れ幕・横断幕・のぼり</span><span>看板の撤去・電球交換</span><span>大型インクジェットプリント</span><span>ステッカー</span><span>プラスチック加工</span><span>レーザー加工</span><span>LEDサイン</span><span>Tシャツ・マグカップのプリント</span><span>垂れ幕・横断幕・のぼり</span><span>看板の撤去・電球交換</span></div></div>
+  <p class="belt-note">※写真はイメージです（フリー素材）。品目は会社のウェブサイト（準備中のページ）に掲載のものから</p>
 </section>
 
 <section class="sec works" id="works">
@@ -295,55 +268,16 @@ html.js .rv.is-in{opacity:1;translate:0 0}
     rv.forEach(function(el){io.observe(el);});
   } else rv.forEach(function(el){el.classList.add('is-in');});
   setTimeout(function(){var stuck=[].some.call(rv,function(el){var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0&&!el.classList.contains('is-in');});if(stuck)document.documentElement.classList.remove('js');},5000);
-  // neon wall
+  // service panels: sticker slaps when a panel arrives, earlier panels sink back
   (function(){
-    var cv=document.getElementById('cv'), stage=document.getElementById('stage'), tip=document.getElementById('tip'), ctx=cv.getContext('2d');
-    var items=[], cur=null, color='#ff3b41', W=0, H=0, dpr=1, running=false, shown=false;
-    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function size(){dpr=Math.min(2,window.devicePixelRatio||1);var r=stage.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
-    function bright(it,now){ // flicker when first lit, then a faint hum
-      var a=now-it.t0; if(reduce) return 1;
-      if(a<900){ var k=Math.floor(a/60); return [0,.9,0,0,1,.2,1,0,1,1,.6,1,1,1,1,1][k%16]; }
-      return .94+.06*Math.sin(now/90+it.t0);
-    }
-    function path(pts){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(var i=1;i<pts.length-1;i++){var mx=(pts[i][0]+pts[i+1][0])/2,my=(pts[i][1]+pts[i+1][1])/2;ctx.quadraticCurveTo(pts[i][0],pts[i][1],mx,my);}var l=pts[pts.length-1];ctx.lineTo(l[0],l[1]);}
-    function drawItem(it,b){
-      ctx.lineCap='round';ctx.lineJoin='round';
-      var passes=[[26,.22,34],[9,.9,16],[3,1,4]];
-      if(it.type==='line'){
-        if(it.pts.length<2) return;
-        ctx.shadowBlur=0; ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=9; path(it.pts); ctx.stroke(); // unlit glass tube
-        if(b<.05) return;
-        passes.forEach(function(q,i){ctx.globalAlpha=q[1]*b;ctx.lineWidth=q[0];ctx.strokeStyle=i===2?'#fff':it.c;ctx.shadowColor=it.c;ctx.shadowBlur=q[2];path(it.pts);ctx.stroke();});
-      }else{
-        ctx.font=it.size+'px Yellowtail, "Dela Gothic One", cursive';ctx.textAlign='center';ctx.textBaseline='middle';
-        ctx.shadowBlur=0;ctx.globalAlpha=1;ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillText(it.text,it.x,it.y);
-        if(b<.05) return;
-        [[48,.55],[18,.95],[5,1]].forEach(function(q,i){ctx.globalAlpha=(i===2?.75:q[1])*b;ctx.shadowColor=it.c;ctx.shadowBlur=q[0];ctx.fillStyle=i===2?'#fff':it.c;ctx.fillText(it.text,it.x,it.y);});
-      }
-      ctx.globalAlpha=1;ctx.shadowBlur=0;
-    }
-    function frame(now){
-      ctx.clearRect(0,0,W,H);
-      items.forEach(function(it){drawItem(it,it.lit?bright(it,now):0);});
-      if(cur) drawItem(cur,.55);
-      if(running) requestAnimationFrame(frame);
-    }
-    function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
-    cv.addEventListener('pointerdown',function(e){cv.setPointerCapture(e.pointerId);cur={type:'line',pts:[pos(e)],c:color};tip.style.opacity=0;});
-    cv.addEventListener('pointermove',function(e){if(!cur)return;var p=pos(e),l=cur.pts[cur.pts.length-1];if(Math.hypot(p[0]-l[0],p[1]-l[1])>2.5)cur.pts.push(p);});
-    function end(){if(!cur)return;if(cur.pts.length>1){cur.lit=true;cur.t0=performance.now();items.push(cur);if(items.length>40)items.shift();}cur=null;}
-    cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
-    [].forEach.call(document.querySelectorAll('.cols button'),function(b){b.addEventListener('click',function(){color=b.dataset.c;[].forEach.call(document.querySelectorAll('.cols button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});});});
-    var line=0;
-    function addText(t){var sz=Math.min(W/Math.max(4,t.length*.62),H*.22);items.push({type:'text',text:t,c:color,x:W/2,y:H*(.3+.22*(line%3)),size:sz,lit:true,t0:performance.now()});line++;tip.style.opacity=0;}
-    document.getElementById('tf').addEventListener('submit',function(e){e.preventDefault();var t=document.getElementById('ti').value.trim();if(t)addText(t);});
-    document.getElementById('clr').addEventListener('click',function(){items=[];line=0;});
-    size(); addEventListener('resize',size);
-    new IntersectionObserver(function(es){es.forEach(function(e){
-      running=e.isIntersecting; if(running){requestAnimationFrame(frame);
-        if(!shown){shown=true;(document.fonts?document.fonts.load('40px Yellowtail'):Promise.resolve()).then(function(){addText('Japan Art');});}}
-    });}).observe(stage);
+    var ps=[].slice.call(document.querySelectorAll('.panel'));
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('in');});},{threshold:.45});
+    ps.forEach(function(p){io.observe(p);});
+    if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    function f(){ps.forEach(function(p,i){var n=ps[i+1];if(!n){p.style.setProperty('--sc',1);p.style.setProperty('--br',1);return;}
+      var r=n.getBoundingClientRect(), t=Math.min(1,Math.max(0,1-(r.top-80)/(innerHeight*.8)));
+      p.style.setProperty('--sc',(1-.06*t).toFixed(3)); p.style.setProperty('--br',(1-.45*t).toFixed(3));});}
+    addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); f();
   })();
 })();
 </script>
