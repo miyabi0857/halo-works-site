@@ -2,7 +2,7 @@
 <html lang="ja"><head>
 <script>document.documentElement.className += " js";</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yellowtail&family=Archivo+Black&family=Archivo:wght@500;700;800&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
 <style>
 :root{--red:#e5222a;--yel:#f7c600;--grn:#1fa24a;--blu:#1f86d6;--ink:#141414;--paper:#f6f3ec;--mute:#6f6a60;
   --en:"Archivo Black",sans-serif;--en2:"Archivo",sans-serif;--disp:"Dela Gothic One",sans-serif;--jp:"Zen Kaku Gothic New",sans-serif}
@@ -54,8 +54,9 @@ a{color:inherit}
 .cb .center .en{font-family:var(--en);font-size:.8rem;letter-spacing:.2em;color:var(--mute);margin-top:.8em}
 .cb .wall{position:absolute;inset:0;z-index:6;background:#fff;background-image:radial-gradient(#e9e4d8 1.2px,transparent 1.3px);background-size:22px 22px;opacity:var(--w,0);pointer-events:none}
 .cb .wall.live{pointer-events:auto}
-.cb .stk{animation:none;opacity:0;scale:2.2;transition:opacity .2s, scale .42s cubic-bezier(.2,1.6,.4,1)}
+.cb .stk{touch-action:pan-y;-webkit-touch-callout:none;animation:none;opacity:0;scale:2.2;transition:opacity .2s, scale .42s cubic-bezier(.2,1.6,.4,1)}
 .cb .stk.on{opacity:1;scale:1}
+.cb .stk:not(.on){pointer-events:none}
 .cb .word{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:10;text-align:center;pointer-events:none;opacity:0;transition:opacity .5s}
 .cb .word.on{opacity:1}
 .cb .word .big{font-family:var(--en);font-size:clamp(3.4rem,13vw,12rem);line-height:.9;letter-spacing:-.01em;display:flex;align-items:center;gap:.14em;justify-content:center}
@@ -106,40 +107,24 @@ html.js .rv.is-in{opacity:1;translate:0 0}
 .more li{border:2px solid var(--ink);border-radius:99px;padding:.3em 1em;font-weight:700;font-size:.88rem;background:#fff}
 .more .note{margin-top:12px;font-size:.78rem;color:var(--mute)}
 
-/* sign simulator (centerpiece) */
-.sim{background:#fff;background-image:radial-gradient(#e9e4d8 1.2px,transparent 1.3px);background-size:22px 22px}
-.sim .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,70px);align-items:center;margin-top:clamp(30px,4vw,50px)}
-.sim label{display:block;font-weight:700;font-size:.88rem}
-.sim input{width:100%;margin-top:8px;font:inherit;font-family:var(--en);font-size:1.3rem;padding:.55em .8em;border:3px solid var(--ink);border-radius:12px;background:#fff}
-.sim .styles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
-.sim .styles button{font:inherit;font-weight:700;font-size:.9rem;padding:.8em .6em;border:3px solid var(--ink);border-radius:12px;background:#fff;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:translate .15s, box-shadow .15s}
-.sim .styles button[aria-pressed="true"]{background:var(--ink);color:#fff;translate:2px 2px;box-shadow:2px 2px 0 var(--ink)}
-.sim .styles button i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.5em;vertical-align:.05em}
-.sim .cap{margin-top:16px;font-size:.8rem;color:var(--mute)}
-.shop{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:linear-gradient(#cfd8de 0 62%,#9aa3a8 62% 64%,#b9b2a5 64%);transition:background .6s}
-.shop.night{background:linear-gradient(#1c2430 0 62%,#2a2f36 62% 64%,#3a3833 64%)}
-.shop .facade{position:absolute;left:8%;right:8%;top:10%;bottom:36%;background:#efe9dd;border:3px solid var(--ink);transition:background .6s}
-.shop.night .facade{background:#3a3f46}
-.shop .band{position:absolute;left:0;right:0;top:0;height:34%;background:#2d2f33;display:grid;place-items:center;overflow:hidden}
-.shop .win{position:absolute;left:6%;right:40%;top:44%;bottom:0;border:3px solid var(--ink);background:linear-gradient(135deg,#bcd3e0,#e4eef3 50%,#bcd3e0);display:grid;place-items:center}
-.shop.night .win{background:linear-gradient(135deg,#f3c57a,#ffe2a8 50%,#f3c57a)}
-.shop .door{position:absolute;right:8%;width:24%;top:44%;bottom:0;border:3px solid var(--ink);background:#6b4a33}
-.shop .door::after{content:"";position:absolute;left:12%;top:48%;width:8px;height:22px;border-radius:4px;background:#e8c46a}
-.shop .hang{position:absolute;right:2%;top:36%;width:24%;transform-origin:50% 0;animation:swing 3s ease-in-out infinite;opacity:0;transition:opacity .4s}
-@keyframes swing{50%{rotate:6deg}}
-.shop .hang::before{content:"";display:block;margin:0 auto;width:60%;height:14px;border:3px solid var(--ink);border-bottom:0}
-.shop .hang span{display:grid;place-items:center;aspect-ratio:1.4;background:var(--yel);border:3px solid var(--ink);border-radius:8px;font-family:var(--disp);font-size:clamp(.7rem,1.3vw,1rem);text-align:center;padding:4px;word-break:break-all}
-.shop .txt{font-family:var(--en);font-size:clamp(1.2rem,3.6vw,2.6rem);letter-spacing:.04em;white-space:nowrap;color:#fff;transition:all .4s}
-.shop .wtxt{font-family:"Dela Gothic One";color:#fff;font-size:clamp(.9rem,2vw,1.4rem);opacity:0;transition:opacity .4s;text-shadow:0 0 1px rgba(0,0,0,.3)}
-.shop[data-s="3d"] .band{background:#f4f1ea;border-bottom:3px solid var(--ink)}
-.shop[data-s="3d"] .txt{color:var(--red);text-shadow:1px 1px 0 #a3151b,2px 2px 0 #a3151b,3px 3px 0 #a3151b,4px 4px 0 #a3151b,8px 10px 10px rgba(0,0,0,.25)}
-.shop[data-s="neon"] .txt{color:#fff;text-shadow:0 0 4px #fff,0 0 12px var(--blu),0 0 24px var(--blu),0 0 44px var(--blu)}
-.shop[data-s="hang"] .hang{opacity:1}
-.shop[data-s="hang"] .txt{opacity:0}
-.shop[data-s="win"] .wtxt{opacity:1}
-.shop[data-s="win"] .txt{opacity:0}
-.shop[data-s="win"] .win{background:linear-gradient(135deg,#5f7886,#7f98a6 50%,#5f7886)}
-.shop .tag{position:absolute;left:10px;top:10px;background:#fff;border:2px solid var(--ink);border-radius:99px;font-size:.72rem;font-weight:700;padding:.2em .8em}
+/* neon wall (centerpiece): draw with finger or mouse, it lights up like a neon tube */
+.neon{background:#0d0d0f;color:#fff}
+.neon .kick{color:#bbb}
+.neon .lead{color:#cfcfcf}
+.stage{position:relative;margin-top:clamp(28px,4vw,44px);height:min(64vh,560px);border-radius:18px;overflow:hidden;background:#111 url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?w=1600&q=70&auto=format&fit=crop") center/cover;box-shadow:0 0 0 3px #2a2a2a}
+.stage::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 40%,rgba(0,0,0,.35),rgba(0,0,0,.82))}
+.stage canvas{position:absolute;inset:0;width:100%;height:100%;touch-action:none;cursor:crosshair}
+.stage .tip{position:absolute;left:50%;bottom:16px;translate:-50% 0;font-size:.8rem;font-weight:700;color:#fff;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.2);border-radius:99px;padding:.35em 1em;pointer-events:none;transition:opacity .5s;white-space:nowrap}
+.ctrl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:18px}
+.ctrl .cols{display:flex;gap:8px}
+.ctrl .cols button{width:34px;height:34px;border-radius:50%;border:3px solid #0d0d0f;box-shadow:0 0 0 2px #444;cursor:pointer}
+.ctrl .cols button[aria-pressed="true"]{box-shadow:0 0 0 3px #fff,0 0 14px var(--c)}
+.ctrl form{display:flex;gap:8px;flex:1;min-width:240px}
+.ctrl input{flex:1;min-width:0;font:inherit;font-weight:700;padding:.55em .9em;border-radius:10px;border:2px solid #444;background:#1a1a1d;color:#fff}
+.ctrl .b{font:inherit;font-weight:700;padding:.55em 1.1em;border-radius:10px;border:2px solid #fff;background:#fff;color:#111;cursor:pointer;white-space:nowrap}
+.ctrl .b.ghost{background:transparent;color:#fff;border-color:#555}
+.neon .note{margin-top:14px;font-size:.78rem;color:#9a9a9a}
+@media (max-width:640px){.stage{height:56vh}}
 
 /* works */
 .works{background:var(--paper)}
@@ -209,32 +194,23 @@ html.js .rv.is-in{opacity:1;translate:0 0}
   </div>
 </section>
 
-<section class="sec sim" id="sim">
+<section class="sec neon" id="neon">
   <span class="kick rv"><i class="c3"></i>TRY IT</span>
-  <h2 class="h2 rv">あなたのお店に、<br>看板をつけてみる。</h2>
-  <p class="lead rv">店名を入れて、看板の種類を選んでみてください。どんな看板がお店に合うか、イメージをふくらませるきっかけに。</p>
-  <div class="wrap">
-    <div class="rv">
-      <label for="nm">店名</label>
-      <input id="nm" type="text" value="YOUR SHOP" maxlength="16" autocomplete="off">
-      <div class="styles" role="group" aria-label="看板の種類">
-        <button type="button" data-s="3d" aria-pressed="true"><i class="c1"></i>立体の文字</button>
-        <button type="button" data-s="neon" aria-pressed="false"><i class="c4"></i>光る看板</button>
-        <button type="button" data-s="hang" aria-pressed="false"><i class="c2"></i>吊り下げ看板</button>
-        <button type="button" data-s="win" aria-pressed="false"><i class="c3"></i>窓ガラスの文字</button>
-      </div>
-      <p class="cap">※イメージです。実際の看板は、お店の形や場所に合わせてご提案します。</p>
+  <h2 class="h2 rv">光る看板を、<br>描いてみる。</h2>
+  <p class="lead rv">壁に指やマウスで線を描くと、ネオン管になって灯ります。文字を入れて「灯す」を押すと、看板の文字として光ります。</p>
+  <div class="stage rv" id="stage"><canvas id="cv" aria-label="ネオンを描くキャンバス"></canvas><span class="tip" id="tip">ここに描いてみてください</span></div>
+  <div class="ctrl rv">
+    <div class="cols" role="group" aria-label="色">
+      <button type="button" style="background:#ff3b41;--c:#ff3b41" data-c="#ff3b41" aria-label="赤" aria-pressed="true"></button>
+      <button type="button" style="background:#ffd21a;--c:#ffd21a" data-c="#ffd21a" aria-label="黄" aria-pressed="false"></button>
+      <button type="button" style="background:#2fe06a;--c:#2fe06a" data-c="#2fe06a" aria-label="緑" aria-pressed="false"></button>
+      <button type="button" style="background:#2fa3ff;--c:#2fa3ff" data-c="#2fa3ff" aria-label="青" aria-pressed="false"></button>
+      <button type="button" style="background:#ffffff;--c:#ffffff" data-c="#ffffff" aria-label="白" aria-pressed="false"></button>
     </div>
-    <div class="shop rv" id="shop" data-s="3d" aria-live="polite">
-      <span class="tag" id="tag">立体の文字</span>
-      <div class="facade">
-        <div class="band"><span class="txt" id="t1">YOUR SHOP</span></div>
-        <div class="win"><span class="wtxt" id="t2">YOUR SHOP</span></div>
-        <div class="door"></div>
-      </div>
-      <div class="hang"><span id="t3">YOUR SHOP</span></div>
-    </div>
+    <form id="tf"><input id="ti" type="text" maxlength="14" placeholder="店名を入れてみる" aria-label="光らせる文字"><button class="b" type="submit">灯す</button></form>
+    <button class="b ghost" type="button" id="clr">消す</button>
   </div>
+  <p class="note rv">※このページの中だけで動く、描いて遊べる見本です。ホームページには、こうした「触って楽しい」仕掛けも入れられます。</p>
 </section>
 
 <section class="sec works" id="works">
@@ -284,19 +260,30 @@ html.js .rv.is-in{opacity:1;translate:0 0}
     wall.classList.toggle('live',p>.45);
     st.forEach(function(s){if(!s.classList.contains('moved'))s.classList.toggle('on',p>=parseFloat(s.dataset.at))});
     word.classList.toggle('on',p>=.84);
-    hint.textContent=p>.84?'ステッカーは、はがして動かせます':'スクロールで、輪をくぐる ↓'; hint.classList.toggle('y',p>.84); hint.style.opacity=(p>.05&&p<.84)?0:1;
+    hint.textContent=p>.84?(matchMedia('(pointer: coarse)').matches?'ステッカーは、長押しで はがして動かせます':'ステッカーは、ドラッグで はがして動かせます'):'スクロールで、輪をくぐる ↓'; hint.classList.toggle('y',p>.84); hint.style.opacity=(p>.05&&p<.84)?0:1;
   }
   addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); addEventListener('resize',f); f();
-  st.forEach(function(s){s.addEventListener('pointerdown',function(){s.classList.add('moved','on')})});
+  
 })();
 </script><script>
 (function(){
+  var coarse=matchMedia('(pointer: coarse)').matches;
   [].forEach.call(document.querySelectorAll('.stk'),function(s){
-    var sx,sy,ox,oy;
-    s.addEventListener('pointerdown',function(e){s.setPointerCapture(e.pointerId);s.classList.add('dragging');sx=e.clientX;sy=e.clientY;ox=s.offsetLeft;oy=s.offsetTop;s.style.animation='none';s.style.opacity=1;s.style.scale=1.06;});
-    s.addEventListener('pointermove',function(e){if(!s.classList.contains('dragging'))return;s.style.left=(ox+e.clientX-sx)+'px';s.style.top=(oy+e.clientY-sy)+'px';});
-    function up(){s.classList.remove('dragging');s.style.scale=1;}
-    s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);
+    var sx,sy,ox,oy,timer=null,drag=false;
+    function start(e){drag=true;s.classList.add('dragging','moved','on');sx=e.clientX;sy=e.clientY;ox=s.offsetLeft;oy=s.offsetTop;s.style.animation='none';s.style.opacity=1;s.style.scale=1.08;try{s.setPointerCapture(e.pointerId)}catch(_){}}
+    s.addEventListener('pointerdown',function(e){
+      if(e.pointerType==='mouse'){e.preventDefault();start(e);return;}
+      var ev=e; sx=e.clientX; sy=e.clientY; clearTimeout(timer);
+      timer=setTimeout(function(){start(ev);},380);   /* touch: long press to peel */
+    });
+    s.addEventListener('pointermove',function(e){
+      if(!drag){ if(timer&&Math.hypot(e.clientX-sx,e.clientY-sy)>8){clearTimeout(timer);timer=null;} return; }
+      s.style.left=(ox+e.clientX-sx)+'px'; s.style.top=(oy+e.clientY-sy)+'px';
+    });
+    s.addEventListener('touchmove',function(e){ if(drag) e.preventDefault(); },{passive:false});
+    s.addEventListener('contextmenu',function(e){e.preventDefault();});
+    function up(){clearTimeout(timer);timer=null;if(!drag)return;drag=false;s.classList.remove('dragging');s.style.scale=1;}
+    s.addEventListener('pointerup',up); s.addEventListener('pointercancel',up);
   });
 })();
 </script>
@@ -308,16 +295,56 @@ html.js .rv.is-in{opacity:1;translate:0 0}
     rv.forEach(function(el){io.observe(el);});
   } else rv.forEach(function(el){el.classList.add('is-in');});
   setTimeout(function(){var stuck=[].some.call(rv,function(el){var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0&&!el.classList.contains('is-in');});if(stuck)document.documentElement.classList.remove('js');},5000);
-  // sign simulator
-  var shop=document.getElementById('shop'), nm=document.getElementById('nm'), tag=document.getElementById('tag');
-  var outs=['t1','t2','t3'].map(function(id){return document.getElementById(id)});
-  nm.addEventListener('input',function(){var v=nm.value.trim()||'YOUR SHOP';outs.forEach(function(o){o.textContent=v});});
-  [].forEach.call(document.querySelectorAll('.styles button'),function(b){
-    b.addEventListener('click',function(){
-      [].forEach.call(document.querySelectorAll('.styles button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
-      shop.dataset.s=b.dataset.s; shop.classList.toggle('night',b.dataset.s==='neon'); tag.textContent=b.textContent;
-    });
-  });
+  // neon wall
+  (function(){
+    var cv=document.getElementById('cv'), stage=document.getElementById('stage'), tip=document.getElementById('tip'), ctx=cv.getContext('2d');
+    var items=[], cur=null, color='#ff3b41', W=0, H=0, dpr=1, running=false, shown=false;
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function size(){dpr=Math.min(2,window.devicePixelRatio||1);var r=stage.getBoundingClientRect();W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);}
+    function bright(it,now){ // flicker when first lit, then a faint hum
+      var a=now-it.t0; if(reduce) return 1;
+      if(a<900){ var k=Math.floor(a/60); return [0,.9,0,0,1,.2,1,0,1,1,.6,1,1,1,1,1][k%16]; }
+      return .94+.06*Math.sin(now/90+it.t0);
+    }
+    function path(pts){ctx.beginPath();ctx.moveTo(pts[0][0],pts[0][1]);for(var i=1;i<pts.length-1;i++){var mx=(pts[i][0]+pts[i+1][0])/2,my=(pts[i][1]+pts[i+1][1])/2;ctx.quadraticCurveTo(pts[i][0],pts[i][1],mx,my);}var l=pts[pts.length-1];ctx.lineTo(l[0],l[1]);}
+    function drawItem(it,b){
+      ctx.lineCap='round';ctx.lineJoin='round';
+      var passes=[[26,.22,34],[9,.9,16],[3,1,4]];
+      if(it.type==='line'){
+        if(it.pts.length<2) return;
+        ctx.shadowBlur=0; ctx.strokeStyle='rgba(255,255,255,.10)'; ctx.lineWidth=9; path(it.pts); ctx.stroke(); // unlit glass tube
+        if(b<.05) return;
+        passes.forEach(function(q,i){ctx.globalAlpha=q[1]*b;ctx.lineWidth=q[0];ctx.strokeStyle=i===2?'#fff':it.c;ctx.shadowColor=it.c;ctx.shadowBlur=q[2];path(it.pts);ctx.stroke();});
+      }else{
+        ctx.font=it.size+'px Yellowtail, "Dela Gothic One", cursive';ctx.textAlign='center';ctx.textBaseline='middle';
+        ctx.shadowBlur=0;ctx.globalAlpha=1;ctx.fillStyle='rgba(255,255,255,.08)';ctx.fillText(it.text,it.x,it.y);
+        if(b<.05) return;
+        [[48,.55],[18,.95],[5,1]].forEach(function(q,i){ctx.globalAlpha=(i===2?.75:q[1])*b;ctx.shadowColor=it.c;ctx.shadowBlur=q[0];ctx.fillStyle=i===2?'#fff':it.c;ctx.fillText(it.text,it.x,it.y);});
+      }
+      ctx.globalAlpha=1;ctx.shadowBlur=0;
+    }
+    function frame(now){
+      ctx.clearRect(0,0,W,H);
+      items.forEach(function(it){drawItem(it,it.lit?bright(it,now):0);});
+      if(cur) drawItem(cur,.55);
+      if(running) requestAnimationFrame(frame);
+    }
+    function pos(e){var r=cv.getBoundingClientRect();return [e.clientX-r.left,e.clientY-r.top];}
+    cv.addEventListener('pointerdown',function(e){cv.setPointerCapture(e.pointerId);cur={type:'line',pts:[pos(e)],c:color};tip.style.opacity=0;});
+    cv.addEventListener('pointermove',function(e){if(!cur)return;var p=pos(e),l=cur.pts[cur.pts.length-1];if(Math.hypot(p[0]-l[0],p[1]-l[1])>2.5)cur.pts.push(p);});
+    function end(){if(!cur)return;if(cur.pts.length>1){cur.lit=true;cur.t0=performance.now();items.push(cur);if(items.length>40)items.shift();}cur=null;}
+    cv.addEventListener('pointerup',end);cv.addEventListener('pointercancel',end);
+    [].forEach.call(document.querySelectorAll('.cols button'),function(b){b.addEventListener('click',function(){color=b.dataset.c;[].forEach.call(document.querySelectorAll('.cols button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});});});
+    var line=0;
+    function addText(t){var sz=Math.min(W/Math.max(4,t.length*.62),H*.22);items.push({type:'text',text:t,c:color,x:W/2,y:H*(.3+.22*(line%3)),size:sz,lit:true,t0:performance.now()});line++;tip.style.opacity=0;}
+    document.getElementById('tf').addEventListener('submit',function(e){e.preventDefault();var t=document.getElementById('ti').value.trim();if(t)addText(t);});
+    document.getElementById('clr').addEventListener('click',function(){items=[];line=0;});
+    size(); addEventListener('resize',size);
+    new IntersectionObserver(function(es){es.forEach(function(e){
+      running=e.isIntersecting; if(running){requestAnimationFrame(frame);
+        if(!shown){shown=true;(document.fonts?document.fonts.load('40px Yellowtail'):Promise.resolve()).then(function(){addText('Japan Art');});}}
+    });}).observe(stage);
+  })();
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
