@@ -1,0 +1,280 @@
+<!doctype html>
+<html lang="ja"><head>
+<script>document.documentElement.className += " js";</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600&family=Zen+Maru+Gothic:wght@400;500;700&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--wall:#f4f1ea;--wall2:#ebe6db;--door:#6d97ab;--door2:#4f7a8f;--deck:#c09157;--ink:#2e3a40;--mute:#76828a;--leaf:#6f8f6a;
+  --en:"Josefin Sans",sans-serif;--jp:"Zen Maru Gothic",sans-serif;--hand:"Caveat",cursive}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--jp);color:var(--ink);background:var(--wall);line-height:1.9;overflow-x:hidden}
+a{color:inherit}
+.top{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:20px clamp(16px,4vw,48px);pointer-events:none}
+.top>*{pointer-events:auto}
+.logo{font-family:var(--en);font-weight:600;letter-spacing:.12em;text-decoration:none;font-size:1.1rem}
+.logo small{font-family:var(--jp);font-weight:500;letter-spacing:.1em;font-size:.72rem;margin-left:.8em;color:var(--mute)}
+.igbtn{font-family:var(--en);font-size:.85rem;letter-spacing:.14em;text-decoration:none;border:1.5px solid var(--ink);border-radius:99px;padding:.45em 1.3em .3em;background:var(--wall)}
+.after{min-height:60vh;display:grid;place-items:center;background:var(--wall2);font-size:.9rem;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.arch{position:relative;height:260vh;background:var(--door)}
+.arch .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center}
+.arch .frame{position:relative;width:var(--w,min(40vw,380px));height:var(--h,min(64vh,540px));border-radius:var(--r,999px 999px 0 0);overflow:hidden;box-shadow:0 0 0 10px var(--wall)}
+.arch .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.arch .frame .in{opacity:var(--o,0)}
+.arch h1{position:absolute;left:clamp(16px,6vw,90px);top:50%;translate:0 -50%;font-family:var(--en);font-weight:300;color:var(--wall);font-size:clamp(3.4rem,10vw,9.5rem);line-height:.95;letter-spacing:.01em;opacity:var(--t,1);z-index:2;mix-blend-mode:normal}
+.arch h1 span{display:block}
+.arch h1 span:last-child{padding-left:.9em}
+.arch .sub{position:absolute;right:clamp(16px,6vw,90px);bottom:clamp(28px,8vh,70px);color:var(--wall);max-width:17em;text-align:right;font-size:.95rem;opacity:var(--t,1)}
+.arch .sub b{font-family:var(--hand);font-weight:500;font-size:1.6rem;display:block;line-height:1.2}
+.arch svg.loop{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3}
+.arch svg.loop path{fill:none;stroke:var(--wall);stroke-width:2;stroke-linecap:round;stroke-dasharray:var(--len);stroke-dashoffset:var(--len);animation:draw 3.2s .4s cubic-bezier(.6,0,.3,1) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.arch .welcome{position:absolute;left:50%;bottom:12vh;translate:-50% 0;z-index:4;color:#fff;font-size:clamp(1.1rem,2vw,1.5rem);letter-spacing:.14em;opacity:var(--o,0);text-shadow:0 2px 16px rgba(0,0,0,.35);white-space:nowrap}
+@media (max-width:760px){.arch h1{top:9vh;translate:0 0;font-size:3.2rem}.arch .pin{place-items:center;padding-top:10vh}.arch .sub{bottom:3vh;font-size:.85rem}.arch .welcome{white-space:normal;width:86vw;text-align:center;font-size:1.05rem}}
+
+/* ================= below the hero ================= */
+.sec{position:relative;padding:clamp(90px,11vw,150px) clamp(16px,6vw,90px);overflow-x:clip}
+.en{display:block;font-family:var(--hand);font-size:1.6rem;color:var(--door2);line-height:1.2;margin-bottom:.2em}
+.h2{font-family:var(--jp);font-weight:500;font-size:clamp(1.35rem,2.3vw,1.9rem);line-height:1.7;letter-spacing:.04em}
+.big{font-family:var(--en);font-weight:300;font-size:clamp(2.8rem,6vw,5.2rem);line-height:1;letter-spacing:.02em}
+.lead{margin-top:1.1em;max-width:28em}
+html.js .rv{opacity:0;translate:0 20px;transition:opacity 1s ease, translate 1s ease}
+html.js .rv.is-in{opacity:1;translate:0 0}
+.archph{position:relative;border-radius:999px 999px 0 0;overflow:hidden;box-shadow:0 0 0 8px var(--wall)}
+.archph img{width:100%;height:100%;object-fit:cover;display:block}
+
+/* about */
+.about{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(30px,6vw,100px);align-items:center}
+.about .pics{position:relative;height:clamp(420px,46vw,620px)}
+.about .pics .a1{position:absolute;left:0;top:0;width:62%;height:78%}
+.about .pics .a2{position:absolute;right:0;bottom:0;width:44%;height:52%}
+.about .pics .a2{box-shadow:0 0 0 8px var(--wall),0 20px 40px rgba(46,58,64,.15)}
+.about .word{display:flex;align-items:baseline;gap:.6em;margin-top:1.6em;padding-top:1.2em;border-top:1.5px dashed #cdc6b6}
+.about .word b{font-family:var(--en);font-weight:400;font-size:2rem;letter-spacing:.06em;color:var(--door2)}
+.about .word span{font-size:.9rem;color:var(--mute)}
+
+/* shelf: things in the shop, each in a small arch */
+.things{background:var(--door);color:var(--wall)}
+.things .en{color:#dce9ef}
+.things .hd{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}
+.things .hd>p{max-width:22em;font-size:.95rem}
+.row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2.4vw,34px);margin-top:clamp(40px,5vw,64px)}
+.card{text-align:center;text-decoration:none;color:inherit}
+.card .archph{aspect-ratio:3/4;box-shadow:0 0 0 6px var(--wall)}
+.card .archph img{transition:scale .8s}
+.card:hover .archph img{scale:1.06}
+.card b{display:block;margin-top:1em;font-weight:500;letter-spacing:.06em}
+.card small{display:block;font-family:var(--hand);font-size:1.25rem;color:#dce9ef;line-height:1.2}
+.card:nth-child(2){translate:0 34px}.card:nth-child(4){translate:0 34px}
+.things .note{margin-top:70px;font-size:.82rem;color:#dce9ef;text-align:center}
+
+/* the way here (centerpiece) */
+.way{position:relative;height:320vh;background:var(--wall)}
+.way .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr);align-items:center;padding:0 clamp(16px,5vw,70px);gap:clamp(10px,3vw,40px)}
+.way .txt{position:relative;z-index:2}
+.way .txt p{margin-top:1em;max-width:22em;font-size:.95rem}
+.way .gm{display:inline-block;margin-top:1.4em;background:var(--ink);color:var(--wall);text-decoration:none;border-radius:99px;padding:.7em 1.6em .6em;font-size:.92rem;letter-spacing:.06em;opacity:.35;transition:opacity .6s,background .3s}
+.way .gm.on{opacity:1}
+.way .gm:hover{background:var(--door2)}
+.way .mapbox{position:relative;height:min(78vh,640px)}
+.way svg.map{position:absolute;inset:0;width:100%;height:100%}
+.way svg.sp{display:none}
+.way .ln{fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.way .tag{font-family:var(--jp);fill:var(--ink);opacity:0;transition:opacity .6s}
+.way .tag.en{font-family:var(--hand);fill:var(--door2)}
+.way .tag.on,.way .dot.on{opacity:1}
+.way .dot{fill:var(--door);opacity:0;transition:opacity .4s}
+.way .hp{opacity:0;transition:opacity 1s}
+.way .hp.on{opacity:1}
+.way .bar{position:absolute;left:clamp(16px,5vw,70px);right:clamp(16px,5vw,70px);bottom:26px;height:2px;background:#ddd6c8}
+.way .bar i{position:absolute;left:0;top:0;bottom:0;background:var(--door2);transform-origin:left;transform:scaleX(var(--wp,0))}
+
+/* flea market */
+.flea{background:var(--wall2);display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(30px,6vw,100px);align-items:center}
+.flea .archph{aspect-ratio:4/5;max-width:440px;width:100%;justify-self:center}
+.flea .tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:1.4em}
+.flea .tags span{border:1.5px solid var(--ink);border-radius:99px;padding:.3em 1em .2em;font-size:.86rem}
+
+/* info */
+.info{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(30px,6vw,90px);align-items:start}
+.info dl{margin-top:1.4em;border-top:1.5px solid var(--ink)}
+.info dl div{display:grid;grid-template-columns:7em 1fr;gap:12px;padding:14px 0;border-bottom:1px solid #d8d1c2;font-size:.95rem}
+.info dt{font-family:var(--en);letter-spacing:.08em;color:var(--mute);font-size:.9rem;padding-top:.15em}
+.info .map{aspect-ratio:4/3;border-radius:200px 200px 0 0;overflow:hidden;box-shadow:0 0 0 8px var(--wall2);filter:saturate(.6)}
+.info .map iframe{width:100%;height:100%;border:0}
+.info .btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.info .btns a{border:1.5px solid var(--ink);border-radius:99px;padding:.6em 1.5em .5em;text-decoration:none;font-size:.9rem;transition:background .3s,color .3s}
+.info .btns a:hover{background:var(--ink);color:var(--wall)}
+.foot{background:var(--door);color:var(--wall);text-align:center;padding:60px 18px 56px}
+.foot b{display:block;font-family:var(--en);font-weight:300;font-size:2.4rem;letter-spacing:.06em}
+.foot p{margin-top:10px;font-size:.78rem;color:#dce9ef;line-height:1.9}
+
+@media (max-width:860px){
+  .about,.flea,.info{grid-template-columns:1fr}
+  .about .pics{height:112vw}
+  .row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .way .pin{grid-template-columns:1fr;grid-template-rows:auto 1fr;align-content:start;padding-top:78px}
+  .way .mapbox{height:calc(100svh - 300px)}
+  .way svg.pc{display:none}.way svg.sp{display:block}
+  .way .txt .lead2{display:none}
+}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;translate:none}.way{height:auto}.way .pin{position:relative;height:auto;padding-bottom:60px}.way .mapbox{height:70vh}}
+</style></head><body>
+<header class="top"><a class="logo" href="#">zakka koti<small>雑貨コティ</small></a><a class="igbtn" href="https://www.instagram.com/zakkakoti655/" target="_blank" rel="noopener">Instagram</a></header>
+<main>
+<section class="arch" id="arch">
+ <div class="pin">
+  <h1><span>zakka</span><span>koti</span></h1>
+  <div class="frame" id="frame"><img src="https://images.unsplash.com/photo-1617606795824-58a617f13fae?w=900&q=78&auto=format&fit=crop" alt=""><img class="in" src="https://images.unsplash.com/photo-1504977402025-84285fea814b?w=1600&q=78&auto=format&fit=crop" alt=""></div>
+  <svg class="loop" viewBox="0 0 1000 700" preserveAspectRatio="none" aria-hidden="true"><path id="loop" d="M-20 610 C 160 640, 260 560, 360 600 S 470 690, 500 640 C 520 600, 470 560, 520 540 C 600 510, 700 620, 820 580 S 960 520, 1030 560"/></svg>
+  <p class="sub"><b>koti = home</b>コティは、フィンランド語で「家」。<br>坂道をくだった先の、小さな雑貨屋さんです。</p>
+  <p class="welcome">いらっしゃいませ。ゆっくり見ていってください。</p>
+ </div>
+</section>
+
+<section class="sec about" id="about">
+  <div class="pics rv">
+    <div class="archph a1"><img src="https://images.unsplash.com/photo-1622299312371-953af5fa768e?w=900&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+    <div class="archph a2"><img src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?w=700&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+  </div>
+  <div class="txt rv">
+    <span class="en">about</span>
+    <h2 class="h2">青いドアの、<br>小さな家の雑貨屋さん。</h2>
+    <p class="lead">諫早市森山町、坂道をくだった先に建つ小さな家。器や手編みの小物、毎日の暮らしで使うものを並べています。</p>
+    <p class="lead">ゆっくり手に取って、選んでみてください。掘り出し物が見つかるかもしれません。</p>
+    <p class="word"><b>koti</b><span>フィンランド語で「家」という意味です。</span></p>
+  </div>
+</section>
+
+<section class="sec things" id="things">
+  <div class="hd rv">
+    <div><span class="en">in the house</span><p class="big">Little things.</p></div>
+    <p>並ぶものは、少しずつ入れ替わります。<br>新しく入ったものは、Instagramでお知らせしています。</p>
+  </div>
+  <div class="row">
+    <a class="card rv" href="https://www.instagram.com/zakkakoti655/" target="_blank" rel="noopener"><div class="archph"><img src="https://images.unsplash.com/photo-1536936812504-0e77dc3f0b40?w=600&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><b>器</b><small>cups &amp; plates</small></a>
+    <a class="card rv" href="https://www.instagram.com/zakkakoti655/" target="_blank" rel="noopener"><div class="archph"><img src="https://images.unsplash.com/photo-1615310748170-29d7088865ad?w=600&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><b>手編みの小物</b><small>handknit</small></a>
+    <a class="card rv" href="https://www.instagram.com/zakkakoti655/" target="_blank" rel="noopener"><div class="archph"><img src="https://images.unsplash.com/photo-1597696929644-a2157a251a43?w=600&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><b>暮らしの雑貨</b><small>for everyday</small></a>
+    <a class="card rv" href="https://www.instagram.com/zakkakoti655/" target="_blank" rel="noopener"><div class="archph"><img src="https://images.unsplash.com/photo-1668072587859-f0f30c8fa938?w=600&q=78&auto=format&fit=crop" alt="" loading="lazy"></div><b>ときどき、掘り出し物</b><small>find something</small></a>
+  </div>
+  <p class="note rv">※写真はイメージです</p>
+</section>
+
+<section class="way" id="way" aria-label="お店までの道">
+  <div class="pin">
+    <div class="txt">
+      <span class="en">the way to koti</span>
+      <h2 class="h2">はじめてでも、<br>迷わず来られるように。</h2>
+      <p class="lead2">長崎方面からは、雲仙へ向かう道の途中。最後の坂道は少し細いけれど、車どうしすれ違えます。スクロールすると、道順が順に出てきます。</p>
+      <a class="gm" id="gm" href="https://www.google.com/maps/search/?api=1&query=zakka%20koti%20%E8%AB%AB%E6%97%A9%E5%B8%82%E6%A3%AE%E5%B1%B1%E7%94%BA%E5%94%90%E6%AF%94%E8%A5%BF655" target="_blank" rel="noopener">Googleマップで道順を見る</a>
+    </div>
+    <div class="mapbox">
+      <svg class="map pc" viewBox="0 0 1000 620" data-a="0 0 1000 620" data-b="0 0 1000 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<path class="ln road" d="M60 120 C 160 110, 220 170, 300 160 S 430 90, 520 120 C 600 146, 640 150, 690 150 L 690 230 C 690 290, 610 300, 600 350 C 590 400, 660 420, 640 470 L 560 470 L 560 470 L 560 359.95 L 500.0 315 L 440 359.95 L 440 470 L 485.6 470 L 485.6 414.2 L 515.6 414.2 L 515.6 470 L 560 470"/>
+<clipPath id="hcpc"><path d="M440 470 L440 359.95 L500.0 315 L560 359.95 L560 470 Z"/></clipPath>
+<image class="hp" href="https://images.unsplash.com/photo-1617606795824-58a617f13fae?w=700&q=78&auto=format&fit=crop" x="440" y="315" width="120" height="155" preserveAspectRatio="xMidYMid slice" clip-path="url(#hcpc)"/>
+<circle class="dot" data-at="0" cx="60" cy="120" r="6.0"/>
+<circle class="dot" data-at="0.36" cx="690" cy="150" r="6.0"/>
+<text class="tag en" data-at="0" x="40" y="96" style="font-size:22.5px">Nagasaki</text>
+<text class="tag" data-at="0.18" x="250" y="200" style="font-size:15px">雲仙方面へ</text>
+<text class="tag" data-at="0.36" x="710" y="145" style="font-size:15px">山口スタンドの交差点を</text>
+<text class="tag" data-at="0.36" x="710" y="168" style="font-size:15px">セブンイレブンの方へ右</text>
+<text class="tag" data-at="0.52" x="705" y="300" style="font-size:15px">まっすぐ坂道をくだる</text>
+<text class="tag" data-at="0.56" x="705" y="323" style="font-size:15px">（ちょっと細いけど、離合できます）</text>
+<text class="tag" data-at="0.62" x="705" y="370" style="font-size:15px">目印は「唐比ハス園」の看板</text>
+<text class="tag en" data-at="0.9" x="575" y="455" style="font-size:22.5px">koti</text>
+</svg>
+      <svg class="map sp" viewBox="0 0 400 620" data-a="0 0 400 620" data-b="0 0 400 620" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<path class="ln road" d="M40 70 C 120 50, 150 130, 230 120 S 330 100, 340 170 L 340 230 C 340 280, 290 280, 295 330 C 300 380, 330 410, 300 450 L 250 450 L 250 450 L 250 350.6 L 195.0 310 L 140 350.6 L 140 450 L 181.8 450 L 181.8 399.6 L 209.3 399.6 L 209.3 450 L 250 450"/>
+<clipPath id="hcsp"><path d="M140 450 L140 350.6 L195.0 310 L250 350.6 L250 450 Z"/></clipPath>
+<image class="hp" href="https://images.unsplash.com/photo-1617606795824-58a617f13fae?w=700&q=78&auto=format&fit=crop" x="140" y="310" width="110" height="140" preserveAspectRatio="xMidYMid slice" clip-path="url(#hcsp)"/>
+<circle class="dot" data-at="0" cx="40" cy="70" r="6.0"/>
+<circle class="dot" data-at="0.34" cx="340" cy="230" r="6.0"/>
+<text class="tag en" data-at="0" x="30" y="46" style="font-size:22.5px">Nagasaki</text>
+<text class="tag" data-at="0.14" x="110" y="156" style="font-size:15px">雲仙方面へ</text>
+<text class="tag" data-at="0.34" x="150" y="208" style="font-size:15px">山口スタンドの交差点を</text>
+<text class="tag" data-at="0.34" x="150" y="230" style="font-size:15px">セブンイレブンの方へ右</text>
+<text class="tag" data-at="0.52" x="20" y="280" style="font-size:15px">まっすぐ坂道をくだる</text>
+<text class="tag" data-at="0.55" x="20" y="302" style="font-size:15px">（細いけど離合できます）</text>
+<text class="tag" data-at="0.62" x="20" y="500" style="font-size:15px">目印は「唐比ハス園」の看板</text>
+<text class="tag en" data-at="0.9" x="262" y="470" style="font-size:22.5px">koti</text>
+</svg>
+    </div>
+    <div class="bar"><i></i></div>
+  </div>
+</section>
+
+<section class="sec flea" id="flea">
+  <div class="txt rv">
+    <span class="en">flea market &amp; events</span>
+    <h2 class="h2">ときどき、<br>フリマやイベントも。</h2>
+    <p class="lead">月イチのフリマや、ハンドメイドのイベントの日もあります。日にちはInstagramでお知らせしています。</p>
+    <div class="tags"><span>フリマ</span><span>ハンドメイド</span><span>駐車場ひろめ</span></div>
+  </div>
+  <div class="archph rv"><img src="https://images.unsplash.com/photo-1766933330352-81ff095ad04a?w=800&q=78&auto=format&fit=crop" alt="" loading="lazy"></div>
+</section>
+
+<section class="sec info" id="info">
+  <div class="rv">
+    <span class="en">information</span>
+    <h2 class="h2">zakka koti（雑貨コティ）</h2>
+    <dl>
+      <div><dt>Address</dt><dd>〒854-0208 長崎県諫早市森山町唐比西655</dd></div>
+      <div><dt>Open</dt><dd>平日 11:00〜16:00<br>土日 12:00〜16:00</dd></div>
+      <div><dt>Closed</dt><dd>不定休（営業日はInstagramでお知らせしています）</dd></div>
+      <div><dt>Payment</dt><dd>現金のみ</dd></div>
+      <div><dt>Parking</dt><dd>あり（広めです）</dd></div>
+    </dl>
+    <div class="btns"><a href="https://www.instagram.com/zakkakoti655/" target="_blank" rel="noopener">今週の営業日を見る（Instagram）</a><a href="https://www.google.com/maps/search/?api=1&query=zakka%20koti%20%E8%AB%AB%E6%97%A9%E5%B8%82%E6%A3%AE%E5%B1%B1%E7%94%BA%E5%94%90%E6%AF%94%E8%A5%BF655" target="_blank" rel="noopener">Googleマップ</a></div>
+  </div>
+  <div class="map rv"><iframe title="zakka kotiの地図" src="https://maps.google.com/maps?q=%E9%95%B7%E5%B4%8E%E7%9C%8C%E8%AB%AB%E6%97%A9%E5%B8%82%E6%A3%AE%E5%B1%B1%E7%94%BA%E5%94%90%E6%AF%94%E8%A5%BF655&z=15&hl=ja&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+</section>
+</main><footer class="foot"><b>zakka koti</b><p>雑貨コティ　諫早市森山町唐比西655<br>※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもので、実際のお店の写真に差し替えます。</p></footer>
+<script>
+(function(){
+  var lp=document.getElementById('loop'); lp.style.setProperty('--len',lp.getTotalLength());
+  var sec=document.getElementById('arch'), fr=document.getElementById('frame'), pin=sec.querySelector('.pin');
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  function f(){
+    var r=sec.getBoundingClientRect(), p=Math.min(1,Math.max(0,-r.top/(sec.offsetHeight-innerHeight)));
+    var e=p<.1?0:Math.min(1,(p-.1)/.6); e=e*e*(3-2*e);
+    var w0=fr.offsetParent?0:0, W=innerWidth, H=innerHeight;
+    var bw=Math.min(W*(W<760?.66:.4),W<760?300:380), bh=Math.min(H*(W<760?.52:.64),540);
+    pin.style.setProperty('--w',(bw+(W-bw)*e)+'px'); pin.style.setProperty('--h',(bh+(H-bh)*e)+'px');
+    var rr=(1-e)*999; pin.style.setProperty('--r',rr+'px '+rr+'px 0 0');
+    pin.style.setProperty('--t',Math.max(0,1-p*4)); pin.style.setProperty('--o',Math.max(0,Math.min(1,(p-.45)/.3)));
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); addEventListener('resize',f); f();
+})();
+</script>
+<script>
+(function(){
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+  } else rv.forEach(function(el){el.classList.add('is-in');});
+  setTimeout(function(){var stuck=[].some.call(rv,function(el){var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0&&!el.classList.contains('is-in');});if(stuck)document.documentElement.classList.remove('js');},5000);
+
+  var sec=document.getElementById('way'), gm=document.getElementById('gm'), bar=sec.querySelector('.bar');
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var maps=[].slice.call(sec.querySelectorAll('svg.map')).map(function(m){
+    var road=m.querySelector('.road'), L=road.getTotalLength(); road.style.strokeDasharray=L;
+    return {road:road,L:L,tags:[].slice.call(m.querySelectorAll('[data-at]')),hp:m.querySelector('.hp')};
+  });
+  function f(){
+    var r=sec.getBoundingClientRect(), tot=sec.offsetHeight-innerHeight;
+    var p=reduce?1:Math.min(1,Math.max(0,-r.top/tot)); var q=Math.min(1,p/.85);
+    maps.forEach(function(o){
+      o.road.style.strokeDashoffset=(o.L*(1-q)).toFixed(1);
+      o.tags.forEach(function(t){t.classList.toggle('on',q>=parseFloat(t.dataset.at))});
+      o.hp.classList.toggle('on',q>=.98);
+    });
+    gm.classList.toggle('on',q>=.98); bar.style.setProperty('--wp',q.toFixed(3));
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); addEventListener('resize',f); f();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>
