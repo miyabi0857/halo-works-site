@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ja"><head>
+<script>document.documentElement.className += " js";</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e5222a;--yel:#f7c600;--grn:#1fa24a;--blu:#1f86d6;--ink:#141414;--paper:#f6f3ec;--mute:#6f6a60;
+  --en:"Archivo Black",sans-serif;--en2:"Archivo",sans-serif;--disp:"Dela Gothic One",sans-serif;--jp:"Zen Kaku Gothic New",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--jp);color:var(--ink);background:var(--paper);line-height:1.8;overflow-x:hidden}
+a{color:inherit}
+.top{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(14px,3vw,36px);pointer-events:none}
+.top>*{pointer-events:auto}
+.logo{display:flex;align-items:center;gap:.5em;text-decoration:none;background:var(--paper);border-radius:99px;padding:.45em 1em}
+.logo .w{font-family:var(--en);font-size:1.05rem;letter-spacing:.04em}
+.logo .d{display:grid;gap:2px}
+.logo .d i{display:block;width:6px;height:6px;border-radius:50%}
+.logo small{font-weight:700;font-size:.7rem;letter-spacing:.08em;color:var(--mute)}
+.tel{font-family:var(--en2);font-weight:800;text-decoration:none;background:var(--ink);color:#fff;border-radius:99px;padding:.5em 1.1em;font-size:.86rem;letter-spacing:.04em}
+.c1{background:var(--red)}.c2{background:var(--yel)}.c3{background:var(--grn)}.c4{background:var(--blu)}
+.after{min-height:60vh;display:grid;place-items:center;background:#ebe7de;color:var(--mute);font-size:.9rem}
+@media (max-width:640px){.logo small{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.stk{position:absolute;z-index:5;translate:-50% -50%;rotate:var(--r);display:inline-flex;align-items:center;gap:.4em;white-space:nowrap;
+  font-family:var(--en2);font-weight:800;letter-spacing:.02em;border:3px solid #fff;box-shadow:0 6px 0 rgba(0,0,0,.12),0 10px 22px rgba(0,0,0,.18);
+  opacity:0;scale:2.2;animation:slap .42s cubic-bezier(.2,1.6,.4,1) var(--d) forwards;cursor:grab;user-select:none;touch-action:none}
+@keyframes slap{0%{opacity:0;scale:2.2}60%{opacity:1}100%{opacity:1;scale:1}}
+.stk.pill{border-radius:99px;padding:.45em 1.1em;font-size:clamp(.8rem,1.3vw,1.05rem);color:#fff}
+.stk.round{border-radius:50%;width:clamp(80px,9vw,120px);aspect-ratio:1;justify-content:center;text-align:center;font-size:clamp(.72rem,1vw,.9rem);line-height:1.15;color:#fff;white-space:normal}
+.stk.jp{font-family:var(--disp);font-weight:400;border-radius:12px;padding:.35em .8em;font-size:clamp(1rem,1.9vw,1.5rem);background:#fff;color:var(--ink);border-color:var(--ink)}
+.stk.arrow{background:var(--yel);color:var(--ink);padding:.4em 1.4em .4em 1em;clip-path:polygon(0 0,86% 0,100% 50%,86% 100%,0 100%);border:0;font-size:clamp(.8rem,1.2vw,1rem);box-shadow:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
+.stk.photo{padding:0;border:6px solid #fff;border-radius:6px;width:clamp(110px,13vw,190px);aspect-ratio:1;overflow:hidden}
+.stk.photo img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.stk.c2{color:var(--ink)}
+.stk.dragging{cursor:grabbing;z-index:20;box-shadow:0 14px 0 rgba(0,0,0,.1),0 24px 40px rgba(0,0,0,.25)}
+
+.cb{position:relative;height:360vh;background:var(--paper)}
+.cb .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center}
+.cb .rings{position:absolute;width:min(150vmax,1500px);left:50%;top:50%;translate:-50% -50%;scale:var(--z,1)}
+.cb .ring{transform-origin:0 0;animation:grow 1.3s cubic-bezier(.2,.8,.2,1) calc(.5s + var(--i)*.14s) both, spin calc(60s + var(--i)*14s) linear infinite}
+.cb .ring:nth-child(odd){animation-direction:normal,reverse}
+@keyframes grow{from{scale:0}to{scale:1}}
+@keyframes spin{to{rotate:360deg}}
+.cb .rt{font-family:var(--disp);font-size:18px;letter-spacing:.06em}
+.cb .rt.en{font-family:var(--en);font-size:17px;letter-spacing:.1em}
+.cb .core{animation:grow .9s cubic-bezier(.2,1.4,.4,1) .2s both}
+.cb .dot{position:absolute;left:50%;top:50%;width:26px;height:26px;border-radius:50%;background:var(--red);translate:-50% -50%;animation:pop 1s ease both}
+@keyframes pop{0%{scale:0}40%{scale:1.4}70%{scale:1}100%{scale:30;opacity:0}}
+.cb .center{position:relative;z-index:4;text-align:center;width:min(92vw,560px);border-radius:50%;aspect-ratio:1;display:grid;place-content:center;padding:8%;opacity:var(--co,1);scale:calc(1 + (var(--z,1) - 1) * .35);animation:grow 1s cubic-bezier(.2,1.3,.4,1) 1.1s both}
+.cb .center .ttl{font-family:var(--disp);font-size:clamp(1.5rem,3.3vw,2.8rem);white-space:nowrap;line-height:1.25;letter-spacing:.02em}
+.cb .center .ttl em{font-style:normal;background:linear-gradient(transparent 62%,var(--yel) 62%)}
+.cb .center p{margin-top:.8em;font-size:clamp(.82rem,1.1vw,.98rem);font-weight:700}
+.cb .center .en{font-family:var(--en);font-size:.8rem;letter-spacing:.2em;color:var(--mute);margin-top:.8em}
+.cb .wall{position:absolute;inset:0;z-index:6;background:#fff;background-image:radial-gradient(#e9e4d8 1.2px,transparent 1.3px);background-size:22px 22px;opacity:var(--w,0);pointer-events:none}
+.cb .wall.live{pointer-events:auto}
+.cb .stk{animation:none;opacity:0;scale:2.2;transition:opacity .2s, scale .42s cubic-bezier(.2,1.6,.4,1)}
+.cb .stk.on{opacity:1;scale:1}
+.cb .word{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:10;text-align:center;pointer-events:none;opacity:0;transition:opacity .5s}
+.cb .word.on{opacity:1}
+.cb .word .big{font-family:var(--en);font-size:clamp(3.4rem,13vw,12rem);line-height:.9;letter-spacing:-.01em;display:flex;align-items:center;gap:.14em;justify-content:center}
+.cb .word .big>span:not(.dots){background:#fff;padding:0 .08em}
+.cb .word .big .dots{display:grid;gap:.06em}
+.cb .word .big .dots i{display:block;width:.16em;height:.16em;border-radius:50%;translate:0 -80vh;transition:translate .7s cubic-bezier(.3,1.6,.5,1)}
+.cb .word.on .big .dots i{translate:0 0}
+.cb .word.on .big .dots i:nth-child(2){transition-delay:.15s}.cb .word.on .big .dots i:nth-child(3){transition-delay:.3s}.cb .word.on .big .dots i:nth-child(4){transition-delay:.45s}
+.cb .word p{display:inline-block;margin-top:.8em;background:var(--ink);color:#fff;font-family:var(--disp);font-size:clamp(1.1rem,2.4vw,1.8rem);padding:.25em .9em}
+.cb .hint{position:absolute;left:50%;bottom:18px;translate:-50% 0;z-index:12;font-weight:700;font-size:.8rem;background:var(--ink);color:#fff;border-radius:99px;padding:.35em 1.1em;white-space:nowrap;transition:opacity .4s}
+.cb .hint.y{background:var(--yel);color:var(--ink)}
+@media (max-width:640px){.cb .rings{width:230vmax}.cb .center{width:84vw}}
+@media (prefers-reduced-motion:reduce){.cb{height:auto}.cb .pin{position:relative}.cb .rings,.cb .center{display:none}.cb .wall{position:relative;height:100svh;opacity:1}.cb .stk,.cb .word{opacity:1;scale:1}.cb .word .big .dots i{translate:0 0}}
+
+/* ================= below the hero ================= */
+.sec{position:relative;padding:clamp(90px,11vw,150px) clamp(16px,5vw,80px);overflow-x:clip}
+.kick{display:inline-flex;align-items:center;gap:.6em;font-family:var(--en);font-size:.8rem;letter-spacing:.2em}
+.kick i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.3;margin-top:.4em}
+.lead{margin-top:1em;max-width:30em;font-weight:500}
+html.js .rv{opacity:0;translate:0 24px;transition:opacity .8s ease, translate .8s cubic-bezier(.2,.8,.2,1)}
+html.js .rv.is-in{opacity:1;translate:0 0}
+
+/* message */
+.msg{background:var(--ink);color:#fff;text-align:center}
+.msg .kick{color:var(--yel)}
+.msg .h2 span{display:inline-block}
+.msg .h2 .u{background:linear-gradient(transparent 64%,var(--red) 64%)}
+.msg .lead{margin:1.4em auto 0;color:#ddd}
+.msg .dots{display:flex;justify-content:center;gap:14px;margin-top:40px}
+.msg .dots i{width:14px;height:14px;border-radius:50%;animation:bob 1.6s ease-in-out infinite}
+.msg .dots i:nth-child(2){animation-delay:.15s}.msg .dots i:nth-child(3){animation-delay:.3s}.msg .dots i:nth-child(4){animation-delay:.45s}
+@keyframes bob{50%{translate:0 -10px}}
+
+/* services as sticker cards */
+.serv .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(36px,5vw,60px)}
+.card{position:relative;background:#fff;border:3px solid var(--ink);border-radius:18px;padding:22px 20px 20px;box-shadow:6px 6px 0 var(--ink);transition:translate .25s, box-shadow .25s, rotate .25s}
+.card:hover{translate:-3px -3px;box-shadow:9px 9px 0 var(--ink);rotate:-1deg}
+.card .ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;color:#fff;border:3px solid var(--ink)}
+.card .ic svg{width:26px;height:26px}
+.card b{display:block;margin-top:14px;font-family:var(--disp);font-weight:400;font-size:1.2rem}
+.card small{display:block;font-family:var(--en);font-size:.68rem;letter-spacing:.14em;color:var(--mute)}
+.card p{margin-top:.6em;font-size:.88rem;line-height:1.7}
+.card.wide{grid-column:span 2;background:var(--yel)}
+.more{margin-top:clamp(40px,5vw,60px);border-top:3px dashed #cfc8b8;padding-top:28px}
+.more h3{font-family:var(--disp);font-weight:400;font-size:1.2rem}
+.more ul{list-style:none;display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.more li{border:2px solid var(--ink);border-radius:99px;padding:.3em 1em;font-weight:700;font-size:.88rem;background:#fff}
+.more .note{margin-top:12px;font-size:.78rem;color:var(--mute)}
+
+/* sign simulator (centerpiece) */
+.sim{background:#fff;background-image:radial-gradient(#e9e4d8 1.2px,transparent 1.3px);background-size:22px 22px}
+.sim .wrap{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(24px,5vw,70px);align-items:center;margin-top:clamp(30px,4vw,50px)}
+.sim label{display:block;font-weight:700;font-size:.88rem}
+.sim input{width:100%;margin-top:8px;font:inherit;font-family:var(--en);font-size:1.3rem;padding:.55em .8em;border:3px solid var(--ink);border-radius:12px;background:#fff}
+.sim .styles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.sim .styles button{font:inherit;font-weight:700;font-size:.9rem;padding:.8em .6em;border:3px solid var(--ink);border-radius:12px;background:#fff;cursor:pointer;box-shadow:4px 4px 0 var(--ink);transition:translate .15s, box-shadow .15s}
+.sim .styles button[aria-pressed="true"]{background:var(--ink);color:#fff;translate:2px 2px;box-shadow:2px 2px 0 var(--ink)}
+.sim .styles button i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:.5em;vertical-align:.05em}
+.sim .cap{margin-top:16px;font-size:.8rem;color:var(--mute)}
+.shop{position:relative;aspect-ratio:4/3;border-radius:18px;overflow:hidden;border:3px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:linear-gradient(#cfd8de 0 62%,#9aa3a8 62% 64%,#b9b2a5 64%);transition:background .6s}
+.shop.night{background:linear-gradient(#1c2430 0 62%,#2a2f36 62% 64%,#3a3833 64%)}
+.shop .facade{position:absolute;left:8%;right:8%;top:10%;bottom:36%;background:#efe9dd;border:3px solid var(--ink);transition:background .6s}
+.shop.night .facade{background:#3a3f46}
+.shop .band{position:absolute;left:0;right:0;top:0;height:34%;background:#2d2f33;display:grid;place-items:center;overflow:hidden}
+.shop .win{position:absolute;left:6%;right:40%;top:44%;bottom:0;border:3px solid var(--ink);background:linear-gradient(135deg,#bcd3e0,#e4eef3 50%,#bcd3e0);display:grid;place-items:center}
+.shop.night .win{background:linear-gradient(135deg,#f3c57a,#ffe2a8 50%,#f3c57a)}
+.shop .door{position:absolute;right:8%;width:24%;top:44%;bottom:0;border:3px solid var(--ink);background:#6b4a33}
+.shop .door::after{content:"";position:absolute;left:12%;top:48%;width:8px;height:22px;border-radius:4px;background:#e8c46a}
+.shop .hang{position:absolute;right:2%;top:36%;width:24%;transform-origin:50% 0;animation:swing 3s ease-in-out infinite;opacity:0;transition:opacity .4s}
+@keyframes swing{50%{rotate:6deg}}
+.shop .hang::before{content:"";display:block;margin:0 auto;width:60%;height:14px;border:3px solid var(--ink);border-bottom:0}
+.shop .hang span{display:grid;place-items:center;aspect-ratio:1.4;background:var(--yel);border:3px solid var(--ink);border-radius:8px;font-family:var(--disp);font-size:clamp(.7rem,1.3vw,1rem);text-align:center;padding:4px;word-break:break-all}
+.shop .txt{font-family:var(--en);font-size:clamp(1.2rem,3.6vw,2.6rem);letter-spacing:.04em;white-space:nowrap;color:#fff;transition:all .4s}
+.shop .wtxt{font-family:"Dela Gothic One";color:#fff;font-size:clamp(.9rem,2vw,1.4rem);opacity:0;transition:opacity .4s;text-shadow:0 0 1px rgba(0,0,0,.3)}
+.shop[data-s="3d"] .band{background:#f4f1ea;border-bottom:3px solid var(--ink)}
+.shop[data-s="3d"] .txt{color:var(--red);text-shadow:1px 1px 0 #a3151b,2px 2px 0 #a3151b,3px 3px 0 #a3151b,4px 4px 0 #a3151b,8px 10px 10px rgba(0,0,0,.25)}
+.shop[data-s="neon"] .txt{color:#fff;text-shadow:0 0 4px #fff,0 0 12px var(--blu),0 0 24px var(--blu),0 0 44px var(--blu)}
+.shop[data-s="hang"] .hang{opacity:1}
+.shop[data-s="hang"] .txt{opacity:0}
+.shop[data-s="win"] .wtxt{opacity:1}
+.shop[data-s="win"] .txt{opacity:0}
+.shop[data-s="win"] .win{background:linear-gradient(135deg,#5f7886,#7f98a6 50%,#5f7886)}
+.shop .tag{position:absolute;left:10px;top:10px;background:#fff;border:2px solid var(--ink);border-radius:99px;font-size:.72rem;font-weight:700;padding:.2em .8em}
+
+/* works */
+.works{background:var(--paper)}
+.works .tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.works .tags a{text-decoration:none;font-weight:800;font-family:var(--en2);color:#fff;border:3px solid #fff;border-radius:99px;padding:.5em 1.2em;box-shadow:0 5px 0 rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.14);transition:rotate .2s}
+.works .tags a:nth-child(odd){rotate:-2deg}.works .tags a:nth-child(even){rotate:2deg}
+.works .tags a:hover{rotate:0deg}
+.works .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}
+.works .strip figure{margin:0;border:6px solid #fff;border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.15);aspect-ratio:1;overflow:hidden}
+.works .strip figure:nth-child(1){rotate:-3deg}.works .strip figure:nth-child(2){rotate:2deg}.works .strip figure:nth-child(3){rotate:-1deg}.works .strip figure:nth-child(4){rotate:3deg}
+.works .strip img{width:100%;height:100%;object-fit:cover}
+.works .note{margin-top:22px;font-size:.8rem;color:var(--mute)}
+
+/* contact */
+.contact{background:var(--yel)}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,70px);align-items:start}
+.bigtel{display:inline-flex;align-items:center;gap:.4em;margin-top:24px;font-family:var(--en);font-size:clamp(1.8rem,4.6vw,3.4rem);text-decoration:none;background:var(--ink);color:#fff;border-radius:18px;padding:.25em .6em;box-shadow:6px 6px 0 #fff}
+.contact dl{margin-top:26px;border-top:3px solid var(--ink)}
+.contact dl div{display:grid;grid-template-columns:6.5em 1fr;gap:10px;padding:12px 0;border-bottom:2px solid rgba(20,20,20,.25);font-weight:500}
+.contact dt{font-family:var(--en);font-size:.78rem;letter-spacing:.14em;padding-top:.2em}
+.contact .map{aspect-ratio:4/3;border:3px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);background:#fff}
+.contact .map iframe{width:100%;height:100%;border:0}
+.contact .ig{display:inline-block;margin-top:20px;font-weight:700;text-decoration:none;border-bottom:3px solid var(--ink)}
+.foot{background:var(--ink);color:#fff;text-align:center;padding:56px 18px}
+.foot .w{font-family:var(--en);font-size:2rem;display:inline-flex;align-items:center;gap:.3em}
+.foot .w span{display:grid;gap:3px}.foot .w span i{width:8px;height:8px;border-radius:50%;display:block}
+.foot p{margin-top:12px;font-size:.78rem;color:#bbb;line-height:1.9}
+@media (max-width:860px){
+  .serv .grid{grid-template-columns:1fr 1fr}.card.wide{grid-column:span 2}
+  .sim .wrap,.contact .wrap{grid-template-columns:1fr}
+  .works .strip{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){.serv .grid{gap:12px}.card{padding:16px 14px 14px;border-radius:14px;box-shadow:4px 4px 0 var(--ink)}.card .ic{width:42px;height:42px}.card b{font-size:1rem}.card p{font-size:.8rem}}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;translate:none}}
+</style></head><body>
+<header class="top"><a class="logo" href="#"><span class="w">JAPAN ART</span><span class="d"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></span><small>有限会社ジャパン・アート</small></a><a class="tel" href="tel:0958437233">095-843-7233</a></header>
+<main><section class="cb" id="cb"><div class="pin"><span class="dot"></span><svg class="rings" viewBox="-360 -360 720 720" aria-hidden="true"><g class="ring" style="--i:3"><circle r="276" fill="none" stroke="var(--blu)" stroke-width="44"/>
+<path id="rprings3" d="M -276 0 a 276 276 0 1 1 552 0 a 276 276 0 1 1 -552 0" fill="none"/>
+<text class="rt" fill="#fff" dy="6"><textPath href="#rprings3" textLength="1730.7" lengthAdjust="spacing">窓ガラスフィルム　・　各種施工　・　イベント・装飾　・　デザイン制作　・　店舗看板　・　屋内サイン　・　カーラッピング　・　窓ガラスフィルム　・　各種施工　・　イベント・装飾　・　</textPath></text></g><g class="ring" style="--i:2"><circle r="214" fill="none" stroke="var(--grn)" stroke-width="44"/>
+<path id="rprings2" d="M -214 0 a 214 214 0 1 1 428 0 a 214 214 0 1 1 -428 0" fill="none"/>
+<text class="rt en" fill="#fff" dy="6"><textPath href="#rprings2" textLength="1341.9" lengthAdjust="spacing">CAR WRAPPING  ・  WINDOW FILM  ・  INSTALLATION  ・  EVENT  ・  DESIGN  ・  SHOP SIGN  ・  INDOOR SIGN  ・  CAR WRAPPING  ・  </textPath></text></g><g class="ring" style="--i:1"><circle r="152" fill="none" stroke="var(--yel)" stroke-width="44"/>
+<path id="rprings1" d="M -152 0 a 152 152 0 1 1 304 0 a 152 152 0 1 1 -304 0" fill="none"/>
+<text class="rt" fill="var(--ink)" dy="6"><textPath href="#rprings1" textLength="953.1" lengthAdjust="spacing">屋内サイン　・　カーラッピング　・　窓ガラスフィルム　・　各種施工　・　イベント・装飾　・　</textPath></text></g><g class="ring" style="--i:0"><circle r="90" fill="none" stroke="var(--red)" stroke-width="44"/>
+<path id="rprings0" d="M -90 0 a 90 90 0 1 1 180 0 a 90 90 0 1 1 -180 0" fill="none"/>
+<text class="rt en" fill="#fff" dy="6"><textPath href="#rprings0" textLength="564.4" lengthAdjust="spacing">SHOP SIGN  ・  INDOOR SIGN  ・  CAR WRAPPING  ・  </textPath></text></g><circle class="core" r="68" fill="#fff"/></svg>
+ <div class="center"><h1 class="ttl">看板で、<br><em>想い</em>をカタチに。</h1><p>長崎の看板屋、ジャパン・アートです。<br>お店の看板から車のラッピングまで。</p><p class="en">SIGN MAKES PEOPLE HAPPY</p></div>
+ <div class="wall" id="wall"><span class="stk photo" data-at="0.500" style="left:14%;top:22%;--r:-8deg;--d:0s"><img src="https://images.unsplash.com/photo-1620194544222-8c956ca15f1d?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk pill c1" data-at="0.520" style="left:36%;top:14%;--r:5deg;--d:0s">SHOP SIGN</span><span class="stk photo" data-at="0.540" style="left:62%;top:20%;--r:7deg;--d:0s"><img src="https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk round c2" data-at="0.560" style="left:86%;top:16%;--r:-6deg;--d:0s">INDOOR<br>SIGN</span><span class="stk jp" data-at="0.580" style="left:8%;top:52%;--r:-10deg;--d:0s">看板</span><span class="stk photo" data-at="0.600" style="left:88%;top:48%;--r:9deg;--d:0s"><img src="https://images.unsplash.com/photo-1616037502269-72da0baf7d71?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk pill c3" data-at="0.620" style="left:24%;top:82%;--r:-5deg;--d:0s">WINDOW FILM</span><span class="stk arrow" data-at="0.640" style="left:50%;top:90%;--r:3deg;--d:0s">店はこちら →</span><span class="stk photo" data-at="0.660" style="left:76%;top:80%;--r:-8deg;--d:0s"><img src="https://images.unsplash.com/photo-1606724003280-8b03a4f72223?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk round c4" data-at="0.680" style="left:30%;top:40%;--r:12deg;--d:0s">CAR<br>WRAP</span><span class="stk jp" data-at="0.700" style="left:70%;top:38%;--r:-4deg;--d:0s">施工も</span><span class="stk pill c1" data-at="0.720" style="left:94%;top:70%;--r:10deg;--d:0s">EVENT</span><span class="stk photo" data-at="0.740" style="left:6%;top:86%;--r:6deg;--d:0s"><img src="https://images.unsplash.com/photo-1651245994635-da8b312578d4?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk jp" data-at="0.760" style="left:48%;top:64%;--r:-3deg;--d:0s">デザインも</span><span class="stk round c1" data-at="0.780" style="left:60%;top:58%;--r:8deg;--d:0s">ご相談<br>どうぞ</span>
+  <div class="word" id="word"><div class="big" role="img" aria-label="JAPAN ART"><span>JAPAN</span><span class="dots"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></span><span>ART</span></div><p>看板で、想いをカタチに。</p></div>
+ </div>
+ <span class="hint" id="hint">スクロールで、輪をくぐる ↓</span>
+</div></section>
+<section class="sec msg">
+  <span class="kick rv"><i class="c1"></i>MESSAGE</span>
+  <h2 class="h2 rv"><span>お店の魅力を伝える。</span><br><span>人と街を<span class="u">つなぐ</span>。</span></h2>
+  <p class="lead rv">それが、私たちの仕事です。長崎市女の都の看板屋、ジャパン・アート。お店の顔になる看板から、走る看板になる車のラッピング、窓のフィルムまで、長崎のまちの「見つけてもらう」をお手伝いしています。</p>
+  <div class="dots rv"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>
+</section>
+
+<section class="sec serv" id="service">
+  <span class="kick rv"><i class="c2"></i>SERVICE</span>
+  <h2 class="h2 rv">できること。</h2>
+  <div class="grid"><div class="card rv"><span class="ic c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9"/><path d="M4 9v11h16V9"/><path d="M3 9h18"/><path d="M9 20v-6h6v6"/></svg></span><b>店舗看板</b><small>SHOP SIGN</small><p>お店の顔になる看板を。</p></div><div class="card rv"><span class="ic c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span><b>屋内サイン</b><small>INDOOR SIGN</small><p>店内やオフィスのサインも。</p></div><div class="card rv"><span class="ic c3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13l2-6h14l2 6v5H3z"/><circle cx="7.5" cy="18" r="1.8"/><circle cx="16.5" cy="18" r="1.8"/><path d="M3 13h18"/></svg></span><b>カーラッピング</b><small>CAR WRAPPING</small><p>社用車やトラックを、走る看板に。</p></div><div class="card rv"><span class="ic c4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="1"/><path d="M12 3v18M4 12h16"/></svg></span><b>窓ガラスフィルム</b><small>WINDOW FILM</small><p>窓を使ったウインドウサイン。</p></div><div class="card rv"><span class="ic c1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span><b>各種施工</b><small>INSTALLATION</small><p>看板の取り付けまで。</p></div><div class="card rv"><span class="ic c3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V4"/><path d="M4 4h13l-3 4 3 4H4"/></svg></span><b>イベント・装飾</b><small>EVENT</small><p>展示やイベントの装飾も。</p></div><div class="card rv"><span class="ic c2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg></span><b>デザイン制作</b><small>DESIGN</small><p>何を伝えたいか、から一緒に考えます。</p></div><div class="card wide rv"><b>看板のこと、まずはお電話で。</b><p>「こんな看板にしたい」がまだぼんやりしていても大丈夫です。お話を聞きながら、形にしていきます。</p><p style="margin-top:.8em"><a href="tel:0958437233" style="font-family:var(--en);font-size:1.4rem;text-decoration:none">095-843-7233 →</a></p></div></div>
+  <div class="more rv">
+    <h3>こんなことも、ご相談ください。</h3>
+    <ul><li>大型インクジェットプリント</li><li>ステッカー</li><li>プラスチック加工</li><li>レーザー加工</li><li>LEDサイン</li><li>Tシャツ・マグカップのプリント</li><li>垂れ幕・横断幕・のぼり</li><li>看板の撤去・電球交換</li></ul>
+    <p class="note">※会社のウェブサイト（準備中のページ）に掲載されている営業品目から</p>
+  </div>
+</section>
+
+<section class="sec sim" id="sim">
+  <span class="kick rv"><i class="c3"></i>TRY IT</span>
+  <h2 class="h2 rv">あなたのお店に、<br>看板をつけてみる。</h2>
+  <p class="lead rv">店名を入れて、看板の種類を選んでみてください。どんな看板がお店に合うか、イメージをふくらませるきっかけに。</p>
+  <div class="wrap">
+    <div class="rv">
+      <label for="nm">店名</label>
+      <input id="nm" type="text" value="YOUR SHOP" maxlength="16" autocomplete="off">
+      <div class="styles" role="group" aria-label="看板の種類">
+        <button type="button" data-s="3d" aria-pressed="true"><i class="c1"></i>立体の文字</button>
+        <button type="button" data-s="neon" aria-pressed="false"><i class="c4"></i>光る看板</button>
+        <button type="button" data-s="hang" aria-pressed="false"><i class="c2"></i>吊り下げ看板</button>
+        <button type="button" data-s="win" aria-pressed="false"><i class="c3"></i>窓ガラスの文字</button>
+      </div>
+      <p class="cap">※イメージです。実際の看板は、お店の形や場所に合わせてご提案します。</p>
+    </div>
+    <div class="shop rv" id="shop" data-s="3d" aria-live="polite">
+      <span class="tag" id="tag">立体の文字</span>
+      <div class="facade">
+        <div class="band"><span class="txt" id="t1">YOUR SHOP</span></div>
+        <div class="win"><span class="wtxt" id="t2">YOUR SHOP</span></div>
+        <div class="door"></div>
+      </div>
+      <div class="hang"><span id="t3">YOUR SHOP</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec works" id="works">
+  <span class="kick rv"><i class="c4"></i>WORKS</span>
+  <h2 class="h2 rv">施工例は、<br>Instagramで。</h2>
+  <p class="lead rv">カーラッピング、壁面の看板、ウインドウサイン、展示の装飾など、手がけた仕事をInstagramで紹介しています。</p>
+  <div class="tags rv"><a class="c1" href="https://www.instagram.com/japan_art.nagasaki/" target="_blank" rel="noopener">カーラッピング</a><a class="c4" href="https://www.instagram.com/japan_art.nagasaki/" target="_blank" rel="noopener">壁面看板</a><a class="c3" href="https://www.instagram.com/japan_art.nagasaki/" target="_blank" rel="noopener">ウインドウサイン</a><a class="c2" href="https://www.instagram.com/japan_art.nagasaki/" target="_blank" rel="noopener" style="color:var(--ink)">展示・装飾</a><a class="c1" href="https://www.instagram.com/japan_art.nagasaki/" target="_blank" rel="noopener">駐車場の看板</a></div>
+  <div class="strip rv">
+    <figure><img src="https://images.unsplash.com/photo-1567093597754-35b79c864763?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1653223495166-ad1a03118303?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1554466343-d340fa1a13f7?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1698525551525-9a69f210b470?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+  </div>
+  <p class="note rv">※写真はイメージです（フリー素材）。実際の施工例に差し替えます。</p>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="rv">
+      <span class="kick"><i class="c1"></i>CONTACT</span>
+      <h2 class="h2">看板のご相談は、<br>お電話で。</h2>
+      <a class="bigtel" href="tel:0958437233">095-843-7233</a>
+      <dl>
+        <div><dt>COMPANY</dt><dd>有限会社ジャパン・アート</dd></div>
+        <div><dt>ADDRESS</dt><dd>〒852-8144 長崎市女の都1-1452-5</dd></div>
+        <div><dt>TEL</dt><dd><a href="tel:0958437233">095-843-7233</a></dd></div>
+        <div><dt>FAX</dt><dd>095-843-7252</dd></div>
+      </dl>
+      <a class="ig" href="https://www.instagram.com/japan_art.nagasaki/" target="_blank" rel="noopener">Instagram @japan_art.nagasaki →</a>
+    </div>
+    <div class="map rv"><iframe title="ジャパン・アートの地図" src="https://maps.google.com/maps?q=%E9%95%B7%E5%B4%8E%E5%B8%82%E5%A5%B3%E3%81%AE%E9%83%BD1-1452-5&z=16&hl=ja&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+  </div>
+</section>
+</main><footer class="foot"><span class="w">JAPAN ART<span><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></span></span><p>有限会社ジャパン・アート　長崎市女の都1-1452-5<br>※このページは制作のご提案用サンプルです。写真はフリー素材（Unsplash）の仮のもので、実際の施工写真に差し替えます。</p></footer>
+<script>
+(function(){
+  var sec=document.getElementById('cb'), pin=sec.querySelector('.pin'), svg=sec.querySelector('svg.rings'), wall=document.getElementById('wall'),
+      word=document.getElementById('word'), hint=document.getElementById('hint'), st=[].slice.call(wall.querySelectorAll('.stk'));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; if(reduce){st.forEach(function(s){s.classList.add('on')});word.classList.add('on');wall.classList.add('live');return;}
+  function f(){
+    var r=sec.getBoundingClientRect(), p=Math.min(1,Math.max(0,-r.top/(sec.offsetHeight-innerHeight)));
+    var coreR=68/720*svg.getBoundingClientRect().width/(parseFloat(getComputedStyle(pin).getPropertyValue('--z'))||1);
+    var zmax=Math.hypot(innerWidth,innerHeight)/(2*coreR)*1.05;
+    var e=Math.min(1,p/.45); e=e*e*e; var z=1+(zmax-1)*e;
+    pin.style.setProperty('--z',z.toFixed(3)); pin.style.setProperty('--co',Math.max(0,1-p*5).toFixed(3));
+    pin.style.setProperty('--w',Math.max(0,Math.min(1,(p-.4)/.08)).toFixed(3));
+    wall.classList.toggle('live',p>.45);
+    st.forEach(function(s){if(!s.classList.contains('moved'))s.classList.toggle('on',p>=parseFloat(s.dataset.at))});
+    word.classList.toggle('on',p>=.84);
+    hint.textContent=p>.84?'ステッカーは、はがして動かせます':'スクロールで、輪をくぐる ↓'; hint.classList.toggle('y',p>.84); hint.style.opacity=(p>.05&&p<.84)?0:1;
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); addEventListener('resize',f); f();
+  st.forEach(function(s){s.addEventListener('pointerdown',function(){s.classList.add('moved','on')})});
+})();
+</script><script>
+(function(){
+  [].forEach.call(document.querySelectorAll('.stk'),function(s){
+    var sx,sy,ox,oy;
+    s.addEventListener('pointerdown',function(e){s.setPointerCapture(e.pointerId);s.classList.add('dragging');sx=e.clientX;sy=e.clientY;ox=s.offsetLeft;oy=s.offsetTop;s.style.animation='none';s.style.opacity=1;s.style.scale=1.06;});
+    s.addEventListener('pointermove',function(e){if(!s.classList.contains('dragging'))return;s.style.left=(ox+e.clientX-sx)+'px';s.style.top=(oy+e.clientY-sy)+'px';});
+    function up(){s.classList.remove('dragging');s.style.scale=1;}
+    s.addEventListener('pointerup',up);s.addEventListener('pointercancel',up);
+  });
+})();
+</script>
+<script>
+(function(){
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+  } else rv.forEach(function(el){el.classList.add('is-in');});
+  setTimeout(function(){var stuck=[].some.call(rv,function(el){var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0&&!el.classList.contains('is-in');});if(stuck)document.documentElement.classList.remove('js');},5000);
+  // sign simulator
+  var shop=document.getElementById('shop'), nm=document.getElementById('nm'), tag=document.getElementById('tag');
+  var outs=['t1','t2','t3'].map(function(id){return document.getElementById(id)});
+  nm.addEventListener('input',function(){var v=nm.value.trim()||'YOUR SHOP';outs.forEach(function(o){o.textContent=v});});
+  [].forEach.call(document.querySelectorAll('.styles button'),function(b){
+    b.addEventListener('click',function(){
+      [].forEach.call(document.querySelectorAll('.styles button'),function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+      shop.dataset.s=b.dataset.s; shop.classList.toggle('night',b.dataset.s==='neon'); tag.textContent=b.textContent;
+    });
+  });
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>
