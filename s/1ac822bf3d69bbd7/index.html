@@ -129,6 +129,73 @@ html.ready .loading{opacity:0;pointer-events:none}
 .styleSw a{text-decoration:none;border-radius:99px;padding:.45em .9em;color:var(--ink)}
 .styleSw a.on{background:var(--ink);color:#fff}
 @media (max-width:760px){.styleSw{right:10px;left:auto;top:74px;bottom:auto;font-size:.68rem}.styleSw span{display:none}}
+
+/* ---- cards: photos, illustrations, staggered entry ---- */
+.panel{max-height:calc(100svh - 180px)}
+.panel.on > *{animation:cardIn .6s cubic-bezier(.2,.8,.2,1) both}
+.panel.on > *:nth-child(2){animation-delay:.06s}.panel.on > *:nth-child(3){animation-delay:.12s}.panel.on > *:nth-child(4){animation-delay:.18s}.panel.on > *:nth-child(5){animation-delay:.24s}.panel.on > *:nth-child(6){animation-delay:.3s}.panel.on > *:nth-child(7){animation-delay:.36s}
+@keyframes cardIn{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+.panel .ph{position:relative;margin:-28px -28px 18px;aspect-ratio:16/8;overflow:hidden;border-radius:24px 24px 0 0}
+.panel .ph.tall{aspect-ratio:16/10}
+.panel .ph img{width:100%;height:100%;object-fit:cover;display:block;scale:1.08;transition:scale 1.4s cubic-bezier(.2,.8,.2,1)}
+.panel.on .ph img{scale:1}
+.panel .ph figcaption{position:absolute;left:14px;bottom:12px;background:var(--terra);color:#fff;font-weight:700;font-size:.8rem;border-radius:99px;padding:.35em 1em;rotate:-3deg;box-shadow:0 6px 14px rgba(60,20,10,.3)}
+.panel .ph figcaption.name{rotate:0deg;background:rgba(255,251,244,.94);color:var(--mute);font-size:.72rem;font-weight:500;border-radius:14px;padding:.5em .9em;line-height:1.4}
+.panel .ph figcaption.name b{display:block;color:var(--ink);font-size:1.05rem}
+.bubbles{display:flex;flex-wrap:wrap;gap:8px;margin-top:1em}
+.bubbles span{position:relative;background:#fff;border:1.5px solid var(--line);border-radius:16px 16px 16px 4px;padding:.45em .9em;font-weight:700;font-size:.88rem;box-shadow:0 4px 10px rgba(60,35,20,.06)}
+.panel.on .bubbles span{animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+.panel.on .bubbles span:nth-child(1){animation-delay:.35s}.panel.on .bubbles span:nth-child(2){animation-delay:.55s}.panel.on .bubbles span:nth-child(3){animation-delay:.75s}
+@keyframes pop{from{opacity:0;scale:.6}to{opacity:1;scale:1}}
+.svc li{align-items:center}
+.svc .ico{flex:none;display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:#fbe3d6;color:var(--terra)}
+.svc .ico svg{width:22px;height:22px}
+.svc li div{flex:1}
+.svc li em{font-style:normal;font-family:var(--en);color:var(--terra);white-space:nowrap}
+.flow{list-style:none;display:grid;grid-template-columns:repeat(6,1fr);gap:4px;margin-top:1.1em;position:relative}
+.flow::before{content:"";position:absolute;left:8%;right:8%;top:21px;height:2px;background:repeating-linear-gradient(90deg,var(--terra) 0 6px,transparent 6px 11px);opacity:.5}
+.flow li{position:relative;display:grid;justify-items:center;gap:5px;font-size:.66rem;font-weight:700;text-align:center;line-height:1.3}
+.flow li span{display:grid;place-items:center;width:42px;height:42px;border-radius:50%;background:#fff;border:2px solid var(--terra);color:var(--terra)}
+.flow li span svg{width:20px;height:20px}
+.panel.on .flow li{animation:pop .45s cubic-bezier(.3,1.6,.5,1) both}
+.panel.on .flow li:nth-child(1){animation-delay:.2s}.panel.on .flow li:nth-child(2){animation-delay:.3s}.panel.on .flow li:nth-child(3){animation-delay:.4s}.panel.on .flow li:nth-child(4){animation-delay:.5s}.panel.on .flow li:nth-child(5){animation-delay:.6s}.panel.on .flow li:nth-child(6){animation-delay:.7s}
+.price div{position:relative}
+.price div i{position:absolute;right:10px;top:10px;width:24px;height:24px;color:#e9b9a2}
+.price div i svg{width:100%;height:100%}
+.tags{list-style:none;display:flex;flex-wrap:wrap;gap:6px;margin-top:1em}
+.tags li{font-size:.76rem;font-weight:700;background:#fbe3d6;color:#8c3a22;border-radius:99px;padding:.35em .9em}
+.dmock{margin:-6px 0 16px;background:linear-gradient(160deg,#fff,#fdf1e8);border:1.5px solid var(--line);border-radius:20px;padding:12px 14px 14px;box-shadow:0 10px 24px rgba(60,35,20,.1)}
+.dmh{display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--line)}
+.dmh img{width:28px;height:28px}.dmh b{font-size:.9rem}.dmh small{margin-left:auto;font-size:.7rem;color:var(--mute)}
+.dmock p{margin-top:10px;max-width:84%;font-size:.84rem;line-height:1.6;border-radius:16px;padding:.55em .9em}
+.dmock .me{background:#efe7dc;border-bottom-left-radius:4px}
+.dmock .gb{margin-left:auto;background:linear-gradient(135deg,#e2653f,#b4472a);color:#fff;border-bottom-right-radius:4px}
+.dmock .typing{margin-left:auto;width:max-content;background:#f3d9cc;display:flex;gap:4px;padding:.7em .9em}
+.dmock .typing i{width:6px;height:6px;border-radius:50%;background:#b4472a;animation:blink 1.2s infinite}
+.dmock .typing i:nth-child(2){animation-delay:.2s}.dmock .typing i:nth-child(3){animation-delay:.4s}
+@keyframes blink{0%,80%,100%{opacity:.25}40%{opacity:1}}
+.panel.on .dmock .me{animation:pop .45s .25s both}.panel.on .dmock .gb{animation:pop .45s .9s both}.panel.on .dmock .typing{animation:pop .45s 1.5s both}
+/* the style switch is a prototype tool: only on the opening screen */
+.styleSw{opacity:0;pointer-events:none;transition:opacity .4s}
+html.at-intro .styleSw{opacity:1;pointer-events:auto}
+@media (max-width:760px){
+  .panel{max-height:50svh}
+  .panel .ph{margin:-20px -18px 12px;aspect-ratio:16/5}
+  .panel .ph.tall{aspect-ratio:16/7}
+  .flow li{font-size:.58rem}.flow li span{width:36px;height:36px}.flow::before{top:18px}
+  .dmock p{font-size:.78rem}
+}
+/* short landscape screens (phones held sideways) */
+@media (min-width:761px) and (max-height:560px){
+  .top{padding:8px 14px}.brand{font-size:.95rem}.brand img{width:24px;height:24px}.dm{font-size:.78rem;padding:.5em 1em}
+  .panel{top:58px;bottom:10px;max-height:none;translate:40px 0;width:min(400px,44vw);padding:16px 18px;border-radius:18px}
+  .panel.on{translate:0 0}
+  .panel h2{font-size:1.15rem}.panel p{font-size:.8rem;line-height:1.75}.panel .note{font-size:.72rem}
+  .panel .ph{margin:-16px -18px 12px;aspect-ratio:16/5;border-radius:18px 18px 0 0}
+  .route{left:10px;bottom:10px;padding:6px 10px}.route a{width:46px;font-size:.58rem}.route i{width:10px;height:10px}
+  .intro h1{font-size:1.7rem}.intro p{font-size:.85rem}.intro .go{margin-top:1em;padding:.7em 1.4em}
+}
+
 html.no3d #c,html.no3d .clouds,html.no3d #labels,html.no3d .route,html.no3d .loading,html.no3d #track{display:none}
 html.no3d .intro,html.no3d .panel{position:relative;inset:auto;translate:none;opacity:1;width:auto;max-width:720px;margin:24px auto;pointer-events:auto}
 html.no3d .intro{margin-top:120px}
@@ -151,18 +218,21 @@ html.no3d .intro{margin-top:120px}
 </section>
 
 <aside class="panel" data-stop="listen">
-  <span class="no">01<i></i>相談</span>
+  <figure class="ph"><img src="https://gearbloom.jp/assets/owner-tablet.jpg" alt="" loading="lazy"><figcaption>まずは、お話から</figcaption></figure>
+  <span class="no">01<i></i>話を聞く</span>
   <h2>まず、話を聞くところから。</h2>
-  <p>どんなお店で、誰に見てほしくて、何を載せたいか。いちばん時間をかけるのは、ここです。</p>
-  <p>InstagramのDMから、「何から相談すればいいか分からない」段階で構いません。お断りいただいても、こちらから追いかけることはありません。</p>
+  <div class="bubbles"><span>どんなお店？</span><span>だれに見てほしい？</span><span>何を載せたい？</span></div>
+  <p>いちばん時間をかけるのは、ここです。InstagramのDMから、「何から相談すればいいか分からない」段階で構いません。</p>
+  <p class="note">お断りいただいても、こちらから追いかけることはありません。</p>
 </aside>
 <aside class="panel" data-stop="build">
+  <figure class="ph"><img src="https://gearbloom.jp/assets/desk-work.jpg" alt="" loading="lazy"><figcaption>作るもの</figcaption></figure>
   <span class="no">02<i></i>制作</span>
   <h2>作る人ではなく、<br>使う人がつまずく場所を考えて。</h2>
   <ul class="svc">
-    <li><div>ホームページ制作<small>スマホでの見え方に合わせて、数ページの静的サイトを中心に</small></div><span>2万円〜</span></li>
-    <li><div>業務アプリ開発<small>日々の業務で使う、小規模なツール</small></div><span>応相談</span></li>
-    <li><div>Excelマクロ制作<small>集計・転記・レポート出力など、毎月の繰り返しを自動化</small></div><span>応相談</span></li>
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></span><div>ホームページ制作<small>スマホでの見え方に合わせて、数ページの静的サイトを中心に</small></div><em>2万円〜</em></li>
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M7 13h4M7 16h7"/></svg></span><div>業務アプリ開発<small>日々の業務で使う、小規模なツール</small></div><em>応相談</em></li>
+    <li><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="1"/><path d="M3 9h18M3 14h18M9 4v16M15 4v16"/></svg></span><div>Excelマクロ制作<small>集計・転記・レポート出力など、毎月の繰り返しを自動化</small></div><em>応相談</em></li>
   </ul>
   <p class="note">サーバーを使わない構成にできるので、月々の維持費がかからないことが多いです。</p>
 </aside>
@@ -180,36 +250,46 @@ html.no3d .intro{margin-top:120px}
 <aside class="panel" data-stop="price">
   <span class="no">04<i></i>料金</span>
   <h2>いくらで、どう進むか。</h2>
+  <ol class="flow">
+    <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16v10H9l-5 4z"/></svg></span>ご相談</li><li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 10a4 4 0 1 1 8 0c0 3-3 3.5-3 6a2.5 2.5 0 0 1-5 0"/></svg></span>ヒアリング</li><li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4l5 7 5-7M12 11v9M8 13h8M8 16h8"/></svg></span>お見積り</li><li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16z"/><path d="M14 6l3 3"/></svg></span>制作</li><li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></span>ご確認</li><li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="9" width="16" height="11" rx="1"/><path d="M4 13h16M12 9v11M12 9s-4-5-6-3 2 3 6 3zm0 0s4-5 6-3-2 3-6 3z"/></svg></span>納品</li>
+  </ol>
   <div class="price">
-    <div><b>2<small>万円〜</small></b><span>数ページの簡単なホームページの目安。内容が増えても8万円ほどまでが多いです。</span></div>
-    <div><b>0<small>円</small></b><span>着手金はいただきません。納品してご確認いただいてからの一括払いです。</span></div>
-    <div><b>2<small>回</small></b><span>納品時のご確認で気になる点は、2回まで無料で直します。</span></div>
-    <div><b>0<small>円/月</small></b><span>サーバーを使わない構成なら維持費はかかりません。独自ドメインは年間数千円。</span></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v8M9.5 10.5c0-1 1-1.5 2.5-1.5s2.5.6 2.5 1.6-1 1.4-2.5 1.4-2.5.5-2.5 1.5 1 1.5 2.5 1.5 2.5-.5 2.5-1.5"/></svg></i><b>2<small>万円〜</small></b><span>数ページの簡単なホームページの目安。内容が増えても8万円ほどまでが多いです。</span></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M8 16L16 8"/></svg></i><b>0<small>円</small></b><span>着手金はいただきません。納品してご確認いただいてからの一括払いです。</span></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 5v6h-6"/></svg></i><b>2<small>回</small></b><span>納品時のご確認で気になる点は、2回まで無料で直します。</span></div>
+    <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18h10a4 4 0 0 0 0-8 6 6 0 0 0-11.6 1.5A3.3 3.3 0 0 0 7 18z"/><path d="M4 4l16 16"/></svg></i><b>0<small>円/月</small></b><span>サーバーを使わない構成なら維持費はかかりません。独自ドメインは年間数千円。</span></div>
   </div>
 </aside>
 <aside class="panel" data-stop="maker">
+  <figure class="ph tall"><img src="https://gearbloom.jp/assets/founder.jpg" alt="野﨑 大雅" loading="lazy" style="object-position:62% 30%"><figcaption class="name"><b>野﨑 大雅</b>Gear Bloom 運営者</figcaption></figure>
   <span class="no">05<i></i>作る人</span>
   <h2>作るのは、この人間ひとりです。</h2>
-  <div class="who"><img src="https://gearbloom.jp/assets/founder.jpg" alt="野﨑 大雅"><div><b>野﨑 大雅</b><small>Gear Bloom 運営者</small></div></div>
   <p>本業は企業の人事部門で、新卒採用と社内広報、それに自社ホームページの運営を担当しています。「作ってもらったはいいけれど、更新の仕方が分からず放置してしまう」ホームページを何度も見てきました。</p>
-  <p class="note">平日は夜間、土日は日中に対応しています。即日対応・24時間対応はしていません。</p>
+  <ul class="tags"><li>専門用語を使わずに説明します</li><li>平日は夜間、土日は日中</li><li>データも著作権もお客様に</li></ul>
 </aside>
 <aside class="panel" data-stop="goal">
-  <span class="no">06<i></i>咲く</span>
-  <h2>歯車がひとつ回ると、<br>お店が動きだす。</h2>
-  <p>Gear Bloom という名前は、そこから取りました。ホームページも、業務アプリも、Excelのマクロも、お店の歯車をひとつ回す仕事だと思っています。</p>
+  <div class="dmock" aria-hidden="true">
+    <div class="dmh"><img src="https://gearbloom.jp/favicon.svg" alt=""><b>gearbloom</b><small>Instagram のDM</small></div>
+    <p class="me">お店のホームページを作りたいのですが、まだ何も決まっていなくて…</p>
+    <p class="gb">大丈夫です！まずは、お店のことを聞かせてください。</p>
+    <p class="typing"><i></i><i></i><i></i></p>
+  </div>
+  <span class="no">06<i></i>ご相談</span>
+  <h2>まずは気軽に、DMから。</h2>
+  <p>歯車がひとつ回ると、お店が動きだす。Gear Bloom という名前は、そこから取りました。ホームページも、業務アプリも、Excelのマクロも、お店の歯車をひとつ回す仕事だと思っています。</p>
   <div class="cta"><a class="p" href="https://www.instagram.com/gearbloom/" target="_blank" rel="noopener">InstagramのDMで相談する</a><a class="s" href="#" data-jump="start" onclick="scrollTo({top:0,behavior:'smooth'});return false;">もう一度はじめから</a></div>
+  <p class="note">上のやりとりはイメージです。</p>
 </aside>
 
 <nav class="route" aria-label="旅の道のり">
   <div class="bar"><span id="routeFill"></span></div>
   <a href="#" data-jump="start"><i></i><span>出発</span></a>
-  <a href="#" data-jump="listen"><i></i><span>相談</span></a>
+  <a href="#" data-jump="listen"><i></i><span>話を聞く</span></a>
   <a href="#" data-jump="build"><i></i><span>制作</span></a>
   <a href="#" data-jump="works"><i></i><span>実績</span></a>
   <a href="#" data-jump="price"><i></i><span>料金</span></a>
   <a href="#" data-jump="maker"><i></i><span>作る人</span></a>
-  <a href="#" data-jump="goal"><i></i><span>咲く</span></a>
+  <a href="#" data-jump="goal"><i></i><span>ご相談</span></a>
 </nav>
 <div id="track"></div>
 <div class="styleSw" aria-label="見た目の切り替え（試作用）"><span>見た目</span><a href="?style=mini" data-st="mini">昼のミニチュア</a><a href="?style=toon" data-st="toon">イラスト</a><a href="?style=night" data-st="night">夜景</a></div>
@@ -1403,7 +1483,7 @@ const OVERVIEW = { pos: V(-24, 118, 176), look: V(10, 4, -46) };
 const panels = [...document.querySelectorAll('.panel')];
 const intro = document.getElementById('intro'), cloudsEl = document.getElementById('clouds'), routeDots = [...document.querySelectorAll('.route i')], routeBar = document.getElementById('routeFill');
 const labelLayer = document.getElementById('labels');
-const stopLabels = STOPS.filter(s => s.off).map((s, k) => { const el = document.createElement('a'); el.href = '#'; el.className = 'pin'; el.dataset.jump = s.id; el.innerHTML = '<b>' + String(k + 1).padStart(2, '0') + '</b>' + ({ listen: '相談', build: '制作', works: '実績', price: '料金', maker: '作る人' }[s.id]); labelLayer.appendChild(el); return { el, s, pos: s.center.clone().add(V(0, s.id === 'works' ? 10 : 7, 0)) }; });
+const stopLabels = STOPS.filter(s => s.off).map((s, k) => { const el = document.createElement('a'); el.href = '#'; el.className = 'pin'; el.dataset.jump = s.id; el.innerHTML = '<b>' + String(k + 1).padStart(2, '0') + '</b>' + ({ listen: '話を聞く', build: '制作', works: '実績', price: '料金', maker: '作る人' }[s.id]); labelLayer.appendChild(el); return { el, s, pos: s.center.clone().add(V(0, s.id === 'works' ? 10 : 7, 0)) }; });
 const workLabels = labelsAt.map(l => { const el = document.createElement('span'); el.className = 'pin sub'; el.textContent = l.text; labelLayer.appendChild(el); const p = V(l.x, l.y, l.z); l.g.updateMatrixWorld(); p.applyMatrix4(l.g.matrixWorld); return { el, pos: p }; });
 
 let target = 0, shown = 0;
@@ -1417,7 +1497,8 @@ function resize() {
   const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false);
   camera.aspect = w / h;
   // keep the subject out from under the panel: on PC it sits left of center, on phones in the upper half
-  if (SP) camera.setViewOffset(w, h * 1.34, 0, h * .34, w, h); else camera.setViewOffset(w * 1.26, h, w * .26, 0, w, h);
+  // phones: the card covers the lower half, so the subject sits in the band between the header and the card
+  if (SP) camera.setViewOffset(w, h * 1.44, 0, h * .44, w, h); else camera.setViewOffset(w * 1.28, h, w * .28, 0, w, h);
   camera.updateProjectionMatrix();
   GLOW_SCALE.value = h * renderer.getPixelRatio() / (2 * Math.tan(camera.fov * Math.PI / 360));
   composer.c.setPixelRatio(DPR); composer.c.setSize(w, h);
@@ -1552,11 +1633,21 @@ function frame(now) {
   /* html overlays */
   const intro0 = shown < TL[0].t1 * .8;
   intro.classList.toggle('off', !intro0); cloudsEl.classList.toggle('open', shown > .004);
+  document.documentElement.classList.toggle('at-intro', intro0);
   panels.forEach(pn => { const i = STOPS.findIndex(s => s.id === pn.dataset.stop); let on = false; if (J.dwell !== null && J.stop === i) on = pn.dataset.stop === 'goal' ? gd > .55 : J.dwell > .04 && J.dwell < .97; pn.classList.toggle('on', on); });
   const cur = J.stop >= 0 ? J.stop : J.from; routeDots.forEach((d, i) => { d.classList.toggle('on', i <= cur); d.classList.toggle('now', i === J.stop); });
   routeBar.style.transform = 'scaleX(' + J.s.toFixed(4) + ')';
   const w = innerWidth, h = innerHeight;
-  const proj = (p, el, show) => { tmpA.copy(p).project(camera); const vis = show && tmpA.z < 1 && Math.abs(tmpA.x) < 1.1 && Math.abs(tmpA.y) < 1.1; el.style.opacity = vis ? 1 : 0; if (vis) el.style.transform = `translate(${((tmpA.x + 1) / 2 * w).toFixed(1)}px,${((1 - tmpA.y) / 2 * h).toFixed(1)}px) translate(-50%,-100%)`; };
+  // labels never sit on top of the header, the open card or the route bar
+  const blockers = [];
+  { const pn = panels.find(x => x.classList.contains('on')); if (pn) blockers.push(pn.getBoundingClientRect()); const rt = document.querySelector('.route'); if (rt && rt.offsetParent !== null && rt.offsetHeight > 8) blockers.push(rt.getBoundingClientRect()); }
+  const headerH = SP ? 92 : 78;
+  const proj = (p, el, show) => { tmpA.copy(p).project(camera); let vis = show && tmpA.z < 1 && Math.abs(tmpA.x) < 1.02 && Math.abs(tmpA.y) < 1.02;
+    const x = (tmpA.x + 1) / 2 * w, y = (1 - tmpA.y) / 2 * h;
+    if (vis) { const hw = (el.offsetWidth || 90) / 2 + 6, hh = (el.offsetHeight || 34) + 10;
+      if (y - hh < headerH || x - hw < 4 || x + hw > w - 4) vis = false;
+      for (const r of blockers) if (x + hw > r.left && x - hw < r.right && y > r.top - 4 && y - hh < r.bottom) vis = false; }
+    el.style.opacity = vis ? 1 : 0; el.style.pointerEvents = vis ? '' : 'none'; if (vis) el.style.transform = `translate(${x.toFixed(1)}px,${y.toFixed(1)}px) translate(-50%,-100%)`; };
   // in the final overview every stop gets a clickable label, like a map of the site
   const over = J.stop === goalI && gd > .72;
   // otherwise only the stop we are at (or arriving at) is labelled
