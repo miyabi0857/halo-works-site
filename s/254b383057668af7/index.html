@@ -22,7 +22,8 @@
 /* たたき台：Gear Bloom
    ヒーローは 案1（参考：なごりおしい夜 / きたがわ）の「夕暮れの灯りの中へ入る」＋
    案2（参考：はちとワルツ）の「左右を止めて中央だけ流す構成」「写真が窓に収まる」。
-   灯りが広がって、思い出の写真を照らす行灯になる。暗いのは入口の夕暮れだけ。
+   夕暮れの家の明かりが広がって、思い出の写真を照らす行灯になる。暗いのは入口の夕暮れだけ。
+   ※2026-10-07 火葬のサイトで「火」「灯り」は火葬の火に読めるため、炎・火の粉・「灯り」の言葉は使わない。光は「家の窓の明かり」として見せる
    ※アーチ形は zakka koti と同じになるので使わず、行灯の形にしている */
 :root{--paper:#f6f0e6;--paper2:#efe6d8;--ink:#3b302a;--sub:#86766b;--ember:#cf6f37;--rule:#d9cbb9;--dusk1:#8f8296;--dusk2:#d9b9a6;--dusk3:#f1d9c3;--side:200px}
 *{box-sizing:border-box;margin:0}
@@ -47,20 +48,17 @@ html.js .side{opacity:var(--b,0)}
 .pin{height:360vh;position:relative}
 .stage{position:sticky;top:0;height:100svh;overflow:hidden}
 .dusk{position:absolute;inset:0;background:linear-gradient(180deg,var(--dusk1) 0%,var(--dusk2) 62%,var(--dusk3) 100%);opacity:calc(1 - var(--a,0))}
-html:not(.js) .dusk,html:not(.js) .glow,html:not(.js) .fire,html:not(.js) .hint,html:not(.js) .top{display:none}
+html:not(.js) .dusk,html:not(.js) .glow,html:not(.js) .lamp,html:not(.js) .hint,html:not(.js) .top{display:none}
 .glow{position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;
   background:radial-gradient(circle,rgba(255,226,182,.75) 0%,rgba(255,206,160,.35) 22%,rgba(255,196,150,.12) 45%,rgba(255,196,150,0) 68%);
   transform:scale(calc(1 + var(--a,0) * 8));opacity:calc(1 - var(--b,0))}
-.fire{position:absolute;left:50%;top:50%;width:0;height:0;opacity:calc(1 - var(--a,0) * 2.5)}
-.core{position:absolute;left:-7px;top:-10px;width:14px;height:20px;border-radius:50% 50% 50% 50% / 60% 60% 40% 40%;
-  background:radial-gradient(ellipse at 50% 65%,#fffdf6 0%,#ffe0a8 40%,#ffa75c 85%,rgba(255,140,70,0) 100%);
-  box-shadow:0 0 10px 3px rgba(255,200,130,.95),0 0 34px 10px rgba(255,150,80,.55),0 0 90px 30px rgba(255,140,80,.25);
-  animation:flick 3.1s ease-in-out infinite,flick2 1.7s ease-in-out infinite}
-@keyframes flick{0%,100%{transform:scale(1)}30%{transform:scale(1.12)}55%{transform:scale(.94)}80%{transform:scale(1.06)}}
-@keyframes flick2{0%,100%{opacity:1}40%{opacity:.86}70%{opacity:.95}}
-.sparks i{position:absolute;left:var(--x);top:-14px;width:var(--s);height:var(--s);border-radius:50%;background:#ffc27a;
-  box-shadow:0 0 6px 2px rgba(255,150,70,.8);opacity:0;animation:rise var(--t) var(--d) ease-out infinite}
-@keyframes rise{0%{opacity:0;transform:translate(0,0)}15%{opacity:.95}55%{opacity:.75;transform:translate(8px,-120px)}100%{opacity:0;transform:translate(-6px,-250px)}}
+.lamp{position:absolute;left:50%;top:50%;width:18px;height:24px;margin:-12px 0 0 -9px;border-radius:3px;
+  background:linear-gradient(180deg,#fff8e8,#ffe2b2);box-shadow:0 0 12px 3px rgba(255,214,160,.8),0 0 48px 14px rgba(255,190,140,.35);
+  opacity:calc(1 - var(--a,0) * 2.5);animation:breathe 5s ease-in-out infinite}
+.lamp::before,.lamp::after{content:"";position:absolute;background:rgba(150,110,85,.45)}
+.lamp::before{left:50%;top:0;bottom:0;width:1px}
+.lamp::after{top:50%;left:0;right:0;height:1px}
+@keyframes breathe{0%,100%{filter:brightness(1)}50%{filter:brightness(1.08)}}
 .top{position:absolute;left:28px;top:22px;font-family:"Kaisei Opti",serif;font-weight:700;font-size:20px;letter-spacing:.12em;color:#fff7ef;opacity:calc(1 - var(--b,0) * 2);z-index:3}
 .hint{position:absolute;left:0;right:0;bottom:40px;text-align:center;color:#fff7ef;font-size:13px;letter-spacing:.2em;opacity:calc(1 - var(--a,0) * 4)}
 .hint::after{content:"";display:block;width:1px;height:38px;margin:12px auto 0;background:#fff7ef;animation:drop 2s infinite}
@@ -102,24 +100,24 @@ html.js .rv.in{opacity:1;transform:none}
 .prep div{border:1px dashed var(--rule);border-radius:14px;padding:18px 20px;font-size:13px;color:var(--sub);line-height:1.8}
 .prep b{display:block;color:var(--ink);font-size:14px;font-weight:500}
 
-/* その日の流れ：灯りが一つずつ点いていく道のり */
+/* その日の流れ：読み進めた所の点に色が入る（光らせない） */
 .flow{list-style:none;padding:0;margin-top:44px;position:relative}
 .flow::before{content:"";position:absolute;left:11px;top:8px;bottom:8px;width:1px;background:var(--rule)}
-.flow::after{content:"";position:absolute;left:11px;top:8px;width:1px;height:calc(var(--fp,0) * (100% - 16px));background:var(--ember)}
+.flow::after{content:"";position:absolute;left:11px;top:8px;width:1px;height:calc(var(--fp,0) * (100% - 16px));background:#b9a38f}
 .flow li{position:relative;padding:0 0 34px 48px}
 .flow li:last-child{padding-bottom:0}
 .flow .dot{position:absolute;left:4px;top:7px;width:15px;height:15px;border-radius:50%;background:var(--paper);border:1px solid var(--rule);transition:background .6s,box-shadow .6s,border-color .6s}
-.flow li.lit .dot{background:#ffd9a6;border-color:#f0a866;box-shadow:0 0 0 4px rgba(255,200,140,.25),0 0 18px 4px rgba(255,170,100,.45)}
+.flow li.lit .dot{background:#d9c3ad;border-color:#b9a38f}
 .flow h3{font-size:16px;font-weight:500;letter-spacing:.08em}
 .flow p{font-size:14px;color:var(--sub);margin-top:4px}
 
-/* よくあるご不安：問いを開くと、答えの場所が灯る */
+/* よくあるご不安：問いを開くと、答えが出る */
 .qa{margin-top:40px;border-top:1px solid var(--rule)}
 .qa details{border-bottom:1px solid var(--rule)}
 .qa summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:20px;padding:22px 4px;font-size:16px;letter-spacing:.06em}
 .qa summary::-webkit-details-marker{display:none}
 .qa summary::after{content:"";flex:none;width:9px;height:9px;border-radius:50%;background:var(--rule);transition:background .4s,box-shadow .4s}
-.qa details[open] summary::after{background:#ffbf80;box-shadow:0 0 12px 3px rgba(255,170,100,.55)}
+.qa details[open] summary::after{background:var(--sub)}
 .qa .ans{padding:0 4px 24px;font-size:14px;color:var(--sub)}
 .qa .ans p + p{margin-top:8px}
 
@@ -133,7 +131,7 @@ footer{margin:0 var(--side);border-left:1px solid var(--rule);border-right:1px s
 footer b{display:block;font-family:"Kaisei HarunoUmi",serif;font-size:24px;color:var(--ink);letter-spacing:.16em;margin-bottom:6px}
 .note{position:fixed;right:12px;bottom:10px;font-size:10px;color:#9b8b80;z-index:9}
 
-@media (prefers-reduced-motion:reduce){.core,.sparks i,.hint::after{animation:none}.sparks{display:none}}
+@media (prefers-reduced-motion:reduce){.lamp,.hint::after{animation:none}}
 @media (max-width:860px){
   :root{--side:0px}
   .side.l{display:none}
@@ -163,14 +161,14 @@ footer b{display:block;font-family:"Kaisei HarunoUmi",serif;font-size:24px;color
   <div class="stage" id="stage">
     <div class="dusk"></div>
     <div class="glow"></div>
-    <div class="fire" aria-hidden="true"><span class="core"></span><span class="sparks"><i style="--x:-14px;--d:0s;--t:3.6s;--s:3px"></i><i style="--x:10px;--d:.7s;--t:4.2s;--s:2px"></i><i style="--x:-4px;--d:1.5s;--t:3.2s;--s:2.5px"></i><i style="--x:16px;--d:2.2s;--t:4.6s;--s:2px"></i><i style="--x:-20px;--d:2.9s;--t:3.9s;--s:2px"></i><i style="--x:4px;--d:3.5s;--t:4.4s;--s:3px"></i><i style="--x:-9px;--d:4.1s;--t:3.5s;--s:2px"></i><i style="--x:22px;--d:4.8s;--t:4s;--s:2.5px"></i></span></div>
+    <div class="lamp" aria-hidden="true"></div>
     <p class="top">かがりび</p>
-    <p class="hint">灯りのほうへ</p>
+    <p class="hint">ゆっくりと、下へ</p>
     <div class="hcenter">
       <div class="andon"><div class="ph"><img src="https://images.unsplash.com/photo-1600232943148-b4b5e339e572?w=900&q=75&auto=format&fit=crop" alt="（仮の写真）海を見て座る犬"></div></div>
       <div class="hcopy">
-        <h1>大切な家族の、<br>最後の時間に<em>灯り</em>を。</h1>
-        <p>ご自宅の近くまで、お迎えにうかがいます。<br>住み慣れた場所で、家族みんなで見送れるように。</p>
+        <h1>住み慣れた家のそばで、<br><em>ありがとう</em>を伝える時間を。</h1>
+        <p>ご自宅の近くまで、お迎えにうかがいます。<br>家族みんなで、ゆっくりお別れができるように。</p>
       </div>
     </div>
   </div>
@@ -249,7 +247,7 @@ footer b{display:block;font-family:"Kaisei HarunoUmi",serif;font-size:24px;color
   };
   const hero = () => { const r = pin.getBoundingClientRect(); return cl(-r.top / (pin.offsetHeight - innerHeight)); };
 
-  // その日の流れ：線が伸び、通った所の灯りが点く
+  // その日の流れ：線が伸び、通った所の点に色が入る
   const flow = document.getElementById('flow'), lis = [...flow.children];
   const flowStep = () => {
     const r = flow.getBoundingClientRect(), fp = cl((innerHeight * .7 - r.top) / r.height);
