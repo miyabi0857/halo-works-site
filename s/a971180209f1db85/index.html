@@ -53,6 +53,7 @@ body{background:var(--bg);color:var(--ink);font-family:"Zen Kaku Gothic New",san
 /* 縦の短い画面（ノートPC・OGP）で、縦書きのコピーが大きな T と重ならないように */
 @media (min-width:761px){.v{top:max(46svh,calc(9svh + 19.5vw + 24px));bottom:calc(5svh + 60px);flex-wrap:wrap}}
 @media (min-width:761px) and (max-height:700px){.v p{display:none}}
+.ph{background:url("https://images.unsplash.com/photo-1722011865035-c32d53dfc543?w=1800&q=75&auto=format&fit=crop") center 40%/cover;filter:grayscale(1) contrast(1.1)}
 /* ---------- 本体 ---------- */
 html{scroll-behavior:smooth}
 .sec{max-width:1120px;margin:0 auto;padding:130px 6vw 110px}
@@ -125,28 +126,7 @@ footer b{display:block;font-family:"Playfair Display",serif;font-size:34px;lette
 <section class="hero">
   <div class="top"><span>TOTAL AUTO BEAUTY SALON</span><span>ISAHAYA, NAGASAKI</span></div>
   <p class="big"><span class="clip"><span>T</span><span>-</span><span>W</span><span>A</span><span>X</span><span>.</span></span></p>
-  <div class="ph" id="stage"><svg id="paint" preserveAspectRatio="none" viewBox="0 0 1000 600" aria-label="黒い塗装面に映る光の線。左は施工前、右は施工後">
-      <defs>
-        <linearGradient id="body" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#15171b"/><stop offset=".55" stop-color="#050506"/><stop offset="1" stop-color="#0d0e11"/></linearGradient>
-        <!-- 施工前：細かな洗車傷（渦）とくすみで、光がにじんで乱れる -->
-        <filter id="dull" x="-10%" y="-10%" width="120%" height="120%">
-          <feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="3" result="n"/>
-          <feDisplacementMap in="SourceGraphic" in2="n" scale="16" xChannelSelector="R" yChannelSelector="G" result="d"/>
-          <feGaussianBlur in="d" stdDeviation="3.2"/>
-        </filter>
-        <filter id="glow"><feGaussianBlur stdDeviation="1.2"/></filter>
-        <pattern id="swirl" width="70" height="70" patternUnits="userSpaceOnUse">
-          <circle cx="35" cy="35" r="30" fill="none" stroke="rgba(255,255,255,.05)" stroke-width=".6"/>
-          <circle cx="35" cy="35" r="19" fill="none" stroke="rgba(255,255,255,.04)" stroke-width=".6"/>
-          <circle cx="12" cy="58" r="12" fill="none" stroke="rgba(255,255,255,.04)" stroke-width=".5"/>
-        </pattern>
-        <clipPath id="L"><rect x="0" y="0" width="500" height="600"/></clipPath>
-        <clipPath id="R"><rect x="500" y="0" width="500" height="600"/></clipPath>
-      </defs>
-      <rect width="1000" height="600" fill="url(#body)"/>
-      <g clip-path="url(#L)"><rect width="1000" height="600" fill="url(#swirl)"/><rect width="1000" height="600" fill="rgba(160,150,135,.06)"/><g id="barsL" filter="url(#dull)" opacity=".6"></g><rect width="1000" height="600" fill="url(#swirl)" opacity="1.6"/></g>
-      <g clip-path="url(#R)"><g id="barsR" filter="url(#glow)"></g></g>
-    </svg><span class="lab l">BEFORE ／ 施工前</span><span class="lab r">AFTER ／ 施工後</span><i class="seam"></i><p class="hint">動かすと、光が動きます</p></div>
+  <div class="ph" role="img" aria-label="（仮の写真）暗がりに浮かぶ車体"></div>
   <div class="v"><h1>一台ずつ、<br>向き合う。</h1><p>完全予約制のカーサロン</p></div>
   <a class="cta" href="#diag">無料診断を予約する</a>
 </section>
@@ -235,28 +215,7 @@ footer b{display:block;font-family:"Playfair Display",serif;font-size:34px;lette
   </div>
 </section>
 <footer><b>T-WAX.</b>TOTAL AUTO BEAUTY SALON｜長崎県諫早市高来町</footer>
-<p class="note">Gear Bloom がお作りしたたたき台です。写真は仮のもの、映り込みと断面はイメージです</p>
-<script>
-(() => {
-  const NS = 'http://www.w3.org/2000/svg', L = document.getElementById('barsL'), R = document.getElementById('barsR'), stage = document.getElementById('stage');
-  // 天井の蛍光灯が、ボンネットに斜めに映った光の線（投稿の動画と同じ並び）
-  const bars = [[120, 120, 230], [330, 90, 260], [560, 150, 220], [760, 110, 250], [210, 330, 280], [470, 300, 250], [700, 350, 270], [120, 500, 240], [420, 480, 300], [760, 520, 230]];
-  const mk = g => bars.map(() => { const r = document.createElementNS(NS, 'rect'); r.setAttribute('height', 9); r.setAttribute('rx', 4.5); r.setAttribute('fill', '#fbfaf6'); g.appendChild(r); return r; });
-  const bl = mk(L), br = mk(R);
-  let tx = 0, ty = 0, x = 0, y = 0, t = 0;
-  const place = () => {
-    bars.forEach(([bx, by, w], i) => {
-      const X = bx + x * 60 + Math.sin(t / 2600 + i) * 6, Y = by + y * 30;
-      for (const r of [bl[i], br[i]]) { r.setAttribute('x', X); r.setAttribute('y', Y); r.setAttribute('width', w); r.setAttribute('transform', `rotate(-17 ${X + w / 2} ${Y})`); }
-    });
-  };
-  const move = (cx, cy) => { const b = stage.getBoundingClientRect(); tx = (cx - b.left) / b.width - .5; ty = (cy - b.top) / b.height - .5; };
-  addEventListener('pointermove', e => move(e.clientX, e.clientY));
-  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const loop = now => { t = now; const idle = now / 4000; if (!still) { x += ((tx || Math.sin(idle) * .35) - x) * .06; y += ((ty || Math.cos(idle * .7) * .2) - y) * .06; } place(); requestAnimationFrame(loop); };
-  requestAnimationFrame(loop);
-})();
-</script>
+<p class="note">Gear Bloom がお作りしたたたき台です。写真は仮のもの、断面はイメージです</p>
 <script>
 (() => {
   document.documentElement.classList.add('js');
