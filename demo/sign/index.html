@@ -1,0 +1,312 @@
+<!doctype html>
+<html lang="ja"><head>
+<script>document.documentElement.className += " js";</script><meta charset="utf-8">
+<title>みなと看板工房｜看板・サイン・カーラッピング</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="輪をくぐると壁一面にステッカーが貼られていく、看板屋という設定のサンプルです。 ※これはGear Bloomの制作サンプルで、実在しない店舗です。">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Gear Bloom">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:title" content="みなと看板工房｜看板・サイン・カーラッピング">
+<meta property="og:description" content="Gear Bloomの制作サンプル（架空のお店）。輪をくぐると壁一面にステッカーが貼られていく、看板屋という設定のサンプルです。">
+<meta property="og:url" content="https://gearbloom.jp/demo/sign/">
+<meta property="og:image" content="https://gearbloom.jp/demo/sign/ogp.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@500;700;800&family=Dela+Gothic+One&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#e5222a;--yel:#f7c600;--grn:#1fa24a;--blu:#1f86d6;--ink:#141414;--paper:#f6f3ec;--mute:#6f6a60;
+  --en:"Archivo Black",sans-serif;--en2:"Archivo",sans-serif;--disp:"Dela Gothic One",sans-serif;--jp:"Zen Kaku Gothic New",sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--jp);color:var(--ink);background:var(--paper);line-height:1.8;overflow-x:clip}main{overflow-x:clip}
+a{color:inherit}
+.top{position:fixed;inset:0 0 auto 0;z-index:40;display:flex;justify-content:space-between;align-items:center;padding:16px clamp(14px,3vw,36px);pointer-events:none}
+.top>*{pointer-events:auto}
+.logo{display:flex;align-items:center;gap:.5em;text-decoration:none;background:var(--paper);border-radius:99px;padding:.45em 1em}
+.logo .w{font-family:var(--en);font-size:1.05rem;letter-spacing:.04em}
+.logo .d{display:grid;gap:2px}
+.logo .d i{display:block;width:6px;height:6px;border-radius:50%}
+.logo small{font-weight:700;font-size:.7rem;letter-spacing:.08em;color:var(--mute)}
+.tel{font-family:var(--en2);font-weight:800;text-decoration:none;background:var(--ink);color:#fff;border-radius:99px;padding:.5em 1.1em;font-size:.86rem;letter-spacing:.04em}
+.c1{background:var(--red)}.c2{background:var(--yel)}.c3{background:var(--grn)}.c4{background:var(--blu)}
+.after{min-height:60vh;display:grid;place-items:center;background:#ebe7de;color:var(--mute);font-size:.9rem}
+@media (max-width:640px){.logo small{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.stk{position:absolute;z-index:5;translate:-50% -50%;rotate:var(--r);display:inline-flex;align-items:center;gap:.4em;white-space:nowrap;
+  font-family:var(--en2);font-weight:800;letter-spacing:.02em;border:3px solid #fff;box-shadow:0 6px 0 rgba(0,0,0,.12),0 10px 22px rgba(0,0,0,.18);
+  opacity:0;scale:2.2;animation:slap .42s cubic-bezier(.2,1.6,.4,1) var(--d) forwards;cursor:grab;user-select:none;touch-action:none}
+@keyframes slap{0%{opacity:0;scale:2.2}60%{opacity:1}100%{opacity:1;scale:1}}
+.stk.pill{border-radius:99px;padding:.45em 1.1em;font-size:clamp(.8rem,1.3vw,1.05rem);color:#fff}
+.stk.round{border-radius:50%;width:clamp(80px,9vw,120px);aspect-ratio:1;justify-content:center;text-align:center;font-size:clamp(.72rem,1vw,.9rem);line-height:1.15;color:#fff;white-space:normal}
+.stk.jp{font-family:var(--disp);font-weight:400;border-radius:12px;padding:.35em .8em;font-size:clamp(1rem,1.9vw,1.5rem);background:#fff;color:var(--ink);border-color:var(--ink)}
+.stk.arrow{background:var(--yel);color:var(--ink);padding:.4em 1.4em .4em 1em;clip-path:polygon(0 0,86% 0,100% 50%,86% 100%,0 100%);border:0;font-size:clamp(.8rem,1.2vw,1rem);box-shadow:none;filter:drop-shadow(0 6px 10px rgba(0,0,0,.2))}
+.stk.photo{padding:0;border:6px solid #fff;border-radius:6px;width:clamp(110px,13vw,190px);aspect-ratio:1;overflow:hidden}
+.stk.photo img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+.stk.c2{color:var(--ink)}
+.stk.dragging{cursor:grabbing;z-index:20;box-shadow:0 14px 0 rgba(0,0,0,.1),0 24px 40px rgba(0,0,0,.25)}
+
+.cb{position:relative;height:360vh;background:var(--paper)}
+.cb .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;place-items:center}
+.cb .rings{position:absolute;width:min(150vmax,1500px);left:50%;top:50%;translate:-50% -50%;scale:var(--z,1)}
+.cb .ring{transform-origin:0 0;animation:grow 1.3s cubic-bezier(.2,.8,.2,1) calc(.5s + var(--i)*.14s) both, spin calc(60s + var(--i)*14s) linear infinite}
+.cb .ring:nth-child(odd){animation-direction:normal,reverse}
+@keyframes grow{from{scale:0}to{scale:1}}
+@keyframes spin{to{rotate:360deg}}
+.cb .rt{font-family:var(--disp);font-size:18px;letter-spacing:.06em}
+.cb .rt.en{font-family:var(--en);font-size:17px;letter-spacing:.1em}
+.cb .core{animation:grow .9s cubic-bezier(.2,1.4,.4,1) .2s both}
+.cb .dot{position:absolute;left:50%;top:50%;width:26px;height:26px;border-radius:50%;background:var(--red);translate:-50% -50%;animation:pop 1s ease both}
+@keyframes pop{0%{scale:0}40%{scale:1.4}70%{scale:1}100%{scale:30;opacity:0}}
+.cb .center{position:relative;z-index:4;text-align:center;width:min(92vw,560px);border-radius:50%;aspect-ratio:1;display:grid;place-content:center;padding:8%;opacity:var(--co,1);scale:calc(1 + (var(--z,1) - 1) * .35);animation:grow 1s cubic-bezier(.2,1.3,.4,1) 1.1s both}
+.cb .center .ttl{font-family:var(--disp);font-size:clamp(1.5rem,3.3vw,2.8rem);white-space:nowrap;line-height:1.25;letter-spacing:.02em}
+.cb .center .ttl em{font-style:normal;background:linear-gradient(transparent 62%,var(--yel) 62%)}
+.cb .center p{margin-top:.8em;font-size:clamp(.82rem,1.1vw,.98rem);font-weight:700}
+.cb .center .en{font-family:var(--en);font-size:.8rem;letter-spacing:.2em;color:var(--mute);margin-top:.8em}
+.cb .wall{position:absolute;inset:0;z-index:6;background:#fff;background-image:radial-gradient(#e9e4d8 1.2px,transparent 1.3px);background-size:22px 22px;opacity:var(--w,0);pointer-events:none}
+.cb .wall.live{pointer-events:auto}
+.cb .stk{touch-action:pan-y;-webkit-touch-callout:none;animation:none;opacity:0;scale:2.2;transition:opacity .2s, scale .42s cubic-bezier(.2,1.6,.4,1)}
+.cb .stk.on{opacity:1;scale:1}
+.cb .stk:not(.on){pointer-events:none}
+.cb .word{position:absolute;left:50%;top:50%;translate:-50% -50%;z-index:10;text-align:center;pointer-events:none;opacity:0;transition:opacity .5s}
+.cb .word.on{opacity:1}
+.cb .word .big{font-family:var(--en);font-size:clamp(3.4rem,13vw,12rem);line-height:.9;letter-spacing:-.01em;display:flex;align-items:center;gap:.14em;justify-content:center}
+.cb .word .big>span:not(.dots){background:#fff;padding:0 .08em}
+.cb .word .big .dots{display:grid;gap:.06em}
+.cb .word .big .dots i{display:block;width:.16em;height:.16em;border-radius:50%;translate:0 -80vh;transition:translate .7s cubic-bezier(.3,1.6,.5,1)}
+.cb .word.on .big .dots i{translate:0 0}
+.cb .word.on .big .dots i:nth-child(2){transition-delay:.15s}.cb .word.on .big .dots i:nth-child(3){transition-delay:.3s}.cb .word.on .big .dots i:nth-child(4){transition-delay:.45s}
+.cb .word p{display:inline-block;margin-top:.8em;background:var(--ink);color:#fff;font-family:var(--disp);font-size:clamp(1.1rem,2.4vw,1.8rem);padding:.25em .9em}
+.cb .hint{position:absolute;left:50%;bottom:18px;translate:-50% 0;z-index:12;font-weight:700;font-size:.8rem;background:var(--ink);color:#fff;border-radius:99px;padding:.35em 1.1em;white-space:nowrap;transition:opacity .4s}
+.cb .hint.y{background:var(--yel);color:var(--ink)}
+@media (max-width:640px){.cb .rings{width:230vmax}.cb .center{width:84vw}}
+@media (prefers-reduced-motion:reduce){.cb{height:auto}.cb .pin{position:relative}.cb .rings,.cb .center{display:none}.cb .wall{position:relative;height:100svh;opacity:1}.cb .stk,.cb .word{opacity:1;scale:1}.cb .word .big .dots i{translate:0 0}}
+
+.sec{position:relative;padding:clamp(90px,11vw,150px) clamp(16px,5vw,80px);overflow-x:clip}
+.kick{display:inline-flex;align-items:center;gap:.6em;font-family:var(--en);font-size:.8rem;letter-spacing:.2em}
+.kick i{display:inline-block;width:10px;height:10px;border-radius:50%}
+.h2{font-family:var(--disp);font-weight:400;font-size:clamp(1.8rem,4vw,3.2rem);line-height:1.3;margin-top:.4em}
+.lead{margin-top:1em;max-width:30em;font-weight:500}
+html.js .rv{opacity:0;translate:0 24px;transition:opacity .8s ease, translate .8s cubic-bezier(.2,.8,.2,1)}
+html.js .rv.is-in{opacity:1;translate:0 0}
+
+.msg{background:var(--ink);color:#fff;text-align:center}
+.msg .kick{color:var(--yel)}
+.msg .h2 span{display:inline-block}
+.msg .h2 .u{background:linear-gradient(transparent 64%,var(--red) 64%)}
+.msg .lead{margin:1.4em auto 0;color:#ddd}
+.msg .dots{display:flex;justify-content:center;gap:14px;margin-top:40px}
+.msg .dots i{width:14px;height:14px;border-radius:50%;animation:bob 1.6s ease-in-out infinite}
+.msg .dots i:nth-child(2){animation-delay:.15s}.msg .dots i:nth-child(3){animation-delay:.3s}.msg .dots i:nth-child(4){animation-delay:.45s}
+@keyframes bob{50%{translate:0 -10px}}
+
+.serv{padding:0}
+.sx{position:relative;height:calc(var(--n) * 85vh + 100vh)}
+.sx .pin{position:sticky;top:0;height:100svh;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto;padding:84px clamp(16px,5vw,80px) 22px;gap:14px}
+.sx .hd{display:flex;align-items:end;justify-content:space-between;gap:10px}
+.sx .hd .h2{margin-top:.1em}
+.sx .count{font-family:var(--en);font-size:clamp(1rem,2vw,1.4rem)}
+.sx .count b{font-size:1.6em}
+.deck{position:relative}
+.panel{position:absolute;top:0;bottom:0;left:calc(var(--i) * 12px);right:calc((var(--n) - 1 - var(--i)) * 12px);border-radius:22px;overflow:hidden;background:#111;color:#fff;border:3px solid var(--ink);box-shadow:-14px 0 30px rgba(0,0,0,.2);display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);translate:calc(var(--x,1) * 115%) 0;rotate:calc(var(--x,1) * 8deg)}
+.panel:first-child{--x:0}
+.panel .ph{position:relative;overflow:hidden}
+.panel .ph img{width:100%;height:100%;object-fit:cover}
+.panel .tx{position:relative;padding:clamp(22px,4vw,56px);display:flex;flex-direction:column;justify-content:flex-end;background:var(--bg)}
+.panel .no{position:absolute;right:clamp(16px,3vw,36px);top:clamp(10px,2vw,24px);font-family:var(--en);font-size:clamp(3.4rem,9vw,8rem);line-height:1;color:rgba(255,255,255,.16)}
+.panel .tx b{font-family:var(--disp);font-weight:400;font-size:clamp(1.7rem,3.6vw,3rem);line-height:1.2}
+.panel .tx small{display:block;margin-top:.4em;font-family:var(--en);letter-spacing:.2em;font-size:.76rem;opacity:.8}
+.panel .tx p{margin-top:.9em;font-weight:500;max-width:22em}
+.panel.dark .tx{color:var(--ink)}
+.panel.dark .no{color:rgba(0,0,0,.12)}
+.panel .lbl{position:absolute;left:clamp(14px,3vw,34px);top:clamp(14px,3vw,34px);z-index:2;font-family:var(--en2);font-weight:800;color:#fff;border:3px solid #fff;border-radius:99px;padding:.45em 1.2em;box-shadow:0 6px 0 rgba(0,0,0,.14),0 10px 22px rgba(0,0,0,.25);rotate:-6deg;opacity:0;scale:2.2;transition:opacity .2s, scale .45s cubic-bezier(.2,1.6,.4,1)}
+.panel.in .lbl{opacity:1;scale:1}
+.sx .hint{font-size:.78rem;color:var(--mute);text-align:center}
+.belt-wrap{padding:0 clamp(16px,5vw,80px) clamp(70px,8vw,110px)}
+.belt{margin:clamp(10px,3vw,30px) calc(-1 * clamp(16px,5vw,80px)) 0;background:var(--ink);color:#fff;overflow:hidden;padding:18px 0;rotate:-2deg}
+.belt .row{display:flex;gap:14px;width:max-content;animation:belt 36s linear infinite}
+.belt span{font-weight:700;border:2px solid #fff;border-radius:99px;padding:.3em 1.1em;white-space:nowrap}
+.belt span:nth-child(4n+1){background:var(--red);border-color:var(--red)}.belt span:nth-child(4n+3){background:var(--blu);border-color:var(--blu)}
+@keyframes belt{to{translate:-50% 0}}
+.belt-note{margin-top:18px;font-size:.78rem;color:var(--mute)}
+@media (max-width:760px){
+  .sx .pin{padding-top:76px}
+  .panel{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;left:calc(var(--i) * 6px);right:calc((var(--n) - 1 - var(--i)) * 6px)}
+  .panel .tx{padding:18px 18px 22px}
+  .panel .tx p{font-size:.9rem}
+}
+@media (prefers-reduced-motion:reduce){.sx{height:auto}.sx .pin{position:relative;height:auto}.deck{display:grid;gap:16px}.panel{position:relative;translate:none;rotate:none;left:0;right:0;height:70vh}.panel .lbl{opacity:1;scale:1}.belt .row{animation:none}}
+
+.works{background:var(--paper)}
+.works .tags{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.works .tags a{text-decoration:none;font-weight:800;font-family:var(--en2);color:#fff;border:3px solid #fff;border-radius:99px;padding:.5em 1.2em;box-shadow:0 5px 0 rgba(0,0,0,.12),0 8px 16px rgba(0,0,0,.14);transition:rotate .2s}
+.works .tags a:nth-child(odd){rotate:-2deg}.works .tags a:nth-child(even){rotate:2deg}
+.works .tags a:hover{rotate:0deg}
+.works .strip{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:40px}
+.works .strip figure{margin:0;border:6px solid #fff;border-radius:6px;box-shadow:0 10px 24px rgba(0,0,0,.15);aspect-ratio:1;overflow:hidden}
+.works .strip figure:nth-child(1){rotate:-3deg}.works .strip figure:nth-child(2){rotate:2deg}.works .strip figure:nth-child(3){rotate:-1deg}.works .strip figure:nth-child(4){rotate:3deg}
+.works .strip img{width:100%;height:100%;object-fit:cover}
+.works .note{margin-top:22px;font-size:.8rem;color:var(--mute)}
+
+.contact{background:var(--yel)}
+.contact .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,5vw,70px);align-items:start}
+.bigtel{display:inline-flex;align-items:center;gap:.4em;margin-top:24px;font-family:var(--en);font-size:clamp(1.8rem,4.6vw,3.4rem);text-decoration:none;background:var(--ink);color:#fff;border-radius:18px;padding:.25em .6em;box-shadow:6px 6px 0 #fff}
+.contact dl{margin-top:26px;border-top:3px solid var(--ink)}
+.contact dl div{display:grid;grid-template-columns:6.5em 1fr;gap:10px;padding:12px 0;border-bottom:2px solid rgba(20,20,20,.25);font-weight:500}
+.contact dt{font-family:var(--en);font-size:.78rem;letter-spacing:.14em;padding-top:.2em}
+.contact .map{aspect-ratio:4/3;border:3px solid var(--ink);border-radius:18px;overflow:hidden;box-shadow:8px 8px 0 var(--ink);background:#fff}
+.contact .map iframe{width:100%;height:100%;border:0}
+.contact .ig{display:inline-block;margin-top:20px;font-weight:700;text-decoration:none;border-bottom:3px solid var(--ink)}
+.foot{background:var(--ink);color:#fff;text-align:center;padding:56px 18px}
+.foot .w{font-family:var(--en);font-size:2rem;display:inline-flex;align-items:center;gap:.3em}
+.foot .w span{display:grid;gap:3px}.foot .w span i{width:8px;height:8px;border-radius:50%;display:block}
+.foot p{margin-top:12px;font-size:.78rem;color:#bbb;line-height:1.9}
+@media (max-width:860px){
+  .serv .grid{grid-template-columns:1fr 1fr}.card.wide{grid-column:span 2}
+  .sim .wrap,.contact .wrap{grid-template-columns:1fr}
+  .works .strip{grid-template-columns:1fr 1fr}
+}
+@media (max-width:480px){.serv .grid{gap:12px}.card{padding:16px 14px 14px;border-radius:14px;box-shadow:4px 4px 0 var(--ink)}.card .ic{width:42px;height:42px}.card b{font-size:1rem}.card p{font-size:.8rem}}
+@media (prefers-reduced-motion:reduce){html.js .rv{opacity:1;translate:none}}
+</style></head><body>
+<header class="top"><a class="logo" href="#"><span class="w">MINATO SIGN</span><span class="d"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></span><small>みなと看板工房</small></a><a class="tel" href="tel:0000000000">000-000-0000</a></header>
+<main><section class="cb" id="cb"><div class="pin"><span class="dot"></span><svg class="rings" viewBox="-360 -360 720 720" aria-hidden="true"><g class="ring" style="--i:3"><circle r="276" fill="none" stroke="var(--blu)" stroke-width="44"/>
+<path id="rprings3" d="M -276 0 a 276 276 0 1 1 552 0 a 276 276 0 1 1 -552 0" fill="none"/>
+<text class="rt" fill="#fff" dy="6"><textPath href="#rprings3" textLength="1730.7" lengthAdjust="spacing">窓ガラスフィルム　・　各種施工　・　イベント・装飾　・　デザイン制作　・　店舗看板　・　屋内サイン　・　カーラッピング　・　窓ガラスフィルム　・　各種施工　・　イベント・装飾　・　</textPath></text></g><g class="ring" style="--i:2"><circle r="214" fill="none" stroke="var(--grn)" stroke-width="44"/>
+<path id="rprings2" d="M -214 0 a 214 214 0 1 1 428 0 a 214 214 0 1 1 -428 0" fill="none"/>
+<text class="rt en" fill="#fff" dy="6"><textPath href="#rprings2" textLength="1341.9" lengthAdjust="spacing">CAR WRAPPING  ・  WINDOW FILM  ・  INSTALLATION  ・  EVENT  ・  DESIGN  ・  SHOP SIGN  ・  INDOOR SIGN  ・  CAR WRAPPING  ・  </textPath></text></g><g class="ring" style="--i:1"><circle r="152" fill="none" stroke="var(--yel)" stroke-width="44"/>
+<path id="rprings1" d="M -152 0 a 152 152 0 1 1 304 0 a 152 152 0 1 1 -304 0" fill="none"/>
+<text class="rt" fill="var(--ink)" dy="6"><textPath href="#rprings1" textLength="953.1" lengthAdjust="spacing">屋内サイン　・　カーラッピング　・　窓ガラスフィルム　・　各種施工　・　イベント・装飾　・　</textPath></text></g><g class="ring" style="--i:0"><circle r="90" fill="none" stroke="var(--red)" stroke-width="44"/>
+<path id="rprings0" d="M -90 0 a 90 90 0 1 1 180 0 a 90 90 0 1 1 -180 0" fill="none"/>
+<text class="rt en" fill="#fff" dy="6"><textPath href="#rprings0" textLength="564.4" lengthAdjust="spacing">SHOP SIGN  ・  INDOOR SIGN  ・  CAR WRAPPING  ・  </textPath></text></g><circle class="core" r="68" fill="#fff"/></svg>
+ <div class="center"><h1 class="ttl">まちに、<br><em>目じるし</em>を。</h1><p>港町の看板屋、みなと看板工房です。<br>お店の看板から車のラッピングまで。</p><p class="en">SIGNS FOR THE TOWN</p></div>
+ <div class="wall" id="wall"><span class="stk photo" data-at="0.500" style="left:14%;top:22%;--r:-8deg;--d:0s"><img src="https://images.unsplash.com/photo-1620194544222-8c956ca15f1d?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk pill c1" data-at="0.520" style="left:36%;top:14%;--r:5deg;--d:0s">SHOP SIGN</span><span class="stk photo" data-at="0.540" style="left:62%;top:20%;--r:7deg;--d:0s"><img src="https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk round c2" data-at="0.560" style="left:86%;top:16%;--r:-6deg;--d:0s">INDOOR<br>SIGN</span><span class="stk jp" data-at="0.580" style="left:8%;top:52%;--r:-10deg;--d:0s">看板</span><span class="stk photo" data-at="0.600" style="left:88%;top:48%;--r:9deg;--d:0s"><img src="https://images.unsplash.com/photo-1616037502269-72da0baf7d71?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk pill c3" data-at="0.620" style="left:24%;top:82%;--r:-5deg;--d:0s">WINDOW FILM</span><span class="stk arrow" data-at="0.640" style="left:50%;top:90%;--r:3deg;--d:0s">店はこちら →</span><span class="stk photo" data-at="0.660" style="left:76%;top:80%;--r:-8deg;--d:0s"><img src="https://images.unsplash.com/photo-1606724003280-8b03a4f72223?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk round c4" data-at="0.680" style="left:25%;top:36%;--r:12deg;--d:0s">CAR<br>WRAP</span><span class="stk jp" data-at="0.700" style="left:70%;top:38%;--r:-4deg;--d:0s">施工も</span><span class="stk pill c1" data-at="0.720" style="left:94%;top:70%;--r:10deg;--d:0s">EVENT</span><span class="stk photo" data-at="0.740" style="left:6%;top:86%;--r:6deg;--d:0s"><img src="https://images.unsplash.com/photo-1651245994635-da8b312578d4?w=400&q=76&auto=format&fit=crop" alt=""></span><span class="stk jp" data-at="0.760" style="left:25%;top:67%;--r:-3deg;--d:0s">デザインも</span><span class="stk round c1" data-at="0.780" style="left:74%;top:62%;--r:8deg;--d:0s">ご相談<br>どうぞ</span>
+  <div class="word" id="word"><div class="big" role="img" aria-label="MINATO SIGN"><span>MINATO</span><span class="dots"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></span><span>SIGN</span></div><p>まちに、目じるしを。</p></div>
+ </div>
+ <span class="hint" id="hint">スクロールで、輪をくぐる ↓</span>
+</div></section>
+<section class="sec msg">
+  <span class="kick rv"><i class="c1"></i>MESSAGE</span>
+  <h2 class="h2 rv"><span>見つけてもらう。</span><br><span>そして、<span class="u">覚えてもらう</span>。</span></h2>
+  <p class="lead rv">それが、看板の仕事です。港町の看板屋、みなと看板工房。お店の顔になる看板から、走る看板になる車のラッピング、窓のフィルムまで、まちの「見つけてもらう」をお手伝いしています。</p>
+  <div class="dots rv"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>
+</section>
+
+<section class="serv" id="service">
+ <div class="sx" id="sx" style="--n:7"><div class="pin">
+  <div class="hd"><div>
+  <span class="kick"><i class="c2"></i>SERVICE</span>
+  <h2 class="h2">できること。</h2></div><p class="count" aria-hidden="true"><b id="cnum">01</b> / 07</p></div>
+  <div class="deck" id="deck"><article class="panel " style="--i:0;--bg:var(--red)"><div class="ph"><img src="https://images.unsplash.com/photo-1620194544222-8c956ca15f1d?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c1">SHOP SIGN</span></div><div class="tx"><span class="no">01</span><b>店舗看板</b><small>SHOP SIGN</small><p>お店の顔になる看板を。通りから見つけてもらうための、いちばん大事な一枚です。</p></div></article><article class="panel dark" style="--i:1;--bg:var(--yel)"><div class="ph"><img src="https://images.unsplash.com/photo-1618623266812-f5075ba99663?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c2">INDOOR SIGN</span></div><div class="tx"><span class="no">02</span><b>屋内サイン</b><small>INDOOR SIGN</small><p>店内やオフィスのサインも。入ってからの「迷わない」をつくります。</p></div></article><article class="panel " style="--i:2;--bg:var(--grn)"><div class="ph"><img src="https://images.unsplash.com/photo-1632823469850-2f77dd9c7f93?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c3">CAR WRAPPING</span></div><div class="tx"><span class="no">03</span><b>カーラッピング</b><small>CAR WRAPPING</small><p>社用車やトラックを、走る看板に。まちを走るたびに名前が広がります。</p></div></article><article class="panel " style="--i:3;--bg:var(--blu)"><div class="ph"><img src="https://images.unsplash.com/photo-1554466343-d340fa1a13f7?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c4">WINDOW FILM</span></div><div class="tx"><span class="no">04</span><b>窓ガラスフィルム</b><small>WINDOW FILM</small><p>窓を使ったウインドウサイン。ガラス越しに、お店の中の雰囲気まで伝えます。</p></div></article><article class="panel dark" style="--i:4;--bg:#f4f1ea"><div class="ph"><img src="https://images.unsplash.com/photo-1567093597754-35b79c864763?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c1">INSTALLATION</span></div><div class="tx"><span class="no">05</span><b>各種施工</b><small>INSTALLATION</small><p>作った看板の取り付けまで。</p></div></article><article class="panel " style="--i:5;--bg:var(--ink)"><div class="ph"><img src="https://images.unsplash.com/photo-1766086893043-d38b06175015?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c2">EVENT</span></div><div class="tx"><span class="no">06</span><b>イベント・装飾</b><small>EVENT</small><p>展示やイベントの装飾も。</p></div></article><article class="panel dark" style="--i:6;--bg:var(--yel)"><div class="ph"><img src="https://images.unsplash.com/photo-1498075702571-ecb018f3752d?w=1200&q=76&auto=format&fit=crop" alt="" loading="lazy"><span class="lbl c3">DESIGN</span></div><div class="tx"><span class="no">07</span><b>デザイン制作</b><small>DESIGN</small><p>何を伝えたいか、から一緒に考えます。</p></div></article></div>
+  <p class="hint">スクロールで、次のカードへ</p>
+ </div></div>
+ <div class="belt-wrap"><p class="h2 rv" style="font-size:clamp(1.2rem,2.4vw,1.8rem);margin-top:0">こんなことも、ご相談ください。</p>
+  <div class="belt" aria-label="大型インクジェットプリント、ステッカー、プラスチック加工、レーザー加工、LEDサイン、Tシャツ・マグカップのプリント、垂れ幕・横断幕・のぼり、看板の撤去・電球交換"><div class="row"><span>大型インクジェットプリント</span><span>ステッカー</span><span>プラスチック加工</span><span>レーザー加工</span><span>LEDサイン</span><span>Tシャツ・マグカップのプリント</span><span>垂れ幕・横断幕・のぼり</span><span>看板の撤去・電球交換</span><span>大型インクジェットプリント</span><span>ステッカー</span><span>プラスチック加工</span><span>レーザー加工</span><span>LEDサイン</span><span>Tシャツ・マグカップのプリント</span><span>垂れ幕・横断幕・のぼり</span><span>看板の撤去・電球交換</span></div></div>
+  <p class="belt-note">※写真はイメージです（フリー素材）。</p>
+</div>
+</section>
+
+<section class="sec works" id="works">
+  <span class="kick rv"><i class="c4"></i>WORKS</span>
+  <h2 class="h2 rv">施工例は、<br>Instagramで。</h2>
+  <p class="lead rv">カーラッピング、壁面の看板、ウインドウサイン、展示の装飾など、手がけた仕事をInstagramで紹介しています。</p>
+  <div class="tags rv"><a class="c1" href="#" target="_blank" rel="noopener">カーラッピング</a><a class="c4" href="#" target="_blank" rel="noopener">壁面看板</a><a class="c3" href="#" target="_blank" rel="noopener">ウインドウサイン</a><a class="c2" href="#" target="_blank" rel="noopener" style="color:var(--ink)">展示・装飾</a><a class="c1" href="#" target="_blank" rel="noopener">駐車場の看板</a></div>
+  <div class="strip rv">
+    <figure><img src="https://images.unsplash.com/photo-1567093597754-35b79c864763?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1653223495166-ad1a03118303?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1554466343-d340fa1a13f7?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+    <figure><img src="https://images.unsplash.com/photo-1698525551525-9a69f210b470?w=600&q=76&auto=format&fit=crop" alt="" loading="lazy"></figure>
+  </div>
+  <p class="note rv">※写真はイメージです（フリー素材）。実際の施工例に差し替えます。</p>
+</section>
+
+<section class="sec contact" id="contact">
+  <div class="wrap">
+    <div class="rv">
+      <span class="kick"><i class="c1"></i>CONTACT</span>
+      <h2 class="h2">看板のご相談は、<br>お電話で。</h2>
+      <a class="bigtel" href="tel:0000000000">000-000-0000</a>
+      <dl>
+        <div><dt>COMPANY</dt><dd>みなと看板工房</dd></div>
+        <div><dt>ADDRESS</dt><dd>長崎県〇〇市みなと町1-2-3（サンプルのため架空の住所です）</dd></div>
+        <div><dt>TEL</dt><dd><a href="tel:0000000000">000-000-0000</a></dd></div>
+        <div><dt>FAX</dt><dd>000-000-0001</dd></div>
+      </dl>
+      <a class="ig" href="#" target="_blank" rel="noopener">Instagram →</a>
+    </div>
+    <div class="map rv" style="display:grid;place-items:center;color:var(--mute);font-weight:700">（地図が入ります）</div>
+  </div>
+</section>
+</main><footer class="foot"><span class="w">MINATO SIGN<span><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></span></span><p>みなと看板工房　長崎県〇〇市みなと町1-2-3<br>※ このページは Gear Bloom の制作サンプルです。「みなと看板工房」は実在しない架空のお店で、住所・電話番号・商品・営業時間などはすべて架空のものです。写真はフリー素材（Unsplash）、図版はこちらで描き起こしたものです。</p></footer>
+<script>
+(function(){
+  var sec=document.getElementById('cb'), pin=sec.querySelector('.pin'), svg=sec.querySelector('svg.rings'), wall=document.getElementById('wall'),
+      word=document.getElementById('word'), hint=document.getElementById('hint'), st=[].slice.call(wall.querySelectorAll('.stk'));
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches; if(reduce){st.forEach(function(s){s.classList.add('on')});word.classList.add('on');wall.classList.add('live');return;}
+  function f(){
+    var r=sec.getBoundingClientRect(), p=Math.min(1,Math.max(0,-r.top/(sec.offsetHeight-innerHeight)));
+    var coreR=68/720*svg.getBoundingClientRect().width/(parseFloat(getComputedStyle(pin).getPropertyValue('--z'))||1);
+    var zmax=Math.hypot(innerWidth,innerHeight)/(2*coreR)*1.05;
+    var e=Math.min(1,p/.45); e=e*e*e; var z=1+(zmax-1)*e;
+    pin.style.setProperty('--z',z.toFixed(3)); pin.style.setProperty('--co',Math.max(0,1-p*5).toFixed(3));
+    pin.style.setProperty('--w',Math.max(0,Math.min(1,(p-.4)/.08)).toFixed(3));
+    wall.classList.toggle('live',p>.45);
+    st.forEach(function(s){if(!s.classList.contains('moved'))s.classList.toggle('on',p>=parseFloat(s.dataset.at))});
+    word.classList.toggle('on',p>=.84);
+    hint.textContent=p>.84?(matchMedia('(pointer: coarse)').matches?'ステッカーは、長押しで はがして動かせます':'ステッカーは、ドラッグで はがして動かせます'):'スクロールで、輪をくぐる ↓'; hint.classList.toggle('y',p>.84); hint.style.opacity=(p>.05&&p<.84)?0:1;
+  }
+  addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); addEventListener('resize',f); f();
+  
+})();
+</script><script>
+(function(){
+  var coarse=matchMedia('(pointer: coarse)').matches;
+  [].forEach.call(document.querySelectorAll('.stk'),function(s){
+    var sx,sy,ox,oy,timer=null,drag=false;
+    function start(e){drag=true;s.classList.add('dragging','moved','on');sx=e.clientX;sy=e.clientY;ox=s.offsetLeft;oy=s.offsetTop;s.style.animation='none';s.style.opacity=1;s.style.scale=1.08;try{s.setPointerCapture(e.pointerId)}catch(_){}}
+    s.addEventListener('pointerdown',function(e){
+      if(e.pointerType==='mouse'){e.preventDefault();start(e);return;}
+      var ev=e; sx=e.clientX; sy=e.clientY; clearTimeout(timer);
+      timer=setTimeout(function(){start(ev);},380);   
+    });
+    s.addEventListener('pointermove',function(e){
+      if(!drag){ if(timer&&Math.hypot(e.clientX-sx,e.clientY-sy)>8){clearTimeout(timer);timer=null;} return; }
+      s.style.left=(ox+e.clientX-sx)+'px'; s.style.top=(oy+e.clientY-sy)+'px';
+    });
+    s.addEventListener('touchmove',function(e){ if(drag) e.preventDefault(); },{passive:false});
+    s.addEventListener('contextmenu',function(e){e.preventDefault();});
+    function up(){clearTimeout(timer);timer=null;if(!drag)return;drag=false;s.classList.remove('dragging');s.style.scale=1;}
+    s.addEventListener('pointerup',up); s.addEventListener('pointercancel',up);
+  });
+})();
+</script>
+<script>
+(function(){
+  var rv=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});},{rootMargin:'0px 0px -10% 0px'});
+    rv.forEach(function(el){io.observe(el);});
+  } else rv.forEach(function(el){el.classList.add('is-in');});
+  setTimeout(function(){var stuck=[].some.call(rv,function(el){var r=el.getBoundingClientRect();return r.top<innerHeight&&r.bottom>0&&!el.classList.contains('is-in');});if(stuck)document.documentElement.classList.remove('js');},5000);
+  (function(){
+    var sx=document.getElementById('sx'), ps=[].slice.call(sx.querySelectorAll('.panel')), num=document.getElementById('cnum'), n=ps.length;
+    var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function f(){
+      var r=sx.getBoundingClientRect(), p=reduce?1:Math.min(1,Math.max(0,-r.top/(sx.offsetHeight-innerHeight)));
+      var seg=p*(n-1), cur=0;
+      ps.forEach(function(el,i){
+        if(i===0){el.classList.add('in');return;}
+        var t=Math.min(1,Math.max(0,(seg-(i-1))/.6)); t=1-Math.pow(1-t,3);
+        el.style.setProperty('--x',(1-t).toFixed(4)); el.classList.toggle('in',t>.85); if(t>.5)cur=i;
+      });
+      num.textContent=('0'+(cur+1)).slice(-2);
+    }
+    addEventListener('scroll',function(){requestAnimationFrame(f)},{passive:true}); addEventListener('resize',f); f();
+  })();
+})();
+</script>
+<!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "a026c385189d4b33abcb084dcc957a0c"}'></script><!-- End Cloudflare Web Analytics -->
+</body></html>
